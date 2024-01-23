@@ -61,8 +61,8 @@ const handleExpandSubMenu = () =>{
     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
   </svg></button>
             {/* <!-- Dropdown menu --> */}
-            <div id="dropdownNavbar" className={`z-10 ${subExpand} fixed font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}>
-                <ul className="flex flex-wrap mx-0 pr-1 mr-5 text-sm overflow-auto text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+            <div id="dropdownNavbar" className={`z-10 ${subExpand} fixed md:ml-[-60px] lg:mt-5 mt-4 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}>
+                <ul className="flex flex-wrap  mx-0 pr-5 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
                   <li>
                   <Link to="/about"className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">About</Link>
                   </li>
