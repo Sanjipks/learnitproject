@@ -67,7 +67,7 @@ const handleExpandSubMenu = () =>{
                   <Link to="/about"className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">About</Link>
                   </li>
                   <li>
-                  <Link to="/services" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Browse Products</Link>
+                  <Link to="/userlist" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Browse Products</Link>
                   </li>
                   <li>
                   <Link to="/" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</Link>

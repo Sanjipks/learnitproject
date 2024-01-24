@@ -7,7 +7,7 @@ import {
 import "./App.css";
 import Navbar from "./components/Navbar";
 import About from "./pages/About";
-import BrowseProducts from "./pages/BrowseProducts";
+import UserList from "./pages/UserList";
 import Home from "./pages/Home";
 
 
@@ -21,7 +21,7 @@ function App() {
         <div>
         <Routes>
           <Route path ="/" element={<Home />}/>
-          <Route path ="/services" element={<BrowseProducts/>}/>
+          <Route path ="/userlist" element={<UserList/>}/>
           <Route path ="/about" element={<About/>}/>
         </Routes>
         </div>
