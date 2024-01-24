@@ -19,9 +19,15 @@ const [userlist, setUserlist] = useState([])
 
   return (
     
-<div className="text-xl font-bold underline">
-{userlist.map((user)=> <User user = {user.login} />)}
-
- </div>
+<div className="container mx-auto p-4">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    {userlist.map((user, id) => (
+      <div key={id} className="p-2">
+       <User user = {user.login} key = {user.node_id} userId = {user.id}  userImage = {user.avatar_url}/>
+      </div>
+    ))}
+  </div>
+</div>
   )
 }
+
