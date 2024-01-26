@@ -26,9 +26,12 @@ const handleExpandSubMenu = () =>{
 }
 
   return (
-  <div className=' max-w-screen'> 
-<nav className = " bg-gray-300 border-gray-200 dark:bg-gray-900 dark:border-gray-700">
-  <div className="max-w-screen-xl flex flex-wrap  items-center justify-between mx-auto p-5">
+    <nav className="sticky top-0 z-50 bg-gray-300 border-b border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
+  
+{/* <nav className = "fixed top-0 z-50 bg-gray-300 border-gray-200 dark:bg-gray-900 dark:border-gray-700">
+  <div className="max-w-screen-xl flex flex-wrap  items-center justify-between mx-auto p-5"> */}
+  
     <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="" className="h-8" alt="Flowbite Logo" />
         <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white">LearnIT</span>
@@ -82,7 +85,7 @@ const handleExpandSubMenu = () =>{
     </div>
   </div>
 </nav>
-</div>
+
 
   )
 }
