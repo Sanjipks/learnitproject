@@ -1,6 +1,8 @@
 import React from "react";
 
 export default function Home() {
+
+    
   return (
     <div className=" h-screen dark:bg-gray-600 dark:border-gray-600 bg-gray-200 border-b border-gray-200">
       <section className=" bg-gray-300 dark:bg-gray-700">
@@ -84,9 +86,9 @@ export default function Home() {
                   Sign in
                 </button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Don’t have an account yet?{" "}
+                  Don’t have an account yet?
                   <a
-                    href="#"
+                    href="/register"
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500 dark:text-white"
                   >
                     Sign up
