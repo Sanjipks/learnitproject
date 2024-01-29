@@ -8,8 +8,10 @@ export default function RegisterPage() {
     confirmpassword: "",
   });
 
-  const handleSubmit = () => {
-    console.log("submitted");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert ('you are registered', 3000)
+    console.log("........");
   };
 
   const handleChange = (event) => {
