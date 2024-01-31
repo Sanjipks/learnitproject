@@ -1,25 +1,42 @@
 import React, { useState } from "react";
 
+
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
-    confirmpassword: "",
+    // confirmpassword: ""
   });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert ('you are registered', 3000)
-    console.log("........");
-  };
-
+  
   const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
     setInputs({...inputs,
-      [event.target.name]:event.target.value
+      [name]:value
     });
   };
-console.log(inputs)
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent the default form submit action
+    try {
+        const response = await fetch("http://localhost:3000/register", { // Adjust the URL to your backend endpoint
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(inputs),
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok.');
+        const data = await response.json();
+        console.log(data); // Handle the response data
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
+
   return (
     <div className=" h-screen dark:bg-gray-600 dark:border-gray-600 bg-gray-200 border-b border-gray-200">
       <section className=" bg-gray-300 dark:bg-gray-700">
@@ -33,7 +50,7 @@ console.log(inputs)
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Register new account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form className="space-y-4 md:space-y-6" onSubmit = {handleSubmit} action='/post'>
                 <div>
                   <label
                     htmlFor="username"
@@ -85,7 +102,7 @@ console.log(inputs)
                     required=""
                   />
                 </div>
-                <div>
+                {/* <div>
                   <label
                     htmlFor="confirm-password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -101,7 +118,7 @@ console.log(inputs)
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
                   />
-                </div>
+                </div> */}
                 <div className="flex items-start">
                   <div className="flex items-center h-5">
                     <input
@@ -112,7 +129,7 @@ console.log(inputs)
                       required=""
                     />
                   </div>
-                  <div className="ml-3 text-sm">
+                  {/* <div className="ml-3 text-sm">
                     <label
                       htmlFor="terms"
                       className="font-light text-gray-500 dark:text-gray-300"
@@ -125,11 +142,11 @@ console.log(inputs)
                         Terms and Conditions
                       </a>
                     </label>
-                  </div>
+                  </div> */}
                 </div>
                 <button
+                
                   type="submit"
-                  onSubmit={handleSubmit}
                   className="w-full text-dark bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 dark:text-white"
                 >
                   Register
