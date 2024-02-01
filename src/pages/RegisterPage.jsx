@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
 
+
+
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
     // username: "",
     // email: "",
     // password: "",
-    // // confirmpassword: ""
+    // confirmpassword: ""
   });
 
   
@@ -18,23 +20,33 @@ export default function RegisterPage() {
     });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault(); 
-    try {
-        const response = await fetch("http://localhost:3000/register", { // Adjust the URL to your backend endpoint
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(inputs),
-        });
+//   const handleSubmit = async (event) => {
+//     event.preventDefault();
+//     try {
+//         const responseData = await registerUser(inputs);
+//         console.log(responseData); // Handle the response data
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// };;
 
-        if (!response.ok) throw new Error('Network response was not ok.');
-        const data = await response.json();
-        console.log(data); // Handle the response data
-    } catch (error) {
-        console.error('Error:', error);
-    }
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  try {
+      const response = await fetch("http://localhost:3000/register", {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(inputs),
+      });
+
+      if (!response.ok) throw new Error('Network response was not ok.');
+      const data = await response.json();
+      console.log(data); // Handle the response data
+  } catch (error) {
+      console.error('Error:', error);
+  }
 };
 
   return (
