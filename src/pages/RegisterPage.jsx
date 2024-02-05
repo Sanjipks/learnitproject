@@ -5,10 +5,10 @@ import React, { useState } from "react";
 
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
-    // username: "",
-    // email: "",
-    // password: "",
-    // confirmpassword: ""
+    username: "",
+    email: "",
+    password: "",
+    confirmpassword: ""
   });
 
   
@@ -32,6 +32,7 @@ export default function RegisterPage() {
 
 const handleSubmit = async (event) => {
   event.preventDefault();
+  if (inputs.password === inputs.confirmpassword){
   try {
       const response = await fetch("http://localhost:3000/register", {
           method: 'POST',
@@ -47,7 +48,10 @@ const handleSubmit = async (event) => {
   } catch (error) {
       console.error('Error:', error);
   }
-  
+}
+else{
+  alert('password did not match')
+}
 };
 
   return (
