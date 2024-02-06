@@ -23,10 +23,18 @@ export default function UserList() {
       
   // }, [])
 
+
+try {
   useEffect( () => {
     getUsers().then(setUserlist);
   }, []
   )
+} 
+catch (error) {
+  throw new Error('Error:', error);
+}
+
+  
 
   return (
     <div className="flex flex-col justify-items-center  bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
