@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import EyeShow from "../assets/EyeShow";
 import EyeHide from "../assets/EyeHide";
 
-
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
     username: "",
@@ -11,23 +10,16 @@ export default function RegisterPage() {
     confirmpassword: "",
   });
 
-
-  
   const [passwordtype, setPasswordtype] = useState("password");
   const [confirmpasswordtype, setConfirmpasswordtype] = useState("password");
-  
- 
- 
-  
 
   const togglePasswordVisibility = () => {
-    setPasswordtype('text')
-  }
+    setPasswordtype("text");
+  };
 
   const endHold = () => {
-    setPasswordtype('password')
-  }  
-   
+    setPasswordtype("password");
+  };
 
   const togglePasswordVisibilityC = () => {
     if (confirmpasswordtype === "password") {
@@ -89,11 +81,7 @@ export default function RegisterPage() {
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Register new account
               </h1>
-              <form
-                className="space-y-4 md:space-y-6"
-                onSubmit={handleSubmit}
-               
-              >
+              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label
                     htmlFor="username"
@@ -146,14 +134,15 @@ export default function RegisterPage() {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   />
-                  <span
+                  <button
                     className="absolute -mt-8 ml-80 pl-8"
+                    disabled={inputs.password.length < 1 && true}
                     onMouseDown={togglePasswordVisibility}
                     onMouseUp={endHold}
                     onMouseLeave={endHold}
                   >
-                    {passwordtype==='password'? <>👁️</>:<EyeHide/>}
-                  </span>
+                    {passwordtype === "password" ? <EyeShow /> : <EyeHide />}
+                  </button>
                 </div>
                 <div>
                   <label
@@ -173,15 +162,19 @@ export default function RegisterPage() {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   />
-                  
-                 <button
-                  type = 'button'
-                  disabled = {inputs.confirmpassword.length<1 && true}
-                  className="absolute -mt-8 ml-80 pl-8" 
-                  onClick={togglePasswordVisibilityC}
-                  
+
+                  <button
+                    type="button"
+                    disabled={inputs.confirmpassword.length < 1 && true}
+                    className="absolute -mt-8 ml-80 pl-8"
+                    onClick={togglePasswordVisibilityC}
                   >
-                    {confirmpasswordtype==='password'?<EyeShow/> :<EyeHide/>}
+                    {confirmpasswordtype === "password" ||
+                    inputs.confirmpassword.length < 1 ? (
+                      <EyeShow />
+                    ) : (
+                      <EyeHide />
+                    )}
                   </button>
                 </div>
                 <div className="flex items-start">
