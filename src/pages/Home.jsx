@@ -1,8 +1,26 @@
-import React from "react";
+import EyeHide from "../assets/EyeHide";
+import React, { useEffect, useState } from "react";
 
 export default function Home() {
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+  });
 
-    
+  const handleInput = (event) => {
+    setInputs({ ...inputs, [event.target.name]: event.target.value });
+  };
+
+  const [passwordtype, setPasswordtype] = useState("password");
+
+  const togglePasswordVisibility = () => {
+    setPasswordtype("text");
+  };
+
+  const endHold = () => {
+    setPasswordtype("password");
+  };
+
   return (
     <div className=" h-screen dark:bg-gray-600 dark:border-gray-600 bg-gray-200 border-b border-gray-200">
       <section className=" bg-gray-300 dark:bg-gray-700">
@@ -31,9 +49,10 @@ export default function Home() {
                     type="email"
                     name="email"
                     id="email"
+                    onChange={handleInput}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
-                    required=""
+                    required
                   />
                 </div>
                 <div>
@@ -44,13 +63,22 @@ export default function Home() {
                     Password
                   </label>
                   <input
-                    type="password"
+                    type={passwordtype}
                     name="password"
                     id="password"
+                    onChange={handleInput}
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required=""
+                    required
                   />
+                  <span
+                    className="absolute -mt-8 ml-80 pl-8"
+                    onMouseDown={togglePasswordVisibility}
+                    onMouseUp={endHold}
+                    onMouseLeave={endHold}
+                  >
+                    {passwordtype === "password" ? <>👁️</> : <EyeHide />}
+                  </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">
@@ -60,7 +88,7 @@ export default function Home() {
                         aria-describedby="remember"
                         type="checkbox"
                         className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                        required=""
+                        required
                       />
                     </div>
                     <div className="ml-3 text-sm">
@@ -86,7 +114,7 @@ export default function Home() {
                   Sign in
                 </button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Don’t have an account yet? {''}
+                  Don’t have an account yet? {""}
                   <a
                     href="/register"
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500 dark:text-white"
