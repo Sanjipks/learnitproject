@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import EyeShow from "../assets/EyeShow";
 import EyeHide from "../assets/EyeHide";
-import HoldButton from "../components/common/Button";
+
 
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
@@ -11,6 +11,8 @@ export default function RegisterPage() {
     confirmpassword: "",
   });
 
+
+  
   const [passwordtype, setPasswordtype] = useState("password");
   const [confirmpasswordtype, setConfirmpasswordtype] = useState("password");
   
@@ -21,7 +23,7 @@ export default function RegisterPage() {
   const togglePasswordVisibility = () => {
     setPasswordtype('text')
   }
-  
+
   const endHold = () => {
     setPasswordtype('password')
   }  
