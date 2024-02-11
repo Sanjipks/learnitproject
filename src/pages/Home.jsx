@@ -7,11 +7,37 @@ export default function Home() {
     password: "",
   });
 
+  const [error, setError] = useState(null);
+
+  const [passwordtype, setPasswordtype] = useState("password");
+
   const handleInput = (event) => {
     setInputs({ ...inputs, [event.target.name]: event.target.value });
   };
 
-  const [passwordtype, setPasswordtype] = useState("password");
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const res = await fetch("http://localhost:3000/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputs),
+      });
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message);
+      }
+
+      const data = await res.json();
+      const token = data.token;
+      localStorage.setItem("token", token);
+      window.location.href = "/userprofile";
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   const togglePasswordVisibility = () => {
     setPasswordtype("text");
@@ -37,7 +63,7 @@ export default function Home() {
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label
                     htmlFor="email"
@@ -50,6 +76,7 @@ export default function Home() {
                     name="email"
                     id="email"
                     onChange={handleInput}
+                    value={inputs.email}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
                     required
@@ -67,6 +94,7 @@ export default function Home() {
                     name="password"
                     id="password"
                     onChange={handleInput}
+                    value={inputs.password}
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
