@@ -37,6 +37,7 @@ export default function Home() {
     } catch (error) {
       setError(error.message);
     }
+    alert(error);
   };
 
   const togglePasswordVisibility = () => {
@@ -76,7 +77,6 @@ export default function Home() {
                     name="email"
                     id="email"
                     onChange={handleInput}
-                    value={inputs.email}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@company.com"
                     required
@@ -94,13 +94,12 @@ export default function Home() {
                     name="password"
                     id="password"
                     onChange={handleInput}
-                    value={inputs.password}
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   />
                   <span
-                    className="absolute -mt-8 ml-80 pl-8"
+                    className="float-right -mt-8 mr-2"
                     onMouseDown={togglePasswordVisibility}
                     onMouseUp={endHold}
                     onMouseLeave={endHold}
@@ -116,7 +115,6 @@ export default function Home() {
                         aria-describedby="remember"
                         type="checkbox"
                         className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                        required
                       />
                     </div>
                     <div className="ml-3 text-sm">
