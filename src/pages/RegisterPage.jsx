@@ -135,7 +135,7 @@ export default function RegisterPage() {
                     required
                   />
                   <button
-                    className="absolute -mt-8 ml-80 pl-8"
+                    className="float-right -mt-8 mr-2"
                     disabled={inputs.password.length < 1 && true}
                     onMouseDown={togglePasswordVisibility}
                     onMouseUp={endHold}
@@ -166,7 +166,7 @@ export default function RegisterPage() {
                   <button
                     type="button"
                     disabled={inputs.confirmpassword.length < 1 && true}
-                    className="absolute -mt-8 ml-80 pl-8"
+                    className="float-right -mt-8 mr-2"
                     onClick={togglePasswordVisibilityC}
                   >
                     {confirmpasswordtype === "password" ||

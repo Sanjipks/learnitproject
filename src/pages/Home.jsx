@@ -37,6 +37,7 @@ export default function Home() {
     } catch (error) {
       setError(error.message);
     }
+    alert(error);
   };
 
   const togglePasswordVisibility = () => {
@@ -98,7 +99,7 @@ export default function Home() {
                     required
                   />
                   <span
-                    className="absolute -mt-8 ml-80 pl-8"
+                    className="float-right -mt-8 mr-2"
                     onMouseDown={togglePasswordVisibility}
                     onMouseUp={endHold}
                     onMouseLeave={endHold}
