@@ -6,6 +6,7 @@ import UserList from "./pages/UserList";
 import Home from "./pages/Home";
 import Register from "./pages/RegisterPage";
 import UserProfile from "./pages/UserProfile";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/userprofile" element={<UserProfile />} />
         </Routes>
       </div>
+      <Footer />
     </Router>
   );
 }
