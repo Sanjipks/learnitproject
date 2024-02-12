@@ -23,19 +23,26 @@ export default function Home() {
         },
         body: JSON.stringify(inputs),
       });
-      if (!res.ok) {
+
+      if (res.status === 200) {
+        alert("login successfully");
+        window.location.href = "/userprofile";
+        const data = await res.json();
+        const token = data.token;
+        localStorage.setItem("token", token);
+      }
+      if (res.status === 401) {
+        const errorData = await res.json();
+        const message = errorData.message;
+        console.log(message);
+        throw new Error(message);
+      } else {
         const errorData = await res.json();
         throw new Error(errorData.message);
       }
-
-      const data = await res.json();
-      const token = data.token;
-      localStorage.setItem("token", token);
     } catch (error) {
       alert(error.message);
     }
-    alert("login Successful");
-    window.location.href = "/userprofile";
   };
 
   const togglePasswordVisibility = () => {
