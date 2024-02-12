@@ -7,8 +7,6 @@ export default function Home() {
     password: "",
   });
 
-  const [error, setError] = useState(null);
-
   const [passwordtype, setPasswordtype] = useState("password");
 
   const handleInput = (event) => {
@@ -25,19 +23,26 @@ export default function Home() {
         },
         body: JSON.stringify(inputs),
       });
-      if (!res.ok) {
+
+      if (res.status === 200) {
+        alert("login successfully");
+        window.location.href = "/userprofile";
+        const data = await res.json();
+        const token = data.token;
+        localStorage.setItem("token", token);
+      }
+      if (res.status === 401) {
+        const errorData = await res.json();
+        const message = errorData.message;
+        console.log(message);
+        throw new Error(message);
+      } else {
         const errorData = await res.json();
         throw new Error(errorData.message);
       }
-
-      const data = await res.json();
-      const token = data.token;
-      localStorage.setItem("token", token);
-      window.location.href = "/userprofile";
     } catch (error) {
-      setError(error.message);
+      alert(error.message);
     }
-    alert(error);
   };
 
   const togglePasswordVisibility = () => {
