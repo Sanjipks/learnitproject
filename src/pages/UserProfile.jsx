@@ -1,7 +1,7 @@
 import React from "react";
 
 function UserProfile() {
-  return <div>UserProfile</div>;
+  return <div className="max-h-dvh">UserProfile</div>;
 }
 
 export default UserProfile;
