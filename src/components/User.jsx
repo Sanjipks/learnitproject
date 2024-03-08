@@ -1,11 +1,22 @@
 import React from "react";
+import { useState } from "react";
 
 export default function User(props) {
+  const [expand, setExpand] = useState("hidden");
+
+  const handleExpand = () => {
+    if (expand === "hidden") {
+      setExpand("block");
+    } else {
+      setExpand("hidden");
+    }
+  };
   return (
     <div className="flex">
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <div className="flex justify-end px-4 pt-4">
+        <div className="flex justify-start px-4 pt-4">
           <button
+            onClick={handleExpand}
             id="dropdownButton"
             data-dropdown-toggle="dropdown"
             className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
@@ -25,7 +36,7 @@ export default function User(props) {
 
           <div
             id="dropdown"
-            className="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+            className={`z-10 ${expand} absolute ml-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
           >
             <ul className="py-2" aria-labelledby="dropdownButton">
               <li>
@@ -57,7 +68,7 @@ export default function User(props) {
         </div>
         <div className="flex flex-col items-center pb-10">
           <img
-            className="w-48 h-48 mb-3 rounded-full shadow-lg"
+            className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"
             src={props.userImage}
             alt="Bonnie image"
           />
