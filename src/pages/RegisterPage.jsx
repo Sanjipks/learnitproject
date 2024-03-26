@@ -69,9 +69,9 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className=" h-screen dark:bg-gray-600 dark:border-gray-600 bg-gray-200 border-b border-gray-200">
-      <section className=" bg-gray-300 dark:bg-gray-700">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-8">
+    <div className="dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-b border-gray-200">
+      <section className="bg-gray-300 dark:bg-gray-600">
+        <div className=" flex flex-col items-center justify-center md:h-dvh px-6 py-8 mx-auto lg:py-8 ">
           <h1 className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
             {/* <img className="w-8 h-8 mr-2" src="" alt="logo"/> */}
             User Registration
