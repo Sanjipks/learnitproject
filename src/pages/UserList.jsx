@@ -22,10 +22,10 @@ export default function UserList() {
           {userlist.map((user, id) => (
             <div key={id} className="p-2">
               <User
-                user={user.login}
-                key={user.node_id}
-                userId={user.id}
-                userImage={user.avatar_url}
+                key={user.user_id}
+                user={user.user_name}
+                userId={user.user_id}
+                userEmail={user.user_email}
               />
             </div>
           ))}

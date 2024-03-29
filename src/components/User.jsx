@@ -69,11 +69,14 @@ export default function User(props) {
         <div className="flex flex-col items-center pb-10">
           <img
             className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"
-            src={props.userImage}
+            src={props.image}
             alt="Bonnie image"
           />
           <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
             {props.user}
+            <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+              {props.userEmail}
+            </h5>
           </h5>
         </div>
       </div>
