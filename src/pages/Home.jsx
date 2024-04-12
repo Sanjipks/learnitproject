@@ -25,8 +25,9 @@ export default function Home() {
       });
 
       if (res.status === 200) {
-        alert("login successfully");
-        window.location.href = "/userprofile";
+        // alert("login successfully");
+        // window.location.href = "/userprofile";
+        window.location.href = "/auth";
         const data = await res.json();
         const token = data.token;
         localStorage.setItem("token", token);
