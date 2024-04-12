@@ -23,7 +23,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50  dark:bg-gray-900 dark:border-gray-700 bg-gray-300 border-b border-gray-200">
+    <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 dark:border-gray-700 border-b border-gray-200">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
         {/* <nav className = "fixed top-0 z-50 bg-gray-300 border-gray-200 dark:bg-gray-900 dark:border-gray-700">
   <div className="max-w-screen-xl flex flex-wrap  items-center justify-between mx-auto p-5"> */}
@@ -68,7 +68,7 @@ export default function Navbar() {
           className={`${expand} w-full md:block md:w-auto lg:static sm:mt-0 md:mt-0 md:ml-0`}
           id="navbar-dropdown"
         >
-          <ul className="flex flex-col overflow-hidden font-medium p-4 md:p-0 mt-4 border border-gray-300 sm:rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-gray-300 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-900">
+          <ul className="flex flex-col overflow-hidden font-medium p-4 md:p-0 mt-4 border border-gray-300 sm:rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-900">
             <li>
               <Link
                 to="/"
