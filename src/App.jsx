@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Register from "./pages/RegisterPage";
 import UserProfile from "./pages/UserProfile";
 import Footer from "./components/Footer";
-import Auth from "./pages/VerifyAccount";
+import Auth from "./pages/Auth";
 import ForgetPassword from "./pages/ForgetPassword";
 
 function App() {
