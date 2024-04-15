@@ -1,5 +1,5 @@
 import EyeHide from "../assets/EyeHide";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export default function Home() {
   const [inputs, setInputs] = useState({
