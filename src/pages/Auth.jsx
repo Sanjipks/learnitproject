@@ -4,11 +4,11 @@ const Auth = () => {
   const [code, setCode] = useState("");
 
   const handleOnchange = (event) => {
-    event.setCode(event.target.value);
+    setCode(event.target.value);
   };
 
-  const handleAuth = () => {
-    "todo";
+  const handleAuth = (event) => {
+    event.preventDefault();
   };
   const handleResend = () => {
     "todo";
