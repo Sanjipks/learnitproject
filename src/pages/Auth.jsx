@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Auth = () => {
-  const handleClick = () => {
+  const [code, setCode] = useState("");
+
+  const handleOnchange = (event) => {
+    event.setCode(event.target.value);
+  };
+
+  const handleAuth = () => {
+    "todo";
+  };
+  const handleResend = () => {
     "todo";
   };
   return (
@@ -22,6 +31,7 @@ const Auth = () => {
                   <input
                     type="text"
                     name="code"
+                    onChange={handleOnchange}
                     id="code"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
@@ -29,14 +39,14 @@ const Auth = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center ">
                   <button
-                    onClick={handleClick}
+                    onClick={handleAuth}
                     type="submit"
                     className=" w-36 border dark:border-gray-200 border-gray-900 text-gray-900 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 dark:text-white"
                   >
                     Authenticate
                   </button>
                   <button
-                    onClick={handleClick}
+                    onClick={handleResend}
                     type="submit"
                     className=" w-36 border mt-2 dark:border-gray-200 border-gray-900 text-gray-900 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 dark:text-white"
                   >
