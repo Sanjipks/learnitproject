@@ -1,14 +1,39 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
   const [code, setCode] = useState("");
+
+  const navigate = useNavigate();
 
   const handleOnchange = (event) => {
     setCode(event.target.value);
   };
 
-  const handleAuth = (event) => {
+  const handleAuth = async (event) => {
     event.preventDefault();
+    if (code) {
+      try {
+        const response = await fetch("http://localhost:3000/auth", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(code),
+        });
+
+        if (!response.ok) throw new Error("Network response was not ok.");
+        const data = await response.json();
+        console.log(data); // Handle the response data
+        if (data) {
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    } else {
+      alert("code required");
+    }
   };
   const handleResend = () => {
     "todo";

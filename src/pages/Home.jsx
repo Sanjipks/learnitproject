@@ -23,14 +23,15 @@ export default function Home() {
         },
         body: JSON.stringify(inputs),
       });
-
+      console.log(">>>>>" + res.status);
       if (res.status === 200) {
         // alert("login successfully");
         // window.location.href = "/userprofile";
-        window.location.href = "/auth";
         const data = await res.json();
+        console.log(">>>>>" + data);
         const token = data.token;
         localStorage.setItem("token", token);
+        window.location.href = "/auth";
       }
       if (res.status === 401) {
         const errorData = await res.json();
