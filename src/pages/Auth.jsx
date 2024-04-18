@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
-  const [code, setCode] = useState("");
+  const [authorizationCode, setAuthorizationCode] = useState("");
 
   const email = localStorage.getItem("email");
 
   const navigate = useNavigate();
 
   const handleOnchange = (event) => {
-    setCode(event.target.value);
+    setAuthorizationCode(event.target.value);
   };
 
   const handleAuth = async (event) => {
@@ -21,7 +21,7 @@ const Auth = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, code }),
+          body: JSON.stringify({ email, authorizationCode }),
         });
 
         if (!response.ok) throw new Error("Network response was not ok.");
