@@ -30,7 +30,10 @@ export default function Home() {
         const data = await res.json();
         console.log(">>>>>" + data);
         const token = data.token;
+
         localStorage.setItem("token", token);
+        localStorage.setItem("email", inputs.email);
+
         window.location.href = "/auth";
       }
       if (res.status === 401) {

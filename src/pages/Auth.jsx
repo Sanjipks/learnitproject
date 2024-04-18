@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 const Auth = () => {
   const [code, setCode] = useState("");
 
+  const email = localStorage.getItem("email");
+
   const navigate = useNavigate();
 
   const handleOnchange = (event) => {
@@ -19,7 +21,7 @@ const Auth = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(code),
+          body: JSON.stringify({ email, code }),
         });
 
         if (!response.ok) throw new Error("Network response was not ok.");
