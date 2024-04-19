@@ -28,7 +28,7 @@ const Auth = () => {
         const data = await response.json();
         console.log(data); // Handle the response data
         if (data) {
-          navigate("/");
+          navigate("/userpage");
         }
       } catch (error) {
         console.error("Error:", error);
