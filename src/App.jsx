@@ -10,23 +10,25 @@ import Footer from "./components/Footer";
 import Auth from "./pages/Auth";
 import ForgetPassword from "./pages/ForgetPassword";
 import Home from "./pages/Home";
+import LoginProvider from "./context/LoginContext";
 
 function App() {
   return (
     <Router>
-      <Navbar />
+      <LoginProvider>
+        <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/userlist" element={<UserList />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/userprofile" element={<UserProfile />} />
-        <Route path="/auth" element={<Auth />} />
-        <Route path="/forgetpassword" element={<ForgetPassword />} />
-      </Routes>
-
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/userlist" element={<UserList />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/userprofile" element={<UserProfile />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/forgetpassword" element={<ForgetPassword />} />
+        </Routes>
+      </LoginProvider>
       <Footer />
     </Router>
   );
