@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
+import { useLogin, useLoginUpdate } from "../context/LoginContext";
 
 export default function Navbar() {
+  const login = useLogin();
+  const loginUpdate = useLoginUpdate();
+
   const [expand, setExpand] = useState("hidden");
   const [subExpand, setSubExpand] = useState("hidden");
 
@@ -155,10 +159,10 @@ export default function Navbar() {
                 </ul>
                 <div className="py-1">
                   <Link
-                    to="/"
+                    onClick={loginUpdate}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
-                    Sign out
+                    {login}
                   </Link>
                 </div>
               </div>
