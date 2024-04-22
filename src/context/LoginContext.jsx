@@ -12,15 +12,18 @@ export function useLoginUpdate() {
 }
 
 export default function LoginProvider({ children }) {
-  const [login, setLogin] = useState("Log in");
+  const [login, setLogin] = useState({
+    loginShow: "Log in",
+    loginState: false,
+  });
 
   const loginMode = () => {
-    // setLogin(login === false ? true : false);
-    setLogin(login === "Log in" ? "Log out" : "Log in");
+    setLogin(login.loginState === false ? true : false);
+    setLogin(login.loginShow === "Log in" ? "Log out" : "Log in");
   };
 
   return (
-    <LoginContext.Provider value={login}>
+    <LoginContext.Provider value={[login.loginShow, login.loginState]}>
       <LoginUpdateContext.Provider value={loginMode}>
         {children}
       </LoginUpdateContext.Provider>
