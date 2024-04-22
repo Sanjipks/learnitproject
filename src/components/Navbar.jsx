@@ -5,6 +5,7 @@ import { useLogin, useLoginUpdate } from "../context/LoginContext";
 
 export default function Navbar() {
   const login = useLogin();
+  console.log("login", login.loginShow, "state", login.loginState);
   const loginUpdate = useLoginUpdate();
 
   const [expand, setExpand] = useState("hidden");
@@ -162,7 +163,7 @@ export default function Navbar() {
                     onClick={loginUpdate}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
-                    {login}
+                    {login.loginShow}
                   </Link>
                 </div>
               </div>

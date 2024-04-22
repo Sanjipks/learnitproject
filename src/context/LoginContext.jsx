@@ -18,12 +18,14 @@ export default function LoginProvider({ children }) {
   });
 
   const loginMode = () => {
-    setLogin(login.loginState === false ? true : false);
-    setLogin(login.loginShow === "Log in" ? "Log out" : "Log in");
+    setLogin(
+      login.loginState === false ? true : false,
+      login.loginShow === "Log in" ? "Log out" : "Log in"
+    );
   };
 
   return (
-    <LoginContext.Provider value={[login.loginShow, login.loginState]}>
+    <LoginContext.Provider value={login}>
       <LoginUpdateContext.Provider value={loginMode}>
         {children}
       </LoginUpdateContext.Provider>
