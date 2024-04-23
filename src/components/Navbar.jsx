@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
-import { useLogin, useLoginUpdate } from "../context/LoginContext";
 
 export default function Navbar() {
-  const login = useLogin();
-  console.log("login", login.loginShow, "state", login.loginState);
-  const loginUpdate = useLoginUpdate();
-
   const [expand, setExpand] = useState("hidden");
   const [subExpand, setSubExpand] = useState("hidden");
 
@@ -27,6 +22,9 @@ export default function Navbar() {
     }
   };
 
+  const loginUpdate = () => {
+    localStorage.clear();
+  };
   return (
     <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 dark:border-gray-700 border-b border-gray-200">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
@@ -158,14 +156,18 @@ export default function Navbar() {
                     </Link>
                   </li>
                 </ul>
-                <div className="py-1">
-                  <Link
-                    onClick={loginUpdate}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    {login.loginShow}
-                  </Link>
-                </div>
+
+                {localStorage.getItem("loginState") === "true" ? (
+                  <div className="py-1">
+                    <Link
+                      onClick={loginUpdate}
+                      to="/"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Log out
+                    </Link>
+                  </div>
+                ) : null}
               </div>
             </li>
           </ul>

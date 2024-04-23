@@ -29,6 +29,7 @@ const Auth = () => {
         console.log(data); // Handle the response data
         if (data) {
           navigate("/userpage");
+          localStorage.setItem("loginState", true);
         }
       } catch (error) {
         console.error("Error:", error);
