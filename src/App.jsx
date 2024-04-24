@@ -11,6 +11,7 @@ import Auth from "./pages/Auth";
 import ForgetPassword from "./pages/ForgetPassword";
 import Home from "./pages/Home";
 import LoginProvider from "./context/LoginContext";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </LoginProvider>
       <Footer />
