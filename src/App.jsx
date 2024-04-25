@@ -12,6 +12,7 @@ import ForgetPassword from "./pages/ForgetPassword";
 import Home from "./pages/Home";
 import LoginProvider from "./context/LoginContext";
 import AdminPage from "./pages/AdminPage";
+import VerifyAccount from "./pages/VerifyAccount";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/userlist" element={<UserList />} />
           <Route path="/about" element={<About />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/verifyaccount" element={<VerifyAccount />} />
           <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />

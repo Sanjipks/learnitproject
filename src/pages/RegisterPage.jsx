@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import EyeShow from "../assets/EyeShow";
 import EyeHide from "../assets/EyeHide";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
@@ -9,6 +10,8 @@ export default function RegisterPage() {
     password: "",
     confirmpassword: "",
   });
+
+  const navigate = useNavigate();
 
   const [passwordtype, setPasswordtype] = useState("password");
   const [confirmpasswordtype, setConfirmpasswordtype] = useState("password");
@@ -60,6 +63,9 @@ export default function RegisterPage() {
         if (!response.ok) throw new Error("Network response was not ok.");
         const data = await response.json();
         console.log(data); // Handle the response data
+        if (data) {
+          navigate("/verifyaccount");
+        }
       } catch (error) {
         console.error("Error:", error);
       }
