@@ -61,9 +61,9 @@ export default function RegisterPage() {
         });
 
         if (!response.ok) throw new Error("Network response was not ok.");
-        const data = await response.json();
-        console.log(data); // Handle the response data
-        if (data) {
+        // const data = await response.json();
+        console.log(response); // Handle the response data
+        if (response.status === 201) {
           navigate("/verifyaccount");
         }
       } catch (error) {
