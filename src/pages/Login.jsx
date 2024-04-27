@@ -24,14 +24,15 @@ export default function Login() {
         body: JSON.stringify(inputs),
       });
       console.log(">>>>>" + res.status);
+      // console.log(">>>>>" + res.json());
       if (res.status === 200) {
         // alert("login successfully");
         // window.location.href = "/userprofile";
-        const data = await res.json();
-        console.log(">>>>>" + data);
-        const token = data.token;
+        // const data = await res.json();
+        console.log("res", res);
+        // const token = data.token;
 
-        localStorage.setItem("token", token);
+        // localStorage.setItem("token", token);
         localStorage.setItem("email", inputs.email);
 
         window.location.href = "/auth";
