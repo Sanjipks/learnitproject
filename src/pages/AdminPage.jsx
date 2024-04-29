@@ -4,7 +4,7 @@ const AdminPage = () => {
   return (
     <div className="sm:items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200">
       <div className="flex justify-center">
-        <a className="text-center text-xl font-bold text-gray-900 dark:bg-gray-800 md:text-2xl dark:text-white p-4 my-8">
+        <a className="text-center text-xl font-bold text-gray-200 dark:bg-gray-800 md:text-2xl dark:text-white p-4 my-8">
           Hello, Admin
         </a>
       </div>
