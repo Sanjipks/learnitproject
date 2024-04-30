@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 const ForgetPassword = () => {
+  const [email, setEmail] = useState("");
+
+  const handleInput = (event) => {
+    setEmail(event.target.value);
+  };
+
   const handleReset = () => {
     "todo";
   };
+
   return (
     <div className="md:h-dvh dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 sm:py-16 lg:-my-16">
       <section className=" bg-gray-300 dark:bg-gray-600">
@@ -20,6 +27,7 @@ const ForgetPassword = () => {
               <form className="space-y-4 md:space-y-6 ">
                 <div>
                   <input
+                    onChange={handleInput}
                     type="email"
                     name="email"
                     id="email"
