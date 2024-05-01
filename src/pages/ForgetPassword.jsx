@@ -7,8 +7,24 @@ const ForgetPassword = () => {
     setEmail(event.target.value);
   };
 
-  const handleReset = () => {
-    "todo";
+  const handleRequest = () => {
+    event.preventDefault();
+    try {
+      const res = fetch("http://localhost:3000/forgetpassword", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+      console.log("resssss", res.status);
+      if (!res.ok) throw new Error("Network response was not ok.");
+
+      if (res.status === 200) {
+        localStorage.setItem("email", email);
+        navigate("/setpassword");
+      }
+    } catch (error) {}
   };
 
   return (
@@ -38,7 +54,7 @@ const ForgetPassword = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center ">
                   <button
-                    onClick={handleReset}
+                    onClick={handleRequest}
                     type="submit"
                     className=" w-36 border dark:border-gray-200 border-gray-900 text-gray-900 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 dark:text-white"
                   >
