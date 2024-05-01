@@ -23,7 +23,8 @@ export default function Login() {
         },
         body: JSON.stringify(inputs),
       });
-      console.log(">>>>>" + res.status);
+
+      if (res) console.log(">>>>>" + res.status);
       // console.log(">>>>>" + res.json());
       if (res.status === 200) {
         // alert("login successfully");
