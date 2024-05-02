@@ -13,6 +13,7 @@ import Home from "./pages/Home";
 import LoginProvider from "./context/LoginContext";
 import AdminPage from "./pages/AdminPage";
 import VerifyAccount from "./pages/VerifyAccount";
+import ResetForgetPassword from "./pages/ResetForgetPassword";
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route
+            path="/reset-forgot-password"
+            element={<ResetForgetPassword />}
+          />
         </Routes>
       </LoginProvider>
       <Footer />
