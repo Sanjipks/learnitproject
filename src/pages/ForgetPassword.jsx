@@ -26,7 +26,7 @@ const ForgetPassword = () => {
 
       if (res.ok) {
         localStorage.setItem("email", email);
-        navigate("/setpassword");
+        navigate("/reset-forgot-password");
       }
       if (res.status == 404) {
         console.log("404");
