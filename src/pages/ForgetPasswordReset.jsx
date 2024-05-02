@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ForgetPassword = () => {
-  const [email, setEmail] = useState("");
+const ForgetPasswordReset = () => {
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
