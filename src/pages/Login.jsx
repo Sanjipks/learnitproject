@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import EyeHide from "../assets/EyeHide";
 import React, { useState } from "react";
 
@@ -23,17 +24,12 @@ export default function Login() {
         },
         body: JSON.stringify(inputs),
       });
+      const data = await res.json();
 
-      if (res) console.log(">>>>>" + res.status);
-      // console.log(">>>>>" + res.json());
       if (res.status === 200) {
-        // alert("login successfully");
-        // window.location.href = "/userprofile";
-        // const data = await res.json();
-        console.log("res", res);
-        // const token = data.token;
+        const token = data.token;
+        localStorage.setItem("token", token);
 
-        // localStorage.setItem("token", token);
         localStorage.setItem("email", inputs.email);
 
         window.location.href = "/auth";
@@ -48,7 +44,7 @@ export default function Login() {
         throw new Error(errorData.message);
       }
     } catch (error) {
-      alert(error.message);
+      toast(error.message);
     }
   };
 
