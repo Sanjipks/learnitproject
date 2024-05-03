@@ -14,6 +14,8 @@ import LoginProvider from "./context/LoginContext";
 import AdminPage from "./pages/AdminPage";
 import VerifyAccount from "./pages/VerifyAccount";
 import ResetForgetPassword from "./pages/ResetForgetPassword";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -39,6 +41,7 @@ function App() {
         </Routes>
       </LoginProvider>
       <Footer />
+      <ToastContainer />
     </Router>
   );
 }
