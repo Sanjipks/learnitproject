@@ -40,13 +40,14 @@ const ResetForgetPassword = () => {
   const handleReset = async (event) => {
     event.preventDefault();
     if (inputs.password === inputs.confirmpassword) {
+      let password = inputs.password;
       try {
         const res = await fetch("http://localhost:3000/reset-forgotpassword", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ inputs, email }),
+          body: JSON.stringify({ password, email }),
         });
 
         console.log("resssss", res);

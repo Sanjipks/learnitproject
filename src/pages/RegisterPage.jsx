@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import EyeShow from "../assets/EyeShow";
 import EyeHide from "../assets/EyeHide";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
@@ -71,7 +72,7 @@ export default function RegisterPage() {
         console.error("Error:", error);
       }
     } else {
-      alert("password did not match");
+      toast("password did not match");
     }
   };
 
