@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Auth = () => {
   const [authorizationCode, setAuthorizationCode] = useState("");
@@ -29,6 +30,7 @@ const Auth = () => {
         console.log(data); // Handle the response data
         if (data) {
           navigate("/home");
+          toast(data.message);
           localStorage.setItem("loginState", true);
         }
       } catch (error) {
