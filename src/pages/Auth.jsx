@@ -6,6 +6,7 @@ const Auth = () => {
   const [authorizationCode, setAuthorizationCode] = useState("");
 
   const email = localStorage.getItem("email");
+  const inputs = localStorage.getItem("inputs");
 
   const navigate = useNavigate();
 
@@ -40,8 +41,27 @@ const Auth = () => {
       alert("code required");
     }
   };
-  const handleResend = () => {
-    "todo";
+  const handleResend = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(inputs),
+      });
+
+      console.log("resssss", res);
+      if (!res.ok) throw new Error("Network response was not ok.");
+
+      if (res.ok) {
+        toast("new code is sent to your email, please check you email");
+      }
+      if (res.status == 404) {
+        console.log("404");
+        alert("email not found");
+      }
+    } catch (error) {}
   };
   return (
     <div className="md:h-dvh dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 sm:py-16 lg:-my-16">
