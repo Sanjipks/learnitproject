@@ -6,7 +6,7 @@ const Auth = () => {
   const [authorizationCode, setAuthorizationCode] = useState("");
 
   const email = localStorage.getItem("email");
-  const inputs = localStorage.getItem("inputs");
+  const token = localStorage.getItem("token");
 
   const navigate = useNavigate();
 
@@ -43,12 +43,12 @@ const Auth = () => {
   };
   const handleResend = async () => {
     try {
-      const res = await fetch("http://localhost:3000/signin", {
+      const res = await fetch("http://localhost:3000/resend-signin-code", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(inputs),
+        body: JSON.stringify({ email, token }),
       });
 
       console.log("resssss", res);
