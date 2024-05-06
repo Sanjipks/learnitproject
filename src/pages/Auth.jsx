@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Auth = () => {
-  const [authorizationCode, setAuthorizationCode] = useState("");
+  const [authCode, setAuthCode] = useState("");
 
   const email = localStorage.getItem("email");
   const token = localStorage.getItem("token");
@@ -11,7 +11,7 @@ const Auth = () => {
   const navigate = useNavigate();
 
   const handleOnchange = (event) => {
-    setAuthorizationCode(event.target.value);
+    setAuthCode(event.target.value);
   };
 
   const handleAuth = async (event) => {
@@ -23,7 +23,7 @@ const Auth = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ email, authorizationCode }),
+          body: JSON.stringify({ email, authCode }),
         });
 
         if (!response.ok) throw new Error("Network response was not ok.");
