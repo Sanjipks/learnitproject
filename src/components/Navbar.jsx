@@ -35,7 +35,7 @@ export default function Navbar() {
           to="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <img src="" className="h-8 dark:text-white mx-4" alt="Logo" />
+          {/* <img src="" className="h-8 dark:text-white mx-4" alt="Logo" /> */}
           <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900 dark:text-white">
             LearnIT
           </span>
