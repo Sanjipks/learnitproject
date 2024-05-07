@@ -139,14 +139,20 @@ export default function Navbar() {
                       About
                     </Link>
                   </li>
-                  <li>
-                    <Link
-                      to="/userlist"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      User List
-                    </Link>
-                  </li>
+                  {localStorage.getItem("loginState") === "ture" &&
+                  localStorage.getItem("userType") === "admin" ? (
+                    <div className="py-1">
+                      <li>
+                        <Link
+                          to="/userlist"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          User List
+                        </Link>
+                      </li>
+                    </div>
+                  ) : null}
+
                   <li>
                     <Link
                       to="/"
