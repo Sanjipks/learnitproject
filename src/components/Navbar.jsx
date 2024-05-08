@@ -150,7 +150,7 @@ export default function Navbar() {
                   aria-labelledby="dropdownLargeButton"
                 >
                   {localStorage.getItem("loginState") === "true" &&
-                  localStorage.getItem("userType") === "admin" ? (
+                  localStorage.getItem("userRole") === "admin" ? (
                     <div className="py-1">
                       <li>
                         <Link
