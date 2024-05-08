@@ -31,7 +31,6 @@ export default function Login() {
         localStorage.setItem("token", token);
 
         localStorage.setItem("email", inputs.email);
-        localStorage.setItem("inputs", inputs);
 
         window.location.href = "/auth";
       }
