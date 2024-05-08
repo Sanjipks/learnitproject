@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import EyeShow from "../assets/EyeShow";
 import EyeHide from "../assets/EyeHide";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ResetForgetPassword = () => {
   const [inputs, setInputs] = useState({
@@ -54,15 +55,16 @@ const ResetForgetPassword = () => {
         if (!res.ok) throw new Error("Network response was not ok.");
 
         if (res.ok) {
+          toast("password was reset successfully");
           navigate("/");
         }
         if (res.status == 404) {
           console.log("404");
-          alert("password reset failed");
+          toast("password reset failed");
         }
       } catch (error) {}
     } else {
-      alert("password did not match");
+      toast("password did not match");
     }
   };
 

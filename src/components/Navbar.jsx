@@ -139,7 +139,7 @@ export default function Navbar() {
                       About
                     </Link>
                   </li>
-                  {localStorage.getItem("loginState") === "ture" &&
+                  {localStorage.getItem("loginState") === "true" &&
                   localStorage.getItem("userType") === "admin" ? (
                     <div className="py-1">
                       <li>
