@@ -38,7 +38,7 @@ const Auth = () => {
         console.error("Error:", error);
       }
     } else {
-      alert("code required");
+      toast("Please provite the code");
     }
   };
   const handleResend = async () => {
@@ -59,7 +59,7 @@ const Auth = () => {
       }
       if (res.status == 404) {
         console.log("404");
-        alert("email not found");
+        toast("email not found");
       }
     } catch (error) {}
   };
