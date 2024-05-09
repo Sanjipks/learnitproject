@@ -1,6 +1,11 @@
 import React from "react";
 
 const AdminPage = () => {
+  useEffect(() => {
+    if (localStorage.getItem("loginState") === "false") {
+      Navigate("/");
+    }
+  });
   return (
     <div className="sm:items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200">
       <div className="flex justify-center">

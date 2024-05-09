@@ -1,6 +1,11 @@
 import React from "react";
 
 function UserProfile() {
+  useEffect(() => {
+    if (localStorage.getItem("loginState") === "false") {
+      Navigate("/");
+    }
+  });
   return (
     <div className="flex h-dvh justify-center items-center">
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
