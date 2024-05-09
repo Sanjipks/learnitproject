@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("loginState") === null) {
+      navigate("/");
+    }
+  });
+
   return (
     <div className="h-dvh dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200">
       <section className=" bg-gray-300 dark:bg-gray-600">
