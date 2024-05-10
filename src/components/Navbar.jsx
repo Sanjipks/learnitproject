@@ -22,11 +22,30 @@ export default function Navbar() {
     }
   };
 
+  const handleMouseLeave = () => {
+    setExpand("hidden");
+    setSubExpand("hidden");
+  };
+
+  const handleMainMenuClick = () => {
+    setExpand("hidden");
+  };
+
+  const handleSubMenuClick = () => {
+    setExpand("hidden");
+    setSubExpand("hidden");
+  };
+
   const loginUpdate = () => {
     localStorage.clear();
+    setExpand("hidden");
+    setSubExpand("hidden");
   };
   return (
-    <nav className="sticky top-0 z-50 bg-white dark:bg-gray-900 dark:border-gray-700 border-b border-gray-200">
+    <nav
+      className="sticky top-0 z-50 bg-white dark:bg-gray-900 dark:border-gray-700 border-b border-gray-200"
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
         {/* <nav className = "fixed top-0 z-50 bg-gray-300 border-gray-200 dark:bg-gray-900 dark:border-gray-700">
   <div className="max-w-screen-xl flex flex-wrap  items-center justify-between mx-auto p-5"> */}
@@ -74,6 +93,7 @@ export default function Navbar() {
           <ul className="flex flex-col overflow-hidden font-medium p-4 md:p-0 mt-4 border border-gray-300 sm:rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-900">
             <li>
               <Link
+                onClick={handleMainMenuClick}
                 to="/home"
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
@@ -84,6 +104,7 @@ export default function Navbar() {
             {localStorage.getItem("loginState") === null ? (
               <li>
                 <Link
+                  onClick={handleMainMenuClick}
                   to="/about"
                   className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
@@ -93,6 +114,7 @@ export default function Navbar() {
             ) : null}
             <li>
               <Link
+                onClick={handleMainMenuClick}
                 to="/services"
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
@@ -101,6 +123,7 @@ export default function Navbar() {
             </li>
             <li>
               <Link
+                onClick={handleMainMenuClick}
                 to="/contact-us"
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
@@ -162,7 +185,8 @@ export default function Navbar() {
                     <div className="py-1">
                       <li>
                         <Link
-                          to="/"
+                          onClick={handleSubMenuClick}
+                          to="/progress"
                           className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
                           Progress
