@@ -30,9 +30,9 @@ const Auth = () => {
         const data = await response.json();
         console.log(data); // Handle the response data
         if (data) {
-          navigate("/home");
           toast(data.message);
           localStorage.setItem("loginState", true);
+          navigate("/home", 2000);
         }
       } catch (error) {
         console.error("Error:", error);
