@@ -18,6 +18,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Services from "./pages/Services";
 import ContactUs from "./pages/ContactUs";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
@@ -27,7 +28,16 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
+          <Route
+            path="/home"
+            element={
+              localStorage.getItem("loginState" === null) ? (
+                <Login />
+              ) : (
+                <LandingPage />
+              )
+            }
+          />
           <Route path="/userlist" element={<UserList />} />
           <Route path="/about" element={<About />} />
           <Route path="/register" element={<Register />} />
