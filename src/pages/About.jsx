@@ -35,11 +35,12 @@ export default function About() {
               Goals
             </h1>
           </div>
-          <p className="mt-24 dark:text-slate-300 text-slate-900 md:text-3xl  text-wrap mx-24 text-justify">
-            <li>Tech Tech Tech Tech</li>
-            <li>Tech Tech Tech Tech</li>
-            <li>Tech Tech Tech Tech</li>
-          </p>
+          <ul className="mt-24 dark:text-slate-300 text-slate-900 md:text-3xl mx-24 list-disc text-left">
+            <li>
+              At LearnIT, we're dedicated to nurturing the next generation of IT
+              professionals with personalized, one-on-one mentorship.
+            </li>
+          </ul>
         </div>
       </section>
     </div>
