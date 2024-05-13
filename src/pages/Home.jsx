@@ -1,6 +1,7 @@
 import React from "react";
 
 import Login from "./Login";
+import UserProfile from "../components/UserProfile";
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
                   <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Welcome
                   </h1>
+                  <UserProfile />
                 </div>
               </div>
             </div>
