@@ -12,9 +12,9 @@ function UserProfile() {
   };
 
   return (
-    <div className=" justify-center items-center">
+    <div className=" justify-center items-center ">
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <div className="flex justify-end px-4 pt-4">
+        <div className="flex justify-end px-4 pt-4 pb-10 ">
           <button
             onClick={handleCardClick}
             id="dropdownButton"
@@ -36,7 +36,7 @@ function UserProfile() {
 
           <div
             id="dropdown"
-            className={`absolute mt-8 z-10 ${expand} text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
+            className={`absolute mt-10 z-10 ${expand} text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
           >
             <ul className="py-2" aria-labelledby="dropdownButton">
               <li>
