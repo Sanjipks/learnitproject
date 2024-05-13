@@ -5,7 +5,7 @@ import About from "./pages/About";
 import UserList from "./pages/UserList";
 import Login from "./pages/Login";
 import Register from "./pages/RegisterPage";
-import UserProfile from "./pages/UserProfile";
+import UserProfile from "./components/UserProfile";
 import Footer from "./components/Footer";
 import Auth from "./pages/Auth";
 import ForgetPassword from "./pages/ForgetPassword";
@@ -32,7 +32,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/register" element={<Register />} />
           <Route path="/verifyaccount" element={<VerifyAccount />} />
-          <Route path="/userprofile" element={<UserProfile />} />
+          {/* <Route path="/userprofile" element={<UserProfile />} /> */}
           <Route path="/auth" element={<Auth />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/admin" element={<AdminPage />} />
