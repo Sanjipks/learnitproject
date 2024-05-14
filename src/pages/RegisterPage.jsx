@@ -49,6 +49,10 @@ export default function RegisterPage() {
   //     }
   // };;
 
+  const handlePopUp = () => {
+    "todo";
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (inputs.password === inputs.confirmpassword) {
@@ -205,7 +209,7 @@ export default function RegisterPage() {
                       I accept the{" "}
                       <a
                         className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                        href="#"
+                        onClick={handlePopUp}
                       >
                         Terms and Conditions
                       </a>
