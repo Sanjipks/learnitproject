@@ -12,7 +12,7 @@ function Footer() {
             <div className="mb-6 md:mb-0">
               <a href="/" className="flex items-center">
                 <img src="" className="h-8 me-3" alt="Logo" />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-slate-950">
                   LearnIT
                 </span>
               </a>
