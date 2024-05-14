@@ -3,6 +3,8 @@ import EyeShow from "../assets/EyeShow";
 import EyeHide from "../assets/EyeHide";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
@@ -198,17 +200,23 @@ export default function RegisterPage() {
                     />
                   </div>
                   <div className="ml-3 text-sm">
-                    <label
-                      htmlFor="terms"
-                      className="font-light text-gray-500 dark:text-gray-300"
-                    >
+                    <label className="font-light text-gray-500 dark:text-gray-300">
                       I accept the{" "}
-                      <a
-                        className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                        href="#"
+                      <Popup
+                        trigger={
+                          <a className="font-medium text-primary-600 hover:underline dark:text-primary-500">
+                            Terms and Conditions
+                          </a>
+                        }
                       >
-                        Terms and Conditions
-                      </a>
+                        <div>
+                          Lorem ipsum dolor sit, amet consectetur adipisicing
+                          elit. Est vitae quibusdam veniam culpa eaque!
+                          Eligendi, sit eaque rem dignissimos perferendis
+                          quaerat quos aliquam, minima impedit fugit laborum
+                          harum culpa reprehenderit.{" "}
+                        </div>
+                      </Popup>
                     </label>
                   </div>
                 </div>
