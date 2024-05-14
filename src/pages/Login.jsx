@@ -29,9 +29,11 @@ export default function Login() {
       if (res.status === 200) {
         const token = data.token;
         const userRole = data.role;
+        const userName = data.userName;
         console.log("userRole", userRole);
         localStorage.setItem("token", token);
         localStorage.setItem("email", inputs.email);
+        localStorage.setItem("userName", userName);
         localStorage.setItem("userRole", userRole);
 
         window.location.href = "/auth";
