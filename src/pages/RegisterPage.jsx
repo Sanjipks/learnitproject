@@ -41,16 +41,6 @@ export default function RegisterPage() {
     setInputs({ ...inputs, [name]: value });
   };
 
-  //   const handleSubmit = async (event) => {
-  //     event.preventDefault();
-  //     try {
-  //         const responseData = await registerUser(inputs);
-  //         console.log(responseData); // Handle the response data
-  //     } catch (error) {
-  //         console.error('Error:', error);
-  //     }
-  // };;
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (inputs.password === inputs.confirmpassword) {
@@ -64,8 +54,7 @@ export default function RegisterPage() {
         });
 
         if (!response.ok) throw new Error("Network response was not ok.");
-        // const data = await response.json();
-        // console.log(response); // Handle the response data
+
         if (response.status === 201) {
           localStorage.setItem("email", inputs.email);
           navigate("/verifyaccount");
