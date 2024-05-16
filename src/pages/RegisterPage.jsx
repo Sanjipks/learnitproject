@@ -8,7 +8,8 @@ import "reactjs-popup/dist/index.css";
 
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
-    username: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
     confirmpassword: "",
