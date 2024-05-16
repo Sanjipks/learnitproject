@@ -8,7 +8,8 @@ import "reactjs-popup/dist/index.css";
 
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
-    username: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
     confirmpassword: "",
@@ -83,18 +84,35 @@ export default function RegisterPage() {
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label
-                    htmlFor="username"
+                    htmlFor="firstname"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    Your Name
+                    Your First Name
                   </label>
                   <input
                     type="text"
-                    name="username"
-                    id="username"
+                    name="firstname"
+                    id="firstname"
                     onChange={handleChange}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="username"
+                    placeholder="firstname"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="lastname"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Your Last Name
+                  </label>
+                  <input
+                    type="text"
+                    name="lastname"
+                    id="lastname"
+                    onChange={handleChange}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="lastname"
                     required
                   />
                 </div>
