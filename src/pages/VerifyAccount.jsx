@@ -35,6 +35,7 @@ const VerifyAccount = () => {
         if (response.ok) {
           toast(data.message);
           navigate("/");
+          localStorage.clear();
         }
       } catch (error) {
         console.error("Error:", error);
