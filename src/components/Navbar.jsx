@@ -101,7 +101,8 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {localStorage.getItem("loginState") === null ? (
+            {localStorage.getItem("loginState") === null &&
+            localStorage.getItem("userRole") === null ? (
               <li>
                 <Link
                   onClick={handleMainMenuClick}
