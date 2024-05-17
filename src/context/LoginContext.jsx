@@ -13,15 +13,18 @@ export function useLoginUpdate() {
 
 export default function LoginProvider({ children }) {
   const [login, setLogin] = useState({
-    loginShow: "Log in",
-    loginState: false,
+    loginState: "",
+    token: "",
+    email: "",
+    userName: "",
+    userRole: "",
   });
 
-  const loginMode = () => {
-    setLogin(
-      login.loginState === false ? true : false,
-      login.loginShow === "Log in" ? "Log out" : "Log in"
-    );
+  const loginMode = (updates) => {
+    setLogin((prevLogin) => ({
+      ...prevLogin,
+      ...updates,
+    }));
   };
 
   return (
