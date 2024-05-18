@@ -8,9 +8,7 @@ const Home = () => {
   const userName = localStorage.getItem("userName");
   return (
     <>
-      {loginState === null ? (
-        <Login />
-      ) : (
+      {loginState === "true" ? (
         <div className="md:h-dvh sm:h-auto sm:py-6  dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 ">
           <section className="flex justify-start bg-gray-300 dark:bg-gray-600">
             <p className=" text-xl p-4">Hello, {userName}</p>
@@ -26,6 +24,8 @@ const Home = () => {
             </div>
           </div>
         </div>
+      ) : (
+        <Login />
       )}
     </>
   );

@@ -13,7 +13,7 @@ export function useLoginUpdate() {
 
 export default function LoginProvider({ children }) {
   const [logininfo, setLogininfo] = useState({
-    loginState: "",
+    loginState: localStorage.getItem("loginState"),
     token: "",
     email: "",
     userName: "",
