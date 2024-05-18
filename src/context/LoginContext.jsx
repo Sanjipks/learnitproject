@@ -12,7 +12,7 @@ export function useLoginUpdate() {
 }
 
 export default function LoginProvider({ children }) {
-  const [login, setLogin] = useState({
+  const [logininfo, setLogininfo] = useState({
     loginState: "",
     token: "",
     email: "",
@@ -20,15 +20,18 @@ export default function LoginProvider({ children }) {
     userRole: "",
   });
 
+  console.log("login", logininfo.loginState);
+  localStorage.setItem("loginState", logininfo.loginState);
+
   const loginMode = (updates) => {
-    setLogin((prevLogin) => ({
+    setLogininfo((prevLogin) => ({
       ...prevLogin,
       ...updates,
     }));
   };
 
   return (
-    <LoginContext.Provider value={login}>
+    <LoginContext.Provider value={logininfo}>
       <LoginUpdateContext.Provider value={loginMode}>
         {children}
       </LoginUpdateContext.Provider>

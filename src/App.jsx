@@ -5,7 +5,6 @@ import About from "./pages/About";
 import UserList from "./pages/UserList";
 import Login from "./pages/Login";
 import Register from "./pages/RegisterPage";
-import UserProfile from "./components/UserProfile";
 import Footer from "./components/Footer";
 import Auth from "./pages/Auth";
 import ForgetPassword from "./pages/ForgetPassword";
