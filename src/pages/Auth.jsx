@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useLogin, useLoginUpdate } from "../context/LoginContext";
 
 const Auth = () => {
   const [authCode, setAuthCode] = useState("");
+
+  const logininfo = useLogin();
+  const loginupdate = useLoginUpdate();
 
   const email = localStorage.getItem("email");
   const token = localStorage.getItem("token");
@@ -33,6 +37,7 @@ const Auth = () => {
           toast(data.message);
           localStorage.setItem("loginState", true);
           navigate("/home", 2000);
+          loginupdate((logininfo.loginState = true));
         }
       } catch (error) {
         console.error("Error:", error);
