@@ -21,6 +21,7 @@ export default function LoginProvider({ children }) {
   });
 
   console.log("login", logininfo.loginState);
+  localStorage.setItem("loginState", logininfo.loginState);
 
   const loginMode = (updates) => {
     setLogininfo((prevLogin) => ({
