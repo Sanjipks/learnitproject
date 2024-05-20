@@ -2,7 +2,7 @@ import React from "react";
 
 const AdminPage = () => {
   useEffect(() => {
-    if (localStorage.getItem("loginState") === "false") {
+    if (localStorage.getItem("loginState") === "null") {
       Navigate("/");
     }
   });
