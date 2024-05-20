@@ -19,15 +19,15 @@ export default function LoginProvider({ children }) {
     userName: "",
     userRole: "",
   });
-
   console.log("login", logininfo.loginState);
-  localStorage.setItem("loginState", logininfo.loginState);
 
   const loginMode = (updates) => {
     setLogininfo((prevLogin) => ({
       ...prevLogin,
       ...updates,
     }));
+
+    localStorage.setItem("loginState", logininfo.loginState);
   };
 
   return (
