@@ -13,21 +13,25 @@ export function useLoginUpdate() {
 
 export default function LoginProvider({ children }) {
   const [logininfo, setLogininfo] = useState({
-    loginState: "",
-    token: "",
-    email: "",
-    userName: "",
-    userRole: "",
+    loginState: localStorage.getItem("loginState"),
+    token: localStorage.getItem("token"),
+    userEmail: localStorage.getItem("userEmail"),
+    userName: localStorage.getItem("userName"),
+    userRole: localStorage.getItem("userRole"),
   });
-
   console.log("login", logininfo.loginState);
-  localStorage.setItem("loginState", logininfo.loginState);
 
   const loginMode = (updates) => {
     setLogininfo((prevLogin) => ({
       ...prevLogin,
       ...updates,
     }));
+
+    localStorage.setItem("loginState", logininfo.loginState);
+    localStorage.setItem("token", logininfo.token);
+    localStorage.setItem("userEmail", logininfo.userEmail);
+    localStorage.setItem("userName", logininfo.userName);
+    localStorage.setItem("userRole", logininfo.userRole);
   };
 
   return (
