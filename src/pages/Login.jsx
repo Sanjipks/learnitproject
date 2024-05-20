@@ -1,12 +1,16 @@
 import { toast } from "react-toastify";
 import EyeHide from "../assets/EyeHide";
 import React, { useState } from "react";
+import { useLogin, useLoginUpdate } from "../context/LoginContext";
 
 export default function Login() {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
+
+  const logininfo = useLogin();
+  const loginupdate = useLoginUpdate();
 
   const [passwordtype, setPasswordtype] = useState("password");
 
@@ -31,10 +35,16 @@ export default function Login() {
         const userRole = data.role;
         const userName = data.userName;
         console.log("userRole", userRole);
-        localStorage.setItem("token", token);
-        localStorage.setItem("email", inputs.email);
-        localStorage.setItem("userName", userName);
-        localStorage.setItem("userRole", userRole);
+        loginupdate(
+          (logininfo.token = token),
+          (logininfo.userEmail = inputs.email),
+          (logininfo.userName = userName),
+          (logininfo.userRole = userRole)
+        );
+        // localStorage.setItem("token", token);
+        // localStorage.setItem("email", inputs.email);
+        // localStorage.setItem("userName", userName);
+        // localStorage.setItem("userRole", userRole);
 
         window.location.href = "/auth";
       }

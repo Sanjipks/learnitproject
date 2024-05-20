@@ -14,10 +14,10 @@ export function useLoginUpdate() {
 export default function LoginProvider({ children }) {
   const [logininfo, setLogininfo] = useState({
     loginState: localStorage.getItem("loginState"),
-    token: "",
-    email: "",
-    userName: "",
-    userRole: "",
+    token: localStorage.getItem("token"),
+    userEmail: localStorage.getItem("userEmail"),
+    userName: localStorage.getItem("userName"),
+    userRole: localStorage.getItem("userRole"),
   });
   console.log("login", logininfo.loginState);
 
@@ -28,6 +28,10 @@ export default function LoginProvider({ children }) {
     }));
 
     localStorage.setItem("loginState", logininfo.loginState);
+    localStorage.setItem("token", logininfo.token);
+    localStorage.setItem("userEmail", logininfo.userEmail);
+    localStorage.setItem("userName", logininfo.userName);
+    localStorage.setItem("userRole", logininfo.userRole);
   };
 
   return (
