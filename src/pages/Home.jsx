@@ -2,10 +2,16 @@ import React from "react";
 
 import Login from "./Login";
 import UserProfile from "../components/UserProfile";
+import { useLogin } from "../context/LoginContext";
 
 const Home = () => {
-  const loginState = localStorage.getItem("loginState");
-  const userName = localStorage.getItem("userName");
+  const loginInfo = useLogin();
+  const loginState = loginInfo.loginState;
+  const userName = loginInfo.userName;
+
+  // const loginState = localStorage.getItem("loginState");
+  // const userName = localStorage.getItem("userName");
+
   return (
     <>
       {loginState === "true" ? (
