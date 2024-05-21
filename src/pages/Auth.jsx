@@ -38,9 +38,8 @@ const Auth = () => {
         console.log(data); // Handle the response data
         if (data) {
           toast(data.message);
-          //localStorage.setItem("loginState", true);
-          navigate("/home", 2000);
-          loginupdate((logininfo.loginState = true));
+          loginupdate((logininfo.loginState = "true"));
+          navigate("/home");
         }
       } catch (error) {
         console.error("Error:", error);

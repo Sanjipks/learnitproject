@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
 
@@ -41,6 +41,7 @@ export default function Navbar() {
     setExpand("hidden");
     setSubExpand("hidden");
   };
+
   return (
     <nav
       className="sticky top-0 z-50 bg-white dark:bg-gray-900 dark:border-gray-700 border-b border-gray-200"
