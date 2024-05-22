@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 const VerifyAccount = () => {
   const [accountVerificationCode, setAccountVerificationCode] = useState("");
-  const email = localStorage.getItem("email");
+  const email = localStorage.getItem("userEmail");
   console.log("email");
 
   const navigate = useNavigate();
