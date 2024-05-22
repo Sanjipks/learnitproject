@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import { useLogin, useLoginUpdate } from "../context/LoginContext";
 
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
@@ -14,6 +15,9 @@ export default function RegisterPage() {
     password: "",
     confirmpassword: "",
   });
+
+  const registerInfo = useLogin();
+  const updateEmail = useLoginUpdate();
 
   const navigate = useNavigate();
 
@@ -57,7 +61,8 @@ export default function RegisterPage() {
         if (!response.ok) throw new Error("Network response was not ok.");
 
         if (response.status === 201) {
-          localStorage.setItem("email", inputs.email);
+          // localStorage.setItem("email", inputs.email);
+          updateEmail((registerInfo.userEmail = inputs.email));
           navigate("/verifyaccount");
         }
       } catch (error) {
