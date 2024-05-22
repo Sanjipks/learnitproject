@@ -7,7 +7,7 @@ const VerifyAccount = () => {
   const [accountVerificationCode, setAccountVerificationCode] = useState("");
   // const email = localStorage.getItem("userEmail");
   const emailInfo = useLogin();
-  const email = emailInfo.userEamil;
+  const email = emailInfo.userEmail;
   console.log("email", email);
 
   const navigate = useNavigate();
