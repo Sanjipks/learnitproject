@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useLogin } from "../context/LoginContext";
 
 const VerifyAccount = () => {
   const [accountVerificationCode, setAccountVerificationCode] = useState("");
-  const email = localStorage.getItem("userEmail");
-  console.log("email");
+  // const email = localStorage.getItem("userEmail");
+  const emailInfo = useLogin();
+  const email = emailInfo.userEamil;
+  console.log("email", email);
 
   const navigate = useNavigate();
 
