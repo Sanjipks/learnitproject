@@ -22,8 +22,8 @@ export default function LoginProvider({ children }) {
   console.log("login", logininfo.loginState);
 
   const loginMode = (updates) => {
-    setLogininfo((prevLogin) => ({
-      ...prevLogin,
+    setLogininfo((prevInfo) => ({
+      ...prevInfo,
       ...updates,
     }));
 
