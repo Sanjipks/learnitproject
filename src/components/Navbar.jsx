@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
+import { useLogin, useLoginUpdate } from "../context/LoginContext";
 
 export default function Navbar() {
   const [expand, setExpand] = useState("hidden");
   const [subExpand, setSubExpand] = useState("hidden");
+
+  const resetInfo = useLoginUpdate();
+  const loginInfo = useLogin();
 
   const handleExpandMenu = () => {
     if (expand === "hidden") {
@@ -37,6 +41,13 @@ export default function Navbar() {
   };
 
   const loginUpdate = () => {
+    resetInfo(
+      (loginInfo.token = null),
+      (loginInfo.userEmail = null),
+      (loginInfo.userName = null),
+      (loginInfo.userRole = null),
+      (loginInfo.loginState = null)
+    );
     localStorage.clear();
     setExpand("hidden");
     setSubExpand("hidden");
