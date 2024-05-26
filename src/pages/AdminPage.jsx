@@ -1,8 +1,9 @@
 import React from "react";
 
 const AdminPage = () => {
+  const userInfo = useLogin();
   useEffect(() => {
-    if (localStorage.getItem("loginState") === "null") {
+    if (!userInfo.loginState && userInfo.userRole !== "admin") {
       Navigate("/");
     }
   });
