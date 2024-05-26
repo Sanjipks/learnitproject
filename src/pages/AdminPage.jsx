@@ -4,6 +4,7 @@ const AdminPage = () => {
   const userInfo = useLogin();
   useEffect(() => {
     if (!userInfo.loginState && userInfo.userRole !== "admin") {
+      localStorage.clear();
       Navigate("/");
     }
   });
