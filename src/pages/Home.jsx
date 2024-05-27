@@ -9,9 +9,6 @@ const Home = () => {
   const loginState = loginInfo.loginState;
   const userName = loginInfo.userName;
 
-  // const loginState = localStorage.getItem("loginState");
-  // const userName = localStorage.getItem("userName");
-
   return (
     <>
       {loginState === "true" ? (

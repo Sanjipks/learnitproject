@@ -41,10 +41,6 @@ export default function Login() {
           (logininfo.userName = userName),
           (logininfo.userRole = userRole)
         );
-        // localStorage.setItem("token", token);
-        // localStorage.setItem("email", inputs.email);
-        // localStorage.setItem("userName", userName);
-        // localStorage.setItem("userRole", userRole);
 
         window.location.href = "/auth";
       }
