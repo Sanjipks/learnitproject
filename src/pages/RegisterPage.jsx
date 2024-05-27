@@ -61,7 +61,6 @@ export default function RegisterPage() {
         if (!response.ok) throw new Error("Network response was not ok.");
 
         if (response.status === 201) {
-          // localStorage.setItem("email", inputs.email);
           updateEmail((registerInfo.userEmail = inputs.email));
           navigate("/verifyaccount");
         }

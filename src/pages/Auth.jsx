@@ -9,9 +9,6 @@ const Auth = () => {
   const logininfo = useLogin();
   const loginupdate = useLoginUpdate();
 
-  // const email = localStorage.getItem("email");
-  // const token = localStorage.getItem("token");
-
   const email = logininfo.userEmail;
   const token = logininfo.token;
 
