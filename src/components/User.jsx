@@ -74,7 +74,7 @@ export default function User(props) {
           />
           <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
             {props.user}
-            <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+            <h5 className="mb-1 xl:text-xl lg:text-lg md:text-sm font-medium text-gray-900 dark:text-white">
               {props.userEmail}
             </h5>
           </h5>
