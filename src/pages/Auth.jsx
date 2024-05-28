@@ -11,6 +11,7 @@ const Auth = () => {
 
   const email = logininfo.userEmail;
   const token = logininfo.token;
+  const Role = logininfo.userRole;
 
   const navigate = useNavigate();
 
@@ -32,11 +33,18 @@ const Auth = () => {
 
         if (!response.ok) throw new Error("Network response was not ok.");
         const data = await response.json();
-        console.log(data); // Handle the response data
+
         if (data) {
           toast(data.message);
           loginupdate((logininfo.loginState = "true"));
-          navigate("/home");
+          if (Role === "admin") {
+            navigate("/admin");
+          }
+          if (Role === "user") {
+            navigate("/home");
+          } else {
+            navigate("/");
+          }
         }
       } catch (error) {
         console.error("Error:", error);

@@ -106,15 +106,14 @@ export default function Navbar() {
             <li>
               <Link
                 onClick={handleMainMenuClick}
-                to="/home"
+                to={loginInfo.userRole === "admin" ? "/admin" : "/user"}
                 className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >
                 Home
               </Link>
             </li>
 
-            {localStorage.getItem("loginState") === null &&
-            localStorage.getItem("userRole") === null ? (
+            {loginInfo.loginState === null && loginInfo.userRole === null ? (
               <li>
                 <Link
                   onClick={handleMainMenuClick}
@@ -144,7 +143,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="static">
-              {localStorage.getItem("userRole") === "user" ? (
+              {loginInfo.loginState === "true" ? (
                 <div>
                   <button
                     id="dropdownNavbarLink"
@@ -181,8 +180,7 @@ export default function Navbar() {
                   className="flex flex-col mx-0 pr-5 text-sm text-gray-900 dark:text-gray-200"
                   aria-labelledby="dropdownLargeButton"
                 >
-                  {localStorage.getItem("loginState") === "true" &&
-                  localStorage.getItem("userRole") === "admin" ? (
+                  {loginInfo.userRole === "admin" ? (
                     <div className="py-1">
                       <li>
                         <Link
@@ -194,7 +192,7 @@ export default function Navbar() {
                       </li>
                     </div>
                   ) : null}
-                  {localStorage.getItem("loginState") === "true" ? (
+                  {loginInfo.loginRole === "user" ? (
                     <div className="py-1">
                       <li>
                         <Link
@@ -209,7 +207,7 @@ export default function Navbar() {
                   ) : null}
                 </ul>
 
-                {localStorage.getItem("loginState") === "true" ? (
+                {loginInfo.loginState === "true" ? (
                   <div className="py-1">
                     <Link
                       onClick={loginUpdate}

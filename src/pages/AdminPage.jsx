@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLogin } from "../context/LoginContext";
 
 const AdminPage = () => {
   const userInfo = useLogin();
+
   useEffect(() => {
     if (!userInfo.loginState && userInfo.userRole !== "admin") {
       localStorage.clear();
