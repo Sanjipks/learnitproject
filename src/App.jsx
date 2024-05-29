@@ -23,7 +23,6 @@ function App() {
     <Router>
       <LoginProvider>
         <Navbar />
-
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
@@ -43,9 +42,8 @@ function App() {
           />
         </Routes>
         <Footer />
+        <ToastContainer />
       </LoginProvider>
-
-      <ToastContainer />
     </Router>
   );
 }

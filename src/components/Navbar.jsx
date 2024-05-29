@@ -192,7 +192,7 @@ export default function Navbar() {
                       </li>
                     </div>
                   ) : null}
-                  {loginInfo.loginRole === "user" ? (
+                  {loginInfo.userRole === "user" ? (
                     <div className="py-1">
                       <li>
                         <Link
