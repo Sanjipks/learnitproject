@@ -3,15 +3,18 @@ import React from "react";
 import Login from "./Login";
 import UserProfile from "../components/UserProfile";
 import { useLogin } from "../context/LoginContext";
+import { Link } from "react-router-dom";
+import AdminPage from "./AdminPage";
 
 const Home = () => {
   const loginInfo = useLogin();
   const loginState = loginInfo.loginState;
   const userName = loginInfo.userName;
+  const Role = loginInfo.userRole;
 
   return (
     <>
-      {loginState === "true" ? (
+      {loginState === "true" && Role === "user" ? (
         <div className="md:h-dvh sm:h-auto sm:py-6  dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 ">
           <section className="flex justify-start bg-gray-300 dark:bg-gray-600">
             <p className=" text-xl p-4">Hello, {userName}</p>

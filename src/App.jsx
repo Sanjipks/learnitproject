@@ -42,8 +42,9 @@ function App() {
             element={<ResetForgetPassword />}
           />
         </Routes>
+        <Footer />
       </LoginProvider>
-      <Footer />
+
       <ToastContainer />
     </Router>
   );

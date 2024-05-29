@@ -63,7 +63,7 @@ export default function Navbar() {
   <div className="max-w-screen-xl flex flex-wrap  items-center justify-between mx-auto p-5"> */}
 
         <Link
-          to="/"
+          to={loginInfo.userRole === "admin" ? "/admin" : "/home"}
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           {/* <img src="" className="h-8 dark:text-white mx-4" alt="Logo" /> */}
