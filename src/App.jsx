@@ -23,7 +23,6 @@ function App() {
     <Router>
       <LoginProvider>
         <Navbar />
-
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
@@ -42,9 +41,9 @@ function App() {
             element={<ResetForgetPassword />}
           />
         </Routes>
+        <Footer />
+        <ToastContainer />
       </LoginProvider>
-      <Footer />
-      <ToastContainer />
     </Router>
   );
 }
