@@ -14,6 +14,20 @@ export default function UserList() {
     throw new Error("Error:", error);
   }
 
+  const handleRemove = (id) => {
+    fetch(`http://localhost:3000/users/delete/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          setUserlist(userlist.filter((user) => user.id !== id));
+        } else {
+          console.error("Failed to remove user");
+        }
+      })
+      .catch((error) => console.error("Error removing user:", error));
+  };
+
   return (
     <div className="flex flex-col justify-items-center  bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
       <h1 className="m-10 text-center text-xl">USERS</h1>
@@ -26,6 +40,7 @@ export default function UserList() {
                 user={user.user_name}
                 userId={user.user_id}
                 userEmail={user.user_email}
+                removeUser={handleRemove}
               />
             </div>
           ))}
