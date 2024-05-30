@@ -14,8 +14,8 @@ export default function UserList() {
     throw new Error("Error:", error);
   }
 
-  const handleRemove = (id) => {
-    fetch(`http://localhost:3000/users/delete/${id}`, {
+  const handleRemove = async (id) => {
+    await fetch(`http://localhost:3000/users/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
