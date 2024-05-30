@@ -14,18 +14,23 @@ export default function UserList() {
     throw new Error("Error:", error);
   }
 
-  const handleRemove = (id) => {
-    fetch(`http://localhost:3000/users/delete/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (response.ok) {
-          setUserlist(userlist.filter((user) => user.id !== id));
-        } else {
-          console.error("Failed to remove user");
-        }
-      })
-      .catch((error) => console.error("Error removing user:", error));
+  const handleRemove = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3000/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setUserlist(userlist.filter((user) => user.id !== id));
+      } else {
+        console.error("Failed to remove user");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
