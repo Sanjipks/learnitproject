@@ -85,12 +85,12 @@ export default function User(props) {
             src={props.image}
             alt="Bonnie image"
           />
-          <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+          <div className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
             {props.user}
-            <h5 className="mb-1 xl:text-xl lg:text-lg md:text-sm font-medium text-gray-900 dark:text-white">
+            <p className="mb-1 xl:text-xl lg:text-lg md:text-sm font-medium text-gray-900 dark:text-white">
               {props.userEmail}
-            </h5>
-          </h5>
+            </p>
+          </div>
         </div>
       </div>
     </div>
