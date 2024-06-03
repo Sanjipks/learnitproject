@@ -1,19 +1,68 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import User from "../components/User";
-import { getUsers } from "../apis/Api";
+// import { getUsers } from "../apis/Api";
 import { toast } from "react-toastify";
 
 export default function UserList() {
   const [userlist, setUserlist] = useState([]);
 
-  try {
-    useEffect(() => {
-      getUsers().then(setUserlist);
-    }, []);
-  } catch (error) {
-    throw new Error("Error:", error);
-  }
+  // try {
+  //   useEffect(() => {
+  //     getUsers().then(setUserlist);
+  //   }, []);
+  //   console.log(userlist.length);
+  // } catch (error) {
+  //   throw new Error("Error:", error);
+  // }
+
+  // useEffect(() => {
+  //   async () => {
+  //     try {
+  //       const response = await fetch("http://localhost:3000/users/", {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
+  //       const data = await response.json();
+  //       console.log(data, "uuuserdata");
+
+  //       if (response.ok) {
+  //         setUserlist(data.map((userlist) => userlist));
+  //       } else {
+  //         console.error("Failed to remove user");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   };
+  // }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch("http://localhost:3000/users/", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        console.log(data, "uuuserdata");
+
+        if (response.ok) {
+          setUserlist((data) => data);
+        } else {
+          console.error("Failed to fetch user list");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    })();
+  }, []);
+
+  console.log(userlist.length);
 
   const handleRemove = async (id) => {
     console.log("handleremoveclick", handleRemove);
@@ -32,7 +81,7 @@ export default function UserList() {
 
       if (response.ok) {
         toast(data.message);
-        setUserlist(list.filter((user) => user.id !== id));
+        setUserlist(userlist.filter((user) => user.id !== id));
       } else {
         console.error("Failed to remove user");
       }
