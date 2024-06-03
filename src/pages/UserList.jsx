@@ -52,7 +52,7 @@ export default function UserList() {
         console.log(data, "uuuserdata");
 
         if (response.ok) {
-          setUserlist((data) => data);
+          setUserlist(data);
         } else {
           console.error("Failed to fetch user list");
         }
