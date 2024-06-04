@@ -6,7 +6,20 @@ import { toast } from "react-toastify";
 
 export default function UserList() {
   const [userlist, setUserlist] = useState([]);
+  const [pagenumber, setPagenumber] = useState(1);
 
+  const handlePrevPage = () => {
+    if (pagenumber > 1) {
+      setPagenumber(pagenumber - 1);
+    }
+  };
+  const handleNextPage = () => {
+    if (pagenumber >= 0) {
+      setPagenumber(pagenumber + 1);
+    }
+  };
+
+  console.log("pageNumber" + pagenumber);
   // try {
   //   useEffect(() => {
   //     getUsers().then(setUserlist);
@@ -42,12 +55,15 @@ export default function UserList() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch("http://localhost:3000/users/", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          `http://localhost:3000/users/page=${pagenumber}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         const data = await response.json();
         console.log(data, "uuuserdata");
 
@@ -60,7 +76,7 @@ export default function UserList() {
         console.error("Error:", error);
       }
     })();
-  }, []);
+  }, [pagenumber]);
 
   console.log(userlist.length);
 
@@ -128,10 +144,16 @@ export default function UserList() {
         </div>
 
         <div className="flex w-3/5 justify-between my-2 xs:mt-0">
-          <button className="items-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          <button
+            onClick={handlePrevPage}
+            className="items-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
             &larr; Prev
           </button>
-          <button className="items-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          <button
+            onClick={handleNextPage}
+            className="items-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
             Next &rarr;
           </button>
         </div>
