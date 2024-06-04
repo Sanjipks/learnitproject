@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 export default function UserList() {
   const [userlist, setUserlist] = useState([]);
   const [pagenumber, setPagenumber] = useState(1);
+  const [userperpage, getUserperpage] = useState(0);
 
   const handlePrevPage = () => {
     if (pagenumber > 1) {
@@ -19,7 +20,7 @@ export default function UserList() {
     }
   };
 
-  console.log("pageNumber" + pagenumber);
+  console.log("pageNumber" + pagenumber + "......" + userlist.length);
   // try {
   //   useEffect(() => {
   //     getUsers().then(setUserlist);
@@ -66,9 +67,11 @@ export default function UserList() {
         );
         const data = await response.json();
         console.log(data, "uuuserdata");
+        const usersperpage = data.usersPerPage;
 
         if (response.ok) {
-          setUserlist(data);
+          setUserlist(data.paginatedUsers);
+          getUserperpage(data.usersPerPage);
         } else {
           console.error("Failed to fetch user list");
         }
@@ -145,12 +148,14 @@ export default function UserList() {
 
         <div className="flex w-3/5 justify-between my-2 xs:mt-0">
           <button
+            disabled={pagenumber === 1}
             onClick={handlePrevPage}
             className="items-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             &larr; Prev
           </button>
           <button
+            disabled={userlist.length < userperpage}
             onClick={handleNextPage}
             className="items-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
