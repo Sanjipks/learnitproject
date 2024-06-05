@@ -31,29 +31,6 @@ export default function UserList() {
   //   throw new Error("Error:", error);
   // }
 
-  // useEffect(() => {
-  //   async () => {
-  //     try {
-  //       const response = await fetch("http://localhost:3000/users/", {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       });
-  //       const data = await response.json();
-  //       console.log(data, "uuuserdata");
-
-  //       if (response.ok) {
-  //         setUserlist(data.map((userlist) => userlist));
-  //       } else {
-  //         console.error("Failed to remove user");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error:", error);
-  //     }
-  //   };
-  // }, []);
-
   useEffect(() => {
     (async () => {
       try {
