@@ -136,13 +136,14 @@ export default function UserList() {
             <span className="font-semibold text-gray-900 dark:text-white">
               {pagenumber * userperpage - (userperpage - 1)}
             </span>{" "}
-            to{" "}
+            {userlist.length !== 1 ? " to " : null}
+            {userlist.length !== 1 ? (
+              <span className="font-semibold text-gray-900 dark:text-white">
+                {(pagenumber - 1) * userperpage + userlist.length}
+              </span>
+            ) : null}
             <span className="font-semibold text-gray-900 dark:text-white">
-              {(pagenumber - 1) * userperpage + userlist.length}
-            </span>{" "}
-            of{" "}
-            <span className="font-semibold text-gray-900 dark:text-white">
-              {totalUsers}
+              {" of "} {totalUsers}
             </span>{" "}
             Total Users
           </span>
@@ -152,14 +153,14 @@ export default function UserList() {
           <button
             disabled={pagenumber === 1}
             onClick={handlePrevPage}
-            className="items-center px-4 h-8 text-sm font-medium text-white bg-gray-800 rounded-s border hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="items-center px-4 h-8 text-sm font-medium text-white disabled:bg-gray-300 bg-gray-800 rounded-s border hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             &larr; Prev
           </button>
           <button
-            disabled={userlist.length < userperpage}
+            disabled={pagenumber === Math.ceil(totalUsers / userperpage)}
             onClick={handleNextPage}
-            className="items-center px-4 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="items-center px-4 h-8 text-sm font-medium text-white  disabled:bg-gray-300 bg-gray-800  rounded-e border border-gray-700  hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             Next &rarr;
           </button>
