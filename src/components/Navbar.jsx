@@ -149,7 +149,7 @@ export default function Navbar() {
                     id="dropdownNavbarLink"
                     onClick={handleExpandSubMenu}
                     data-dropdown-toggle="dropdownNavbar"
-                    className="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
+                    className="flex items-center justify-between w-full py-2 px-3 text-gray-900 focus:text-gray-900  rounded hover:bg-gray-200 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent"
                   >
                     More{" "}
                     <svg
@@ -185,7 +185,8 @@ export default function Navbar() {
                       <li>
                         <Link
                           to="/userlist"
-                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                          onClick={handleSubMenuClick}
+                          className="block px-4 py-2 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
                           User List
                         </Link>
@@ -198,7 +199,7 @@ export default function Navbar() {
                         <Link
                           onClick={handleSubMenuClick}
                           to="/progress"
-                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                          className="block px-4 py-2 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
                           Progress
                         </Link>
@@ -212,7 +213,7 @@ export default function Navbar() {
                     <Link
                       onClick={loginUpdate}
                       to="/"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      className="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
                       Log out
                     </Link>
