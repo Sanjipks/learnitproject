@@ -8,6 +8,7 @@ export default function UserList() {
   const [userlist, setUserlist] = useState([]);
   const [pagenumber, setPagenumber] = useState(1);
   const [userperpage, getUserperpage] = useState(0);
+  const [totalUsers, setTotalUsers] = useState(0);
 
   const handlePrevPage = () => {
     if (pagenumber > 1) {
@@ -72,6 +73,7 @@ export default function UserList() {
         if (response.ok) {
           setUserlist(data.paginatedUsers);
           getUserperpage(data.usersPerPage);
+          setTotalUsers(data.totalEntries);
         } else {
           console.error("Failed to fetch user list");
         }
@@ -129,20 +131,20 @@ export default function UserList() {
       </div>
       <div className="flex flex-col items-center">
         <div>
-          <span className="text-sm text-gray-700 dark:text-gray-400">
+          <span className="text-sm text-gray-950 dark:text-gray-400">
             Showing{" "}
             <span className="font-semibold text-gray-900 dark:text-white">
-              1
+              {pagenumber * userperpage - (userperpage - 1)}
             </span>{" "}
             to{" "}
             <span className="font-semibold text-gray-900 dark:text-white">
-              10
+              {(pagenumber - 1) * userperpage + userlist.length}
             </span>{" "}
             of{" "}
             <span className="font-semibold text-gray-900 dark:text-white">
-              100
+              {totalUsers}
             </span>{" "}
-            Entries
+            Total Users
           </span>
         </div>
 
@@ -150,14 +152,14 @@ export default function UserList() {
           <button
             disabled={pagenumber === 1}
             onClick={handlePrevPage}
-            className="items-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="items-center px-4 h-8 text-sm font-medium text-white bg-gray-800 rounded-s border hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             &larr; Prev
           </button>
           <button
             disabled={userlist.length < userperpage}
             onClick={handleNextPage}
-            className="items-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="items-center px-4 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             Next &rarr;
           </button>
