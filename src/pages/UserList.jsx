@@ -134,14 +134,14 @@ export default function UserList() {
           <button
             disabled={pagenumber === 1}
             onClick={handlePrevPage}
-            className="items-center px-4 h-8 text-sm font-medium text-white disabled:bg-gray-300 bg-gray-800 rounded-s border hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="items-center px-4 h-8 text-sm font-medium text-white disabled:cursor-not-allowed disabled:bg-gray-300 bg-gray-800 rounded-s border  disabled:hover:bg-gray-300 hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             &larr; Prev
           </button>
           <button
             disabled={pagenumber === Math.ceil(totalUsers / userperpage)}
             onClick={handleNextPage}
-            className="items-center px-4 h-8 text-sm font-medium text-white  disabled:bg-gray-300 bg-gray-800  rounded-e border border-gray-700  hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="items-center px-4 h-8 text-sm font-medium text-white  disabled:cursor-not-allowed disabled:bg-gray-300 disabled:hover:bg-gray-300 bg-gray-800  rounded-e border border-gray-700  hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             Next &rarr;
           </button>
