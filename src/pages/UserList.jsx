@@ -3,12 +3,16 @@ import { useEffect, useState } from "react";
 import User from "../components/User";
 // import { getUsers } from "../apis/Api";
 import { toast } from "react-toastify";
+import { useLogin } from "../context/LoginContext";
 
 export default function UserList() {
   const [userlist, setUserlist] = useState([]);
   const [pagenumber, setPagenumber] = useState(1);
   const [userperpage, setUserperpage] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
+
+  const loggedinUserInfo = useLogin();
+  const loggedinUserRole = loggedinUserInfo.userRole;
 
   const handlePrevPage = () => {
     if (pagenumber > 1) {
@@ -72,7 +76,9 @@ export default function UserList() {
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({ loggedinUserRole }),
       });
+
       const data = await response.json();
 
       if (response.ok) {
