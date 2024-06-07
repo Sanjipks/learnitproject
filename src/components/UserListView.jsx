@@ -96,7 +96,7 @@ export default function UserListView(props) {
     // </div>
 
     <>
-      <td className="w-20 text-center">{props.userId}</td>
+      <td className="w-20 text-center">{props.sn}</td>
       <td className="w-60 text-left pl-10">{props.user}</td>
       <td className="w-80 text-left">{props.userEmail}</td>
       <td className="w-40 text-center">{props.userId}</td>
