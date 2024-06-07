@@ -4,12 +4,14 @@ import User from "../components/User";
 // import { getUsers } from "../apis/Api";
 import { toast } from "react-toastify";
 import { useLogin } from "../context/LoginContext";
+import UserListView from "../components/UserListView";
 
 export default function UserList() {
   const [userlist, setUserlist] = useState([]);
   const [pagenumber, setPagenumber] = useState(1);
   const [userperpage, setUserperpage] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
+  const [listView, setListView] = useState(false);
 
   const loggedinUserInfo = useLogin();
   const loggedinUserRole = loggedinUserInfo.userRole;
@@ -96,20 +98,58 @@ export default function UserList() {
     <div className="min-h-dvh h-auto flex flex-col justify-items-center justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
       <h1 className="m-10 text-center text-xl">USERS</h1>
       <div className="flex justify-self-center mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-          {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
-          {userlist.map((user, id) => (
-            <div key={id} className="p-2">
-              <User
-                key={user.user_id}
-                user={user.user_name}
-                userId={user.user_id}
-                userEmail={user.user_email}
-                removeUser={handleRemove}
-              />
-            </div>
-          ))}
-        </div>
+        {listView ? (
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+            {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
+            {userlist.map((user, id) => (
+              <div key={id} className="p-2">
+                <User
+                  key={user.user_id}
+                  user={user.user_name}
+                  userId={user.user_id}
+                  userEmail={user.user_email}
+                  removeUser={handleRemove}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div>
+            <table className="">
+              <thead className="sm:text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th className="w-20">SN</th>
+                  <th className="w-60 ml-16" htmlFor="">
+                    User Name
+                  </th>
+                  <th className="w-80" htmlFor="">
+                    User Email
+                  </th>
+                  <th className="w-40" htmlFor="">
+                    UserId
+                  </th>
+                  <th className="w-40" htmlFor="">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
+                {userlist.map((user, id) => (
+                  <tr key={id} className="gap-9">
+                    <UserListView
+                      key={user.user_id}
+                      user={user.user_name}
+                      userId={user.user_id}
+                      userEmail={user.user_email}
+                      removeUser={handleRemove}
+                    />
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
       <div className="flex flex-col items-center">
         <div>
