@@ -16,6 +16,10 @@ export default function UserList() {
   const loggedinUserInfo = useLogin();
   const loggedinUserRole = loggedinUserInfo.userRole;
 
+  const handleSwitchView = () => {
+    setListView((prev) => !prev);
+  };
+
   const handlePrevPage = () => {
     if (pagenumber > 1) {
       setPagenumber(pagenumber - 1);
@@ -170,6 +174,7 @@ export default function UserList() {
             Total Users
           </span>
         </div>
+        <button onClick={handleSwitchView}> List View </button>
 
         <div className="flex w-3/5 justify-between my-2  float-end">
           <button
