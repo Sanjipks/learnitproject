@@ -74,6 +74,7 @@ export default function UserList() {
 
   const handleRemove = async (id) => {
     console.log("handleremoveclick", handleRemove);
+    console.log("id", id);
     const userConfirmed = window.confirm(
       "Are you sure you want to remove this user?"
     );

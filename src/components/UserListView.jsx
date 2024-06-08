@@ -17,7 +17,7 @@ export default function UserListView(props) {
   };
 
   const handleDelete = () => {
-    props.removeUser(user.userId);
+    props.removeUser(user.user_Id);
     setExpand("hidden");
   };
 
@@ -59,6 +59,9 @@ export default function UserListView(props) {
             <th scope="col" className="px-6 py-3">
               SN
             </th>
+            <th scope="col" className="px-6 py-3">
+              User ID
+            </th>
             <th scope="col" className="p-4">
               <div className="flex items-center">
                 <input
@@ -97,6 +100,8 @@ export default function UserListView(props) {
               <td className="px-6 py-4">
                 {props.totalusers.indexOf(user) + 1}
               </td>
+              <td className="px-6 py-4">{user.user_id}</td>
+
               <td className="w-4 p-4">
                 <div className="flex items-center">
                   <input
@@ -127,107 +132,18 @@ export default function UserListView(props) {
               </th>
               <td className="px-6 py-4">{user.user_email}</td>
               <td className="px-6 py-4">{user.role}</td>
-              <td className="px-6 py-4">
-                <a
+              <td class="px-6 py-4">
+                <div
                   onClick={handleDelete}
                   className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
-                  Delete
-                </a>
+                  Delete user
+                </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-
-    // <div className="flex">
-    //   <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    //     <div
-    //       className="flex justify-start px-4 pt-4"
-    //       onMouseLeave={handleMouseLeave}
-    //     >
-    //       <button
-    //         onClick={handleExpand}
-    //         id="dropdownButton"
-    //         data-dropdown-toggle="dropdown"
-    //         className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-    //         type="button"
-    //       >
-    //         <span className="sr-only">Open dropdown</span>
-    //         <svg
-    //           className="w-5 h-5"
-    //           aria-hidden="true"
-    //           xmlns="http://www.w3.org/2000/svg"
-    //           fill="currentColor"
-    //           viewBox="0 0 16 3"
-    //         >
-    //           <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
-    //         </svg>
-    //       </button>
-
-    //       <div
-    //         id="dropdown"
-    //         className={`z-10 ${expand} absolute ml-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
-    //       >
-    //         <ul className="py-2" aria-labelledby="dropdownButton">
-    //           <li>
-    //             <a
-    //               href="#"
-    //               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-    //             >
-    //               Edit
-    //             </a>
-    //           </li>
-    //           <li>
-    //             <a
-    //               href="#"
-    //               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-    //             >
-    //               Export Data
-    //             </a>
-    //           </li>
-    //           <li>
-    //             <a
-    //               onClick={handleDelete}
-    //               className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-    //             >
-    //               Delete
-    //             </a>
-    //           </li>
-    //         </ul>
-    //       </div>
-    //     </div>
-    //     <div className="flex flex-col items-center pb-10">
-    //       <img
-    //         className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"
-    //         src={props.image}
-    //         alt="Bonnie image"
-    //       />
-    //       <div className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-    //         {props.user}
-    //         <p className="mb-1 xl:text-xl lg:text-lg md:text-sm font-medium text-gray-900 dark:text-white">
-    //           {props.userEmail}
-    //         </p>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-
-    // <>
-    //   <td className="w-20 text-center">{props.sn}</td>
-    //   <td className="w-60 text-left pl-10">{props.user}</td>
-    //   <td className="w-80 text-left">{props.userEmail}</td>
-    //   <td className="w-40 text-center">{props.userId}</td>
-
-    //   <td className="w-40 text-center">
-    //     <a
-    //       href="#"
-    //       className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-    //     >
-    //       Edit
-    //     </a>
-    //   </td>
-    // </>
   );
 }
