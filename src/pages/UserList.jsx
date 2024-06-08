@@ -10,7 +10,8 @@ export default function UserList() {
   const [userlist, setUserlist] = useState([]);
   const [pagenumber, setPagenumber] = useState(1);
   const [userperpage, setUserperpage] = useState(0);
-  const [totalUsers, setTotalUsers] = useState(0);
+  const [totalUserscount, setTotalUserscount] = useState(0);
+  const [totalUsers, setTotalUsers] = useState([]);
   const [listView, setListView] = useState(false);
 
   const loggedinUserInfo = useLogin();
@@ -57,8 +58,9 @@ export default function UserList() {
 
         if (response.ok) {
           setUserlist(data.paginatedUsers);
+          setTotalUsers(data.totalUsers);
           setUserperpage(data.usersPerPage);
-          setTotalUsers(data.totalEntries);
+          setTotalUserscount(data.totalEntries);
         } else {
           console.error("Failed to fetch user list");
         }
@@ -72,6 +74,7 @@ export default function UserList() {
 
   const handleRemove = async (id) => {
     console.log("handleremoveclick", handleRemove);
+    console.log("id", id);
     const userConfirmed = window.confirm(
       "Are you sure you want to remove this user?"
     );
@@ -118,41 +121,11 @@ export default function UserList() {
             ))}
           </div>
         ) : (
-          <div>
-            <table className="">
-              <thead className="sm:text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th className="w-20">SN</th>
-                  <th className="w-60 ml-16" htmlFor="">
-                    User Name
-                  </th>
-                  <th className="w-80" htmlFor="">
-                    User Email
-                  </th>
-                  <th className="w-40" htmlFor="">
-                    UserId
-                  </th>
-                  <th className="w-40" htmlFor="">
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
-                {userlist.map((user, id) => (
-                  <tr key={id} className="gap-9">
-                    <UserListView
-                      key={user.user_id}
-                      user={user.user_name}
-                      userId={user.user_id}
-                      userEmail={user.user_email}
-                      removeUser={handleRemove}
-                    />
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <UserListView
+            users={userlist}
+            totalusers={totalUsers}
+            removeUser={handleRemove}
+          />
         )}
       </div>
       <div className="flex flex-col items-center">
@@ -169,7 +142,7 @@ export default function UserList() {
               </span>
             ) : null}
             <span className="font-semibold text-gray-900 dark:text-white">
-              {" of "} {totalUsers}
+              {" of "} {totalUserscount}
             </span>{" "}
             Total Users
           </span>
@@ -185,7 +158,7 @@ export default function UserList() {
             &larr; Prev
           </button>
           <button
-            disabled={pagenumber === Math.ceil(totalUsers / userperpage)}
+            disabled={pagenumber === Math.ceil(totalUserscount / userperpage)}
             onClick={handleNextPage}
             className="items-center px-4 h-8 text-sm font-medium text-white  disabled:cursor-not-allowed disabled:bg-gray-300 disabled:hover:bg-gray-300 bg-gray-800  rounded-e border border-gray-700  hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
@@ -196,3 +169,39 @@ export default function UserList() {
     </div>
   );
 }
+
+// <div>
+// <table className="sm:w-1/2 md:w-full justify-center">
+//   <thead className="sm:text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+//     <tr>
+//       <th className="w-20">SN</th>
+//       <th className="w-60 ml-16" htmlFor="">
+//         User Name
+//       </th>
+//       <th className="w-80" htmlFor="">
+//         User Email
+//       </th>
+//       <th className="w-40" htmlFor="">
+//         UserId
+//       </th>
+//       <th className="w-40" htmlFor="">
+//         Action
+//       </th>
+//     </tr>
+//   </thead>
+//   <tbody>
+//     {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
+//     {userlist.map((user, id) => (
+//       <tr key={id} className="gap-9">
+//         <UserListView
+//           key={user.user_id}
+//           user={user.user_name}
+//           userId={user.user_id}
+//           userEmail={user.user_email}
+//           removeUser={handleRemove}
+//         />
+//       </tr>
+//     ))}
+//   </tbody>
+// </table>
+// </div>
