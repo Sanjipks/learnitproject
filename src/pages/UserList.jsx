@@ -195,7 +195,7 @@ export default function UserList() {
                   Total Users
                 </span>
               </div>
-              <button onClick={handleSwitchView}> List View </button>
+              <button onClick={handleSwitchView}> Card View </button>
 
               <div className="flex w-3/5 justify-between my-2  float-end">
                 <button
