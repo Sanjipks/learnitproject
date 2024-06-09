@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 
 export default function UserListView(props) {
+  const { users, totalusers, removeUser } = props;
   const [expand, setExpand] = useState("hidden");
 
   const handleExpand = () => {
@@ -16,15 +17,16 @@ export default function UserListView(props) {
     setExpand("hidden");
   };
 
-  const handleDelete = () => {
-    props.removeUser();
+  const handleDelete = (id) => {
+    removeUser(id);
+    console.log("id", id);
     setExpand("hidden");
   };
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <div className="p-4 bg-white dark:bg-gray-900">
-        <label for="table-search" className="sr-only">
+        <label htmlFor="table-search" className="sr-only">
           Search
         </label>
         <div className="relative mt-1">
@@ -38,9 +40,9 @@ export default function UserListView(props) {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
               />
             </svg>
@@ -69,7 +71,7 @@ export default function UserListView(props) {
                   type="checkbox"
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
-                <label for="checkbox-all-search" className="sr-only">
+                <label htmlFor="checkbox-all-search" className="sr-only">
                   checkbox
                 </label>
               </div>
@@ -92,14 +94,12 @@ export default function UserListView(props) {
           </tr>
         </thead>
         <tbody>
-          {props.totalusers.map((user, id) => (
+          {totalusers.map((user, id) => (
             <tr
               className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
               key={id}
             >
-              <td className="px-6 py-4">
-                {props.totalusers.indexOf(user) + 1}
-              </td>
+              <td className="px-6 py-4">{totalusers.indexOf(user) + 1}</td>
               <td className="px-6 py-4">{user.user_id}</td>
 
               <td className="w-4 p-4">
@@ -109,7 +109,7 @@ export default function UserListView(props) {
                     type="checkbox"
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
-                  <label for="checkbox-table-3" className="sr-only">
+                  <label htmlFor="checkbox-table-3" className="sr-only">
                     checkbox
                   </label>
                 </div>
@@ -132,9 +132,9 @@ export default function UserListView(props) {
               </th>
               <td className="px-6 py-4">{user.user_email}</td>
               <td className="px-6 py-4">{user.role}</td>
-              <td class="px-6 py-4">
+              <td className="px-6 py-4">
                 <div
-                  onClick={handleDelete}
+                  onClick={() => handleDelete(user.user_id)}
                   className="font-medium text-blue-600 dark:text-blue-500 "
                 >
                   Delete user
