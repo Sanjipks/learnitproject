@@ -17,7 +17,7 @@ export default function UserListView(props) {
   };
 
   const handleDelete = () => {
-    props.removeUser(user.user_Id);
+    props.removeUser();
     setExpand("hidden");
   };
 
@@ -53,8 +53,8 @@ export default function UserListView(props) {
           />
         </div>
       </div>
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <table className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-3">
               SN
@@ -135,7 +135,7 @@ export default function UserListView(props) {
               <td class="px-6 py-4">
                 <div
                   onClick={handleDelete}
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  className="font-medium text-blue-600 dark:text-blue-500 "
                 >
                   Delete user
                 </div>
