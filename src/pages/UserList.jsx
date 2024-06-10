@@ -10,6 +10,7 @@ export default function UserList() {
   const [userlist, setUserlist] = useState([]);
   const [pagenumber, setPagenumber] = useState(1);
   const [userperpage, setUserperpage] = useState(0);
+  const [userperpageListView, setUserperpageListView] = useState(10);
   const [totalUserscount, setTotalUserscount] = useState(0);
   const [totalUsers, setTotalUsers] = useState([]);
   const [listView, setListView] = useState(true);
@@ -181,12 +182,13 @@ export default function UserList() {
                 <span className="text-sm text-gray-950 dark:text-gray-400">
                   Showing{" "}
                   <span className="font-semibold text-gray-900 dark:text-white">
-                    {pagenumber * userperpage - (userperpage - 1)}
+                    {pagenumber * userperpageListView -
+                      (userperpageListView - 1)}
                   </span>{" "}
                   {userlist.length !== 1 ? " to " : null}
                   {userlist.length !== 1 ? (
                     <span className="font-semibold text-gray-900 dark:text-white">
-                      {(pagenumber - 1) * userperpage + userlist.length}
+                      {(pagenumber - 1) * userperpageListView + userlist.length}
                     </span>
                   ) : null}
                   <span className="font-semibold text-gray-900 dark:text-white">
