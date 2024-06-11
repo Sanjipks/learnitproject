@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 
 export default function UserListView(props) {
-  const { users, totalusers, removeUser } = props;
+  const {
+    totalusers,
+    removeUser,
+    handlesetuserperpagelistview,
+    paginatedUsers,
+  } = props;
   const [expand, setExpand] = useState("hidden");
   const [expandeduser, setExpandeduser] = useState(null);
   const [expandone, setExpandone] = useState("hidden");
@@ -34,6 +39,11 @@ export default function UserListView(props) {
     removeUser(id);
     console.log("id", id);
     setExpand("hidden");
+  };
+
+  const handlesetUserPerPage = (number) => {
+    handlesetuserperpagelistview(number);
+    setExpandone("hidden");
   };
 
   return (
@@ -106,32 +116,32 @@ export default function UserListView(props) {
             >
               <li>
                 <a
-                  href="#"
+                  onClick={() => handlesetUserPerPage(5)}
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
-                  15
+                  5
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
+                  onClick={() => handlesetUserPerPage(10)}
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  10
+                </a>
+              </li>
+              <li>
+                <a
+                  onClick={() => handlesetUserPerPage(20)}
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
                   20
                 </a>
               </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  30
-                </a>
-              </li>
             </ul>
             <div className="py-1">
               <a
-                href="#"
+                onClick={() => handlesetUserPerPage(40)}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
               >
                 40
@@ -179,7 +189,7 @@ export default function UserListView(props) {
           </tr>
         </thead>
         <tbody>
-          {totalusers.map((user, id) => (
+          {paginatedUsers.map((user, id) => (
             <tr
               className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
               key={id}

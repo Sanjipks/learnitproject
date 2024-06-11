@@ -9,11 +9,19 @@ import UserListView from "../components/UserListView";
 export default function UserList() {
   const [userlist, setUserlist] = useState([]);
   const [pagenumber, setPagenumber] = useState(1);
+  const [pagenumberlist, setPagenumberlist] = useState(1);
   const [userperpage, setUserperpage] = useState(0);
   const [userperpageListView, setUserperpageListView] = useState(10);
   const [totalUserscount, setTotalUserscount] = useState(0);
   const [totalUsers, setTotalUsers] = useState([]);
-  const [listView, setListView] = useState(true);
+  const [listView, setListView] = useState(false);
+  // const [paginatedUserslistview, setPaginatedUserslistview] = useState([]);
+
+  const startIndex = (pagenumberlist - 1) * userperpageListView;
+  const endIndex = startIndex + userperpageListView;
+  console.log("pagelist", pagenumberlist);
+
+  let paginatedUserslistview = totalUsers.slice(startIndex, endIndex);
 
   const loggedinUserInfo = useLogin();
   const loggedinUserRole = loggedinUserInfo.userRole;
@@ -27,10 +35,27 @@ export default function UserList() {
       setPagenumber(pagenumber - 1);
     }
   };
+
   const handleNextPage = () => {
     if (pagenumber >= 0) {
       setPagenumber(pagenumber + 1);
     }
+  };
+  const handlePrevPageList = () => {
+    if (pagenumberlist > 1) {
+      setPagenumberlist(pagenumberlist - 1);
+    }
+  };
+  const handleNextPageList = () => {
+    console.log(handleNextPageList);
+    if (pagenumberlist >= 1) {
+      setPagenumberlist(pagenumberlist + 1);
+      console.log(pagenumberlist);
+    }
+  };
+
+  const handleuserperpage = (number) => {
+    setUserperpageListView(number);
   };
 
   console.log("pageNumber" + pagenumber + "......" + userlist.length);
@@ -172,9 +197,10 @@ export default function UserList() {
             <h1 className="m-10 text-center text-xl">USERS</h1>
             <div className="flex justify-self-center mx-auto">
               <UserListView
-                users={userlist}
                 totalusers={totalUsers}
                 removeUser={handleRemove}
+                handlesetuserperpagelistview={handleuserperpage}
+                paginatedUsers={paginatedUserslistview}
               />
             </div>
             <div className="flex flex-col items-center">
@@ -182,13 +208,12 @@ export default function UserList() {
                 <span className="text-sm text-gray-950 dark:text-gray-400">
                   Showing{" "}
                   <span className="font-semibold text-gray-900 dark:text-white">
-                    {pagenumber * userperpageListView -
-                      (userperpageListView - 1)}
+                    {startIndex + 1}
                   </span>{" "}
-                  {userlist.length !== 1 ? " to " : null}
-                  {userlist.length !== 1 ? (
+                  {startIndex !== null ? " to " : null}
+                  {endIndex !== null ? (
                     <span className="font-semibold text-gray-900 dark:text-white">
-                      {(pagenumber - 1) * userperpageListView + userlist.length}
+                      {totalUserscount < endIndex ? totalUserscount : endIndex}
                     </span>
                   ) : null}
                   <span className="font-semibold text-gray-900 dark:text-white">
@@ -201,17 +226,18 @@ export default function UserList() {
 
               <div className="flex w-3/5 justify-between my-2  float-end">
                 <button
-                  disabled={pagenumber === 1}
-                  onClick={handlePrevPage}
+                  disabled={pagenumberlist === 1}
+                  onClick={handlePrevPageList}
                   className="items-center px-4 h-8 text-sm font-medium text-white disabled:cursor-not-allowed disabled:bg-gray-300 bg-gray-800 rounded-s border  disabled:hover:bg-gray-300 hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
                   &larr; Prev
                 </button>
                 <button
                   disabled={
-                    pagenumber === Math.ceil(totalUserscount / userperpage)
+                    pagenumberlist ===
+                    Math.ceil(totalUserscount / userperpageListView)
                   }
-                  onClick={handleNextPage}
+                  onClick={handleNextPageList}
                   className="items-center px-4 h-8 text-sm font-medium text-white  disabled:cursor-not-allowed disabled:bg-gray-300 disabled:hover:bg-gray-300 bg-gray-800  rounded-e border border-gray-700  hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
                   Next &rarr;
