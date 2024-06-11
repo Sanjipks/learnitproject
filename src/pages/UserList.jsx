@@ -33,6 +33,10 @@ export default function UserList() {
     }
   };
 
+  const handleuserperpage = (number) => {
+    setUserperpageListView(number);
+  };
+
   console.log("pageNumber" + pagenumber + "......" + userlist.length);
   // try {
   //   useEffect(() => {
@@ -175,6 +179,7 @@ export default function UserList() {
                 users={userlist}
                 totalusers={totalUsers}
                 removeUser={handleRemove}
+                setuserperpage={userperpageListView}
               />
             </div>
             <div className="flex flex-col items-center">

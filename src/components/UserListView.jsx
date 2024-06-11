@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 
 export default function UserListView(props) {
-  const { users, totalusers, removeUser } = props;
+  const { totalusers, removeUser, setuserperpage } = props;
   const [expand, setExpand] = useState("hidden");
   const [expandeduser, setExpandeduser] = useState(null);
   const [expandone, setExpandone] = useState("hidden");
@@ -34,6 +34,10 @@ export default function UserListView(props) {
     removeUser(id);
     console.log("id", id);
     setExpand("hidden");
+  };
+
+  const handlesetUserPerPage = (number) => {
+    setuserperpage(number);
   };
 
   return (
@@ -106,6 +110,7 @@ export default function UserListView(props) {
             >
               <li>
                 <a
+                  onClick={() => handlesetUserPerPage(15)}
                   href="#"
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                 >
