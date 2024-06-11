@@ -201,6 +201,7 @@ export default function UserList() {
                 removeUser={handleRemove}
                 handlesetuserperpagelistview={handleuserperpage}
                 paginatedUsers={paginatedUserslistview}
+                usernumber={userperpageListView}
               />
             </div>
             <div className="flex flex-col items-center">

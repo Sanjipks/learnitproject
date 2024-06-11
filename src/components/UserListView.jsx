@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 
 export default function UserListView(props) {
@@ -7,10 +7,11 @@ export default function UserListView(props) {
     removeUser,
     handlesetuserperpagelistview,
     paginatedUsers,
+    usernumber,
   } = props;
   const [expand, setExpand] = useState("hidden");
   const [expandeduser, setExpandeduser] = useState(null);
-  const [expandone, setExpandone] = useState("hidden");
+  const [expandforpagenumber, setExpandforpagenumber] = useState("hidden");
 
   const handleExpand = (id) => {
     if (expand === "hidden" && expandeduser == null) {
@@ -22,17 +23,16 @@ export default function UserListView(props) {
     }
   };
 
-  const handleExpandone = () => {
-    if (expandone === "hidden") {
-      setExpandone("block");
+  const handleExpandForpagenumber = () => {
+    if (expandforpagenumber === "hidden") {
+      setExpandforpagenumber("block");
     } else {
-      setExpandone("hidden");
-      setExpandone("hidden");
+      setExpandforpagenumber("hidden");
     }
   };
 
   const handleMouseLeave = () => {
-    setExpand("hidden");
+    setExpandforpagenumber("hidden");
   };
 
   const handleDelete = (id) => {
@@ -43,7 +43,7 @@ export default function UserListView(props) {
 
   const handlesetUserPerPage = (number) => {
     handlesetuserperpagelistview(number);
-    setExpandone("hidden");
+    setExpandforpagenumber("hidden");
   };
 
   return (
@@ -80,15 +80,18 @@ export default function UserListView(props) {
           </div>
         </div>
         <div onMouseLeave={handleMouseLeave}>
+          <div className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+            Number of Users per Page
+          </div>
           <button
-            onClick={handleExpandone}
+            onClick={handleExpandForpagenumber}
             id="dropdownActionButton"
             data-dropdown-toggle="dropdownAction1"
             className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
             type="button"
           >
             <span className="sr-only">Action button</span>
-            Number of Users per Page
+            {usernumber}
             <svg
               className="w-2.5 h-2.5 ms-2.5"
               aria-hidden="true"
@@ -108,7 +111,7 @@ export default function UserListView(props) {
 
           <div
             id="dropdownAction1"
-            className={`z-10 ${expandone} absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
+            className={`z-10 ${expandforpagenumber} absolute  ml-48 px-3 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-auto dark:bg-gray-700 dark:divide-gray-600`}
           >
             <ul
               className="py-1 text-sm text-gray-700 dark:text-gray-200"
@@ -138,15 +141,15 @@ export default function UserListView(props) {
                   20
                 </a>
               </li>
+              <li>
+                <a
+                  onClick={() => handlesetUserPerPage(40)}
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                  40
+                </a>
+              </li>
             </ul>
-            <div className="py-1">
-              <a
-                onClick={() => handlesetUserPerPage(40)}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-              >
-                40
-              </a>
-            </div>
           </div>
         </div>
       </div>
