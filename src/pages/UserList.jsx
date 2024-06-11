@@ -208,14 +208,12 @@ export default function UserList() {
                 <span className="text-sm text-gray-950 dark:text-gray-400">
                   Showing{" "}
                   <span className="font-semibold text-gray-900 dark:text-white">
-                    {pagenumber * userperpageListView -
-                      (userperpageListView - 1)}
+                    {startIndex + 1}
                   </span>{" "}
-                  {userlist.length !== 1 ? " to " : null}
-                  {userlist.length !== 1 ? (
+                  {startIndex !== null ? " to " : null}
+                  {endIndex !== null ? (
                     <span className="font-semibold text-gray-900 dark:text-white">
-                      {(pagenumber - 1) * userperpageListView +
-                        paginatedUserslistview.length}
+                      {totalUserscount < endIndex ? totalUserscount : endIndex}
                     </span>
                   ) : null}
                   <span className="font-semibold text-gray-900 dark:text-white">
