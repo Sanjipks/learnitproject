@@ -15,7 +15,6 @@ export default function UserList() {
   const [totalUserscount, setTotalUserscount] = useState(0);
   const [totalUsers, setTotalUsers] = useState([]);
   const [listView, setListView] = useState(false);
-  // const [paginatedUserslistview, setPaginatedUserslistview] = useState([]);
 
   const startIndex = (pagenumberlist - 1) * userperpageListView;
   const endIndex = startIndex + userperpageListView;
