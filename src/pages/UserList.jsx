@@ -71,7 +71,7 @@ export default function UserList() {
     (async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/users/page=${pagenumber}`,
+          `http://localhost:3000/${loggedinUserRole}/users/page=${pagenumber}`,
           {
             method: "GET",
             headers: {
