@@ -194,7 +194,7 @@ export default function UserList() {
                       disabled={
                         pagenumber ===
                           Math.ceil(totalUserscount / userperpage) ||
-                        startIndex === 0
+                        userlist.length === 0
                       }
                       onClick={handleNextPage}
                       className="items-center px-4 h-8 text-sm font-medium text-white  disabled:cursor-not-allowed disabled:bg-gray-300 disabled:hover:bg-gray-300 bg-gray-800  rounded-e border border-gray-700  hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
