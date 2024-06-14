@@ -150,24 +150,28 @@ export default function UserList() {
             </div>
             <div className="flex flex-col items-center">
               <div>
-                <span className="text-sm text-gray-950 dark:text-gray-400">
-                  Showing{" "}
-                  <span className="font-semibold text-gray-900 dark:text-white">
-                    {pagenumber * userperpage - (userperpage - 1)}
-                  </span>{" "}
-                  {userlist.length !== 1 ? " to " : null}
-                  {userlist.length !== 1 ? (
+                {startIndex ? (
+                  <span className="text-sm text-gray-950 dark:text-gray-400">
+                    Showing{" "}
                     <span className="font-semibold text-gray-900 dark:text-white">
-                      {(pagenumber - 1) * userperpage + userlist.length}
-                    </span>
-                  ) : null}
-                  <span className="font-semibold text-gray-900 dark:text-white">
-                    {" of "} {totalUserscount}
-                  </span>{" "}
-                  Total Users
-                </span>
+                      {pagenumber * userperpage - (userperpage - 1)}
+                    </span>{" "}
+                    {userlist.length !== 1 ? " to " : null}
+                    {userlist.length !== 1 ? (
+                      <span className="font-semibold text-gray-900 dark:text-white">
+                        {(pagenumber - 1) * userperpage + userlist.length}
+                      </span>
+                    ) : null}
+                    <span className="font-semibold text-gray-900 dark:text-white">
+                      {" of "} {totalUserscount}
+                    </span>{" "}
+                    Total Users
+                  </span>
+                ) : (
+                  "NO USERS TO DISPLAY"
+                )}
               </div>
-              <button onClick={handleSwitchView}> List View </button>
+              <button onClick={handleSwitchView}> Switch List View </button>
 
               <div className="flex w-3/5 justify-between my-2  float-end">
                 <button
@@ -179,7 +183,8 @@ export default function UserList() {
                 </button>
                 <button
                   disabled={
-                    pagenumber === Math.ceil(totalUserscount / userperpage)
+                    pagenumber === Math.ceil(totalUserscount / userperpage) ||
+                    startIndex === 0
                   }
                   onClick={handleNextPage}
                   className="items-center px-4 h-8 text-sm font-medium text-white  disabled:cursor-not-allowed disabled:bg-gray-300 disabled:hover:bg-gray-300 bg-gray-800  rounded-e border border-gray-700  hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
@@ -205,24 +210,30 @@ export default function UserList() {
             </div>
             <div className="flex flex-col items-center">
               <div>
-                <span className="text-sm text-gray-950 dark:text-gray-400">
-                  Showing{" "}
-                  <span className="font-semibold text-gray-900 dark:text-white">
-                    {startIndex + 1}
-                  </span>{" "}
-                  {startIndex !== null ? " to " : null}
-                  {endIndex !== null ? (
+                {startIndex ? (
+                  <span className="text-sm text-gray-950 dark:text-gray-400">
+                    Showing{" "}
                     <span className="font-semibold text-gray-900 dark:text-white">
-                      {totalUserscount < endIndex ? totalUserscount : endIndex}
-                    </span>
-                  ) : null}
-                  <span className="font-semibold text-gray-900 dark:text-white">
-                    {" of "} {totalUserscount}
-                  </span>{" "}
-                  Total Users
-                </span>
+                      {startIndex + 1}
+                    </span>{" "}
+                    {startIndex !== null ? " to " : null}
+                    {endIndex !== null ? (
+                      <span className="font-semibold text-gray-900 dark:text-white">
+                        {totalUserscount < endIndex
+                          ? totalUserscount
+                          : endIndex}
+                      </span>
+                    ) : null}
+                    <span className="font-semibold text-gray-900 dark:text-white">
+                      {" of "} {totalUserscount}
+                    </span>{" "}
+                    Total Users
+                  </span>
+                ) : (
+                  "NO USERS TO DISPLAY"
+                )}
               </div>
-              <button onClick={handleSwitchView}> Card View </button>
+              <button onClick={handleSwitchView}> Switch to Card View </button>
 
               <div className="flex w-3/5 justify-between my-2  float-end">
                 <button
@@ -235,7 +246,8 @@ export default function UserList() {
                 <button
                   disabled={
                     pagenumberlist ===
-                    Math.ceil(totalUserscount / userperpageListView)
+                      Math.ceil(totalUserscount / userperpageListView) ||
+                    startIndex === 0
                   }
                   onClick={handleNextPageList}
                   className="items-center px-4 h-8 text-sm font-medium text-white  disabled:cursor-not-allowed disabled:bg-gray-300 disabled:hover:bg-gray-300 bg-gray-800  rounded-e border border-gray-700  hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
