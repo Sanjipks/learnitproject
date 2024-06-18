@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Service from "../components/Service";
 
 const Services = () => {
+  const [servicesList, setServicesList] = useState([]);
+
+  useEffect(() => {
+    "todo";
+  }, []);
   return (
     <div className="h-dvh flex md:flex-row sm:flex-col sm:items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 pt-12">
       <div className=" flex flex-col items-center md:h-dvh px-6 mx-auto lg:pt-6 ">
@@ -9,6 +15,7 @@ const Services = () => {
             Our Services
           </h1>
         </div>
+        <Service />
       </div>
     </div>
   );
