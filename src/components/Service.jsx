@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const Service = () => {
+const Service = (props) => {
+  const { service, serviceId } = props;
   const [expand, setExpand] = useState("hidden");
 
   const handleExpand = () => {
@@ -77,9 +78,9 @@ const Service = () => {
             alt="Bonnie image"
           />
           <div className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            {/* {props.user} */}
+            {service}
             <p className="mb-1 xl:text-xl lg:text-lg md:text-sm font-medium text-gray-900 dark:text-white">
-              {/* {props.userEmail} */}
+              {serviceId}
             </p>
           </div>
         </div>
