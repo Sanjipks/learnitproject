@@ -65,6 +65,7 @@ const Services = () => {
                 key={service.service_id}
                 service={service.service_name}
                 serviceId={service.service_id}
+                serviceLogo={service.service_image}
                 // addService={handleAdd}
               />
             </div>
