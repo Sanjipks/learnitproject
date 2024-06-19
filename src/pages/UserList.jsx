@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import User from "../components/UserBlockView";
-// import { getUsers } from "../apis/Api";
+import { getUsers } from "../apis/Api";
 import { toast } from "react-toastify";
 import { useLogin } from "../context/LoginContext";
 import UserListView from "../components/UserListView";
@@ -65,42 +65,47 @@ export default function UserList() {
 
   console.log("pageNumber" + pagenumber + "......" + userlist.length);
 
-  // try {
-  //   useEffect(() => {
-  //     getUsers(loggedinUserRole, pagenumber).then(setUserlist);
-  //   }, []);
-  //   console.log("length");
-  // } catch (error) {
-  //   throw new Error("Error:", error);
-  // }
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/${loggedinUserRole}/users/page=${pagenumber}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const data = await response.json();
-
-        if (response.ok) {
-          setUserlist(data.paginatedUsers);
-          setTotalUsers(data.totalUsers);
-          setUserperpage(data.usersPerPage);
+  try {
+    useEffect(() => {
+      getUsers(loggedinUserRole, pagenumber).then((data) => {
+        setUserlist(data.paginatedUsers),
+          setTotalUsers(data.totalUsers),
+          setUserperpage(data.usersPerPage),
           setTotalUserscount(data.totalEntries);
-        } else {
-          console.error("Failed to fetch user list");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    })();
-  }, [pagenumber]);
+      });
+    }, [pagenumber]);
+    console.log("length");
+  } catch (error) {
+    throw new Error("Error:", error);
+  }
+
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `http://localhost:3000/${loggedinUserRole}/users/page=${pagenumber}`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //         }
+  //       );
+  //       const data = await response.json();
+
+  //       if (response.ok) {
+  //         setUserlist(data.paginatedUsers);
+  //         setTotalUsers(data.totalUsers);
+  //         setUserperpage(data.usersPerPage);
+  //         setTotalUserscount(data.totalEntries);
+  //       } else {
+  //         console.error("Failed to fetch user list");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   })();
+  // }, [pagenumber]);
 
   console.log(userlist.length);
 
