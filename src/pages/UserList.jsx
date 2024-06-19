@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import User from "../components/User";
+import User from "../components/UserBlockView";
 // import { getUsers } from "../apis/Api";
 import { toast } from "react-toastify";
 import { useLogin } from "../context/LoginContext";
@@ -64,11 +64,12 @@ export default function UserList() {
   };
 
   console.log("pageNumber" + pagenumber + "......" + userlist.length);
+
   // try {
   //   useEffect(() => {
-  //     getUsers().then(setUserlist);
+  //     getUsers(loggedinUserRole, pagenumber).then(setUserlist);
   //   }, []);
-  //   console.log(userlist.length);
+  //   console.log("length");
   // } catch (error) {
   //   throw new Error("Error:", error);
   // }
