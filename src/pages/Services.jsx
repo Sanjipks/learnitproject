@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Service from "../components/Service";
+import { getServices } from "../apis/Api";
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -20,32 +21,13 @@ const Services = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/services/page=${pagenumber}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const data = await response.json();
-
-        if (response.ok) {
-          setServicesList(data.paginatedServices);
-          // setTotalServices(data.totalServices);
-          setServicesPerpage(data.servicesPerPage);
-          setTotalServicesCount(data.totalEntries);
-        } else {
-          console.error("Failed to fetch user list");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    })();
+    getServices(pagenumber).then((data) => {
+      setServicesList(data.paginatedServices);
+      setServicesPerpage(data.servicesPerPage);
+      setTotalServicesCount(data.totalEntries);
+    });
   }, [pagenumber]);
+
   return (
     <div className="min-h-dvh h-aut0 flex flex-col justify-items-center justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
       <div className="md:my-20">
