@@ -17,6 +17,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Services from "./pages/Services";
 import ContactUs from "./pages/ContactUs";
+import Progress from "./pages/Progress";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="user/progress" element={<Progress />} />
           <Route
             path="/reset-forgot-password"
             element={<ResetForgetPassword />}
