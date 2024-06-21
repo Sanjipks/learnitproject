@@ -15,7 +15,7 @@ export default function UserList() {
   const [userperpage, setUserperpage] = useState(0);
   const [userperpageListView, setUserperpageListView] = useState(10);
   const [totalUserscount, setTotalUserscount] = useState(0);
-  const [totalUsers, setTotalUsers] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [listView, setListView] = useState(false);
 
   const loginInfo = useLogin();
@@ -26,7 +26,7 @@ export default function UserList() {
   const startIndex = (pagenumberlist - 1) * userperpageListView;
   const endIndex = startIndex + userperpageListView;
 
-  let paginatedUserslistview = totalUsers.slice(startIndex, endIndex);
+  let paginatedUserslistview = allUsers.slice(startIndex, endIndex);
 
   const loggedinUserInfo = useLogin();
   const loggedinUserRole = loggedinUserInfo.userRole;
@@ -69,7 +69,7 @@ export default function UserList() {
     useEffect(() => {
       getUsers(loggedinUserRole, pagenumber).then((data) => {
         setUserlist(data.paginatedUsers),
-          setTotalUsers(data.totalUsers),
+          setAllUsers(data.allUsers),
           setUserperpage(data.usersPerPage),
           setTotalUserscount(data.totalEntries);
       });
@@ -214,7 +214,7 @@ export default function UserList() {
                 <h1 className="m-10 text-center text-xl">USERS</h1>
                 <div className="flex justify-self-center mx-auto">
                   <UserListView
-                    totalusers={totalUsers}
+                    allusers={allUsers}
                     removeUser={handleRemove}
                     handlesetuserperpagelistview={handleuserperpage}
                     paginatedUsers={paginatedUserslistview}
