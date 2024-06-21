@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function UserListView(props) {
   const {
-    totalusers,
+    allusers,
     removeUser,
     handlesetuserperpagelistview,
     paginatedUsers,
@@ -197,7 +197,7 @@ export default function UserListView(props) {
               className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
               key={id}
             >
-              <td className="px-6 py-4">{totalusers.indexOf(user) + 1}</td>
+              <td className="px-6 py-4">{allusers.indexOf(user) + 1}</td>
               <td className="px-6 py-4">{user.user_id}</td>
 
               <td className="w-4 p-4">
