@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import EyeShow from "../assets/EyeShow";
-import EyeHide from "../assets/EyeHide";
+import EyeShow from "../../assets/EyeShow";
+import EyeHide from "../../assets/EyeHide";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import { useLogin, useLoginUpdate } from "../context/LoginContext";
+import { useLogin, useLoginUpdate } from "../../context/LoginContext";
 
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({

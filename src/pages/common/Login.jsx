@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
-import EyeHide from "../assets/EyeHide";
+import EyeHide from "../../assets/EyeHide";
 import React, { useState } from "react";
-import { useLogin, useLoginUpdate } from "../context/LoginContext";
+import { useLogin, useLoginUpdate } from "../../context/LoginContext";
 
 export default function Login() {
   const [inputs, setInputs] = useState({
