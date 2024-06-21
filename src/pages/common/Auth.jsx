@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLogin, useLoginUpdate } from "../context/LoginContext";
+import { useLogin, useLoginUpdate } from "../../context/LoginContext";
 
 const Auth = () => {
   const [authCode, setAuthCode] = useState("");

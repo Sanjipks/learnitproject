@@ -1,23 +1,23 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import About from "./pages/About";
-import UserList from "./pages/UserList";
-import Login from "./pages/Login";
-import Register from "./pages/RegisterPage";
+import About from "./pages/common/About";
+import UserList from "./pages/admin/UserList";
+import Login from "./pages/common/Login";
+import Register from "./pages/common/RegisterPage";
 import Footer from "./components/Footer";
-import Auth from "./pages/Auth";
-import ForgetPassword from "./pages/ForgetPassword";
-import Home from "./pages/Home";
+import Auth from "./pages/common/Auth";
+import ForgetPassword from "./pages/common/ForgetPassword";
+import Home from "./pages/user/Home";
 import LoginProvider from "./context/LoginContext";
-import AdminPage from "./pages/AdminPage";
-import VerifyAccount from "./pages/VerifyAccount";
-import ResetForgetPassword from "./pages/ResetForgetPassword";
+import AdminPage from "./pages/admin/AdminPage";
+import VerifyAccount from "./pages/common/VerifyAccount";
+import ResetForgetPassword from "./pages/common/ResetForgetPassword";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Services from "./pages/Services";
-import ContactUs from "./pages/ContactUs";
-import Progress from "./pages/Progress";
+import Services from "./pages/common/Services";
+import ContactUs from "./pages/common/ContactUs";
+import Progress from "./pages/user/Progress";
 
 function App() {
   return (

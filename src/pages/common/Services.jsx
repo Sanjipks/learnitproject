@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Service from "../components/Service";
-import { getServices } from "../apis/Api";
+import Service from "../../components/Service";
+import { getServices } from "../../apis/Api";
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);

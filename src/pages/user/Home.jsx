@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 
-import Login from "./Login";
-import UserProfile from "../components/UserProfile";
-import { useLogin } from "../context/LoginContext";
+import Login from "../common/Login";
+import UserProfile from "../../components/UserProfile";
+import { useLogin } from "../../context/LoginContext";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
