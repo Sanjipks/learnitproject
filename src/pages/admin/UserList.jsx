@@ -154,6 +154,7 @@ export default function UserList() {
                           user={user.user_name}
                           userId={user.user_id}
                           userEmail={user.user_email}
+                          userImage={user.user_image}
                           removeUser={handleRemove}
                         />
                       </div>
