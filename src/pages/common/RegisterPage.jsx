@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { useLogin, useLoginUpdate } from "../../context/LoginContext";
+import { registerUser } from "../../apis/Api";
 
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
@@ -50,17 +51,9 @@ export default function RegisterPage() {
     event.preventDefault();
     if (inputs.password === inputs.confirmpassword) {
       try {
-        const response = await fetch("http://localhost:3000/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(inputs),
-        });
-
-        if (!response.ok) throw new Error("Network response was not ok.");
-
-        if (response.status === 201) {
+        const response = await registerUser(inputs);
+        console.log("status", response);
+        if (response.status == 201) {
           updateEmail((registerInfo.userEmail = inputs.email));
           navigate("/verifyaccount");
         }
@@ -71,6 +64,32 @@ export default function RegisterPage() {
       toast("password did not match");
     }
   };
+
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   if (inputs.password === inputs.confirmpassword) {
+  //     try {
+  //       const response = await fetch("http://localhost:3000/register", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(inputs),
+  //       });
+
+  //       if (!response.ok) throw new Error("Network response was not ok.");
+
+  //       if (response.status === 201) {
+  //         updateEmail((registerInfo.userEmail = inputs.email));
+  //         navigate("/verifyaccount");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   } else {
+  //     toast("password did not match");
+  //   }
+  // };
 
   return (
     <div className=" dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200">

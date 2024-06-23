@@ -19,7 +19,7 @@ export default function LoginProvider({ children }) {
     userName: localStorage.getItem("userName"),
     userRole: localStorage.getItem("userRole"),
   });
-  console.log("login", logininfo.loginState);
+  console.log("login", logininfo);
 
   const loginMode = (updates) => {
     setLogininfo((prevInfo) => ({
