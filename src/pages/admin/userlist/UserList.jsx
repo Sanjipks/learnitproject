@@ -1,12 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import User from "../../components/UserBlockView";
-import { getUsers } from "../../apis/Api";
+import User from "../../../components/UserBlockView";
+import { getUsers } from "../../../apis/Api";
 import { toast } from "react-toastify";
-import { useLogin } from "../../context/LoginContext";
-import UserListView from "../../components/UserListView";
+import { useLogin } from "../../../context/LoginContext";
+import UserListView from "../../../components/UserListView";
 import { useNavigate } from "react-router-dom";
-import Login from "../common/Login";
+import Login from "../../common/Login";
 
 export default function UserList() {
   const [userlist, setUserlist] = useState([]);
