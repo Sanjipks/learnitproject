@@ -21,7 +21,7 @@ const Auth = () => {
 
   const handleAuth = async (event) => {
     event.preventDefault();
-    if (code) {
+    if (authCode) {
       try {
         const response = await fetch("http://localhost:3000/auth", {
           method: "POST",

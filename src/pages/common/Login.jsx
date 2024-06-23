@@ -2,6 +2,7 @@ import { toast } from "react-toastify";
 import EyeHide from "../../assets/EyeHide";
 import React, { useState } from "react";
 import { useLogin, useLoginUpdate } from "../../context/LoginContext";
+import { loginUser } from "../../apis/Api";
 
 export default function Login() {
   const [inputs, setInputs] = useState({
@@ -21,14 +22,10 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(inputs),
-      });
+      const res = await loginUser(inputs);
       const data = await res.json();
+
+      console.log("res login", data);
 
       if (res.status === 200) {
         const token = data.token;

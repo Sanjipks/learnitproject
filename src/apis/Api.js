@@ -6,8 +6,9 @@
 //   return data;
 // };
 
+// to get userlist
 export const getUsers = async (loggedinUserRole, pagenumber) => {
-  const getUsers = await fetch(
+  const res = await fetch(
     `http://localhost:3000/${loggedinUserRole}/users/page=${pagenumber}`,
     {
       method: "GET",
@@ -16,10 +17,12 @@ export const getUsers = async (loggedinUserRole, pagenumber) => {
       },
     }
   );
-  const data = await getUsers.json();
+  if (!res.ok) throw new Error("Network response was not ok.");
+  const data = await res.json();
   return data;
 };
 
+//to get list of services
 export const getServices = async (pagenumber) => {
   const res = await fetch(`http://localhost:3000/services/page=${pagenumber}`, {
     method: "GET",
@@ -27,6 +30,37 @@ export const getServices = async (pagenumber) => {
       "Content-Type": "application/json",
     },
   });
+  if (!res.ok) throw new Error("Network response was not ok.");
   const data = await res.json();
   return data;
+};
+
+//for user registration
+export const registerUser = async (inputs) => {
+  const res = await fetch("http://localhost:3000/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(inputs),
+  });
+
+  if (!res.ok) throw new Error("Network response was not ok.");
+
+  return res;
+};
+
+//for user login
+export const loginUser = async (inputs) => {
+  const res = await fetch("http://localhost:3000/signin", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(inputs),
+  });
+
+  if (!res.ok) throw new Error("Network response was not ok.");
+
+  return res;
 };
