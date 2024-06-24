@@ -12,8 +12,8 @@ function UserProfile(props) {
   };
 
   return (
-    <div className=" justify-center items-center ">
-      <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="flex justify-center items-center ">
+      <div className="w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div className="flex justify-end px-4 pt-4 pb-10 ">
           <button
             onClick={handleCardClick}
@@ -68,7 +68,7 @@ function UserProfile(props) {
         </div>
         <div className="flex flex-col items-center pb-10">
           <img
-            className="w-24 h-24 mb-3 rounded-full shadow-lg"
+            className="lg:w-96 lg:h-96 mb-3 rounded-full shadow-lg"
             src="/docs/images/people/profile-picture-3.jpg"
             alt="Bonnie image"
           />
