@@ -67,7 +67,7 @@ function UserInfo(props) {
             </ul>
           </div>
         </div>
-        <div className="flex  min-h-96 flex-col items-center pb-10">
+        <div className="flex ml-16 min-h-96 flex-col pb-10">
           <div className="flex flex-row">
             <label
               htmlFor="username"
