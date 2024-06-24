@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-function UserProfile(props) {
+function UserInfo(props) {
+  const { username } = props;
   const [expand, setExpand] = useState("hidden");
 
   const handleCardClick = () => {
@@ -66,25 +67,20 @@ function UserProfile(props) {
             </ul>
           </div>
         </div>
-        <div className="md:min-h-96 flex flex-col items-center pb-10">
-          <img
-            className="lg:w-96 lg:h-96 mb-3 rounded-full shadow-lg"
-            src="/docs/images/people/profile-picture-3.jpg"
-            alt="Bonnie image"
-          />
-          <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            {props.username}
-          </h5>
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            Visual Designer
-          </span>
-          <div className="flex mt-4 md:mt-6">
-            <a
-              href="#"
-              className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+        <div className="flex  min-h-96 flex-col items-center pb-10">
+          <div className="flex flex-row">
+            <label
+              htmlFor="username"
+              className="block mb-2 mr-4 text-xl font-medium text-gray-900 dark:text-white"
             >
-              Message
-            </a>
+              Name:
+            </label>
+            <label
+              id="username"
+              className="block text-xl font-medium text-gray-900 dark:text-white"
+            >
+              {username}
+            </label>
           </div>
         </div>
       </div>
@@ -92,4 +88,4 @@ function UserProfile(props) {
   );
 }
 
-export default UserProfile;
+export default UserInfo;
