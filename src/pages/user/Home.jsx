@@ -28,7 +28,7 @@ const Home = () => {
               <p className=" text-xl p-4">Hello, {userName}</p>
             </div>
             <div className="flex flex-col md:flex-row sm:flex-col-reverse">
-              <section className="w-full ">Hello</section>
+              <section className="w-full">Todo section</section>
               <section className="w-full">
                 <div className="flex justify-center w-full md:h-auto px-6 mx-auto lg:pt-6 ">
                   <div className="w-full bg-white rounded-lg shadow dark:border xl:p-0 dark:bg-gray-800 dark:border-gray-700">
