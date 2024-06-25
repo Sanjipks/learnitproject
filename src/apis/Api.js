@@ -7,6 +7,11 @@
 // };
 
 // to get userlist
+
+const GET_SERVICES = import.meta.env.VITE_GET_SERVICES;
+const REGISTER_USER = import.meta.env.VITE_REGISTER_USER;
+const SIGNIN_USER = import.meta.env.VITE_SIGNIN_USER;
+
 export const getUsers = async (loggedinUserRole, pagenumber) => {
   const res = await fetch(
     `http://localhost:3000/${loggedinUserRole}/users/page=${pagenumber}`,
@@ -24,7 +29,7 @@ export const getUsers = async (loggedinUserRole, pagenumber) => {
 
 //to get list of services
 export const getServices = async (pagenumber) => {
-  const res = await fetch(`http://localhost:3000/services/page=${pagenumber}`, {
+  const res = await fetch(`${GET_SERVICES}${pagenumber}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +42,7 @@ export const getServices = async (pagenumber) => {
 
 //for user registration
 export const registerUser = async (inputs) => {
-  const res = await fetch("http://localhost:3000/register", {
+  const res = await fetch(`${REGISTER_USER}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -52,7 +57,7 @@ export const registerUser = async (inputs) => {
 
 //for user login
 export const loginUser = async (inputs) => {
-  const res = await fetch("http://localhost:3000/signin", {
+  const res = await fetch(`${SIGNIN_USER}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
