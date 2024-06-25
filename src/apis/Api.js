@@ -9,12 +9,13 @@
 // to get userlist
 
 const GET_SERVICES = import.meta.env.VITE_GET_SERVICES;
+const GET_USERS = import.meta.env.VITE_GET_USERS;
 const REGISTER_USER = import.meta.env.VITE_REGISTER_USER;
 const SIGNIN_USER = import.meta.env.VITE_SIGNIN_USER;
 
 export const getUsers = async (loggedinUserRole, pagenumber) => {
   const res = await fetch(
-    `http://localhost:3000/${loggedinUserRole}/users/page=${pagenumber}`,
+    `${GET_USERS}/${loggedinUserRole}/page=${pagenumber}`,
     {
       method: "GET",
       headers: {
