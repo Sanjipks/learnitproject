@@ -13,6 +13,8 @@ const GET_USERS = import.meta.env.VITE_GET_USERS;
 const REGISTER_USER = import.meta.env.VITE_REGISTER_USER;
 const SIGNIN_USER = import.meta.env.VITE_SIGNIN_USER;
 const VERIFY_ACCOUNT = import.meta.env.VITE_VERIFY_ACCOUNT;
+const AUTH_LOGIN = import.meta.env.VITE_AUTH_LOGIN;
+const AUTH_RESENDCODE = import.meta.env.VITE_AUTH_CODE_RESEND;
 
 export const getUsers = async (loggedinUserRole, pagenumber) => {
   const res = await fetch(
@@ -81,6 +83,33 @@ export const loginUser = async (inputs) => {
     body: JSON.stringify(inputs),
   });
 
+  if (!res.ok) throw new Error("Network response was not ok.");
+
+  return res;
+};
+
+//authenticate user during signin process
+export const authLogin = async (email, authCode) => {
+  const res = await fetch(`${AUTH_LOGIN}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, authCode }),
+  });
+  if (!res.ok) throw new Error("Network response was not ok.");
+
+  return res;
+};
+
+export const authCodeResend = async (email, token) => {
+  const res = await fetch(`${AUTH_RESENDCODE}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, token }),
+  });
   if (!res.ok) throw new Error("Network response was not ok.");
 
   return res;

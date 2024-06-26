@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useLogin, useLoginUpdate } from "../../context/LoginContext";
+import { authCodeResend, authLogin } from "../../apis/Api";
 
 const Auth = () => {
   const [authCode, setAuthCode] = useState("");
@@ -23,15 +24,7 @@ const Auth = () => {
     event.preventDefault();
     if (authCode) {
       try {
-        const response = await fetch("http://localhost:3000/auth", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, authCode }),
-        });
-
-        if (!response.ok) throw new Error("Network response was not ok.");
+        const response = await authLogin(email, authCode);
         const data = await response.json();
 
         if (data) {
@@ -57,13 +50,7 @@ const Auth = () => {
   };
   const handleResend = async () => {
     try {
-      const res = await fetch("http://localhost:3000/resend-signin-code", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, token }),
-      });
+      const res = await authCodeResend(email, token);
 
       console.log("resssss", res);
       if (!res.ok) throw new Error("Network response was not ok.");
