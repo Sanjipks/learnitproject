@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useLogin } from "../../context/LoginContext";
+import { verifyAccount } from "../../apis/Api";
 
 const VerifyAccount = () => {
   const [accountVerificationCode, setAccountVerificationCode] = useState("");
@@ -23,15 +24,7 @@ const VerifyAccount = () => {
     if (accountVerificationCode) {
       console.log(email, accountVerificationCode);
       try {
-        const response = await fetch("http://localhost:3000/verifyEmail", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, accountVerificationCode }),
-        });
-
-        if (!response.ok) throw new Error("Network response was not ok.");
+        const response = await verifyAccount(email, accountVerificationCode);
 
         const data = await response.json();
 
