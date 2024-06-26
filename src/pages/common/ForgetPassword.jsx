@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { forgotPassword } from "../../apis/Api";
+import { toast } from "react-toastify";
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
@@ -13,22 +15,14 @@ const ForgetPassword = () => {
   const handleRequest = async (event) => {
     event.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/forgetpassword", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      console.log("resssss", res);
-      if (!res.ok) throw new Error("Network response was not ok.");
+      const res = await forgotPassword(email);
+      console.log("status", res.status);
 
       if (res.ok) {
         localStorage.setItem("email", email);
         navigate("/reset-forgot-password");
       }
-      if (res.status == 404) {
+      if (res.status === 404) {
         console.log("404");
         toast("email not found");
       }
