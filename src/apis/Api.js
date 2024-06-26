@@ -126,7 +126,7 @@ export const forgotPassword = async (email) => {
     },
     body: JSON.stringify({ email }),
   });
-  if (!res.ok) throw new Error("Network response was not ok.");
+  //if (!res.ok) throw new Error("Network response was not ok.")
 
   return res;
 };
