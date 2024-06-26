@@ -12,6 +12,7 @@ const GET_SERVICES = import.meta.env.VITE_GET_SERVICES;
 const GET_USERS = import.meta.env.VITE_GET_USERS;
 const REGISTER_USER = import.meta.env.VITE_REGISTER_USER;
 const SIGNIN_USER = import.meta.env.VITE_SIGNIN_USER;
+const VERIFY_ACCOUNT = import.meta.env.VITE_VERIFY_ACCOUNT;
 
 export const getUsers = async (loggedinUserRole, pagenumber) => {
   const res = await fetch(
@@ -51,6 +52,20 @@ export const registerUser = async (inputs) => {
     body: JSON.stringify(inputs),
   });
 
+  if (!res.ok) throw new Error("Network response was not ok.");
+
+  return res;
+};
+
+//user account(email) verification after user registration
+export const verifyAccount = async (email, accountVerificationCode) => {
+  const res = await fetch(`${VERIFY_ACCOUNT}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, accountVerificationCode }),
+  });
   if (!res.ok) throw new Error("Network response was not ok.");
 
   return res;
