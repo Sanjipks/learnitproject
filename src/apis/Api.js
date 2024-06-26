@@ -15,6 +15,7 @@ const SIGNIN_USER = import.meta.env.VITE_SIGNIN_USER;
 const VERIFY_ACCOUNT = import.meta.env.VITE_VERIFY_ACCOUNT;
 const AUTH_LOGIN = import.meta.env.VITE_AUTH_LOGIN;
 const AUTH_RESENDCODE = import.meta.env.VITE_AUTH_CODE_RESEND;
+const FORGOT_PASSWORD = import.meta.env.VITE_FORGOT_PASSWORD;
 
 export const getUsers = async (loggedinUserRole, pagenumber) => {
   const res = await fetch(
@@ -102,6 +103,7 @@ export const authLogin = async (email, authCode) => {
   return res;
 };
 
+//to resend authcode
 export const authCodeResend = async (email, token) => {
   const res = await fetch(`${AUTH_RESENDCODE}`, {
     method: "POST",
@@ -109,6 +111,20 @@ export const authCodeResend = async (email, token) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, token }),
+  });
+  if (!res.ok) throw new Error("Network response was not ok.");
+
+  return res;
+};
+
+//to request new password
+export const forgotPassword = async (email) => {
+  const res = await fetch(`${FORGOT_PASSWORD}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
   });
   if (!res.ok) throw new Error("Network response was not ok.");
 
