@@ -18,7 +18,7 @@ const ForgetPassword = () => {
       const res = await forgotPassword(email);
       console.log("status", res.status);
 
-      if (!res.ok) throw new Error("Network response was not ok.");
+      //if (!res.ok) throw new Error("Network response was not ok.");
 
       if (res.ok) {
         localStorage.setItem("email", email);
