@@ -3,6 +3,7 @@ import EyeShow from "../../assets/EyeShow";
 import EyeHide from "../../assets/EyeHide";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { resetForgotPassword } from "../../apis/Api";
 
 const ResetForgetPassword = () => {
   const [inputs, setInputs] = useState({
@@ -43,15 +44,8 @@ const ResetForgetPassword = () => {
     if (inputs.password === inputs.confirmpassword) {
       let password = inputs.password;
       try {
-        const res = await fetch("http://localhost:3000/reset-forgotpassword", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ password, email }),
-        });
+        const res = await resetForgotPassword(password, email);
 
-        console.log("resssss", res);
         if (!res.ok) throw new Error("Network response was not ok.");
 
         if (res.ok) {
