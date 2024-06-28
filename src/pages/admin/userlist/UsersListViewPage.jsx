@@ -76,8 +76,7 @@ export default function UserListViewPage(props) {
 
       if (response.ok) {
         toast(data.message);
-        setAllUsers(userlist.filter((user) => user.id !== id));
-        return;
+        setAllUsers(allUsers.filter((user) => user.user_id !== id));
       } else {
         console.error("Failed to remove user");
       }
