@@ -12,6 +12,7 @@ export default function UserListViewPage(props) {
   const [userperpageListView, setUserperpageListView] = useState(10);
   const [totalUserscount, setTotalUserscount] = useState(0);
   const [allUsers, setAllUsers] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
   const { handleView } = props;
 
   const pagenumber = 1;
@@ -75,7 +76,8 @@ export default function UserListViewPage(props) {
 
       if (response.ok) {
         toast(data.message);
-        setUserlist(userlist.filter((user) => user.id !== id));
+        setAllUsers(userlist.filter((user) => user.id !== id));
+        return;
       } else {
         console.error("Failed to remove user");
       }
@@ -83,6 +85,18 @@ export default function UserListViewPage(props) {
       console.error("Error:", error);
     }
   };
+
+  const handleSearch = async (input) => {
+    setSearchInput(input);
+
+    const filteredUsers = allUsers.filter((user) =>
+      user.user_name.toLowerCase().includes(input.toLowerCase())
+    );
+
+    setAllUsers(filteredUsers);
+  };
+
+  console.log("input", searchInput);
 
   return (
     <>
@@ -95,6 +109,7 @@ export default function UserListViewPage(props) {
             handlesetuserperpagelistview={handleuserperpage}
             paginatedUsers={paginatedUserslistview}
             usernumber={userperpageListView}
+            handleSearchInput={handleSearch}
           />
         </div>
         <div className="flex flex-col items-center">
