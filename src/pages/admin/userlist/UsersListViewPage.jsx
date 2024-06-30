@@ -4,8 +4,6 @@ import { deleteUser, getUsers } from "../../../apis/Api";
 import { toast } from "react-toastify";
 import { useLogin } from "../../../context/LoginContext";
 import UserListView from "../../../components/UserListViewTable";
-import { useNavigate } from "react-router-dom";
-import Login from "../../common/Login";
 
 export default function UserListViewPage(props) {
   const [pagenumberlist, setPagenumberlist] = useState(1);
@@ -19,7 +17,6 @@ export default function UserListViewPage(props) {
 
   const loggedinUserInfo = useLogin();
   const loggedinUserRole = loggedinUserInfo.userRole;
-  const navigate = useNavigate();
 
   const startIndex = (pagenumberlist - 1) * userperpageListView;
   const endIndex = startIndex + userperpageListView;
