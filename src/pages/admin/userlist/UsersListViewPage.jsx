@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { getUsers } from "../../../apis/Api";
+import { deleteUser, getUsers } from "../../../apis/Api";
 import { toast } from "react-toastify";
 import { useLogin } from "../../../context/LoginContext";
 import UserListView from "../../../components/UserListViewTable";
@@ -17,18 +17,14 @@ export default function UserListViewPage(props) {
 
   const pagenumber = 1;
 
-  const loginInfo = useLogin();
-  const loginState = loginInfo.loginState;
-  const userRole = loginInfo.userRole;
+  const loggedinUserInfo = useLogin();
+  const loggedinUserRole = loggedinUserInfo.userRole;
   const navigate = useNavigate();
 
   const startIndex = (pagenumberlist - 1) * userperpageListView;
   const endIndex = startIndex + userperpageListView;
 
   let paginatedUserslistview = allUsers.slice(startIndex, endIndex);
-
-  const loggedinUserInfo = useLogin();
-  const loggedinUserRole = loggedinUserInfo.userRole;
 
   const handlePrevPageList = () => {
     if (pagenumberlist > 1) {
@@ -64,13 +60,7 @@ export default function UserListViewPage(props) {
     );
     if (!userConfirmed) return;
     try {
-      const response = await fetch(`http://localhost:3000/users/${id}/delete`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ loggedinUserRole }),
-      });
+      const response = await deleteUser(id, loggedinUserRole);
 
       const data = await response.json();
 

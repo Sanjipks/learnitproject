@@ -131,6 +131,7 @@ export const forgotPassword = async (email) => {
   return res;
 };
 
+//set new password
 export const resetForgotPassword = async (password, email) => {
   const res = await fetch(`${RESET_FORGOT_PASSWORD}`, {
     method: "POST",
@@ -140,5 +141,17 @@ export const resetForgotPassword = async (password, email) => {
     body: JSON.stringify({ email, password }),
   });
 
+  return res;
+};
+
+// delete user adminonly
+export const deleteUser = async (id, loggedinUserRole) => {
+  const res = await fetch(`${GET_USERS}/${id}/delete`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ loggedinUserRole }),
+  });
   return res;
 };
