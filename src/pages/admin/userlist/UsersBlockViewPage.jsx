@@ -4,8 +4,6 @@ import User from "../../../components/UserBlockViewCard";
 import { getUsers } from "../../../apis/Api";
 import { toast } from "react-toastify";
 import { useLogin } from "../../../context/LoginContext";
-import { useNavigate } from "react-router-dom";
-import Login from "../../common/Login";
 
 export default function UsersBlockViewPage(props) {
   const [userlist, setUserlist] = useState([]);
@@ -14,11 +12,6 @@ export default function UsersBlockViewPage(props) {
   const [totalUserscount, setTotalUserscount] = useState(0);
 
   const { handleView } = props;
-
-  const loginInfo = useLogin();
-  const loginState = loginInfo.loginState;
-  const userRole = loginInfo.userRole;
-  const navigate = useNavigate();
 
   const loggedinUserInfo = useLogin();
   const loggedinUserRole = loggedinUserInfo.userRole;
