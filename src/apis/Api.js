@@ -1,11 +1,3 @@
-// export const getUsers = async (loggedinUserRole, pagenumber) => {
-//   const getUsers = await fetch(
-//     `http://localhost:3000/${loggedinUserRole}/users/page=${pagenumber}`
-//   );
-//   const data = await getUsers.json();
-//   return data;
-// };
-
 // to get userlist
 
 const GET_SERVICES = import.meta.env.VITE_GET_SERVICES;
