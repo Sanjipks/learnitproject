@@ -10,6 +10,7 @@ export default function UserListViewPage(props) {
   const [userperpageListView, setUserperpageListView] = useState(10);
   const [totalUserscount, setTotalUserscount] = useState(0);
   const [allUsers, setAllUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const { handleView } = props;
 
@@ -21,7 +22,7 @@ export default function UserListViewPage(props) {
   const startIndex = (pagenumberlist - 1) * userperpageListView;
   const endIndex = startIndex + userperpageListView;
 
-  let paginatedUserslistview = allUsers.slice(startIndex, endIndex);
+  let paginatedUserslistview = filteredUsers.slice(startIndex, endIndex);
 
   const handlePrevPageList = () => {
     if (pagenumberlist > 1) {
@@ -43,9 +44,11 @@ export default function UserListViewPage(props) {
   try {
     useEffect(() => {
       getUsers(loggedinUserRole, pagenumber).then((data) => {
-        setAllUsers(data.allUsers), setTotalUserscount(data.totalEntries);
+        setAllUsers(data.allUsers),
+          setFilteredUsers(data.allUsers),
+          setTotalUserscount(data.totalEntries);
       });
-    }, [pagenumber]);
+    }, []);
     console.log("length");
   } catch (error) {
     throw new Error("Error:", error);
@@ -72,14 +75,14 @@ export default function UserListViewPage(props) {
     }
   };
 
-  const handleSearch = async (input) => {
+  const handleSearch = (input) => {
     setSearchInput(input);
 
     const filteredUsers = allUsers.filter((user) =>
       user.user_name.toLowerCase().includes(input.toLowerCase())
     );
 
-    setAllUsers(filteredUsers);
+    setFilteredUsers(filteredUsers);
   };
 
   console.log("input", searchInput);
