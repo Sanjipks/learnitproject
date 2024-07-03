@@ -24,6 +24,19 @@ export default function UserListViewPage(props) {
 
   let paginatedUserslistview = filteredUsers.slice(startIndex, endIndex);
 
+  try {
+    useEffect(() => {
+      getUsers(loggedinUserRole, pagenumber).then((data) => {
+        setAllUsers(data.allUsers),
+          setFilteredUsers(data.allUsers),
+          setTotalUserscount(data.totalEntries);
+      });
+    }, []);
+    console.log("length");
+  } catch (error) {
+    throw new Error("Error:", error);
+  }
+
   const handlePrevPageList = () => {
     if (pagenumberlist > 1) {
       setPagenumberlist(pagenumberlist - 1);
@@ -40,19 +53,6 @@ export default function UserListViewPage(props) {
   const handleuserperpage = (number) => {
     setUserperpageListView(number);
   };
-
-  try {
-    useEffect(() => {
-      getUsers(loggedinUserRole, pagenumber).then((data) => {
-        setAllUsers(data.allUsers),
-          setFilteredUsers(data.allUsers),
-          setTotalUserscount(data.totalEntries);
-      });
-    }, []);
-    console.log("length");
-  } catch (error) {
-    throw new Error("Error:", error);
-  }
 
   const handleRemove = async (id) => {
     const userConfirmed = window.confirm(
@@ -102,28 +102,56 @@ export default function UserListViewPage(props) {
           />
         </div>
         <div className="flex flex-col items-center">
-          <div>
-            {allUsers.length !== 0 ? (
-              <span className="text-sm text-gray-950 dark:text-gray-400">
-                Showing{" "}
-                <span className="font-semibold text-gray-900 dark:text-white">
-                  {startIndex + 1}
-                </span>{" "}
-                {startIndex !== null ? " to " : null}
-                {endIndex !== null ? (
+          {searchInput ? (
+            <div>
+              {filteredUsers.length !== 0 ? (
+                <span className="text-sm text-gray-950 dark:text-gray-400">
+                  Showing{" "}
                   <span className="font-semibold text-gray-900 dark:text-white">
-                    {totalUserscount < endIndex ? totalUserscount : endIndex}
-                  </span>
-                ) : null}
-                <span className="font-semibold text-gray-900 dark:text-white">
-                  {" of "} {totalUserscount}
-                </span>{" "}
-                Total Users
-              </span>
-            ) : (
-              "NO USERS TO DISPLAY"
-            )}
-          </div>
+                    {startIndex + 1}
+                  </span>{" "}
+                  {startIndex !== null ? " to " : null}
+                  {endIndex !== null ? (
+                    <span className="font-semibold text-gray-900 dark:text-white">
+                      {filteredUsers.length < endIndex
+                        ? filteredUsers.length
+                        : endIndex}
+                    </span>
+                  ) : null}
+                  <span className="font-semibold text-gray-900 dark:text-white">
+                    {" of "} {filteredUsers.length}
+                  </span>{" "}
+                  Total Users
+                </span>
+              ) : (
+                "NO USERS TO DISPLAY"
+              )}
+            </div>
+          ) : (
+            <div>
+              {allUsers.length !== 0 ? (
+                <span className="text-sm text-gray-950 dark:text-gray-400">
+                  Showing{" "}
+                  <span className="font-semibold text-gray-900 dark:text-white">
+                    {startIndex + 1}
+                  </span>{" "}
+                  {startIndex !== null ? " to " : null}
+                  {endIndex !== null ? (
+                    <span className="font-semibold text-gray-900 dark:text-white">
+                      {totalUserscount < endIndex ? totalUserscount : endIndex}
+                    </span>
+                  ) : null}
+                  <span className="font-semibold text-gray-900 dark:text-white">
+                    {" of "} {totalUserscount}
+                  </span>{" "}
+                  Total Users
+                </span>
+              ) : (
+                "NO USERS TO DISPLAY"
+              )}
+            </div>
+          )}
+
           <button onClick={handleView}> Switch to Card View </button>
 
           <div className="flex w-3/5 justify-between my-2  float-end">
@@ -138,6 +166,8 @@ export default function UserListViewPage(props) {
               disabled={
                 pagenumberlist ===
                   Math.ceil(totalUserscount / userperpageListView) ||
+                pagenumberlist ===
+                  Math.ceil(filteredUsers.length / userperpageListView) ||
                 allUsers.length === 0
               }
               onClick={handleNextPageList}
