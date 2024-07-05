@@ -18,13 +18,13 @@ const AdminPage = () => {
   return (
     <>
       {userRole === "admin" && loginState === "true" ? (
-        <div className="h-auto sm:items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200">
+        <div className="h-auto  w-full sm:items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200">
           <div className="flex justify-center">
             <a className="text-center text-xl font-bold text-gray-200 dark:bg-gray-800 md:text-2xl dark:text-white p-4 my-8">
               Hello, Admin
             </a>
           </div>
-          <div className=" h-auto flex md:flex-row sm:flex-col sm:items-center ">
+          <div className="max-w-screen-xl justify-center h-auto w-full flex md:flex-row sm:flex-col sm:items-center mx-auto">
             <section className="sm:min-h-dvh bg-gray-200 dark:bg-gray-600 md:w-1/2 sm:w-full mt-8 border dark:border-black ">
               <div className=" flex flex-col items-center md:h-dvh px-6 mx-auto lg:pt-6 ">
                 <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
