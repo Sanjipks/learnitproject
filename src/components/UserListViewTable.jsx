@@ -52,7 +52,7 @@ export default function UserListView(props) {
   };
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="relative shadow-md sm:rounded-lg">
       <div className="p-4 flex flex-row justify-between bg-white dark:bg-gray-900">
         <div>
           <label htmlFor="table-search" className="sr-only">

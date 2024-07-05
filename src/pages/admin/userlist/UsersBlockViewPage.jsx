@@ -114,7 +114,7 @@ export default function UsersBlockViewPage(props) {
           </div>
           <button onClick={handleView}> Switch List View </button>
 
-          <div className="flex w-3/5 justify-between my-2  float-end">
+          <div className="flex max-w-screen-xl w-full justify-between my-2 float-end">
             <button
               disabled={pagenumber === 1}
               onClick={handlePrevPage}

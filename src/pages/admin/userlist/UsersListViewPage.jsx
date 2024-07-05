@@ -154,7 +154,7 @@ export default function UserListViewPage(props) {
 
           <button onClick={handleView}> Switch to Card View </button>
 
-          <div className="flex w-3/5 justify-between my-2  float-end">
+          <div className="flex max-w-screen-xl w-full justify-between my-2 float-end">
             <button
               disabled={pagenumberlist === 1}
               onClick={handlePrevPageList}
