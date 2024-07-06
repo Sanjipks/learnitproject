@@ -4,6 +4,7 @@ import { bufferToBase64 } from "../utility/BufferToBase64";
 const Service = (props) => {
   const { service, serviceId, serviceLogo } = props;
   const [image, setImage] = useState(null);
+  const [hidden, setHidden] = useState("hidden");
 
   useEffect(() => {
     if (serviceLogo && serviceLogo.data) {
@@ -32,6 +33,7 @@ const Service = (props) => {
     // props.removeUser(props.userId);
     setExpand("hidden");
   };
+  const handleEdit = () => {};
   return (
     <div className="flex">
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -65,7 +67,7 @@ const Service = (props) => {
             <ul className="py-2" aria-labelledby="dropdownButton">
               <li>
                 <a
-                  href="#"
+                  onclick={handleEdit}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Edit
