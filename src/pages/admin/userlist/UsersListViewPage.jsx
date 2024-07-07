@@ -79,13 +79,14 @@ export default function UserListViewPage(props) {
   //   }
   // };
 
-  const handlePop = (state) => {
-    setConfirmDelete(state);
-  };
-
   const handleRemove = async (id) => {
     setDeletedId(id);
     setPop(true);
+  };
+
+  const handlePop = (state) => {
+    setConfirmDelete(state);
+    setPop(false);
   };
 
   useEffect(() => {
@@ -112,8 +113,10 @@ export default function UserListViewPage(props) {
       };
 
       deleteUserAsync();
+    } else {
+      return;
     }
-  }, [confirmDelete, deletedId, loggedinUserRole, allUsers, setFilteredUsers]);
+  }, [confirmDelete]);
 
   const handleSearch = (input) => {
     setSearchInput(input);
@@ -129,7 +132,7 @@ export default function UserListViewPage(props) {
 
   return (
     <>
-      {pop ? <DeleteDecision handlepop={handlePop} /> : null}
+      {pop ? <DeleteDecision handlePopAction={handlePop} /> : null}
       <div className="min-h-dvh h-auto flex flex-col justify-items-center justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
         <h1 className="m-10 text-center text-xl">USERS</h1>
         <div className="flex justify-self-center mx-auto">
@@ -179,11 +182,13 @@ export default function UserListViewPage(props) {
                   {startIndex !== null ? " to " : null}
                   {endIndex !== null ? (
                     <span className="font-semibold text-gray-900 dark:text-white">
-                      {totalUserscount < endIndex ? totalUserscount : endIndex}
+                      {filteredUsers.length < endIndex
+                        ? filteredUsers.length
+                        : endIndex}
                     </span>
                   ) : null}
                   <span className="font-semibold text-gray-900 dark:text-white">
-                    {" of "} {totalUserscount}
+                    {" of "} {filteredUsers.length}
                   </span>{" "}
                   Total Users
                 </span>
