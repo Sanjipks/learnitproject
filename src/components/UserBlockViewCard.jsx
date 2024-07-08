@@ -6,7 +6,7 @@ import EditUser from "../modals/EditUser";
 export default function User(props) {
   const { removeUser, userId, userImage, user, userEmail, editUser } = props;
   const [expand, setExpand] = useState("hidden");
-  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(false);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -22,11 +22,16 @@ export default function User(props) {
       setExpand("block");
     } else {
       setExpand("hidden");
+      setSelectedUser(false);
     }
   };
 
   const handleMouseLeave = () => {
-    setExpand("hidden");
+    if (selectedUser === false) {
+      setExpand("hidden");
+    } else {
+      setExpand("block");
+    }
   };
 
   const handleDelete = () => {
@@ -35,12 +40,7 @@ export default function User(props) {
   };
 
   const handleEditUser = () => {
-    if (selectedUserId === null) {
-      setSelectedUserId(userId);
-    } else {
-      setSelectedUserId(null);
-    }
-
+    setSelectedUser((prev) => !prev);
     editUser(userId);
   };
 
@@ -78,7 +78,7 @@ export default function User(props) {
               <ul className="py-2" aria-labelledby="dropdownButton">
                 <li>
                   <a
-                    onClick={() => handleEditUser(userId)}
+                    onClick={() => handleEditUser()}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Edit
@@ -96,7 +96,7 @@ export default function User(props) {
               </ul>
             </div>
           </div>
-          {selectedUserId === userId ? <EditUser /> : null}
+          {selectedUser ? <EditUser /> : null}
           <div className="flex flex-col items-center pb-10">
             <img
               className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"
