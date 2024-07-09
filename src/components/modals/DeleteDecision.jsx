@@ -1,7 +1,7 @@
 import React from "react";
 
 const DeleteDecision = (props) => {
-  const { handlePopAction } = props;
+  const { handlePopAction, type } = props;
 
   const confirmDelete = () => {
     handlePopAction(true);
@@ -59,7 +59,7 @@ const DeleteDecision = (props) => {
                 />
               </svg>
               <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                Are you sure you want to delete this user?
+                Are you sure you want to delete this {type}?
               </h3>
               <button
                 onClick={confirmDelete}
