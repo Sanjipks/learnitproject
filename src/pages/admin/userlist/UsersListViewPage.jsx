@@ -58,37 +58,19 @@ export default function UserListViewPage(props) {
     setUserperpageListView(number);
   };
 
-  // const handleRemove = async (id) => {
-  //   const userConfirmed = window.confirm(
-  //     "Are you sure you want to remove this user?"
-  //   );
-  //   if (!userConfirmed) return;
-  //   try {
-  //     const response = await deleteUser(id, loggedinUserRole);
-
-  //     const data = await response.json();
-
-  //     if (response.ok) {
-  //       toast(data.message);
-  //       setAllUsers(allUsers.filter((user) => user.user_id !== id));
-  //     } else {
-  //       console.error("Failed to remove user");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
-
+  //first step to remove user, passed as removeuser props and it recieves user id from child and set Pop true to dispaly component created as modal
   const handleRemove = async (id) => {
     setDeletedId(id);
     setPop(true);
   };
 
+  //user delete decision can be made and receives true or false state from child compo
   const handlePop = (state) => {
     setConfirmDelete(state);
     setPop(false);
   };
 
+  //it deletes the user if condition is met
   useEffect(() => {
     if (confirmDelete && deletedId !== null) {
       const deleteUserAsync = async () => {
@@ -132,7 +114,7 @@ export default function UserListViewPage(props) {
 
   return (
     <>
-      {pop ? <DeleteDecision handlePopAction={handlePop} /> : null}
+      {pop ? <DeleteDecision handlePopAction={handlePop} type="user" /> : null}
       <div className="min-h-dvh h-auto flex flex-col justify-items-center justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
         <h1 className="m-10 text-center text-xl">USERS</h1>
         <div className="flex justify-self-center mx-auto">

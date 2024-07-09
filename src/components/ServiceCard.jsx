@@ -4,7 +4,7 @@ import { bufferToBase64 } from "../utility/BufferToBase64";
 const Service = (props) => {
   const { service, serviceId, serviceLogo } = props;
   const [image, setImage] = useState(null);
-  const [hidden, setHidden] = useState("hidden");
+  const [expand, setExpand] = useState("hidden");
 
   useEffect(() => {
     if (serviceLogo && serviceLogo.data) {
@@ -15,7 +15,6 @@ const Service = (props) => {
   }, [serviceLogo]);
 
   console.log("image", image);
-  const [expand, setExpand] = useState("hidden");
 
   const handleExpand = () => {
     if (expand === "hidden") {
@@ -30,10 +29,11 @@ const Service = (props) => {
   };
 
   const handleDelete = () => {
-    // props.removeUser(props.userId);
     setExpand("hidden");
   };
-  const handleEdit = () => {};
+  const handleEdit = () => {
+    "todo";
+  };
   return (
     <div className="flex">
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -91,9 +91,9 @@ const Service = (props) => {
             src={image ? image : "no image"}
             alt="Bonnie image"
           />
-          <div className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+          <div className="mb-1 text-xl  min-w-full font-medium text-center text-gray-900 dark:text-white p-4">
             {service}
-            <p className="mb-1 xl:text-xl lg:text-lg md:text-sm font-medium text-gray-900 dark:text-white">
+            <p className="mb-1 xl:text-xl lg:text-lg md:text-sm  text-center font-medium text-gray-900 dark:text-white">
               {serviceId}
             </p>
           </div>
