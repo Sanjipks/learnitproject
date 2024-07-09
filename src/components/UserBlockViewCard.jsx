@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
-import EditUser from "../modals/EditUser";
+import EditUser from "./modals/EditUser";
 
 export default function User(props) {
   const { removeUser, userId, userImage, user, userEmail, editUser } = props;
