@@ -1,44 +1,40 @@
-import React, { useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-const LoginContext = React.createContext();
-const LoginUpdateContext = React.createContext();
+const LoginContext = createContext();
 
 export function useLogin() {
   return useContext(LoginContext);
 }
 
-export function useLoginUpdate() {
-  return useContext(LoginUpdateContext);
-}
-
 export default function LoginProvider({ children }) {
-  const [logininfo, setLogininfo] = useState({
+  const [loginInfo, setLogininfo] = useState({
     loginState: localStorage.getItem("loginState"),
     token: localStorage.getItem("token"),
     userEmail: localStorage.getItem("userEmail"),
     userName: localStorage.getItem("userName"),
     userRole: localStorage.getItem("userRole"),
   });
-  console.log("login", logininfo);
 
-  const loginMode = (updates) => {
-    setLogininfo((prevInfo) => ({
-      ...prevInfo,
-      ...updates,
-    }));
+  const loginInfoUpdate = (updates) => {
+    setLogininfo((prevInfo) => {
+      const updatedInfo = {
+        ...prevInfo,
+        ...updates,
+      };
 
-    localStorage.setItem("loginState", logininfo.loginState);
-    localStorage.setItem("token", logininfo.token);
-    localStorage.setItem("userEmail", logininfo.userEmail);
-    localStorage.setItem("userName", logininfo.userName);
-    localStorage.setItem("userRole", logininfo.userRole);
+      localStorage.setItem("loginState", updatedInfo.loginState);
+      localStorage.setItem("token", updatedInfo.token);
+      localStorage.setItem("userEmail", updatedInfo.userEmail);
+      localStorage.setItem("userName", updatedInfo.userName);
+      localStorage.setItem("userRole", updatedInfo.userRole);
+
+      return updatedInfo;
+    });
   };
 
   return (
-    <LoginContext.Provider value={logininfo}>
-      <LoginUpdateContext.Provider value={loginMode}>
-        {children}
-      </LoginUpdateContext.Provider>
+    <LoginContext.Provider value={{ loginInfo, loginInfoUpdate }}>
+      {children}
     </LoginContext.Provider>
   );
 }

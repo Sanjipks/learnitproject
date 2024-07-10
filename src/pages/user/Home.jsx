@@ -7,11 +7,13 @@ import { useNavigate } from "react-router-dom";
 import UserInfo from "../../components/UserInfo";
 
 const Home = () => {
-  const loginInfo = useLogin();
+  const { loginInfo } = useLogin();
   const loginState = loginInfo.loginState;
   const userName = loginInfo.userName;
   const userRole = loginInfo.userRole;
   const navigate = useNavigate();
+
+  console.log(loginInfo, loginState, userName);
 
   useEffect(() => {
     if (userRole !== "user") {

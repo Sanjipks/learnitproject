@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useLogin, useLoginUpdate } from "../../context/LoginContext";
+import { useLogin } from "../../context/LoginContext";
 import { authCodeResend, authLogin } from "../../apis/Api";
 
 const Auth = () => {
   const [authCode, setAuthCode] = useState("");
 
-  const logininfo = useLogin();
-  const loginupdate = useLoginUpdate();
+  const { loginInfo, loginInfoUpdate } = useLogin();
 
-  const email = logininfo.userEmail;
-  const token = logininfo.token;
-  const Role = logininfo.userRole;
+  const email = loginInfo.userEmail;
+  const token = loginInfo.token;
+  const Role = loginInfo.userRole;
 
   const navigate = useNavigate();
 
@@ -29,7 +28,7 @@ const Auth = () => {
 
         if (data) {
           toast(data.message);
-          loginupdate((logininfo.loginState = "true"));
+          loginInfoUpdate((loginInfo.loginState = "true"));
           if (Role === "admin") {
             navigate("/admin");
             console.log("i am here");
