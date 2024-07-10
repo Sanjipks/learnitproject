@@ -115,7 +115,7 @@ export default function UserListViewPage(props) {
   return (
     <>
       {pop ? <DeleteDecision handlePopAction={handlePop} type="user" /> : null}
-      <div className="min-h-dvh h-auto flex flex-col justify-items-center justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
+      <div className="min-h-dvh h-auto flex flex-col justify-items-center justify-between overflow-x-scroll bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
         <h1 className="m-10 text-center text-xl">USERS</h1>
         <div className="flex justify-self-center mx-auto">
           <UserListView
