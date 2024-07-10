@@ -3,13 +3,14 @@ import GMap from "../../components/Map";
 
 const ContactUs = () => {
   return (
-    <div className="h-dvh flex  md:flex-col sm:flex-col sm:items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 pt-12">
-      <div className=" bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800">
+    <div className="min-h-screen flex sm:m-auto md:h-fit md:flex-col sm:gap-8 xl:gap-0 sm:flex-col sm:items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 pt-12">
+      <div className="bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800">
         <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
           Contact Us
         </h1>
       </div>
-      <div className="max-w-screen-xl w-full max-h-dvh h-1/2 mt-48 flex md:flex-row sm:flex-col-reverse">
+
+      <div className="max-w-screen-xl w-full h-fit sm:h-auto sm:m-auto flex md:flex-row sm:flex-col-reverse">
         <section className="flex justify-center items-center w-full bg-amber-300 md:rounded-l-xl">
           <div className="relative p-4 w-full max-w-md max-h-full">
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -79,8 +80,8 @@ const ContactUs = () => {
             </div>
           </div>
         </section>
-        <section className="flex justify-center items-center h-full w-full bg-amber-100 md:rounded-r-xl">
-          <div className=" w-full max-h-full h-full p-4">
+        <section className="flex justify-center items-center min-h-max w-full bg-amber-100 md:rounded-r-xl">
+          <div className="flex w-full min-h-96 p-4 justify-center items-center ">
             <GMap />
           </div>
         </section>

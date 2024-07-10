@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import { useLogin, useLoginUpdate } from "../../context/LoginContext";
+import { useLogin } from "../../context/LoginContext";
 import { registerUser } from "../../apis/Api";
 
 export default function RegisterPage() {
@@ -17,8 +17,7 @@ export default function RegisterPage() {
     confirmpassword: "",
   });
 
-  const registerInfo = useLogin();
-  const updateEmail = useLoginUpdate();
+  const { loginInfo, loginInfoUpdate } = useLogin();
 
   const navigate = useNavigate();
 
@@ -54,7 +53,7 @@ export default function RegisterPage() {
         const response = await registerUser(inputs);
         console.log("status", response);
         if (response.status == 201) {
-          updateEmail((registerInfo.userEmail = inputs.email));
+          loginInfoUpdate((loginInfo.userEmail = inputs.email));
           navigate("/verifyaccount");
         }
       } catch (error) {

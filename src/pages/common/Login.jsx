@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import EyeHide from "../../assets/EyeHide";
 import React, { useState } from "react";
-import { useLogin, useLoginUpdate } from "../../context/LoginContext";
+import { useLogin } from "../../context/LoginContext";
 import { loginUser } from "../../apis/Api";
 
 export default function Login() {
@@ -10,8 +10,7 @@ export default function Login() {
     password: "",
   });
 
-  const logininfo = useLogin();
-  const loginupdate = useLoginUpdate();
+  const { loginInfo, loginInfoUpdate } = useLogin();
 
   const [passwordtype, setPasswordtype] = useState("password");
 
@@ -32,11 +31,11 @@ export default function Login() {
         const userRole = data.role;
         const userName = data.userName;
         console.log("userRole", userRole);
-        loginupdate(
-          (logininfo.token = token),
-          (logininfo.userEmail = inputs.email),
-          (logininfo.userName = userName),
-          (logininfo.userRole = userRole)
+        loginInfoUpdate(
+          (loginInfo.token = token),
+          (loginInfo.userEmail = inputs.email),
+          (loginInfo.userName = userName),
+          (loginInfo.userRole = userRole)
         );
 
         window.location.href = "/auth";
