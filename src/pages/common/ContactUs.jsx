@@ -3,16 +3,14 @@ import GMap from "../../components/Map";
 
 const ContactUs = () => {
   return (
-    <div className="md:h-dvh flex sm:h-auto  md:flex-col sm:flex-col sm:items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 pt-12">
-      <div className="h-auto mb-12">
-        <div className="bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800">
-          <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
-            Contact Us
-          </h1>
-        </div>
+    <div className="min-h-screen flex sm:m-auto md:h-fit md:flex-col sm:gap-8 xl:gap-0 sm:flex-col sm:items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 pt-12">
+      <div className="bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800">
+        <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
+          Contact Us
+        </h1>
       </div>
 
-      <div className="max-w-screen-xl w-full max-h-dvh h-1/2 md:mt-12 sm:h-auto flex md:flex-row sm:flex-col-reverse">
+      <div className="max-w-screen-xl w-full h-fit sm:h-auto sm:m-auto flex md:flex-row sm:flex-col-reverse">
         <section className="flex justify-center items-center w-full bg-amber-300 md:rounded-l-xl">
           <div className="relative p-4 w-full max-w-md max-h-full">
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
