@@ -63,9 +63,9 @@ export default function Login() {
   };
 
   return (
-    <div className="flex justify-center items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 sm:pb-4 xm:pb-4">
-      <section className="h-auto md:my-24 bg-gray-300 dark:bg-gray-600 max-w-screen-xl w-full m-auto">
-        <div className=" flex flex-col items-center justify-center md:h-dvh px-6 lg:pt-6 ">
+    <div className="min-h-screen justify-center items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 sm:pb-4 xm:pb-4">
+      <div className=" bg-gray-300 dark:bg-gray-600 max-w-screen-xl m-auto pt-16">
+        <div className=" flex flex-col items-center justify-center px-6 lg:pt-6 ">
           <a
             href="/"
             className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
@@ -166,7 +166,7 @@ export default function Login() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

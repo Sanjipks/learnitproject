@@ -25,7 +25,7 @@ const Home = () => {
   return (
     <>
       {loginState === "true" && userRole === "user" ? (
-        <div className="h-dvh dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 ">
+        <div className="min-h-dvh dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 ">
           <div className="max-w-screen-xl w-full flex flex-col mx-auto">
             <div className="flex justify-start bg-gray-300 dark:bg-gray-600">
               <p className=" text-xl p-4">Hello, {userName}</p>
