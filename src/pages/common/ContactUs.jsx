@@ -3,7 +3,7 @@ import GMap from "../../components/Map";
 
 const ContactUs = () => {
   return (
-    <div className="min-h-screen dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200">
+    <div className="min-h-screen xl:-mb-64  dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200">
       <div className="h-auto flex md:h-fit md:flex-col sm:gap-8 sm:pb-8 lg:pb-0 xl:gap-0 sm:flex-col sm:items-center">
         <div className=" bg-white rounded-lg shadow dark:border my-8 sm:max-w-md xl:p-0 dark:bg-gray-800">
           <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
