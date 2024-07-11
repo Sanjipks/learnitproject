@@ -7,7 +7,7 @@ import Login from "../../common/Login";
 const UsersList = () => {
   const [listView, setListView] = useState(true);
 
-  const loginInfo = useLogin();
+  const { loginInfo } = useLogin();
   const loginState = loginInfo.loginState;
   const userRole = loginInfo.userRole;
 

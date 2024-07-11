@@ -20,8 +20,8 @@ export default function UserListViewPage(props) {
 
   const pagenumber = 1;
 
-  const loggedinUserInfo = useLogin();
-  const loggedinUserRole = loggedinUserInfo.userRole;
+  const { loginInfo } = useLogin();
+  const loggedinUserRole = loginInfo.userRole;
 
   const startIndex = (pagenumberlist - 1) * userperpageListView;
   const endIndex = startIndex + userperpageListView;

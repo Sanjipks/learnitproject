@@ -13,8 +13,8 @@ export default function UsersBlockViewPage(props) {
 
   const { handleView } = props;
 
-  const loggedinUserInfo = useLogin();
-  const loggedinUserRole = loggedinUserInfo.userRole;
+  const { loginInfo } = useLogin();
+  const loggedinUserRole = loginInfo.userRole;
 
   const handlePrevPage = () => {
     if (pagenumber > 1) {
