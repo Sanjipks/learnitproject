@@ -4,7 +4,7 @@ import Login from "../common/Login";
 import { useNavigate } from "react-router-dom";
 
 const AdminPage = () => {
-  const loginInfo = useLogin();
+  const { loginInfo } = useLogin();
   const loginState = loginInfo.loginState;
   const userRole = loginInfo.userRole;
   const navigate = useNavigate();
