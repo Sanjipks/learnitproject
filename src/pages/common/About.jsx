@@ -5,8 +5,8 @@ export default function About() {
     <div className="min-h-dvh flex flex-col sm:items-center sm:mb-auto dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 ">
       <section className=" bg-gray-200 dark:bg-gray-600 md:w-1/2 sm:w-full sm:mt-2 sm:mb-4 border rounded-xl dark:border-black ">
         <div className=" flex flex-col items-center md:h-dvh px-6 mx-auto lg:pt-6 ">
-          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-8">
+          <div className="flex mx-auto w-full justify-center  bg-white rounded-lg shadow dark:border md:mt-0 xm:max-w-sm md:max-w-md xl:p-0 dark:bg-gray-800">
+            <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
               About Us
             </h1>
           </div>
@@ -30,8 +30,8 @@ export default function About() {
 
       <section className="mb-24 bg-gray-200 dark:bg-gray-600 md:w-1/2 sm:w-full mt-8 sm:mt-2 border rounded-xl dark:border-black ">
         <div className=" flex flex-col items-center px-6 mx-auto lg:pt-6 ">
-          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-8">
+          <div className="flex mx-auto w-full justify-center  bg-white rounded-lg shadow dark:border md:mt-0 xm:max-w-sm md:max-w-md xl:p-0 dark:bg-gray-800">
+            <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
               Goals
             </h1>
           </div>
