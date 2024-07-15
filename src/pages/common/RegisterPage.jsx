@@ -65,7 +65,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen xxl:-mb-64 justify-center items-center dark:bg-gray-700 dark:border-gray-800 bg-gray-200 border-gray-200 sm:pb-4 xm:pb-4">
+    <div className="min-h-screen justify-center items-center dark:bg-gray-700 dark:border-gray-800 bg-gray-200 border-gray-200 sm:pb-4 xm:pb-4">
       <div className="max-w-screen-xl m-auto pt-16">
         <div className=" flex flex-col items-center justify-center px-6 ">
           <h1 className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
@@ -77,7 +77,7 @@ export default function RegisterPage() {
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Register new account
               </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div>
                   <label
                     htmlFor="firstname"
