@@ -1,7 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { bufferToBase64 } from "../utility/BufferToBase64";
 
 function UserProfile(props) {
+  const { username, rawimage } = props;
   const [expand, setExpand] = useState("hidden");
+  const [userImage, setUserImage] = useState(null);
+  console.log("userimage", userImage);
+
+  useEffect(() => {
+    if (rawimage) {
+      const savedImage = JSON.parse(rawimage);
+
+      if (savedImage && savedImage.data) {
+        const base64String = bufferToBase64(savedImage.data);
+        setUserImage(`data:image/jpeg;base64,${base64String}`);
+      }
+    }
+  }, [rawimage]);
 
   const handleCardClick = () => {
     if (expand === "hidden") {
@@ -69,11 +84,11 @@ function UserProfile(props) {
         <div className="md:min-h-96 flex flex-col items-center pb-10">
           <img
             className="lg:w-96 lg:h-96 mb-3 rounded-full shadow-lg"
-            src="/docs/images/people/profile-picture-3.jpg"
-            alt="Bonnie image"
+            src={userImage}
+            alt={`${username}` + "'s profile"}
           />
           <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-            {props.username}
+            {username}
           </h5>
           <span className="text-sm text-gray-500 dark:text-gray-400">
             Visual Designer

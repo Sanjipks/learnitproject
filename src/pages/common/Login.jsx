@@ -30,12 +30,14 @@ export default function Login() {
         const token = data.token;
         const userRole = data.role;
         const userName = data.userName;
+        const userImage = data.userImage;
         console.log("userRole", userRole);
         loginInfoUpdate(
           (loginInfo.token = token),
           (loginInfo.userEmail = inputs.email),
           (loginInfo.userName = userName),
-          (loginInfo.userRole = userRole)
+          (loginInfo.userRole = userRole),
+          (loginInfo.userImage = userImage)
         );
 
         window.location.href = "/auth";
