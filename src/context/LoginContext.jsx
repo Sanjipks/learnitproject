@@ -13,6 +13,7 @@ export default function LoginProvider({ children }) {
     userEmail: localStorage.getItem("userEmail"),
     userName: localStorage.getItem("userName"),
     userRole: localStorage.getItem("userRole"),
+    userImage: localStorage.getItem("userImage"),
   });
 
   const loginInfoUpdate = (updates) => {
@@ -27,6 +28,7 @@ export default function LoginProvider({ children }) {
       localStorage.setItem("userEmail", updatedInfo.userEmail);
       localStorage.setItem("userName", updatedInfo.userName);
       localStorage.setItem("userRole", updatedInfo.userRole);
+      localStorage.setItem("userImage", JSON.stringify(updatedInfo.userImage));
 
       return updatedInfo;
     });

@@ -11,6 +11,7 @@ const Home = () => {
   const loginState = loginInfo.loginState;
   const userName = loginInfo.userName;
   const userRole = loginInfo.userRole;
+  const userImage = loginInfo.userImage;
   const navigate = useNavigate();
 
   console.log(loginInfo, loginState, userName);
@@ -51,7 +52,7 @@ const Home = () => {
                     <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                       My Profile
                     </h1>
-                    <UserProfile username={userName} />
+                    <UserProfile username={userName} rawimage={userImage} />
                   </div>
                 </div>
               </section>

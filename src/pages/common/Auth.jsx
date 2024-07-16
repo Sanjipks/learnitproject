@@ -34,7 +34,7 @@ const Auth = () => {
             console.log("i am here");
           } else if (Role === "user") {
             navigate("/home");
-            onsole.log("i am here too");
+            console.log("i am here too");
           } else {
             navigate("/");
             console.log("i am here too");
