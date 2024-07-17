@@ -1,22 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
+import { useLogin } from "../context/LoginContext";
+import { getUserInfo } from "../apis/Api";
 
-function UserProfile(props) {
-  const { username, rawimage } = props;
+function UserProfile() {
+  const { loginInfo } = useLogin();
+  //const rawimage = loginInfo.userImage;
+  const username = loginInfo.userName;
+  const email = loginInfo.userEmail;
   const [expand, setExpand] = useState("hidden");
   const [userImage, setUserImage] = useState(null);
-  console.log("userimage", userImage);
+  // console.log("raw", rawimage);
+
+  // useEffect(() => {
+  //   const savedImage = JSON.parse(rawimage);
+
+  //   if (savedImage && savedImage.data) {
+  //     console.log("savediiiiiii", savedImage.data);
+  //     const base64String = bufferToBase64(savedImage.data);
+  //     console.log("saved", base64String);
+  //     setUserImage(`data:image/jpeg;base64,${base64String}`);
+  //   }
+  // }, [rawimage]);
 
   useEffect(() => {
-    if (rawimage) {
-      const savedImage = JSON.parse(rawimage);
+    const fetchUserInfo = async () => {
+      try {
+        const res = await getUserInfo(email);
+        const data = await res.json();
+        console.log("data", data, res);
 
-      if (savedImage && savedImage.data) {
-        const base64String = bufferToBase64(savedImage.data);
-        setUserImage(`data:image/jpeg;base64,${base64String}`);
+        const image = data.userInfo.user_image;
+        if (image && image.data) {
+          const base64String = bufferToBase64(image.data);
+          setUserImage(`data:image/jpeg;base64,${base64String}`);
+        }
+      } catch (error) {
+        console.error("Error fetching user info:", error);
       }
-    }
-  }, [rawimage]);
+    };
+
+    fetchUserInfo();
+  }, [email]);
 
   const handleCardClick = () => {
     if (expand === "hidden") {

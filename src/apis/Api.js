@@ -4,6 +4,7 @@ const GET_SERVICES = import.meta.env.VITE_GET_SERVICES;
 const GET_USERS = import.meta.env.VITE_GET_USERS;
 const REGISTER_USER = import.meta.env.VITE_REGISTER_USER;
 const SIGNIN_USER = import.meta.env.VITE_SIGNIN_USER;
+const SIGNIN_USERINFO = import.meta.env.VITE_SIGNEDIN_USERINFO;
 const VERIFY_ACCOUNT = import.meta.env.VITE_VERIFY_ACCOUNT;
 const AUTH_LOGIN = import.meta.env.VITE_AUTH_LOGIN;
 const AUTH_RESENDCODE = import.meta.env.VITE_AUTH_CODE_RESEND;
@@ -144,6 +145,17 @@ export const deleteUser = async (id, loggedinUserRole) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ loggedinUserRole }),
+  });
+  return res;
+};
+//get individual user info
+export const getUserInfo = async (email) => {
+  const res = await fetch(`${SIGNIN_USERINFO}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
   });
   return res;
 };
