@@ -11,6 +11,7 @@ export default function User(props) {
 
   useEffect(() => {
     if (userImage && userImage.data) {
+      console.log("user", userImage);
       const base64String = bufferToBase64(userImage.data);
       console.log("base", base64String);
       setImage(`data:image/jpeg;base64,${base64String}`);
