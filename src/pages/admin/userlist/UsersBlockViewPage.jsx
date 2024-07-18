@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import User from "../../../components/UserBlockViewCard";
-import { getUsers } from "../../../apis/Api";
+import { deleteUser, getUsers } from "../../../apis/Api";
 import { toast } from "react-toastify";
 import { useLogin } from "../../../context/LoginContext";
 
@@ -35,26 +35,19 @@ export default function UsersBlockViewPage(props) {
           setUserperpage(data.usersPerPage),
           setTotalUserscount(data.totalEntries);
       });
-    }, [pagenumber]);
+    }, [pagenumber, userlist]);
     console.log("length");
   } catch (error) {
     throw new Error("Error:", error);
   }
 
-  const handleRemove = async (id) => {
+  const handleRemove = async (deletedId) => {
     const userConfirmed = window.confirm(
       "Are you sure you want to remove this user?"
     );
     if (!userConfirmed) return;
     try {
-      const response = await fetch(`http://localhost:3000/users/${id}/delete`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ loggedinUserRole }),
-      });
-
+      const response = await deleteUser(deletedId, loggedinUserRole);
       const data = await response.json();
 
       if (response.ok) {
