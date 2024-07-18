@@ -148,6 +148,7 @@ export const deleteUser = async (id, loggedinUserRole) => {
   });
   return res;
 };
+
 //get individual user info
 export const getUserInfo = async (email) => {
   const res = await fetch(`${SIGNIN_USERINFO}`, {
