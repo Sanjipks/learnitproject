@@ -160,3 +160,15 @@ export const getUserInfo = async (email) => {
   });
   return res;
 };
+
+//to add new services
+export const addServices = async (bodyData) => {
+  const res = await fetch("http://localhost:3000/services/new", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bodyData),
+  });
+  return res;
+};
