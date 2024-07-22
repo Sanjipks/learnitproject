@@ -1,6 +1,3 @@
-// to get userlist
-
-const GET_SERVICES = import.meta.env.VITE_GET_SERVICES;
 const GET_USERS = import.meta.env.VITE_GET_USERS;
 const REGISTER_USER = import.meta.env.VITE_REGISTER_USER;
 const SIGNIN_USER = import.meta.env.VITE_SIGNIN_USER;
@@ -10,6 +7,8 @@ const AUTH_LOGIN = import.meta.env.VITE_AUTH_LOGIN;
 const AUTH_RESENDCODE = import.meta.env.VITE_AUTH_CODE_RESEND;
 const FORGOT_PASSWORD = import.meta.env.VITE_FORGOT_PASSWORD;
 const RESET_FORGOT_PASSWORD = import.meta.env.VITE_RESET_FORGOT_PASSWORD;
+const GET_SERVICES = import.meta.env.VITE_GET_SERVICES;
+const ADD_SERVICE = import.meta.env.VITE_ADD_SERVICE;
 
 export const getUsers = async (loggedinUserRole, pagenumber) => {
   const res = await fetch(
@@ -163,7 +162,7 @@ export const getUserInfo = async (email) => {
 
 //to add new services
 export const addServices = async (bodyData) => {
-  const res = await fetch("http://localhost:3000/services/new", {
+  const res = await fetch(`${ADD_SERVICE}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
