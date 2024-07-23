@@ -3,7 +3,8 @@ import { useLogin } from "../../context/LoginContext";
 import { addServices } from "../../apis/Api";
 import { toast } from "react-toastify";
 
-const AddNewService = () => {
+const AddNewService = (props) => {
+  const { handleformview } = props;
   const [inputs, setInputs] = useState({
     servicename: "",
     servicecode: null,
@@ -32,6 +33,7 @@ const AddNewService = () => {
 
     const res = await addServices(bodyData);
     const data = await res.json();
+    handleformview(false);
     console.log(data.message);
     if (res.status == 201) {
       toast(data.message);

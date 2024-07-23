@@ -26,6 +26,10 @@ const Services = () => {
     setOpenAddForm((prev) => !prev);
   };
 
+  const handleFormView = (state) => {
+    setOpenAddForm(state);
+  };
+
   useEffect(() => {
     getServices(pagenumber).then((data) => {
       setServicesList(data.paginatedServices);
@@ -51,7 +55,11 @@ const Services = () => {
           >
             Add New Service
           </button>
-          {openAddForm ? <AddNewService /> : <></>}
+          {openAddForm ? (
+            <AddNewService handleformview={handleFormView} />
+          ) : (
+            <></>
+          )}
         </div>
 
         <div className="flex flex-col justify-evenly mx-auto">
