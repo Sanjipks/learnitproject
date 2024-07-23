@@ -40,10 +40,7 @@ const Services = () => {
 
   return (
     <>
-      <div
-        className="min-h-screen  mx-auto h-auto flex flex-col justify-items-center justify-center bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white"
-        onClick
-      >
+      <div className="min-h-screen  mx-auto h-auto flex flex-col justify-items-center justify-center bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
         <div className="md:my-20 max-w-screen-xl flex justify-center w-full mx-auto">
           <div className="w-full flex mx-auto justify-center bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800">
             <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
