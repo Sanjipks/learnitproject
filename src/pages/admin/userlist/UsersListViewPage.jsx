@@ -56,6 +56,7 @@ export default function UserListViewPage(props) {
 
   const handleuserperpage = (number) => {
     setUserperpageListView(number);
+    setPagenumberlist(1);
   };
 
   //first step to remove user, passed as removeuser props and it recieves user id from child and set Pop true to dispaly component created as modal
