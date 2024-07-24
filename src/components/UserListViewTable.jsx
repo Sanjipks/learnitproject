@@ -162,13 +162,13 @@ export default function UserListView(props) {
       <table className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 w-12">
               SN
             </th>
             <th scope="col" className="px-6 py-3">
               User ID
             </th>
-            <th scope="col" className="p-4">
+            <th scope="col" className="p-4 w-8">
               <div className="flex items-center">
                 <input
                   id="checkbox-all-search"
@@ -180,19 +180,19 @@ export default function UserListView(props) {
                 </label>
               </div>
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 w-80">
               User Name
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 w-28">
               User Image
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 w-96">
               User Email
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 w-20">
               User Role
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 w-32">
               Action
             </th>
           </tr>
