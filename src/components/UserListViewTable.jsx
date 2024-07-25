@@ -162,13 +162,13 @@ export default function UserListView(props) {
       <table className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
         <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
-            <th scope="col" className="px-6 py-3 w-12">
+            <th scope="col" className="px-6 py-3 w-12 border">
               SN
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 border">
               User ID
             </th>
-            <th scope="col" className="p-4 w-8">
+            <th scope="col" className="p-4 w-8 border">
               <div className="flex items-center">
                 <input
                   id="checkbox-all-search"
@@ -183,16 +183,16 @@ export default function UserListView(props) {
             <th scope="col" className="px-6 py-3 w-80 border ">
               User Name
             </th>
-            <th scope="col" className="px-6 py-3 w-28">
+            <th scope="col" className="px-6 py-3 w-28 border">
               User Image
             </th>
-            <th scope="col" className="px-6 py-3 w-96">
+            <th scope="col" className="px-6 py-3 w-96 border">
               User Email
             </th>
-            <th scope="col" className="px-6 py-3 w-20">
+            <th scope="col" className="px-6 py-3 w-20 border">
               User Role
             </th>
-            <th scope="col" className="px-6 py-3 w-32">
+            <th scope="col" className="px-6 py-3 w-32 border">
               Action
             </th>
           </tr>
@@ -203,10 +203,10 @@ export default function UserListView(props) {
               className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 border"
               key={id}
             >
-              <td className="px-6 py-4">{allusers.indexOf(user) + 1}</td>
-              <td className="px-6 py-4">{user.user_id}</td>
+              <td className="px-6 py-4 border">{allusers.indexOf(user) + 1}</td>
+              <td className="px-6 py-4 border">{user.user_id}</td>
 
-              <td className="w-4 p-4">
+              <td className="w-4 p-4 border">
                 <div className="flex items-center">
                   <input
                     id="checkbox-table-3"
@@ -220,13 +220,13 @@ export default function UserListView(props) {
               </td>
               <th
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border"
               >
                 {user.user_name}
               </th>
               <th
                 scope="row"
-                className="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border"
               >
                 <img
                   className="w-10 h-10 rounded-full"
@@ -234,9 +234,9 @@ export default function UserListView(props) {
                   alt="Jese image"
                 />
               </th>
-              <td className="px-6 py-4">{user.user_email}</td>
-              <td className="px-6 py-4">{user.role}</td>
-              <td className="px-6 py-4">
+              <td className="px-6 py-4 border">{user.user_email}</td>
+              <td className="px-6 py-4 border">{user.role}</td>
+              <td className="px-6 py-4 border">
                 <div>
                   <button
                     onClick={() => handleExpand(user.user_id)}
