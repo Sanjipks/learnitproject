@@ -52,8 +52,8 @@ export default function UserListView(props) {
   };
 
   return (
-    <div className="relative shadow-md sm:rounded-lg">
-      <div className="p-4 flex flex-row justify-between bg-white dark:bg-gray-900">
+    <div className="relative shadow-md border ">
+      <div className="p-4 flex flex-row justify-between bg-white dark:bg-gray-900 border ">
         <div>
           <label htmlFor="table-search" className="sr-only">
             Search
@@ -159,7 +159,7 @@ export default function UserListView(props) {
           </div>
         </div>
       </div>
-      <table className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <table className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
         <thead className="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-3 w-12">
@@ -180,7 +180,7 @@ export default function UserListView(props) {
                 </label>
               </div>
             </th>
-            <th scope="col" className="px-6 py-3 w-80">
+            <th scope="col" className="px-6 py-3 w-80 border ">
               User Name
             </th>
             <th scope="col" className="px-6 py-3 w-28">
@@ -200,7 +200,7 @@ export default function UserListView(props) {
         <tbody>
           {paginatedUsers.map((user, id) => (
             <tr
-              className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600"
+              className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 border"
               key={id}
             >
               <td className="px-6 py-4">{allusers.indexOf(user) + 1}</td>
