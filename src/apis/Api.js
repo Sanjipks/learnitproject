@@ -25,19 +25,6 @@ export const getUsers = async (loggedinUserRole, pagenumber) => {
   return data;
 };
 
-//to get list of services
-export const getServices = async (pagenumber) => {
-  const res = await fetch(`${GET_SERVICES}${pagenumber}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  if (!res.ok) throw new Error("Network response was not ok.");
-  const data = await res.json();
-  return data;
-};
-
 //for user registration
 export const registerUser = async (inputs) => {
   const res = await fetch(`${REGISTER_USER}`, {
@@ -160,6 +147,19 @@ export const getUserInfo = async (email) => {
   return res;
 };
 
+//to get list of services
+export const getServices = async (pagenumber) => {
+  const res = await fetch(`${GET_SERVICES}${pagenumber}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!res.ok) throw new Error("Network response was not ok.");
+  const data = await res.json();
+  return data;
+};
+
 //to add new services
 export const addServices = async (bodyData) => {
   const res = await fetch(`${ADD_SERVICE}`, {
@@ -168,6 +168,18 @@ export const addServices = async (bodyData) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(bodyData),
+  });
+  return res;
+};
+
+// delete service adminonly
+export const deleteService = async (id, loggedinUserRole) => {
+  const res = await fetch(`${GET_SERVICES}/${id}/delete`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ loggedinUserRole }),
   });
   return res;
 };
