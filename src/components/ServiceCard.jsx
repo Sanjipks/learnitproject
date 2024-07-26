@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 
 const Service = (props) => {
-  const { service, serviceId, serviceLogo } = props;
+  const { service, serviceId, serviceLogo, deleteService } = props;
   const [image, setImage] = useState(null);
   const [expand, setExpand] = useState("hidden");
 
@@ -28,7 +28,8 @@ const Service = (props) => {
     setExpand("hidden");
   };
 
-  const handleDelete = () => {
+  const handleDelete = (id) => {
+    deleteService(id);
     setExpand("hidden");
   };
   const handleEdit = () => {
@@ -76,7 +77,7 @@ const Service = (props) => {
 
               <li>
                 <a
-                  onClick={handleDelete}
+                  onClick={() => handleDelete(serviceId)}
                   className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Delete

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Service from "../../components/ServiceCard";
-import { getServices } from "../../apis/Api";
+import { deleteService, getServices } from "../../apis/Api";
 import AddNewService from "../../components/modals/AddNewService";
+import { useLogin } from "../../context/LoginContext";
+import DeleteDecision from "../../components/modals/DeleteDecision";
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -9,6 +11,12 @@ const Services = () => {
   const [totalServicesCount, setTotalServicesCount] = useState(0);
   const [pagenumber, setPagenumber] = useState(1);
   const [openAddForm, setOpenAddForm] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [pop, setPop] = useState(false);
+  const [deletedId, setDeletedId] = useState(null);
+
+  const { loginInfo } = useLogin();
+  const loggedinUserRole = loginInfo.userRole;
 
   const handlePrevPage = () => {
     if (pagenumber > 1) {
@@ -36,10 +44,55 @@ const Services = () => {
       setServicesPerpage(data.servicesPerPage);
       setTotalServicesCount(data.totalEntries);
     });
-  }, [pagenumber]);
+  }, [pagenumber, deletedId]);
+
+  //first step to remove user, passed as removeuser props and it recieves user id from child and set Pop true to dispaly component created as modal
+  const handleDelete = async (id) => {
+    setDeletedId(id);
+    setPop(true);
+  };
+
+  //user delete decision can be made and receives true or false state from child compo
+  const handlePop = (state) => {
+    setConfirmDelete(state);
+    setPop(false);
+  };
+
+  //it deletes the user if condition is met
+  useEffect(() => {
+    if (confirmDelete && deletedId !== null) {
+      const deleteServiceAsync = async () => {
+        try {
+          const response = await deleteService(deletedId, loggedinUserRole);
+          const data = await response.json();
+
+          if (response.ok) {
+            toast(data.message);
+            setFilteredServices(
+              servicesList.filter((service) => service.service_id !== deletedId)
+            );
+          } else {
+            console.error("Failed to remove user");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        } finally {
+          setDeletedId(null); // Reset deletedId after operation
+          setConfirmDelete(false); // Reset confirmDelete after operation
+        }
+      };
+
+      deleteServiceAsync();
+    } else {
+      return;
+    }
+  }, [confirmDelete]);
 
   return (
     <>
+      {pop ? (
+        <DeleteDecision handlePopAction={handlePop} type="service" />
+      ) : null}
       <div className="min-h-screen  mx-auto h-auto flex flex-col justify-items-center justify-center bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
         <div className="md:my-20 max-w-screen-xl flex justify-center w-full mx-auto">
           <div className="w-full flex mx-auto justify-center bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800">
@@ -72,6 +125,7 @@ const Services = () => {
                   service={service.service_name}
                   serviceId={service.service_id}
                   serviceLogo={service.service_image}
+                  deleteService={handleDelete}
                   // addService={handleAdd}
                 />
               </div>
