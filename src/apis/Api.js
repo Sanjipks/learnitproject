@@ -149,7 +149,7 @@ export const getUserInfo = async (email) => {
 
 //to get list of services
 export const getServices = async (pagenumber) => {
-  const res = await fetch(`${GET_SERVICES}${pagenumber}`, {
+  const res = await fetch(`${GET_SERVICES}/page=${pagenumber}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

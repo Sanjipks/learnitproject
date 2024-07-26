@@ -4,6 +4,7 @@ import { deleteService, getServices } from "../../apis/Api";
 import AddNewService from "../../components/modals/AddNewService";
 import { useLogin } from "../../context/LoginContext";
 import DeleteDecision from "../../components/modals/DeleteDecision";
+import { toast } from "react-toastify";
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);
