@@ -40,6 +40,7 @@ export default function UserListView(props) {
     removeUser(id);
     console.log("id", id);
     setExpand("hidden");
+    setExpandeduser(null);
   };
 
   const handlesetUserPerPage = (number) => {
