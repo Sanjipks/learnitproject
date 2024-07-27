@@ -13,7 +13,6 @@ export default function UserListViewPage(props) {
   const [allUsers, setAllUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [confirmDelete, setConfirmDelete] = useState(false);
   const [pop, setPop] = useState(false);
   const [deletedId, setDeletedId] = useState(null);
   const { handleView } = props;
@@ -66,40 +65,29 @@ export default function UserListViewPage(props) {
   };
 
   //user delete decision can be made and receives true or false state from child compo
-  const handlePop = (state) => {
-    setConfirmDelete(state);
+  const handlePop = async (state) => {
+    //  setConfirmDelete(state);
     setPop(false);
-  };
+    if (state && deletedId !== null) {
+      try {
+        const response = await deleteUser(deletedId, loggedinUserRole);
+        const data = await response.json();
 
-  //it deletes the user if condition is met
-  useEffect(() => {
-    if (confirmDelete && deletedId !== null) {
-      const deleteUserAsync = async () => {
-        try {
-          const response = await deleteUser(deletedId, loggedinUserRole);
-          const data = await response.json();
-
-          if (response.ok) {
-            toast(data.message);
-            setFilteredUsers(
-              allUsers.filter((user) => user.user_id !== deletedId)
-            );
-          } else {
-            console.error("Failed to remove user");
-          }
-        } catch (error) {
-          console.error("Error:", error);
-        } finally {
-          setDeletedId(null); // Reset deletedId after operation
-          setConfirmDelete(false); // Reset confirmDelete after operation
+        if (response.ok) {
+          toast(data.message);
+          setFilteredUsers(
+            allUsers.filter((user) => user.user_id !== deletedId)
+          );
+        } else {
+          console.error("Failed to remove user");
         }
-      };
-
-      deleteUserAsync();
-    } else {
-      return;
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setDeletedId(null); // Reset deletedId after operation
+      }
     }
-  }, [confirmDelete]);
+  };
 
   const handleSearch = (input) => {
     setSearchInput(input);
@@ -115,7 +103,6 @@ export default function UserListViewPage(props) {
 
   return (
     <>
-      {pop ? <DeleteDecision handlePopAction={handlePop} type="user" /> : null}
       <div className="min-h-dvh h-auto flex flex-col justify-items-center justify-between overflow-x-scroll bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
         <div className="md:my-20 xm:my-10">
           <div className="w-full flex mx-auto justify-center bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800">
@@ -213,6 +200,7 @@ export default function UserListViewPage(props) {
           </div>
         </div>
       </div>
+      {pop ? <DeleteDecision handlePopAction={handlePop} type="user" /> : null}
     </>
   );
 }
