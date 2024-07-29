@@ -297,11 +297,11 @@ export default function UserListView(props) {
                           >
                             Delete user
                           </div>
-                          <div className="pr-48">
-                            {selectedUser ? <EditUser /> : null}
-                          </div>
                         </li>
                       </ul>
+                      <div className="-ml-64">
+                        {selectedUser ? <EditUser /> : null}
+                      </div>
                     </div>
                   ) : null}
                 </div>
