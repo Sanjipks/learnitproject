@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import EditUser from "./modals/EditUser";
 
 export default function UserListView(props) {
   const {
@@ -9,9 +10,11 @@ export default function UserListView(props) {
     handlesetuserperpagelistview,
     paginatedUsers,
     usernumber,
+    editUser,
   } = props;
   const [expand, setExpand] = useState("hidden");
   const [expandeduser, setExpandeduser] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(false);
   const [expandforpagenumber, setExpandforpagenumber] = useState("hidden");
 
   const handleExpand = (id) => {
@@ -41,6 +44,11 @@ export default function UserListView(props) {
     console.log("id", id);
     setExpand("hidden");
     setExpandeduser(null);
+  };
+
+  const handleEditUser = () => {
+    setSelectedUser((prev) => !prev);
+    editUser(userId);
   };
 
   const handlesetUserPerPage = (number) => {
@@ -238,7 +246,7 @@ export default function UserListView(props) {
               <td className="px-6 py-4 border">{user.user_email}</td>
               <td className="px-6 py-4 border">{user.role}</td>
               <td className="px-6 py-4 border">
-                <div>
+                <div className="">
                   <button
                     onClick={() => handleExpand(user.user_id)}
                     id="dropdownActionButton"
@@ -267,26 +275,30 @@ export default function UserListView(props) {
                   {expandeduser === user.user_id ? (
                     <div
                       id="dropdownAction"
-                      className={`z-10 ${expand} absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
+                      className={`z-10 ${expand} absolute bg-white divide-y divide-gray-100 rounded-lg shadow mt-2 w-28 dark:bg-gray-700 dark:divide-gray-600`}
                     >
                       <ul
-                        className="py-1 text-sm text-gray-700 dark:text-gray-200"
+                        className="py-1 text-sm text-gray-700 dark:text-gray-200 "
                         aria-labelledby="dropdownActionButton"
                       >
                         <li>
-                          <a
-                            href="#"
+                          <div
+                            onClick={handleEditUser}
                             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                           >
                             Edit
-                          </a>
+                          </div>
                         </li>
+
                         <li>
                           <div
                             onClick={() => handleDelete(user.user_id)}
                             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                           >
                             Delete user
+                          </div>
+                          <div className="pr-48">
+                            {selectedUser ? <EditUser /> : null}
                           </div>
                         </li>
                       </ul>
