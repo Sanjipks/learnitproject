@@ -46,7 +46,7 @@ export default function UserListView(props) {
     setExpandeduser(null);
   };
 
-  const handleEditUser = () => {
+  const handleEditUser = (userId) => {
     setSelectedUser((prev) => !prev);
     editUser(userId);
   };
@@ -283,7 +283,7 @@ export default function UserListView(props) {
                       >
                         <li>
                           <div
-                            onClick={handleEditUser}
+                            onClick={() => handleEditUser(user.user_id)}
                             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                           >
                             Edit
