@@ -12,7 +12,7 @@ const Services = () => {
   const [totalServicesCount, setTotalServicesCount] = useState(0);
   const [pagenumber, setPagenumber] = useState(1);
   const [openAddForm, setOpenAddForm] = useState(false);
-  const [confirmDelete, setConfirmDelete] = useState(false);
+  // const [confirmDelete, setConfirmDelete] = useState(false);
   const [pop, setPop] = useState(false);
   const [deletedId, setDeletedId] = useState(null);
 
@@ -54,46 +54,61 @@ const Services = () => {
   };
 
   //user delete decision can be made and receives true or false state from child compo
-  const handlePop = (state) => {
-    setConfirmDelete(state);
+  const handlePop = async (state) => {
     setPop(false);
+    if (state && deletedId !== null) {
+      try {
+        const response = await deleteService(deletedId, loggedinUserRole);
+        const data = await response.json();
+
+        if (response.ok) {
+          toast(data.message);
+          setFilteredServices(
+            servicesList.filter((service) => service.service_id !== deletedId)
+          );
+        } else {
+          console.error("Failed to remove user");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setDeletedId(null); // Reset deletedId after operation
+      }
+    }
   };
 
   //it deletes the user if condition is met
-  useEffect(() => {
-    if (confirmDelete && deletedId !== null) {
-      const deleteServiceAsync = async () => {
-        try {
-          const response = await deleteService(deletedId, loggedinUserRole);
-          const data = await response.json();
+  // useEffect(() => {
+  //   if (confirmDelete && deletedId !== null) {
+  //     const deleteServiceAsync = async () => {
+  //       try {
+  //         const response = await deleteService(deletedId, loggedinUserRole);
+  //         const data = await response.json();
 
-          if (response.ok) {
-            toast(data.message);
-            setFilteredServices(
-              servicesList.filter((service) => service.service_id !== deletedId)
-            );
-          } else {
-            console.error("Failed to remove user");
-          }
-        } catch (error) {
-          console.error("Error:", error);
-        } finally {
-          setDeletedId(null); // Reset deletedId after operation
-          setConfirmDelete(false); // Reset confirmDelete after operation
-        }
-      };
+  //         if (response.ok) {
+  //           toast(data.message);
+  //           setFilteredServices(
+  //             servicesList.filter((service) => service.service_id !== deletedId)
+  //           );
+  //         } else {
+  //           console.error("Failed to remove user");
+  //         }
+  //       } catch (error) {
+  //         console.error("Error:", error);
+  //       } finally {
+  //         setDeletedId(null); // Reset deletedId after operation
+  //         setConfirmDelete(false); // Reset confirmDelete after operation
+  //       }
+  //     };
 
-      deleteServiceAsync();
-    } else {
-      return;
-    }
-  }, [confirmDelete]);
+  //     deleteServiceAsync();
+  //   } else {
+  //     return;
+  //   }
+  // }, [confirmDelete]);
 
   return (
     <>
-      {pop ? (
-        <DeleteDecision handlePopAction={handlePop} type="service" />
-      ) : null}
       <div className="min-h-screen  mx-auto h-auto flex flex-col justify-items-center justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
         <div className="mt-28">
           <div className=" max-w-screen-xl flex w-full mx-auto">
@@ -181,6 +196,9 @@ const Services = () => {
           </div>
         </div>
       </div>
+      {pop ? (
+        <DeleteDecision handlePopAction={handlePop} type="service" />
+      ) : null}
     </>
   );
 };
