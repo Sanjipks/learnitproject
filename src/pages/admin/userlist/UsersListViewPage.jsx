@@ -64,9 +64,8 @@ export default function UserListViewPage(props) {
     setPop(true);
   };
 
-  //user delete decision can be made and receives true or false state from child compo
+  //user delete decision can be made with received true or false state from child compo
   const handlePop = async (state) => {
-    //  setConfirmDelete(state);
     setPop(false);
     if (state && deletedId !== null) {
       try {
