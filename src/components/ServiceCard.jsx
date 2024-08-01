@@ -37,7 +37,7 @@ const Service = (props) => {
   };
   return (
     <div className="flex">
-      <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <div className="w-80 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
         <div
           className="flex justify-start px-4 pt-4"
           onMouseLeave={handleMouseLeave}
