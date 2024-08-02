@@ -39,6 +39,10 @@ const Services = () => {
     setOpenAddForm(state);
   };
 
+  const handleclose = () => {
+    setOpenAddForm(false);
+  };
+
   useEffect(() => {
     getServices(pagenumber).then((data) => {
       setServicesList(data.paginatedServices);
@@ -126,12 +130,15 @@ const Services = () => {
               Add New Service +
             </button>
             {openAddForm ? (
-              <AddNewService handleformview={handleFormView} />
+              <AddNewService
+                handleformview={handleFormView}
+                handleclose={handleclose}
+              />
             ) : (
               <></>
             )}
           </div>
-          <div className="flex justify-center mt-2">
+          <div className="flex justify-center mt-2" onMouseDown={handleclose}>
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
               {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
               {servicesList.map((service, id) => (
