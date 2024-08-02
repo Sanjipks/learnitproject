@@ -122,22 +122,27 @@ const Services = () => {
               </h1>
             </div>
           </div>
-          <div className="max-w-screen-xl flex justify-end px-2  mx-auto mt-12">
-            <button
-              onClick={handleOpenAddService}
-              className=" flex items-center bg-white rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
-            >
-              Add New Service +
-            </button>
-            {openAddForm ? (
-              <AddNewService
-                handleformview={handleFormView}
-                handleclose={handleclose}
-              />
-            ) : (
-              <></>
-            )}
-          </div>
+          {loggedinUserRole === "admin" ? (
+            <div className="max-w-screen-xl flex justify-end px-2  mx-auto mt-12">
+              <button
+                onClick={handleOpenAddService}
+                className=" flex items-center bg-white rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
+              >
+                Add New Service +
+              </button>
+              {openAddForm ? (
+                <AddNewService
+                  handleformview={handleFormView}
+                  handleclose={handleclose}
+                />
+              ) : (
+                <></>
+              )}
+            </div>
+          ) : (
+            <div className="max-w-screen-xl flex px-2  mx-auto mt-12"></div>
+          )}
+
           <div className="flex justify-center mt-2" onMouseDown={handleclose}>
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
               {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
