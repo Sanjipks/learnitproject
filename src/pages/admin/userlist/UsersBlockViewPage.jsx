@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import User from "../../../components/UserBlockViewCard";
+import UserBlockView from "../../../components/UserBlockViewCard";
 import { deleteUser, getUsers } from "../../../apis/Api";
 import { toast } from "react-toastify";
 import { useLogin } from "../../../context/LoginContext";
@@ -80,7 +80,7 @@ export default function UsersBlockViewPage(props) {
             {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
             {userlist.map((user, id) => (
               <div key={id} className="p-2">
-                <User
+                <UserBlockView
                   key={user.user_id}
                   user={user.user_name}
                   userId={user.user_id}
