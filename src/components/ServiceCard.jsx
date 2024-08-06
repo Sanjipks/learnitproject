@@ -126,7 +126,9 @@ const Service = (props) => {
               )}
             </div>
           </div>
-          {serviceEditPop ? <EditService /> : null}
+          {serviceEditPop ? (
+            <EditService servicename={service} serviceId={serviceId} />
+          ) : null}
           <div className="flex flex-col items-center pb-10">
             <img
               className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"

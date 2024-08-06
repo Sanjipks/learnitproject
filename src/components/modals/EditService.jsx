@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const EditService = () => {
+const EditService = (props) => {
+  const { servicename, serviceId } = props;
   const [inputs, setInputs] = useState({
     servicename: "",
     servicecode: null,
@@ -46,7 +47,7 @@ const EditService = () => {
                   id="servicename"
                   onClick={handleInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type product name"
+                  placeholder={servicename}
                   required=""
                 />
               </div>
@@ -63,7 +64,7 @@ const EditService = () => {
                   id="servicecode"
                   onClick={handleInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="yourname@email.com"
+                  placeholder={serviceId}
                   required=""
                 />
               </div>
