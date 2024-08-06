@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
+import { useNavigate } from "react-router-dom";
+
 const Service = (props) => {
   const { service, serviceId, serviceLogo, deleteService } = props;
+  const navigate = useNavigate();
+
   const [image, setImage] = useState(null);
   const [expand, setExpand] = useState("hidden");
 
   const { loginInfo } = useLogin();
   const loggedinUserRole = loginInfo.userRole;
+  const loginState = loginInfo.loginState;
 
   useEffect(() => {
     if (serviceLogo && serviceLogo.data) {
@@ -41,6 +46,9 @@ const Service = (props) => {
   const handleAddToCart = () => {
     "todo";
   };
+  const handleRedirectPage = () => {
+    navigate("/register");
+  };
   return (
     <div className="flex">
       <div className="w-80 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
@@ -70,7 +78,7 @@ const Service = (props) => {
             id="dropdown"
             className={`z-10 ${expand} absolute ml-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
           >
-            {loggedinUserRole === "admin" ? (
+            {loggedinUserRole === "admin" && loginState === "true" ? (
               <ul className="py-2" aria-labelledby="dropdownButton">
                 <li>
                   <a
@@ -90,11 +98,22 @@ const Service = (props) => {
                   </a>
                 </li>
               </ul>
-            ) : (
+            ) : loggedinUserRole === "user" && loginState === "true" ? (
               <ul className="py-2" aria-labelledby="dropdownButton">
                 <li>
                   <a
                     onClick={handleAddToCart}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    Add to Cart+
+                  </a>
+                </li>
+              </ul>
+            ) : (
+              <ul className="py-2" aria-labelledby="dropdownButton">
+                <li>
+                  <a
+                    onClick={handleRedirectPage}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Add to Cart+
