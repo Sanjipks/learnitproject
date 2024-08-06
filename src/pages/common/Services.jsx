@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Service from "../../components/ServiceCard";
+import ServiceCard from "../../components/ServiceCard";
 import { deleteService, getServices } from "../../apis/Api";
 import AddNewService from "../../components/modals/AddNewService";
 import { useLogin } from "../../context/LoginContext";
@@ -148,7 +148,7 @@ const Services = () => {
               {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
               {servicesList.map((service, id) => (
                 <div key={id} className="p-2">
-                  <Service
+                  <ServiceCard
                     key={service.service_id}
                     service={service.service_name}
                     serviceId={service.service_id}

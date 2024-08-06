@@ -51,6 +51,10 @@ const Service = (props) => {
   const handleRedirectPage = () => {
     navigate("/register");
   };
+  const handleclose = () => {
+    setServiceEditPop(false);
+  };
+
   return (
     <>
       <div className="flex">
@@ -127,7 +131,11 @@ const Service = (props) => {
             </div>
           </div>
           {serviceEditPop ? (
-            <EditService servicename={service} serviceId={serviceId} />
+            <EditService
+              servicename={service}
+              serviceId={serviceId}
+              handleclose={handleclose}
+            />
           ) : null}
           <div className="flex flex-col items-center pb-10">
             <img
