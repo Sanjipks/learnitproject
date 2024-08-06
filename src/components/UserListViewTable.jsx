@@ -51,6 +51,10 @@ export default function UserListView(props) {
     editUser(userId);
   };
 
+  const handleClose = () => {
+    setSelectedUser(false);
+  };
+
   const handlesetUserPerPage = (number) => {
     handlesetuserperpagelistview(number);
     setExpandforpagenumber("hidden");
@@ -300,7 +304,9 @@ export default function UserListView(props) {
                         </li>
                       </ul>
                       <div className="-ml-64">
-                        {selectedUser ? <EditUser /> : null}
+                        {selectedUser ? (
+                          <EditUser handleclose={handleClose} />
+                        ) : null}
                       </div>
                     </div>
                   ) : null}

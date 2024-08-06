@@ -1,6 +1,8 @@
 import React from "react";
 
-const EditUser = () => {
+const EditUser = (props) => {
+  const { handleclose } = props;
+
   const handleSubmit = () => {
     "todo";
   };

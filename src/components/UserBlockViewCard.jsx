@@ -45,6 +45,10 @@ export default function User(props) {
     editUser(userId);
   };
 
+  const handleClose = () => {
+    setSelectedUser(false);
+  };
+
   return (
     <>
       <div className="flex">
@@ -97,7 +101,7 @@ export default function User(props) {
               </ul>
             </div>
           </div>
-          {selectedUser ? <EditUser /> : null}
+          {selectedUser ? <EditUser handleclose={handleClose} /> : null}
           <div className="flex flex-col items-center pb-10">
             <img
               className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"
