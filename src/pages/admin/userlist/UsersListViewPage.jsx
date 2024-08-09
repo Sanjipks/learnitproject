@@ -35,7 +35,6 @@ export default function UserListViewPage(props) {
           setTotalUserscount(data.totalEntries);
       });
     }, []);
-    console.log("length");
   } catch (error) {
     throw new Error("Error:", error);
   }
@@ -49,7 +48,6 @@ export default function UserListViewPage(props) {
     console.log(handleNextPageList);
     if (pagenumberlist >= 1) {
       setPagenumberlist(pagenumberlist + 1);
-      console.log(pagenumberlist);
     }
   };
 
@@ -97,8 +95,6 @@ export default function UserListViewPage(props) {
 
     setFilteredUsers(filteredUsers);
   };
-
-  console.log("input", searchInput);
 
   return (
     <>

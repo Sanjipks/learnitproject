@@ -9,15 +9,12 @@ const VerifyAccount = () => {
 
   const emailInfo = useLogin();
   const email = emailInfo.userEmail;
-  console.log("email", email);
 
   const navigate = useNavigate();
 
   const handleOnchange = (event) => {
     setAccountVerificationCode(event.target.value);
   };
-
-  console.log(email, accountVerificationCode);
 
   const handleVerifyAccount = async (event) => {
     event.preventDefault();
