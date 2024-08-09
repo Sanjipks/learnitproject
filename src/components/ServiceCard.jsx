@@ -4,7 +4,7 @@ import { useLogin } from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";
 import EditService from "./modals/EditService";
 
-const Service = (props) => {
+const ServiceCard = (props) => {
   const { service, serviceId, serviceLogo, deleteService } = props;
   const navigate = useNavigate();
 
@@ -19,12 +19,9 @@ const Service = (props) => {
   useEffect(() => {
     if (serviceLogo && serviceLogo.data) {
       const base64String = bufferToBase64(serviceLogo.data);
-      console.log("base", base64String);
       setImage(`data:image/jpeg;base64,${base64String}`);
     }
   }, [serviceLogo]);
-
-  console.log("image", image);
 
   const handleExpand = () => {
     if (expand === "hidden") {
@@ -156,4 +153,4 @@ const Service = (props) => {
   );
 };
 
-export default Service;
+export default ServiceCard;

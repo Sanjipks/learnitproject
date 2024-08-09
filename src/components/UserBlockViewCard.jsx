@@ -11,9 +11,7 @@ export default function User(props) {
 
   useEffect(() => {
     if (userImage && userImage.data) {
-      console.log("user", userImage);
       const base64String = bufferToBase64(userImage.data);
-      console.log("base", base64String);
       setImage(`data:image/jpeg;base64,${base64String}`);
     }
   }, [userImage]);
@@ -35,14 +33,14 @@ export default function User(props) {
     }
   };
 
-  const handleDelete = () => {
-    removeUser(userId);
+  const handleDelete = (id) => {
+    removeUser(id);
     setExpand("hidden");
   };
 
-  const handleEditUser = () => {
+  const handleEditUser = (id) => {
     setSelectedUser((prev) => !prev);
-    editUser(userId);
+    editUser(id);
   };
 
   const handleClose = () => {
@@ -83,7 +81,7 @@ export default function User(props) {
               <ul className="py-2" aria-labelledby="dropdownButton">
                 <li>
                   <a
-                    onClick={() => handleEditUser()}
+                    onClick={() => handleEditUser(userId)}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Edit
@@ -92,7 +90,7 @@ export default function User(props) {
 
                 <li>
                   <a
-                    onClick={handleDelete}
+                    onClick={() => handleDelete(userId)}
                     className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Delete
