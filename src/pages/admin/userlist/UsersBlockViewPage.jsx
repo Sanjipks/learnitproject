@@ -10,6 +10,7 @@ export default function UsersBlockViewPage(props) {
   const [pagenumber, setPagenumber] = useState(1);
   const [userperpage, setUserperpage] = useState(0);
   const [totalUserscount, setTotalUserscount] = useState(0);
+  const [deletedUser, setDeletedUser] = useState(null);
 
   const { handleView } = props;
 
@@ -35,13 +36,13 @@ export default function UsersBlockViewPage(props) {
           setUserperpage(data.usersPerPage),
           setTotalUserscount(data.totalEntries);
       });
-    }, [pagenumber, userlist]);
-    console.log("length");
+    }, [pagenumber, deletedUser]);
   } catch (error) {
     throw new Error("Error:", error);
   }
 
   const handleRemove = async (deletedId) => {
+    setDeletedUser(deletedId);
     const userConfirmed = window.confirm(
       "Are you sure you want to remove this user?"
     );
@@ -52,7 +53,7 @@ export default function UsersBlockViewPage(props) {
 
       if (response.ok) {
         toast(data.message);
-        setUserlist(userlist.filter((user) => user.id !== id));
+        setUserlist(userlist.filter((user) => user.id !== deletedId));
       } else {
         console.error("Failed to remove user");
       }
