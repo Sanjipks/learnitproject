@@ -13,8 +13,6 @@ const Home = () => {
   const userRole = loginInfo.userRole;
   const navigate = useNavigate();
 
-  console.log(loginInfo, loginState, userName);
-
   useEffect(() => {
     if (userRole !== "user") {
       localStorage.clear();

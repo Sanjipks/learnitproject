@@ -46,14 +46,11 @@ const ResetForgetPassword = () => {
       try {
         const res = await resetForgotPassword(password, email);
 
-        console.log("res", res);
-
         if (res.ok) {
           toast("password was reset successfully");
           navigate("/");
         }
         if (res.status == 404) {
-          console.log("404");
           toast("password reset failed");
         }
       } catch (error) {}

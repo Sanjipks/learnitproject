@@ -51,14 +51,12 @@ const Auth = () => {
     try {
       const res = await authCodeResend(email, token);
 
-      console.log("resssss", res);
       if (!res.ok) throw new Error("Network response was not ok.");
 
       if (res.ok) {
         toast("new code is sent to your email, please check you email");
       }
       if (res.status == 404) {
-        console.log("404");
         toast("email not found");
       }
     } catch (error) {}

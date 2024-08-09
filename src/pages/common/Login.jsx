@@ -24,14 +24,12 @@ export default function Login() {
       const res = await loginUser(inputs);
       const data = await res.json();
 
-      console.log("res login", data);
-
       if (res.status === 200) {
         const token = data.token;
         const userRole = data.role;
         const userName = data.userName;
         const userImage = data.userImage;
-        console.log("userRole", userRole);
+
         loginInfoUpdate(
           (loginInfo.token = token),
           (loginInfo.userEmail = inputs.email),
@@ -45,7 +43,7 @@ export default function Login() {
       if (res.status === 401) {
         const errorData = await res.json();
         const message = errorData.message;
-        console.log(message);
+
         throw new Error(message);
       } else {
         const errorData = await res.json();

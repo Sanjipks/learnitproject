@@ -23,7 +23,6 @@ const ForgetPassword = () => {
         navigate("/reset-forgot-password");
       }
       if (res.status === 404) {
-        console.log("404");
         toast("email not found");
       }
     } catch (error) {}
