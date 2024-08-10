@@ -6,7 +6,7 @@ import EditUser from "./modals/EditUser";
 export default function User(props) {
   const { removeUser, userId, userImage, user, userEmail, editUser } = props;
   const [expand, setExpand] = useState("hidden");
-  const [selectedUser, setSelectedUser] = useState(false);
+  const [popUserEditModel, setpopUserEditModel] = useState(false);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -21,12 +21,12 @@ export default function User(props) {
       setExpand("block");
     } else {
       setExpand("hidden");
-      setSelectedUser(false);
+      setpopUserEditModel(false);
     }
   };
 
   const handleMouseLeave = () => {
-    if (selectedUser === false) {
+    if (popUserEditModel === false) {
       setExpand("hidden");
     } else {
       setExpand("block");
@@ -39,12 +39,12 @@ export default function User(props) {
   };
 
   const handleEditUser = (id) => {
-    setSelectedUser((prev) => !prev);
+    setpopUserEditModel((prev) => !prev);
     editUser(id);
   };
 
   const handleClose = () => {
-    setSelectedUser(false);
+    setpopUserEditModel(false);
   };
 
   return (
@@ -99,7 +99,7 @@ export default function User(props) {
               </ul>
             </div>
           </div>
-          {selectedUser ? <EditUser handleclose={handleClose} /> : null}
+          {popUserEditModel ? <EditUser handleclose={handleClose} /> : null}
           <div className="flex flex-col items-center pb-10">
             <img
               className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"
