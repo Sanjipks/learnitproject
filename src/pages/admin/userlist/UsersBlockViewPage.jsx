@@ -62,10 +62,6 @@ export default function UsersBlockViewPage(props) {
     }
   };
 
-  const handleUpdateUser = () => {
-    "todo";
-  };
-
   return (
     <>
       <div className="min-h-dvh h-auto flex flex-col justify-items-start justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
@@ -88,7 +84,6 @@ export default function UsersBlockViewPage(props) {
                   userEmail={user.user_email}
                   userImage={user.user_image}
                   removeUser={handleRemove}
-                  editUser={handleUpdateUser}
                 />
               </div>
             ))}
