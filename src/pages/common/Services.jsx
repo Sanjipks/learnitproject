@@ -15,6 +15,7 @@ const Services = () => {
   // const [confirmDelete, setConfirmDelete] = useState(false);
   const [pop, setPop] = useState(false);
   const [deletedId, setDeletedId] = useState(null);
+  const [expandedservice, setExpandedservice] = useState(null);
 
   const { loginInfo } = useLogin();
   const loggedinUserRole = loginInfo.userRole;
@@ -154,6 +155,8 @@ const Services = () => {
                     serviceId={service.service_id}
                     serviceLogo={service.service_image}
                     deleteService={handleDelete}
+                    expandedservice={expandedservice}
+                    setExpandedservice={setExpandedservice}
                     // addService={handleAdd}
                   />
                 </div>

@@ -5,11 +5,19 @@ import { useNavigate } from "react-router-dom";
 import EditService from "./modals/EditService";
 
 const ServiceCard = (props) => {
-  const { service, serviceId, serviceLogo, deleteService } = props;
+  const {
+    service,
+    serviceId,
+    serviceLogo,
+    deleteService,
+    expandedservice,
+    setExpandedservice,
+  } = props;
   const navigate = useNavigate();
 
   const [image, setImage] = useState(null);
   const [expand, setExpand] = useState("hidden");
+
   const [serviceEditPop, setServiceEditPop] = useState(false);
 
   const { loginInfo } = useLogin();
@@ -23,11 +31,13 @@ const ServiceCard = (props) => {
     }
   }, [serviceLogo]);
 
-  const handleExpand = () => {
-    if (expand === "hidden") {
+  const handleExpand = (id) => {
+    if (expand === "hidden" && expandedservice === null) {
       setExpand("block");
+      setExpandedservice(id);
     } else {
       setExpand("hidden");
+      setExpandedservice(null);
     }
   };
 
@@ -61,7 +71,7 @@ const ServiceCard = (props) => {
             onMouseLeave={handleMouseLeave}
           >
             <button
-              onClick={handleExpand}
+              onClick={() => handleExpand(serviceId)}
               id="dropdownButton"
               data-dropdown-toggle="dropdown"
               className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
@@ -78,6 +88,7 @@ const ServiceCard = (props) => {
                 <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
               </svg>
             </button>
+
             <div
               id="dropdown"
               className={`z-10 ${expand} absolute ml-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
@@ -127,7 +138,7 @@ const ServiceCard = (props) => {
               )}
             </div>
           </div>
-          {serviceEditPop ? (
+          {serviceEditPop && expandedservice === serviceId ? (
             <EditService
               servicename={service}
               serviceId={serviceId}
