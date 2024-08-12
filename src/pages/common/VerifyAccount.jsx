@@ -19,7 +19,6 @@ const VerifyAccount = () => {
   const handleVerifyAccount = async (event) => {
     event.preventDefault();
     if (accountVerificationCode) {
-      console.log(email, accountVerificationCode);
       try {
         const response = await verifyAccount(email, accountVerificationCode);
 

@@ -31,13 +31,10 @@ const Auth = () => {
           loginInfoUpdate((loginInfo.loginState = "true"));
           if (Role === "admin") {
             navigate("/admin");
-            console.log("i am here");
           } else if (Role === "user") {
             navigate("/home");
-            console.log("i am here too");
           } else {
             navigate("/");
-            console.log("i am here too");
           }
         }
       } catch (error) {
