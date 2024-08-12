@@ -24,10 +24,11 @@ export default function User(props) {
       setpopUserEditModel(false);
     }
   };
-
+  console.log(expand);
   const handleMouseLeave = () => {
     if (popUserEditModel === false) {
       setExpand("hidden");
+      setpopUserEditModel(false);
     } else {
       setExpand("block");
     }
@@ -38,9 +39,8 @@ export default function User(props) {
     setExpand("hidden");
   };
 
-  const handleEditUser = (id) => {
+  const handleEditUser = () => {
     setpopUserEditModel((prev) => !prev);
-    editUser(id);
   };
 
   const handleClose = () => {
@@ -81,7 +81,7 @@ export default function User(props) {
               <ul className="py-2" aria-labelledby="dropdownButton">
                 <li>
                   <a
-                    onClick={() => handleEditUser(userId)}
+                    onClick={handleEditUser}
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Edit

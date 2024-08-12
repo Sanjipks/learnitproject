@@ -16,7 +16,6 @@ const ForgetPassword = () => {
     event.preventDefault();
     try {
       const res = await forgotPassword(email);
-      console.log("status", res.status);
 
       if (res.ok) {
         localStorage.setItem("email", email);

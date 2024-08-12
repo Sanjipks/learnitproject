@@ -18,7 +18,7 @@ export default function UserListView(props) {
   const [expandforpagenumber, setExpandforpagenumber] = useState("hidden");
 
   const handleExpand = (id) => {
-    if (expand === "hidden" && expandeduser == null) {
+    if (expand === "hidden" && expandeduser === null) {
       setExpand("block");
       setExpandeduser(id);
     } else {
@@ -41,7 +41,6 @@ export default function UserListView(props) {
 
   const handleDelete = (id) => {
     removeUser(id);
-    console.log("id", id);
     setExpand("hidden");
     setExpandeduser(null);
   };

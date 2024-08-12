@@ -51,7 +51,6 @@ export default function RegisterPage() {
     if (inputs.password === inputs.confirmpassword) {
       try {
         const response = await registerUser(inputs);
-        console.log("status", response);
         if (response.status == 201) {
           loginInfoUpdate((loginInfo.userEmail = inputs.email));
           navigate("/verifyaccount");

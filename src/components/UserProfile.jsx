@@ -28,7 +28,6 @@ function UserProfile() {
       try {
         const res = await getUserInfo(email);
         const data = await res.json();
-        console.log("data", data, res);
 
         const image = data.userInfo.user_image;
         if (image && image.data) {

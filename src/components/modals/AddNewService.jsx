@@ -34,7 +34,6 @@ const AddNewService = (props) => {
     const res = await addServices(bodyData);
     const data = await res.json();
     handleformview(false);
-    console.log(data.message);
     if (res.status == 201) {
       toast(data.message);
     }

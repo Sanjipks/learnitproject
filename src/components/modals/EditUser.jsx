@@ -1,10 +1,32 @@
 import React from "react";
+import { useState } from "react";
+import { useLogin } from "../../context/LoginContext";
 
 const EditUser = (props) => {
   const { handleclose } = props;
 
-  const handleSubmit = () => {
-    "todo";
+  const [inputs, setInputs] = useState({
+    username: "",
+    useremail: "",
+    userRole: "",
+  });
+
+  const { loginInfo } = useLogin();
+  const loggedinUserRole = loginInfo.userRole;
+
+  const handleInput = (event) => {
+    setInputs({ ...inputs, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const bodyData = { ...inputs, loggedinUserRole };
+
+    const res = await addServices(bodyData);
+    const data = await res.json();
+    if (res.status == 201) {
+      toast(data.message);
+    }
   };
   return (
     <>
@@ -50,8 +72,9 @@ const EditUser = (props) => {
                 </label>
                 <input
                   type="text"
-                  name="name"
-                  id="name"
+                  name="username"
+                  id="username"
+                  onChange={handleInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type product name"
                   required=""
@@ -66,8 +89,9 @@ const EditUser = (props) => {
                 </label>
                 <input
                   type="email"
-                  name="email"
-                  id="email"
+                  name="useremail"
+                  id="useremail"
+                  onChange={handleInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="yourname@email.com"
                   required=""
@@ -80,14 +104,17 @@ const EditUser = (props) => {
                 >
                   Role
                 </label>
-                <input
-                  type="text"
-                  name="role"
-                  id="role"
+                <select
+                  name="userrole"
+                  id="userrole"
+                  onChange={handleInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="type user role"
-                  required=""
-                />
+                  required
+                >
+                  <option value="">Select a role</option>
+                  <option value="user">user</option>
+                  <option value="admin">admin</option>
+                </select>
               </div>
             </div>
             <button
