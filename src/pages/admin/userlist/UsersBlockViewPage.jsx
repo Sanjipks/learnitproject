@@ -11,6 +11,7 @@ export default function UsersBlockViewPage(props) {
   const [userperpage, setUserperpage] = useState(0);
   const [totalUserscount, setTotalUserscount] = useState(0);
   const [deletedUser, setDeletedUser] = useState(null);
+  const [expandeduser, setExpandeduser] = useState(null);
 
   const { handleView } = props;
 
@@ -84,6 +85,8 @@ export default function UsersBlockViewPage(props) {
                   userEmail={user.user_email}
                   userImage={user.user_image}
                   removeUser={handleRemove}
+                  expandeduser={expandeduser}
+                  setExpandeduser={setExpandeduser}
                 />
               </div>
             ))}

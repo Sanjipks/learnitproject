@@ -4,7 +4,15 @@ import { bufferToBase64 } from "../utility/BufferToBase64";
 import EditUser from "./modals/EditUser";
 
 export default function User(props) {
-  const { removeUser, userId, userImage, user, userEmail, editUser } = props;
+  const {
+    removeUser,
+    userId,
+    userImage,
+    user,
+    userEmail,
+    expandeduser,
+    setExpandeduser,
+  } = props;
   const [expand, setExpand] = useState("hidden");
   const [popUserEditModel, setpopUserEditModel] = useState(false);
   const [image, setImage] = useState(null);
@@ -16,15 +24,17 @@ export default function User(props) {
     }
   }, [userImage]);
 
-  const handleExpand = () => {
-    if (expand === "hidden") {
+  const handleExpand = (id) => {
+    if (expand === "hidden" && expandeduser === null) {
       setExpand("block");
+      setExpandeduser(id);
     } else {
       setExpand("hidden");
+      setExpandeduser(null);
       setpopUserEditModel(false);
     }
   };
-  console.log(expand);
+  console.log(expandeduser);
   const handleMouseLeave = () => {
     if (popUserEditModel === false) {
       setExpand("hidden");
@@ -56,7 +66,7 @@ export default function User(props) {
             onMouseLeave={handleMouseLeave}
           >
             <button
-              onClick={handleExpand}
+              onClick={() => handleExpand(userId)}
               id="dropdownButton"
               data-dropdown-toggle="dropdown"
               className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
@@ -73,33 +83,36 @@ export default function User(props) {
                 <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
               </svg>
             </button>
+            {expandeduser === userId ? (
+              <div
+                id="dropdown"
+                className={`z-10 ${expand} absolute ml-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
+              >
+                <ul className="py-2" aria-labelledby="dropdownButton">
+                  <li>
+                    <a
+                      onClick={handleEditUser}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Edit
+                    </a>
+                  </li>
 
-            <div
-              id="dropdown"
-              className={`z-10 ${expand} absolute ml-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
-            >
-              <ul className="py-2" aria-labelledby="dropdownButton">
-                <li>
-                  <a
-                    onClick={handleEditUser}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    Edit
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    onClick={() => handleDelete(userId)}
-                    className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    Delete
-                  </a>
-                </li>
-              </ul>
-            </div>
+                  <li>
+                    <a
+                      onClick={() => handleDelete(userId)}
+                      className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Delete
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            ) : null}
           </div>
-          {popUserEditModel ? <EditUser handleclose={handleClose} /> : null}
+          {popUserEditModel && expandeduser === userId ? (
+            <EditUser handleclose={handleClose} />
+          ) : null}
           <div className="flex flex-col items-center pb-10">
             <img
               className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"
