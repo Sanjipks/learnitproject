@@ -14,7 +14,7 @@ export default function User(props) {
     setExpandeduser,
   } = props;
   const [expand, setExpand] = useState("hidden");
-  const [popUserEditModel, setpopUserEditModel] = useState(false);
+  const [popUserEditModel, setPopUserEditModel] = useState(false);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -31,14 +31,14 @@ export default function User(props) {
     } else {
       setExpand("hidden");
       setExpandeduser(null);
-      setpopUserEditModel(false);
+      setPopUserEditModel(false);
     }
   };
-  console.log(expandeduser);
+
   const handleMouseLeave = () => {
     if (popUserEditModel === false) {
       setExpand("hidden");
-      setpopUserEditModel(false);
+      setPopUserEditModel(false);
     } else {
       setExpand("block");
     }
@@ -50,11 +50,13 @@ export default function User(props) {
   };
 
   const handleEditUser = () => {
-    setpopUserEditModel((prev) => !prev);
+    setPopUserEditModel((prev) => !prev);
   };
 
   const handleClose = () => {
-    setpopUserEditModel(false);
+    setPopUserEditModel(false);
+    setExpand("hidden");
+    setExpandeduser(null);
   };
 
   return (
