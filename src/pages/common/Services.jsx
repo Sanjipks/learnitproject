@@ -5,6 +5,7 @@ import AddNewService from "../../components/modals/AddNewService";
 import { useLogin } from "../../context/LoginContext";
 import DeleteDecision from "../../components/modals/DeleteDecision";
 import { toast } from "react-toastify";
+import CartIcon from "../../assets/CartIcon";
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -122,6 +123,7 @@ const Services = () => {
                 Services
               </h1>
             </div>
+            <CartIcon />
           </div>
           {loggedinUserRole === "admin" ? (
             <div className="max-w-screen-xl flex justify-end px-2  mx-auto mt-12">
