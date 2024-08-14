@@ -123,7 +123,6 @@ const Services = () => {
                 Services
               </h1>
             </div>
-            <CartIcon />
           </div>
           {loggedinUserRole === "admin" ? (
             <div className="max-w-screen-xl flex justify-end px-2  mx-auto mt-12">
