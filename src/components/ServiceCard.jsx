@@ -3,6 +3,7 @@ import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";
 import EditService from "./modals/EditService";
+import CartIcon from "../assets/CartIcon";
 
 const ServiceCard = (props) => {
   const {
@@ -43,6 +44,7 @@ const ServiceCard = (props) => {
 
   const handleMouseLeave = () => {
     setExpand("hidden");
+    setExpandedservice(null);
   };
 
   const handleDelete = (id) => {
@@ -115,24 +117,22 @@ const ServiceCard = (props) => {
                 </ul>
               ) : loggedinUserRole === "user" && loginState === "true" ? (
                 <ul className="py-2" aria-labelledby="dropdownButton">
-                  <li>
-                    <a
-                      onClick={handleAddToCart}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      Add to Cart+
-                    </a>
+                  <li
+                    onClick={handleAddToCart}
+                    className="flex flex-row ml-6 text-xl text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    <span className="mr-4">add to my </span>
+                    <CartIcon />
                   </li>
                 </ul>
               ) : (
                 <ul className="py-2" aria-labelledby="dropdownButton">
-                  <li>
-                    <a
-                      onClick={handleRedirectPage}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      Add to Cart+
-                    </a>
+                  <li
+                    onClick={handleRedirectPage}
+                    className="flex flex-row ml-6 text-xl text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    <span className="mr-4">add to my </span>
+                    <CartIcon />
                   </li>
                 </ul>
               )}
