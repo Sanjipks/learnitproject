@@ -17,6 +17,7 @@ const Services = () => {
   const [pop, setPop] = useState(false);
   const [deletedId, setDeletedId] = useState(null);
   const [expandedservice, setExpandedservice] = useState(null);
+  const [cartItems, setCartItems] = useState([]);
 
   const { loginInfo } = useLogin();
   const loggedinUserRole = loginInfo.userRole;
@@ -158,6 +159,8 @@ const Services = () => {
                     deleteService={handleDelete}
                     expandedservice={expandedservice}
                     setExpandedservice={setExpandedservice}
+                    cartItems={cartItems}
+                    setCartItems={setCartItems}
                     // addService={handleAdd}
                   />
                 </div>
