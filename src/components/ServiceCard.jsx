@@ -13,12 +13,13 @@ const ServiceCard = (props) => {
     deleteService,
     expandedservice,
     setExpandedservice,
+    cartItems,
+    setCartItems,
   } = props;
   const navigate = useNavigate();
 
   const [image, setImage] = useState(null);
   const [expand, setExpand] = useState("hidden");
-
   const [serviceEditPop, setServiceEditPop] = useState(false);
 
   const { loginInfo } = useLogin();
@@ -54,9 +55,10 @@ const ServiceCard = (props) => {
   const handleEdit = () => {
     setServiceEditPop((prev) => !prev);
   };
-  const handleAddToCart = () => {
-    "todo";
+  const handleAddToCart = (id) => {
+    setCartItems((prevItems) => [...prevItems, id]);
   };
+  console.log("cart", cartItems);
   const handleRedirectPage = () => {
     navigate("/register");
   };
@@ -118,8 +120,8 @@ const ServiceCard = (props) => {
               ) : loggedinUserRole === "user" && loginState === "true" ? (
                 <ul className="py-2" aria-labelledby="dropdownButton">
                   <li
-                    onClick={handleAddToCart}
-                    className="flex flex-row ml-6 text-xl text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    onClick={() => handleAddToCart(serviceId)}
+                    className="flex flex-row pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     <span className="mr-4">add to my </span>
                     <CartIcon />
