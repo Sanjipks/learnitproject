@@ -57,8 +57,12 @@ const ServiceCard = (props) => {
   };
   const handleAddToCart = (id) => {
     setCartItems((prevItems) => [...prevItems, id]);
+    setExpand("hidden");
+    setExpandedservice(null);
   };
+
   console.log("cart", cartItems);
+
   const handleRedirectPage = () => {
     navigate("/register");
   };
