@@ -5,7 +5,7 @@ import AddNewService from "../../components/modals/AddNewService";
 import { useLogin } from "../../context/LoginContext";
 import DeleteDecision from "../../components/modals/DeleteDecision";
 import { toast } from "react-toastify";
-import CartIcon from "../../assets/CartIcon";
+import Cart from "../../components/Cart";
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -143,7 +143,9 @@ const Services = () => {
               )}
             </div>
           ) : (
-            <div className="max-w-screen-xl flex px-2  mx-auto mt-12"></div>
+            <div className="max-w-screen-xl flex px-2  mx-auto mt-12">
+              <Cart cartItems={cartItems} />
+            </div>
           )}
 
           <div className="flex justify-center mt-2" onMouseDown={handleclose}>
