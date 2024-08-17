@@ -6,6 +6,7 @@ import { useLogin } from "../../context/LoginContext";
 import DeleteDecision from "../../components/modals/DeleteDecision";
 import { toast } from "react-toastify";
 import Cart from "../../components/Cart";
+import { useNavigate } from "react-router-dom";
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -18,6 +19,8 @@ const Services = () => {
   const [deletedId, setDeletedId] = useState(null);
   const [expandedservice, setExpandedservice] = useState(null);
   const [cartItems, setCartItems] = useState([]);
+
+  const navigate = useNavigate();
 
   const { loginInfo } = useLogin();
   const loggedinUserRole = loginInfo.userRole;
@@ -58,6 +61,10 @@ const Services = () => {
   const handleDelete = async (id) => {
     setDeletedId(id);
     setPop(true);
+  };
+
+  const handleCartView = () => {
+    navigate("/mycart");
   };
 
   //user delete decision can be made and receives true or false state from child compo
@@ -143,8 +150,13 @@ const Services = () => {
               )}
             </div>
           ) : (
-            <div className="max-w-screen-xl flex px-2  mx-auto mt-12">
-              <Cart cartItems={cartItems} />
+            <div className="max-w-screen-xl flex justify-end px-2  mx-auto mt-12">
+              <button
+                onClick={handleCartView}
+                className="flex bg-white rounded-lg shadow dark:border md:mt-0 max-w-sm w-48 p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
+              >
+                <Cart cartItems={cartItems} />
+              </button>
             </div>
           )}
 
