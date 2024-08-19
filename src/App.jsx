@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Services from "./pages/common/Services";
 import ContactUs from "./pages/common/ContactUs";
 import Progress from "./pages/user/Progress";
+import MyCart from "./pages/user/MyCart";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="user/progress" element={<Progress />} />
+          <Route path="mycart" element={<MyCart />} />
           <Route
             path="/reset-forgot-password"
             element={<ResetForgetPassword />}
