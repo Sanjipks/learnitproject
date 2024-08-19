@@ -61,6 +61,12 @@ const ServiceCard = (props) => {
     setExpandedservice(null);
   };
 
+  const handleRemoveFromCart = (id) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item !== id));
+    setExpand("hidden");
+    setExpandedservice(null);
+  };
+
   console.log("cart", cartItems);
 
   const handleRedirectPage = () => {
@@ -125,10 +131,16 @@ const ServiceCard = (props) => {
                 <ul className="py-2" aria-labelledby="dropdownButton">
                   <li
                     onClick={() => handleAddToCart(serviceId)}
-                    className="flex flex-row pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     <span className="mr-4">add to my </span>
                     <CartIcon />
+                  </li>
+                  <li
+                    onClick={() => handleRemoveFromCart(serviceId)}
+                    className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  >
+                    <span className="mr-4">remove Item </span>
                   </li>
                 </ul>
               ) : (
