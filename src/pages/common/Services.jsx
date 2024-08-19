@@ -7,6 +7,7 @@ import DeleteDecision from "../../components/modals/DeleteDecision";
 import { toast } from "react-toastify";
 import Cart from "../../components/Cart";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -18,11 +19,14 @@ const Services = () => {
   const [pop, setPop] = useState(false);
   const [deletedId, setDeletedId] = useState(null);
   const [expandedservice, setExpandedservice] = useState(null);
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
+
+  const { cartItems, setCartItems } = useCart();
 
   const navigate = useNavigate();
 
   const { loginInfo } = useLogin();
+
   const loggedinUserRole = loginInfo.userRole;
 
   const handlePrevPage = () => {
