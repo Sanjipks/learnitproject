@@ -19,34 +19,37 @@ import Services from "./pages/common/Services";
 import ContactUs from "./pages/common/ContactUs";
 import Progress from "./pages/user/Progress";
 import MyCart from "./pages/user/MyCart";
+import CartProvider from "./context/CartContext";
 
 function App() {
   return (
     <Router>
       <LoginProvider>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/userlist" element={<UserList />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/verifyaccount" element={<VerifyAccount />} />
-          {/* <Route path="/userprofile" element={<UserProfile />} /> */}
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/forgetpassword" element={<ForgetPassword />} />
-          <Route path="/admin" element={<AdminPage />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/contact-us" element={<ContactUs />} />
-          <Route path="user/progress" element={<Progress />} />
-          <Route path="mycart" element={<MyCart />} />
-          <Route
-            path="/reset-forgot-password"
-            element={<ResetForgetPassword />}
-          />
-        </Routes>
-        <Footer />
-        <ToastContainer />
+        <CartProvider>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/userlist" element={<UserList />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/verifyaccount" element={<VerifyAccount />} />
+            {/* <Route path="/userprofile" element={<UserProfile />} /> */}
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/forgetpassword" element={<ForgetPassword />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="user/progress" element={<Progress />} />
+            <Route path="mycart" element={<MyCart />} />
+            <Route
+              path="/reset-forgot-password"
+              element={<ResetForgetPassword />}
+            />
+          </Routes>
+          <Footer />
+          <ToastContainer />
+        </CartProvider>
       </LoginProvider>
     </Router>
   );
