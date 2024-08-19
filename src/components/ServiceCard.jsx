@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";
@@ -61,12 +61,26 @@ const ServiceCard = (props) => {
     setExpandedservice(null);
   };
 
-  const handleRemoveFromCart = (id) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item !== id));
+  const handleRemoveFromCart = useCallback((id) => {
+    setCartItems((prevItems) => {
+      const index = prevItems.findIndex((item) => item === id);
+      if (index !== -1) {
+        return [
+          ...prevItems.slice(0, index), // Items before the one to remove
+          ...prevItems.slice(index + 1), // Items after the one to remove
+        ];
+      }
+      return prevItems;
+    });
     setExpand("hidden");
     setExpandedservice(null);
-  };
+  }, []);
 
+  // const handleRemoveFromCart = (id) => {
+  //   setCartItems((prevItems) => prevItems.filter((item) => item !== id));
+  //   setExpand("hidden");
+  //   setExpandedservice(null);
+  // };
   console.log("cart", cartItems);
 
   const handleRedirectPage = () => {
@@ -105,7 +119,7 @@ const ServiceCard = (props) => {
 
             <div
               id="dropdown"
-              className={`z-10 ${expand} absolute ml-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
+              className={`z-10 ${expand} absolute w-60 ml-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
             >
               {loggedinUserRole === "admin" && loginState === "true" ? (
                 <ul className="py-2" aria-labelledby="dropdownButton">
@@ -140,7 +154,8 @@ const ServiceCard = (props) => {
                     onClick={() => handleRemoveFromCart(serviceId)}
                     className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
-                    <span className="mr-4">remove Item </span>
+                    <span className="mr-4">remove from </span>
+                    <CartIcon />
                   </li>
                 </ul>
               ) : (
@@ -149,7 +164,7 @@ const ServiceCard = (props) => {
                     onClick={handleRedirectPage}
                     className="flex flex-row ml-6 text-xl text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
-                    <span className="mr-4">add to my </span>
+                    <span className="mr-4">add to </span>
                     <CartIcon />
                   </li>
                 </ul>
