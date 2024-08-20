@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import Cart from "../../components/Cart";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
+import CartIcon from "../../assets/CartIcon";
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -21,7 +22,7 @@ const Services = () => {
   const [expandedservice, setExpandedservice] = useState(null);
   // const [cartItems, setCartItems] = useState([]);
 
-  const { cartItems, setCartItems } = useCart();
+  const { cartItems, setCartItems, clearCart } = useCart();
 
   const navigate = useNavigate();
 
@@ -69,6 +70,11 @@ const Services = () => {
 
   const handleCartView = () => {
     navigate("/mycart");
+  };
+
+  //clearcart
+  const handleClearCart = () => {
+    clearCart();
   };
 
   //user delete decision can be made and receives true or false state from child compo
@@ -154,13 +160,26 @@ const Services = () => {
               )}
             </div>
           ) : (
-            <div className="max-w-screen-xl flex justify-end px-2  mx-auto mt-12">
-              <button
-                onClick={handleCartView}
-                className="flex bg-white rounded-lg shadow dark:border md:mt-0 max-w-sm w-48 p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
-              >
-                <Cart cartItems={cartItems} />
-              </button>
+            <div>
+              <div className="max-w-screen-xl flex justify-end px-2  mx-auto mt-12">
+                <button
+                  onClick={handleCartView}
+                  className="flex bg-white rounded-lg shadow dark:border md:mt-0 max-w-sm w-48 p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
+                >
+                  <Cart cartItems={cartItems} />
+                </button>
+              </div>
+              <div className="max-w-screen-xl flex justify-end px-2  mx-auto mt-12">
+                <button
+                  onClick={handleClearCart}
+                  className="flex bg-white rounded-lg shadow dark:border md:mt-0 max-w-sm w-48 p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
+                >
+                  Clear
+                  <span className="ml-4">
+                    <CartIcon />
+                  </span>
+                </button>
+              </div>
             </div>
           )}
 

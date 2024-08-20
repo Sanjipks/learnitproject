@@ -38,9 +38,15 @@ export default function CartProvider({ children }) {
     });
   }, []);
 
+  // Function to clear all items from the cart
+  const clearCart = useCallback(() => {
+    setCartItems([]);
+    localStorage.removeItem("cartItems");
+  }, []);
+
   return (
     <CartContext.Provider
-      value={{ cartItems, setCartItems, addToCart, removeFromCart }}
+      value={{ cartItems, setCartItems, addToCart, removeFromCart, clearCart }}
     >
       {children}
     </CartContext.Provider>
