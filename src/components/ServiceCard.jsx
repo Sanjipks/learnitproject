@@ -14,11 +14,10 @@ const ServiceCard = (props) => {
     deleteService,
     expandedservice,
     setExpandedservice,
-    cartItems,
   } = props;
   const navigate = useNavigate();
 
-  const { addToCart, removeFromCart, clearCart } = useCart();
+  const { addToCart, removeFromCart } = useCart();
 
   const [image, setImage] = useState(null);
   const [expand, setExpand] = useState("hidden");
@@ -69,7 +68,6 @@ const ServiceCard = (props) => {
     setExpand("hidden");
     setExpandedservice(null);
   };
-  console.log("cart", cartItems);
 
   const handleRedirectPage = () => {
     navigate("/register");

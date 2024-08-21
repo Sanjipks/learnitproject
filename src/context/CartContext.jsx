@@ -10,19 +10,17 @@ export default function CartProvider({ children }) {
   // Initialize cartItems from localStorage or with an empty array
   const [cartItems, setCartItems] = useState(() => {
     const savedCartItems = localStorage.getItem("cartItems");
-    return savedCartItems ? JSON.parse(savedCartItems) : [];
+    return savedCartItems;
   });
 
   // Function to add items to the cart
   const addToCart = useCallback((item) => {
     setCartItems((prevItems) => {
       const updatedItems = [...prevItems, item];
-      // localStorage.setItem("cartItems", JSON.stringify(updatedItems));
       return updatedItems;
     });
   }, []);
 
-  console.log("cartcontext" + cartItems);
   // Function to remove a single item from the cart
   const removeFromCart = useCallback((id) => {
     setCartItems((prevItems) => {
@@ -32,7 +30,7 @@ export default function CartProvider({ children }) {
           ...prevItems.slice(0, index),
           ...prevItems.slice(index + 1),
         ];
-        // localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+
         return updatedItems;
       }
       return prevItems;
@@ -49,7 +47,7 @@ export default function CartProvider({ children }) {
 
   return (
     <CartContext.Provider
-      value={{ cartItems, setCartItems, addToCart, removeFromCart, clearCart }}
+      value={{ cartItems, addToCart, removeFromCart, clearCart }}
     >
       {children}
     </CartContext.Provider>
