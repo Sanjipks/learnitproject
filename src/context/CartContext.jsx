@@ -17,7 +17,6 @@ export default function CartProvider({ children }) {
   const addToCart = useCallback((item) => {
     setCartItems((prevItems) => {
       const updatedItems = [...prevItems, item];
-      localStorage.setItem("cartItems", JSON.stringify(updatedItems));
       return updatedItems;
     });
   }, []);
@@ -31,12 +30,14 @@ export default function CartProvider({ children }) {
           ...prevItems.slice(0, index),
           ...prevItems.slice(index + 1),
         ];
-        localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+
         return updatedItems;
       }
       return prevItems;
     });
   }, []);
+
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
   // Function to clear all items from the cart
   const clearCart = useCallback(() => {
@@ -46,7 +47,7 @@ export default function CartProvider({ children }) {
 
   return (
     <CartContext.Provider
-      value={{ cartItems, setCartItems, addToCart, removeFromCart, clearCart }}
+      value={{ cartItems, addToCart, removeFromCart, clearCart }}
     >
       {children}
     </CartContext.Provider>

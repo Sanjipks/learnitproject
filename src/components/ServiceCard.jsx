@@ -4,6 +4,7 @@ import { useLogin } from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";
 import EditService from "./modals/EditService";
 import CartIcon from "../assets/CartIcon";
+import { useCart } from "../context/CartContext";
 
 const ServiceCard = (props) => {
   const {
@@ -13,10 +14,10 @@ const ServiceCard = (props) => {
     deleteService,
     expandedservice,
     setExpandedservice,
-    cartItems,
-    setCartItems,
   } = props;
   const navigate = useNavigate();
+
+  const { addToCart, removeFromCart } = useCart();
 
   const [image, setImage] = useState(null);
   const [expand, setExpand] = useState("hidden");
@@ -55,33 +56,18 @@ const ServiceCard = (props) => {
   const handleEdit = () => {
     setServiceEditPop((prev) => !prev);
   };
+
   const handleAddToCart = (id) => {
-    setCartItems((prevItems) => [...prevItems, id]);
+    addToCart(id);
     setExpand("hidden");
     setExpandedservice(null);
   };
 
-  const handleRemoveFromCart = useCallback((id) => {
-    setCartItems((prevItems) => {
-      const index = prevItems.findIndex((item) => item === id);
-      if (index !== -1) {
-        return [
-          ...prevItems.slice(0, index), // Items before the one to remove
-          ...prevItems.slice(index + 1), // Items after the one to remove
-        ];
-      }
-      return prevItems;
-    });
+  const handleRemoveFromCart = (id) => {
+    removeFromCart(id);
     setExpand("hidden");
     setExpandedservice(null);
-  }, []);
-
-  // const handleRemoveFromCart = (id) => {
-  //   setCartItems((prevItems) => prevItems.filter((item) => item !== id));
-  //   setExpand("hidden");
-  //   setExpandedservice(null);
-  // };
-  console.log("cart", cartItems);
+  };
 
   const handleRedirectPage = () => {
     navigate("/register");

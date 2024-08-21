@@ -192,9 +192,6 @@ const Services = () => {
                     deleteService={handleDelete}
                     expandedservice={expandedservice}
                     setExpandedservice={setExpandedservice}
-                    cartItems={cartItems}
-                    setCartItems={setCartItems}
-                    // addService={handleAdd}
                   />
                 </div>
               ))}
