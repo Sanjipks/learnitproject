@@ -10,7 +10,7 @@ export default function CartProvider({ children }) {
   // Initialize cartItems from localStorage or with an empty array
   const [cartItems, setCartItems] = useState(() => {
     const savedCartItems = localStorage.getItem("cartItems");
-    return savedCartItems;
+    return savedCartItems ? JSON.parse(savedCartItems) : [];
   });
 
   // Function to add items to the cart
