@@ -17,11 +17,12 @@ export default function CartProvider({ children }) {
   const addToCart = useCallback((item) => {
     setCartItems((prevItems) => {
       const updatedItems = [...prevItems, item];
-      localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+      // localStorage.setItem("cartItems", JSON.stringify(updatedItems));
       return updatedItems;
     });
   }, []);
 
+  console.log("cartcontext" + cartItems);
   // Function to remove a single item from the cart
   const removeFromCart = useCallback((id) => {
     setCartItems((prevItems) => {
@@ -31,7 +32,7 @@ export default function CartProvider({ children }) {
           ...prevItems.slice(0, index),
           ...prevItems.slice(index + 1),
         ];
-        localStorage.setItem("cartItems", JSON.stringify(updatedItems));
+        // localStorage.setItem("cartItems", JSON.stringify(updatedItems));
         return updatedItems;
       }
       return prevItems;
@@ -43,6 +44,8 @@ export default function CartProvider({ children }) {
     setCartItems([]);
     localStorage.removeItem("cartItems");
   }, []);
+
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
   return (
     <CartContext.Provider
