@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import { useLogin } from "../context/LoginContext";
 
-function UserInfo(props) {
-  const { username } = props;
+function UserInfo() {
   const [expand, setExpand] = useState("hidden");
+
+  const { loginInfo } = useLogin();
+
+  const username = loginInfo.userName;
+  const useremail = loginInfo.userEmail;
+  console.log("username", username);
 
   const handleCardClick = () => {
     if (expand === "hidden") {
@@ -68,18 +74,18 @@ function UserInfo(props) {
           </div>
         </div>
         <div className="flex ml-16 min-h-96 flex-col pb-10">
-          <div className="flex flex-row">
+          <div className="flex flex-col">
             <label
               htmlFor="username"
               className="block mb-2 mr-4 text-xl font-medium text-gray-900 dark:text-white"
             >
-              Name:
+              Name: {username}
             </label>
             <label
-              id="username"
+              id="useremail"
               className="block text-xl font-medium text-gray-900 dark:text-white"
             >
-              {username}
+              Email: {useremail}
             </label>
           </div>
         </div>
