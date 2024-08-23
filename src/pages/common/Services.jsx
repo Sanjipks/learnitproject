@@ -22,7 +22,7 @@ const Services = () => {
   const [expandedservice, setExpandedservice] = useState(null);
   // const [cartItems, setCartItems] = useState([]);
 
-  const { cartItems, setCartItems, clearCart } = useCart();
+  const { cartItems, clearCart } = useCart();
 
   const navigate = useNavigate();
 
