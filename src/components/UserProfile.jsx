@@ -50,6 +50,10 @@ function UserProfile() {
     }
   };
 
+  const handleChangePhoto = () => {
+    "todo";
+  };
+
   return (
     <div className="flex justify-center items-center ">
       <div className="w-full h-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -79,20 +83,12 @@ function UserProfile() {
           >
             <ul className="py-2" aria-labelledby="dropdownButton">
               <li>
-                <a
-                  href="#"
+                <div
+                  onClick={handleChangePhoto}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
-                  Edit
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Export Data
-                </a>
+                  Change Profile Photo
+                </div>
               </li>
             </ul>
           </div>
