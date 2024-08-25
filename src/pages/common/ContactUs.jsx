@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import GMap from "../../components/Map";
 
 const ContactUs = () => {
+  const [message, setMessage] = useState("");
+
+  const handleInput = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const handleMessageSubmit = () => {
+    "todo";
+  };
+
   return (
     <div className="min-h-screen h-auto flex flex-col xm:gap-4 bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
       <div className="mt-20">
@@ -59,21 +69,22 @@ const ContactUs = () => {
 
                     <div className="col-span-2">
                       <label
-                        htmlFor="description"
+                        htmlFor="message"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
                         Message
                       </label>
                       <textarea
-                        id="description"
+                        id="message"
                         rows="4"
+                        onChange={handleInput}
                         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Write your message here"
                       ></textarea>
                     </div>
                   </div>
                   <button
-                    type="submit"
+                    onClick={handleMessageSubmit}
                     className="text-dark bg-primary-600 border border-gray-300 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm py-2 px-4 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800  text-gray-950 dark:text-white"
                   >
                     Submit
