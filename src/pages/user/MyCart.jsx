@@ -13,7 +13,6 @@ const MyCart = () => {
         </div>
         <div className=" max-w-screen-xl  justify-between mx-auto mt-20">
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center">
-            {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
             {cartItems.map((item) => (
               <div className="p-2 border mx-4">{item}</div>
             ))}

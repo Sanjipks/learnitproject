@@ -75,7 +75,6 @@ export default function UsersBlockViewPage(props) {
         </div>
         <div className="flex  justify-start mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-            {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
             {userlist.map((user, id) => (
               <div key={id} className="p-2">
                 <UserBlockView

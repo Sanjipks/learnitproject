@@ -16,11 +16,9 @@ const Services = () => {
   const [totalServicesCount, setTotalServicesCount] = useState(0);
   const [pagenumber, setPagenumber] = useState(1);
   const [openAddForm, setOpenAddForm] = useState(false);
-  // const [confirmDelete, setConfirmDelete] = useState(false);
   const [pop, setPop] = useState(false);
   const [deletedId, setDeletedId] = useState(null);
   const [expandedservice, setExpandedservice] = useState(null);
-  // const [cartItems, setCartItems] = useState([]);
 
   const { cartItems, clearCart } = useCart();
 
