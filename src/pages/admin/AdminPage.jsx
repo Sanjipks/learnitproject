@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLogin } from "../../context/LoginContext";
 import Login from "../common/Login";
 import { useNavigate } from "react-router-dom";
+import MessageCard from "../../components/messageCard";
 
 const AdminPage = () => {
   const { loginInfo } = useLogin();
@@ -31,8 +32,11 @@ const AdminPage = () => {
               <div className=" flex flex-col items-center md:h-dvh px-6 mx-auto lg:pt-6 ">
                 <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                   <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-8">
-                    Requests
+                    Requests and Messages
                   </h1>
+                </div>
+                <div className="mt-8">
+                  <MessageCard />
                 </div>
               </div>
             </section>
