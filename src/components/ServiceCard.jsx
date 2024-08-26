@@ -74,6 +74,8 @@ const ServiceCard = (props) => {
   };
   const handleclose = () => {
     setServiceEditPop(false);
+    setExpand("hidden");
+    setExpandedservice(null);
   };
 
   return (
@@ -82,7 +84,7 @@ const ServiceCard = (props) => {
         <div className="w-80 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
           <div
             className="flex justify-start px-4 pt-4"
-            onMouseLeave={handleMouseLeave}
+            onMouseLeave={loggedinUserRole === "user" ? handleMouseLeave : null}
           >
             <button
               onClick={() => handleExpand(serviceId)}
