@@ -41,12 +41,15 @@ const ServiceCard = (props) => {
     } else {
       setExpand("hidden");
       setExpandedservice(null);
+      setServiceEditPop(false);
     }
   };
 
   const handleMouseLeave = () => {
-    setExpand("hidden");
-    setExpandedservice(null);
+    if (serviceEditPop === false) {
+      setExpand("hidden");
+      setExpandedservice(null);
+    }
   };
 
   const handleDelete = (id) => {
@@ -84,7 +87,8 @@ const ServiceCard = (props) => {
         <div className="w-80 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
           <div
             className="flex justify-start px-4 pt-4"
-            onMouseLeave={loggedinUserRole === "user" ? handleMouseLeave : null}
+            // onMouseLeave={loggedinUserRole === "user" ? handleMouseLeave : null}
+            onMouseLeave={handleMouseLeave}
           >
             <button
               onClick={() => handleExpand(serviceId)}
@@ -104,60 +108,61 @@ const ServiceCard = (props) => {
                 <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
               </svg>
             </button>
+            {expandedservice === serviceId ? (
+              <div
+                id="dropdown"
+                className={`z-10 ${expand} absolute w-60 ml-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
+              >
+                {loggedinUserRole === "admin" && loginState === "true" ? (
+                  <ul className="py-2" aria-labelledby="dropdownButton">
+                    <li>
+                      <a
+                        onClick={handleEdit}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Edit
+                      </a>
+                    </li>
 
-            <div
-              id="dropdown"
-              className={`z-10 ${expand} absolute w-60 ml-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
-            >
-              {loggedinUserRole === "admin" && loginState === "true" ? (
-                <ul className="py-2" aria-labelledby="dropdownButton">
-                  <li>
-                    <a
-                      onClick={handleEdit}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    <li>
+                      <a
+                        onClick={() => handleDelete(serviceId)}
+                        className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Delete
+                      </a>
+                    </li>
+                  </ul>
+                ) : loggedinUserRole === "user" && loginState === "true" ? (
+                  <ul className="py-2" aria-labelledby="dropdownButton">
+                    <li
+                      onClick={() => handleAddToCart(serviceId)}
+                      className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
-                      Edit
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      onClick={() => handleDelete(serviceId)}
-                      className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      <span className="mr-4">add to my </span>
+                      <CartIcon />
+                    </li>
+                    <li
+                      onClick={() => handleRemoveFromCart(serviceId)}
+                      className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
-                      Delete
-                    </a>
-                  </li>
-                </ul>
-              ) : loggedinUserRole === "user" && loginState === "true" ? (
-                <ul className="py-2" aria-labelledby="dropdownButton">
-                  <li
-                    onClick={() => handleAddToCart(serviceId)}
-                    className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    <span className="mr-4">add to my </span>
-                    <CartIcon />
-                  </li>
-                  <li
-                    onClick={() => handleRemoveFromCart(serviceId)}
-                    className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    <span className="mr-4">remove from </span>
-                    <CartIcon />
-                  </li>
-                </ul>
-              ) : (
-                <ul className="py-2" aria-labelledby="dropdownButton">
-                  <li
-                    onClick={handleRedirectPage}
-                    className="flex flex-row ml-6 text-xl text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    <span className="mr-4">add to </span>
-                    <CartIcon />
-                  </li>
-                </ul>
-              )}
-            </div>
+                      <span className="mr-4">remove from </span>
+                      <CartIcon />
+                    </li>
+                  </ul>
+                ) : (
+                  <ul className="py-2" aria-labelledby="dropdownButton">
+                    <li
+                      onClick={handleRedirectPage}
+                      className="flex flex-row ml-6 text-xl text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      <span className="mr-4">add to </span>
+                      <CartIcon />
+                    </li>
+                  </ul>
+                )}
+              </div>
+            ) : null}
           </div>
           {serviceEditPop && expandedservice === serviceId ? (
             <EditService
