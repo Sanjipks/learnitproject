@@ -14,7 +14,7 @@ const MyCart = () => {
         <div className=" max-w-screen-xl  justify-between mx-auto mt-20">
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center gap-8">
             {cartItems.map((item) => (
-              <div className="flex">
+              <div className="flex" key={item.serviceId}>
                 <div className="w-80 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
                   <div className="flex justify-start px-4 pt-4">
                     <button
@@ -54,13 +54,13 @@ const MyCart = () => {
                   <div className="flex flex-col items-center pb-10">
                     <img
                       className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"
-                      // src={image ? image : "no image"}
+                      src={item.image ? item.image : "no image"}
                       alt="Bonnie image"
                     />
                     <div className="mb-1 text-xl  min-w-full font-medium text-center text-gray-900 dark:text-white p-4">
-                      {/* {service} */}
+                      {item.serviceId}
                       <p className="mb-1 xl:text-xl lg:text-lg md:text-sm  text-center font-medium text-gray-900 dark:text-white">
-                        {item}
+                        {item.service}
                       </p>
                     </div>
                   </div>

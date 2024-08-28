@@ -23,6 +23,8 @@ const ServiceCard = (props) => {
   const [expand, setExpand] = useState("hidden");
   const [serviceEditPop, setServiceEditPop] = useState(false);
 
+  let serviceObject = { service, serviceId, image };
+
   const { loginInfo } = useLogin();
   const loggedinUserRole = loginInfo.userRole;
   const loginState = loginInfo.loginState;
@@ -60,8 +62,8 @@ const ServiceCard = (props) => {
     setServiceEditPop((prev) => !prev);
   };
 
-  const handleAddToCart = (id) => {
-    addToCart(id);
+  const handleAddToCart = (item) => {
+    addToCart(item);
     setExpand("hidden");
     setExpandedservice(null);
   };
@@ -139,7 +141,7 @@ const ServiceCard = (props) => {
                 ) : loggedinUserRole === "user" && loginState === "true" ? (
                   <ul className="py-2" aria-labelledby="dropdownButton">
                     <li
-                      onClick={() => handleAddToCart(serviceId)}
+                      onClick={() => handleAddToCart(serviceObject)}
                       className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
                       <span className="mr-4">add to my </span>
