@@ -17,7 +17,7 @@ const ServiceCard = (props) => {
   } = props;
   const navigate = useNavigate();
 
-  const { addToCart, removeFromCart } = useCart();
+  const { cartItems, addToCart, removeFromCart } = useCart();
 
   const [image, setImage] = useState(null);
   const [expand, setExpand] = useState("hidden");
@@ -140,20 +140,25 @@ const ServiceCard = (props) => {
                   </ul>
                 ) : loggedinUserRole === "user" && loginState === "true" ? (
                   <ul className="py-2" aria-labelledby="dropdownButton">
-                    <li
-                      onClick={() => handleAddToCart(serviceObject)}
-                      className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      <span className="mr-4">add to my </span>
-                      <CartIcon />
-                    </li>
-                    <li
-                      onClick={() => handleRemoveFromCart(serviceId)}
-                      className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      <span className="mr-4">remove from </span>
-                      <CartIcon />
-                    </li>
+                    {!cartItems.some(
+                      (item) => item.serviceId === expandedservice
+                    ) ? (
+                      <li
+                        onClick={() => handleAddToCart(serviceObject)}
+                        className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        <span className="mr-4">add to my </span>
+                        <CartIcon />
+                      </li>
+                    ) : (
+                      <li
+                        onClick={() => handleRemoveFromCart(serviceId)}
+                        className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        <span className="mr-4">remove from </span>
+                        <CartIcon />
+                      </li>
+                    )}
                   </ul>
                 ) : (
                   <ul className="py-2" aria-labelledby="dropdownButton">
