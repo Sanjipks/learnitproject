@@ -25,7 +25,8 @@ export default function CartProvider({ children }) {
   // Function to remove a single item from the cart
   const removeFromCart = useCallback((id) => {
     setCartItems((prevItems) => {
-      const index = prevItems.findIndex((item) => item === id);
+      const index = prevItems.findIndex((item) => item.serviceId === id);
+      console.log("cartItems", cartItems);
       if (index !== -1) {
         const updatedItems = [
           ...prevItems.slice(0, index),
