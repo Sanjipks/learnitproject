@@ -187,6 +187,7 @@ const Services = () => {
                     service={service.service_name}
                     serviceId={service.service_id}
                     serviceLogo={service.service_image}
+                    servicePrice={service.service_price}
                     deleteService={handleDelete}
                     expandedservice={expandedservice}
                     setExpandedservice={setExpandedservice}

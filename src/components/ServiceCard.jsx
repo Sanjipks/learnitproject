@@ -11,6 +11,7 @@ const ServiceCard = (props) => {
     service,
     serviceId,
     serviceLogo,
+    servicePrice,
     deleteService,
     expandedservice,
     setExpandedservice,
@@ -23,7 +24,7 @@ const ServiceCard = (props) => {
   const [expand, setExpand] = useState("hidden");
   const [serviceEditPop, setServiceEditPop] = useState(false);
 
-  let serviceObject = { service, serviceId, image };
+  let serviceObject = { service, serviceId, image, servicePrice };
 
   const { loginInfo } = useLogin();
   const loggedinUserRole = loginInfo.userRole;
@@ -88,7 +89,7 @@ const ServiceCard = (props) => {
       <div className="flex">
         <div className="w-80 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
           <div
-            className="flex justify-start px-4 pt-4"
+            className="flex justify-between px-4 pt-4"
             onMouseLeave={
               loggedinUserRole === "user" || loggedinUserRole === null
                 ? handleMouseLeave
@@ -113,6 +114,10 @@ const ServiceCard = (props) => {
                 <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
               </svg>
             </button>
+            <div className=" text-xl">
+              <span>Price: </span>${servicePrice}
+            </div>
+
             {expandedservice === serviceId ? (
               <div
                 id="dropdown"
@@ -190,7 +195,7 @@ const ServiceCard = (props) => {
             <div className="mb-1 text-xl  min-w-full font-medium text-center text-gray-900 dark:text-white p-4">
               {service}
               <p className="mb-1 xl:text-xl lg:text-lg md:text-sm  text-center font-medium text-gray-900 dark:text-white">
-                {serviceId}
+                {serviceId} {servicePrice}
               </p>
             </div>
           </div>
