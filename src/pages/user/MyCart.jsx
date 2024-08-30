@@ -19,7 +19,7 @@ const MyCart = () => {
               {cartItems.map((item) => (
                 <div className="flex" key={item.serviceId}>
                   <div className="w-80 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
-                    <div className="flex justify-start px-4 pt-4">
+                    <div className="flex justify-between px-4 pt-4">
                       <button
                         id="dropdownButton"
                         data-dropdown-toggle="dropdown"
@@ -37,6 +37,9 @@ const MyCart = () => {
                           <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
                         </svg>
                       </button>
+                      <div className=" text-xl">
+                        <span>Price: </span>${item.servicePrice}
+                      </div>
                       <div
                         id="dropdown"
                         className={`z-10 hidden  absolute w-60 ml-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
