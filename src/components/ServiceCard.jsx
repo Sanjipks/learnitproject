@@ -121,7 +121,7 @@ const ServiceCard = (props) => {
             {expandedservice === serviceId ? (
               <div
                 id="dropdown"
-                className={`z-10 ${expand} absolute w-48 mt-9 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
+                className={`z-10 ${expand} absolute w-48 mt-8 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
               >
                 {loggedinUserRole === "admin" && loginState === "true" ? (
                   <ul className="py-2" aria-labelledby="dropdownButton">
@@ -150,7 +150,7 @@ const ServiceCard = (props) => {
                     ) ? (
                       <li
                         onClick={() => handleAddToCart(serviceObject)}
-                        className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
                         <span className="mr-4">add to my </span>
                         <CartIcon />
@@ -158,7 +158,7 @@ const ServiceCard = (props) => {
                     ) : (
                       <li
                         onClick={() => handleRemoveFromCart(serviceId)}
-                        className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        className="flex flex-row w-auto pl-6 py-2 text-xl text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
                         <span className="mr-4">remove from </span>
                         <CartIcon />
