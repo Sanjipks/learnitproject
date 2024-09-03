@@ -2,7 +2,7 @@ import React from "react";
 import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
 
-const MyCart = () => {
+const CheckOutPage = () => {
   const { cartItems } = useCart();
 
   const navigate = useNavigate();
@@ -10,16 +10,12 @@ const MyCart = () => {
   const navigateBacktoCart = () => {
     navigate("/services");
   };
-
-  const handleCheckOut = () => {
-    navigate("/checkout");
-  };
   return (
     <div className="min-h-screen h-auto flex flex-col justify-items-center justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
       <div className="md:my-20">
         <div className="w-full flex mx-auto justify-center bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800">
           <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
-            My Cart
+            Check Out
           </h1>
         </div>
         <div className=" max-w-screen-xl  justify-between mx-auto mt-20">
@@ -31,10 +27,10 @@ const MyCart = () => {
               Go Back to the Cart
             </button>
             <button
-              onClick={handleCheckOut}
+              // onClick={handleCheckOut}
               className="flex bg-white rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
             >
-              Check Out
+              Submit Payment
             </button>
           </div>
 
@@ -109,4 +105,4 @@ const MyCart = () => {
   );
 };
 
-export default MyCart;
+export default CheckOutPage;
