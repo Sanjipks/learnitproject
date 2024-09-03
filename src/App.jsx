@@ -20,6 +20,7 @@ import ContactUs from "./pages/common/ContactUs";
 import Progress from "./pages/user/Progress";
 import MyCart from "./pages/user/MyCart";
 import CartProvider from "./context/CartContext";
+import CheckOutPage from "./pages/user/CheckOutPage";
 
 function App() {
   return (
@@ -40,8 +41,9 @@ function App() {
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/services" element={<Services />} />
             <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="user/progress" element={<Progress />} />
-            <Route path="mycart" element={<MyCart />} />
+            <Route path="/user/progress" element={<Progress />} />
+            <Route path="/mycart" element={<MyCart />} />
+            <Route path="/checkout" element={<CheckOutPage />} />
             <Route
               path="/reset-forgot-password"
               element={<ResetForgetPassword />}
