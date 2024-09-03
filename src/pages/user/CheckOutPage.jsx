@@ -1,6 +1,7 @@
 import React from "react";
 import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import CartIcon from "../../assets/CartIcon";
 
 const CheckOutPage = () => {
   const { cartItems } = useCart();
@@ -24,10 +25,13 @@ const CheckOutPage = () => {
               onClick={navigateBacktoCart}
               className="flex bg-white rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
             >
-              Go Back to the Cart
+              Go Back to the{" "}
+              <span>
+                <CartIcon />
+              </span>
             </button>
             <button
-              // onClick={handleCheckOut}
+              // onClick={handlePayment}
               className="flex bg-white rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
             >
               Submit Payment
