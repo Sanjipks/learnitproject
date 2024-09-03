@@ -7,7 +7,7 @@ const MyCart = () => {
 
   const navigate = useNavigate();
 
-  const navigateBacktoCart = () => {
+  const navigateBacktoServiceList = () => {
     navigate("/services");
   };
 
@@ -25,10 +25,10 @@ const MyCart = () => {
         <div className=" max-w-screen-xl  justify-between mx-auto mt-20">
           <div className=" flex justify-between">
             <button
-              onClick={navigateBacktoCart}
+              onClick={navigateBacktoServiceList}
               className="flex bg-white rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
             >
-              Go Back to the Cart
+              Go Back to the Service List
             </button>
             <button
               onClick={handleCheckOut}
