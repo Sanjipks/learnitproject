@@ -195,7 +195,7 @@ const ServiceCard = (props) => {
             <div className="mb-1 text-xl  min-w-full font-medium text-center text-gray-900 dark:text-white p-4">
               {service}
               <p className="mb-1 xl:text-xl lg:text-lg md:text-sm  text-center font-medium text-gray-900 dark:text-white">
-                {serviceId} {servicePrice}
+                {serviceId}
               </p>
             </div>
           </div>
