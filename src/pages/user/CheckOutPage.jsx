@@ -3,11 +3,24 @@ import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import CartIcon from "../../assets/CartIcon";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const CheckOutPage = () => {
   const { cartItems } = useCart();
-
+  const [itemTotal, setItemTotal] = useState(0);
   const [total, setTotal] = useState(0);
+  const tax = 6 / 100;
+
+  useEffect(() => {
+    if (cartItems && cartItems.length > 0) {
+      const sum = cartItems.reduce((acc, item) => {
+        const price = parseFloat(item.servicePrice) || 0;
+        return acc + price;
+      }, 0.0);
+      setItemTotal(sum);
+      setTotal(itemTotal * (itemTotal * tax));
+    }
+  }, [cartItems]);
 
   const navigate = useNavigate();
 
@@ -39,6 +52,21 @@ const CheckOutPage = () => {
             >
               Submit Payment
             </button>
+          </div>
+          <div className="flex mt-20 flex-col mx-auto">
+            <h2>Your Cart Summary</h2>
+            <div className="flex ">Total Items: {cartItems.length}</div>
+            <div className="flex justify-center flex-col">
+              Items: Price
+              {cartItems.map((item) => {
+                console.log(item.servicePrice);
+                return (
+                  <div key={item.serviceId}>
+                    {item.serviceId}: {item.servicePrice}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
