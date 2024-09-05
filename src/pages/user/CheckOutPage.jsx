@@ -8,8 +8,8 @@ import { useEffect } from "react";
 const CheckOutPage = () => {
   const { cartItems } = useCart();
   const [itemTotal, setItemTotal] = useState(0);
-  const [total, setTotal] = useState(0);
-  const tax = 6 / 100;
+
+  const taxRate = 6 / 100;
 
   useEffect(() => {
     if (cartItems && cartItems.length > 0) {
@@ -18,9 +18,11 @@ const CheckOutPage = () => {
         return acc + price;
       }, 0.0);
       setItemTotal(sum);
-      setTotal(itemTotal * (itemTotal * tax));
     }
   }, [cartItems]);
+
+  const tax = itemTotal * taxRate;
+  const total = itemTotal + tax;
 
   const navigate = useNavigate();
 
@@ -35,7 +37,7 @@ const CheckOutPage = () => {
             Check Out
           </h1>
         </div>
-        <div className=" max-w-screen-xl  justify-between mx-auto mt-20">
+        <div className=" max-w-screen-xl  justify-start mx-auto mt-20">
           <div className=" flex justify-between">
             <button
               onClick={navigateBacktoCart}
@@ -46,26 +48,61 @@ const CheckOutPage = () => {
                 <CartIcon />
               </span>
             </button>
-            <button
-              // onClick={handlePayment}
-              className="flex bg-white rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
-            >
-              Submit Payment
-            </button>
           </div>
           <div className="flex mt-20 flex-col mx-auto">
-            <h2>Your Cart Summary</h2>
-            <div className="flex ">Total Items: {cartItems.length}</div>
+            <h4 className="text-xl text-center mb-6">Your Cart Summary</h4>
+
             <div className="flex justify-center flex-col">
-              Items: Price
-              {cartItems.map((item) => {
-                console.log(item.servicePrice);
-                return (
-                  <div key={item.serviceId}>
-                    {item.serviceId}: {item.servicePrice}
-                  </div>
-                );
-              })}
+              <table>
+                <thead className="border">
+                  <tr>
+                    <th className="border">Service ID</th>
+                    <th className="border">Service Name</th>
+                    <th className="border">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cartItems.map((item) => {
+                    return (
+                      <tr
+                        className="border justify-center"
+                        key={item.serviceId}
+                      >
+                        <td className="dark:border text-center">
+                          {item.serviceId}
+                        </td>
+                        <td className="dark:border text-center">
+                          {item.service}
+                        </td>
+                        <td className="dark:border text-center">
+                          {item.servicePrice}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td></td>
+                    <td className=" text-right">Tax:</td>
+                    <td className="text-center">{tax.toFixed(2)}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td className=" text-right">Total:</td>
+                    <td className=" text-center">{total.toFixed(2)}</td>
+                  </tr>
+                </tfoot>
+              </table>
+
+              <div className=" flex justify-end mt-20">
+                <button
+                  // onClick={handlePayment}
+                  className="flex bg-white rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
+                >
+                  Submit Payment
+                </button>
+              </div>
             </div>
           </div>
         </div>
