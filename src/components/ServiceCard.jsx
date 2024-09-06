@@ -90,11 +90,11 @@ const ServiceCard = (props) => {
         <div className="w-80 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
           <div
             className="flex justify-between px-4 pt-4"
-            onMouseLeave={
-              loggedinUserRole === "user" || loggedinUserRole === null
-                ? handleMouseLeave
-                : null
-            }
+            // onMouseLeave={
+            //   loggedinUserRole === "user" || loggedinUserRole === null
+            //     ? handleMouseLeave
+            //     : null
+            // }
           >
             <button
               onClick={() => handleExpand(serviceId)}
@@ -121,7 +121,8 @@ const ServiceCard = (props) => {
             {expandedservice === serviceId ? (
               <div
                 id="dropdown"
-                className={`z-10 ${expand} absolute w-48 mt-8 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
+                onMouseLeave={handleMouseLeave}
+                className={`z-10 ${expand} absolute w-48 mt-9 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
               >
                 {loggedinUserRole === "admin" && loginState === "true" ? (
                   <ul className="py-2" aria-labelledby="dropdownButton">
