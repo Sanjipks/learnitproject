@@ -5,16 +5,23 @@ import CartIcon from "../../assets/CartIcon";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useLogin } from "../../context/LoginContext";
-import Home from "./Home";
+import Login from "../common/Login";
 
 const CheckOutPage = () => {
   const { cartItems } = useCart();
   const { loginInfo } = useLogin();
+  const navigate = useNavigate();
 
   const [itemTotal, setItemTotal] = useState(0);
 
   const taxRate = 6 / 100;
   const userRole = loginInfo.userRole;
+
+  useEffect(() => {
+    if (userRole !== "user") {
+      localStorage.clear();
+    }
+  });
 
   useEffect(() => {
     if (cartItems && cartItems.length > 0) {
@@ -28,8 +35,6 @@ const CheckOutPage = () => {
 
   const tax = itemTotal * taxRate;
   const total = itemTotal + tax;
-
-  const navigate = useNavigate();
 
   const navigateBacktoCart = () => {
     navigate("/mycart");
@@ -116,7 +121,7 @@ const CheckOutPage = () => {
           </div>
         </div>
       ) : (
-        navigate("/home")
+        <Login />
       )}
     </>
   );
