@@ -7,6 +7,7 @@ const AddNewService = (props) => {
   const { handleformview, handleclose } = props;
   const [inputs, setInputs] = useState({
     servicename: "",
+    serviceprice: 0.0,
     servicecode: null,
     serviceimage: null,
   });
@@ -105,7 +106,24 @@ const AddNewService = (props) => {
                   onChange={handleInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="type service code"
-                  required=""
+                  required
+                />
+              </div>
+              <div className="col-span-2">
+                <label
+                  htmlFor="serviceprice"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Service Price
+                </label>
+                <input
+                  type="text"
+                  name="serviceprice"
+                  id="serviceprice"
+                  onChange={handleInput}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="type price for service"
+                  required
                 />
               </div>
               <div className="col-span-2">
@@ -122,7 +140,7 @@ const AddNewService = (props) => {
                   onChange={handleImageChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="add image"
-                  required=""
+                  required
                 />
               </div>
             </div>
