@@ -19,11 +19,19 @@ const AddNewService = (props) => {
     setInputs({ ...inputs, [event.target.name]: event.target.value });
   };
 
+  // const handleImageChange = (event) => {
+  //   if (event.target.files && event.target.files[0]) {
+  //     setInputs({
+  //       ...inputs,
+  //       serviceimage: URL.createObjectURL(event.target.files[0]),
+  //     });
+  //   }
+  // };
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setInputs({
         ...inputs,
-        serviceimage: URL.createObjectURL(event.target.files[0]),
+        serviceimage: event.target.files[0],
       });
     }
   };
