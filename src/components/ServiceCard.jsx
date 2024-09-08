@@ -184,6 +184,7 @@ const ServiceCard = (props) => {
             <EditService
               servicename={service}
               serviceId={serviceId}
+              servicePrice={servicePrice}
               handleclose={handleclose}
             />
           ) : null}

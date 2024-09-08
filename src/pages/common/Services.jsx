@@ -85,7 +85,7 @@ const Services = () => {
 
         if (response.ok) {
           toast(data.message);
-          setFilteredServices(
+          setServicesList(
             servicesList.filter((service) => service.service_id !== deletedId)
           );
         } else {

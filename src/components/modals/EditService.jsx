@@ -1,12 +1,18 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { useLogin } from "../../context/LoginContext";
 
 const EditService = (props) => {
-  const { servicename, serviceId, handleclose } = props;
+  const { servicename, serviceId, servicePrice, handleclose } = props;
   const [inputs, setInputs] = useState({
     servicename: "",
     servicecode: null,
+    serviceprice: null,
     serviceimage: null,
   });
+
+  const { loginInfo } = useLogin();
+  const loggedinUserRole = loginInfo.userRole;
   const handleInput = (event) => {
     setInputs({ ...inputs, [event.target.name]: event.target.value });
   };
@@ -15,12 +21,20 @@ const EditService = (props) => {
     if (event.target.files && event.target.files[0]) {
       setInputs({
         ...inputs,
-        serviceimage: URL.createObjectURL(event.target.files[0]),
+        serviceimage: event.target.files[0],
       });
     }
   };
-  const handleSubmit = () => {
-    "todo";
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const bodyData = { ...inputs, loggedinUserRole };
+
+    const res = await addServices(bodyData);
+    const data = await res.json();
+    handleformview(false);
+    if (res.status == 201) {
+      toast(data.message);
+    }
   };
   return (
     <>
@@ -71,7 +85,7 @@ const EditService = (props) => {
                   onClick={handleInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder={servicename}
-                  required=""
+                  required
                 />
               </div>
               <div className="col-span-2">
@@ -88,7 +102,24 @@ const EditService = (props) => {
                   onClick={handleInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder={serviceId}
-                  required=""
+                  required
+                />
+              </div>
+              <div className="col-span-2">
+                <label
+                  htmlFor="serviceprice"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Service Price
+                </label>
+                <input
+                  type="text"
+                  name="serviceprice"
+                  id="serviceprice"
+                  onChange={handleInput}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder={servicePrice}
+                  required
                 />
               </div>
               <div className="col-span-2">
@@ -105,7 +136,7 @@ const EditService = (props) => {
                   onChange={handleImageChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="add image"
-                  required=""
+                  required
                 />
               </div>
             </div>
