@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLogin } from "../../context/LoginContext";
 import { addServices } from "../../apis/Api";
 import { toast } from "react-toastify";
+import { convertToBase64 } from "../../utility/ConvertToBase64";
 
 const AddNewService = (props) => {
   const { handleformview, handleclose } = props;
@@ -38,7 +39,12 @@ const AddNewService = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const bodyData = { ...inputs, loggedinUserRole };
+    let base64Image = null;
+
+    if (inputs.serviceimage) {
+      base64Image = await convertToBase64(inputs.serviceimage);
+    }
+    const bodyData = { ...inputs, serviceimage: base64Image, loggedinUserRole };
 
     const res = await addServices(bodyData);
     const data = await res.json();
