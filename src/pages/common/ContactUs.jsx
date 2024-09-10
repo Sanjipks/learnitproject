@@ -1,15 +1,38 @@
 import React, { useState } from "react";
 import GMap from "../../components/Map";
+import { sendContactUsMessages } from "../../apis/Api";
+import { toast } from "react-toastify";
+import { useLogin } from "../../context/LoginContext";
 
 const ContactUs = () => {
+  const { loginInfo } = useLogin();
   const [message, setMessage] = useState("");
+  const [email, setEmail] = useState(loginInfo?.userEmail || "");
 
-  const handleInput = (e) => {
-    setMessage(e.target.value);
+  const handleInput = (event) => {
+    const { name, value } = event.target;
+
+    // Handle message input
+    if (name === "message") {
+      setMessage(value);
+    }
+
+    // Handle email input (if not provided by loginInfo)
+    if (name === "email" && !loginInfo?.userEmail) {
+      setEmail(value); // Allow the user to enter their email if it's not set in loginInfo
+    }
   };
 
-  const handleMessageSubmit = () => {
-    "todo";
+  const handleMessageSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await sendContactUsMessages(email, message);
+      if (response.status == 201) {
+        toast("message sent successfully");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
@@ -46,8 +69,8 @@ const ContactUs = () => {
                         name="name"
                         id="name"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="Type product name"
-                        required=""
+                        placeholder="Type your name"
+                        required
                       />
                     </div>
                     <div className="col-span-2">
@@ -60,10 +83,16 @@ const ContactUs = () => {
                       <input
                         type="email"
                         name="email"
+                        onChange={handleInput}
+                        value={
+                          loginInfo?.userEmail ? loginInfo?.userEmail : email
+                        }
                         id="email"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="yourname@email.com"
-                        required=""
+                        placeholder={
+                          loginInfo?.userEmail ? loginInfo?.userEmail : email
+                        }
+                        required
                       />
                     </div>
 
@@ -75,6 +104,8 @@ const ContactUs = () => {
                         Message
                       </label>
                       <textarea
+                        type="text"
+                        name="message"
                         id="message"
                         rows="4"
                         onChange={handleInput}
