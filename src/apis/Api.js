@@ -9,6 +9,7 @@ const FORGOT_PASSWORD = import.meta.env.VITE_FORGOT_PASSWORD;
 const RESET_FORGOT_PASSWORD = import.meta.env.VITE_RESET_FORGOT_PASSWORD;
 const GET_SERVICES = import.meta.env.VITE_GET_SERVICES;
 const ADD_SERVICE = import.meta.env.VITE_ADD_SERVICE;
+const SEND_CONTACTUS_MESSAGE = import.meta.env.VITE_CONTACT_US_MSG;
 
 export const getUsers = async (loggedinUserRole, pagenumber) => {
   const res = await fetch(
@@ -181,5 +182,18 @@ export const deleteService = async (id, loggedinUserRole) => {
     },
     body: JSON.stringify({ loggedinUserRole }),
   });
+  return res;
+};
+
+//send message
+export const sendContactUsMessages = async (useremail, message) => {
+  const res = await fetch(`${SEND_CONTACTUS_MESSAGE}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ useremail, message }),
+  });
+
   return res;
 };
