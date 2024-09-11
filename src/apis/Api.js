@@ -186,13 +186,13 @@ export const deleteService = async (id, loggedinUserRole) => {
 };
 
 //send message
-export const sendContactUsMessages = async (useremail, message) => {
+export const sendContactUsMessages = async (useremail, username, message) => {
   const res = await fetch(`${SEND_CONTACTUS_MESSAGE}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ useremail, message }),
+    body: JSON.stringify({ useremail, username, message }),
   });
 
   return res;
