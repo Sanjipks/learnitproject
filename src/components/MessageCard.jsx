@@ -1,79 +1,19 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { bufferToBase64 } from "../utility/BufferToBase64";
-import { useLogin } from "../context/LoginContext";
-import { useNavigate } from "react-router-dom";
-import EditService from "./modals/EditService";
-import CartIcon from "../assets/CartIcon";
-import { useCart } from "../context/CartContext";
+import React, { useState } from "react";
 
-const MessageCard = (props) => {
-  const {
-    service,
-    serviceId,
-    serviceLogo,
-    deleteService,
-    expandedservice,
-    setExpandedservice,
-  } = props;
-  const navigate = useNavigate();
-
-  const { addToCart, removeFromCart } = useCart();
-
-  const [image, setImage] = useState(null);
+const MessageCard = () => {
   const [expand, setExpand] = useState("hidden");
-  const [serviceEditPop, setServiceEditPop] = useState(false);
 
-  const { loginInfo } = useLogin();
-  const loggedinUserRole = loginInfo.userRole;
-  const loginState = loginInfo.loginState;
-
-  useEffect(() => {
-    if (serviceLogo && serviceLogo.data) {
-      const base64String = bufferToBase64(serviceLogo.data);
-      setImage(`data:image/jpeg;base64,${base64String}`);
-    }
-  }, [serviceLogo]);
-
-  const handleExpand = (id) => {
-    if (expand === "hidden" && expandedservice === null) {
+  const handleExpand = () => {
+    if (expand === "hidden") {
       setExpand("block");
-      setExpandedservice(id);
     } else {
       setExpand("hidden");
-      setExpandedservice(null);
     }
-  };
-
-  const handleMouseLeave = () => {
-    setExpand("hidden");
-    setExpandedservice(null);
   };
 
   const handleDelete = (id) => {
-    deleteService(id);
+    deleteMessage(id);
     setExpand("hidden");
-  };
-  const handleEdit = () => {
-    setServiceEditPop((prev) => !prev);
-  };
-
-  const handleAddToCart = (id) => {
-    addToCart(id);
-    setExpand("hidden");
-    setExpandedservice(null);
-  };
-
-  const handleRemoveFromCart = (id) => {
-    removeFromCart(id);
-    setExpand("hidden");
-    setExpandedservice(null);
-  };
-
-  const handleRedirectPage = () => {
-    navigate("/register");
-  };
-  const handleclose = () => {
-    setServiceEditPop(false);
   };
 
   return (
@@ -100,72 +40,75 @@ const MessageCard = (props) => {
           Delivered
         </span>
       </div>
-      <button
-        id="dropdownMenuIconButton"
-        data-dropdown-toggle="dropdownDots"
-        data-dropdown-placement="bottom-start"
-        class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600"
-        type="button"
-      >
-        <svg
-          class="w-4 h-4 text-gray-500 dark:text-gray-400"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 4 15"
+      <div>
+        <button
+          onClick={handleExpand}
+          id="dropdownMenuIconButton"
+          data-dropdown-toggle="dropdownDots"
+          data-dropdown-placement="bottom-start"
+          class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600"
+          type="button"
         >
-          <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-        </svg>
-      </button>
-      <div
-        id="dropdownDots"
-        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 dark:bg-gray-700 dark:divide-gray-600"
-      >
-        <ul
-          class="py-2 text-sm text-gray-700 dark:text-gray-200"
-          aria-labelledby="dropdownMenuIconButton"
+          <svg
+            class="w-4 h-4 text-gray-500 dark:text-gray-400"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 4 15"
+          >
+            <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+          </svg>
+        </button>
+        <div
+          id="dropdownDots"
+          class={`z-10 ${expand} absolute  px-2 bg-white divide-y divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600`}
         >
-          <li>
-            <a
-              href="#"
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Reply
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Forward
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Copy
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Report
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Delete
-            </a>
-          </li>
-        </ul>
+          <ul
+            class="py-2 text-sm text-gray-700 dark:text-gray-200"
+            aria-labelledby="dropdownMenuIconButton"
+          >
+            <li>
+              <a
+                href="#"
+                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Reply
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Forward
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Copy
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Report
+              </a>
+            </li>
+            <li>
+              <a
+                href={handleDelete}
+                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+              >
+                Delete
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
