@@ -6,27 +6,30 @@ import { useLogin } from "../../context/LoginContext";
 
 const ContactUs = () => {
   const { loginInfo } = useLogin();
+  const [sendername, setSendername] = useState(loginInfo?.userName || "");
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState(loginInfo?.userEmail || "");
 
   const handleInput = (event) => {
     const { name, value } = event.target;
 
-    // Handle message input
     if (name === "message") {
       setMessage(value);
     }
 
-    // Handle email input (if not provided by loginInfo)
+    if (name === "sendername" && !loginInfo?.userName) {
+      setSendername(value);
+    }
+
     if (name === "email" && !loginInfo?.userEmail) {
-      setEmail(value); // Allow the user to enter their email if it's not set in loginInfo
+      setEmail(value);
     }
   };
 
   const handleMessageSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await sendContactUsMessages(email, message);
+      const response = await sendContactUsMessages(email, sendername, message);
       if (response.status == 201) {
         toast("message sent successfully");
       }
@@ -59,17 +62,24 @@ const ContactUs = () => {
                   <div className="grid gap-4 mb-4 grid-cols-2">
                     <div className="col-span-2">
                       <label
-                        htmlFor="name"
+                        htmlFor="sendername"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
                         Name
                       </label>
                       <input
                         type="text"
-                        name="name"
-                        id="name"
+                        name="sendername"
+                        id="sendername"
+                        value={
+                          loginInfo?.userName ? loginInfo?.userName : sendername
+                        }
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="Type your name"
+                        placeholder={
+                          loginInfo?.userName
+                            ? loginInfo?.userName
+                            : "type your name here"
+                        }
                         required
                       />
                     </div>
@@ -90,7 +100,9 @@ const ContactUs = () => {
                         id="email"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                         placeholder={
-                          loginInfo?.userEmail ? loginInfo?.userEmail : email
+                          loginInfo?.userEmail
+                            ? loginInfo?.userEmail
+                            : "type your email here"
                         }
                         required
                       />
