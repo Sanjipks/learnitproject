@@ -71,6 +71,7 @@ const ContactUs = () => {
                         type="text"
                         name="sendername"
                         id="sendername"
+                        onChange={handleInput}
                         value={
                           loginInfo?.userName ? loginInfo?.userName : sendername
                         }
