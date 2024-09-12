@@ -10,6 +10,7 @@ const RESET_FORGOT_PASSWORD = import.meta.env.VITE_RESET_FORGOT_PASSWORD;
 const GET_SERVICES = import.meta.env.VITE_GET_SERVICES;
 const ADD_SERVICE = import.meta.env.VITE_ADD_SERVICE;
 const SEND_CONTACTUS_MESSAGE = import.meta.env.VITE_CONTACT_US_MSG;
+const VIEW_CONTACTUS_MESSAGES = import.meta.env.VITE_CONTACT_US_VIEW_MSG;
 
 export const getUsers = async (loggedinUserRole, pagenumber) => {
   const res = await fetch(
@@ -196,4 +197,17 @@ export const sendContactUsMessages = async (useremail, username, message) => {
   });
 
   return res;
+};
+
+//view messageInfo
+export const viewMessageInfo = async (loggedinUserRole) => {
+  const res = await fetch(`${VIEW_CONTACTUS_MESSAGES}/${loggedinUserRole}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  if (!res.ok) throw new Error("Network response was not ok.");
+  const data = await res.json();
+  return data;
 };
