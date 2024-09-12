@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { deleteMessageInfo, viewMessageInfo } from "../apis/Api";
 import { useLogin } from "../context/LoginContext";
 import DeleteDecision from "./modals/DeleteDecision";
+import { toast } from "react-toastify";
 
 const MessageCard = () => {
   const { loginInfo } = useLogin();
@@ -55,7 +56,7 @@ const MessageCard = () => {
       } finally {
         setExpand("hidden");
         setSelectedMessageInfo(null);
-        setDeletedId(null); // Reset deletedId after operation
+        setDeletedId(null);
       }
     }
   };

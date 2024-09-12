@@ -15,7 +15,7 @@ const AdminPage = () => {
       localStorage.clear();
       navigate("/");
     }
-  });
+  }, []);
   return (
     <>
       {userRole === "admin" && loginState === "true" ? (

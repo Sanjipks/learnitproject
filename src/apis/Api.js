@@ -214,7 +214,7 @@ export const viewMessageInfo = async (loggedinUserRole) => {
 
 // delete message adminonly
 export const deleteMessageInfo = async (id, loggedinUserRole) => {
-  const res = await fetch(`$${VIEW_CONTACTUS_MESSAGES}/${id}/delete`, {
+  const res = await fetch(`${VIEW_CONTACTUS_MESSAGES}/${id}/delete`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
