@@ -60,12 +60,6 @@ const Services = () => {
     });
   }, [pagenumber, deletedId]);
 
-  //first step to remove user, passed as removeuser props and it recieves user id from child and set Pop true to dispaly component created as modal
-  const handleDelete = async (id) => {
-    setDeletedId(id);
-    setPop(true);
-  };
-
   const handleCartView = () => {
     navigate("/mycart");
   };
@@ -73,6 +67,11 @@ const Services = () => {
   //clearcart
   const handleClearCart = () => {
     clearCart();
+  };
+  //first step to remove user, passed as removeuser props and it recieves user id from child and set Pop true to dispaly component created as modal
+  const handleDelete = async (id) => {
+    setDeletedId(id);
+    setPop(true);
   };
 
   //user delete decision can be made and receives true or false state from child compo
