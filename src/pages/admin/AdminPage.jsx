@@ -27,22 +27,24 @@ const AdminPage = () => {
               </h1>
             </div>
           </div>
-          <div className="max-w-screen-xl justify-center h-auto w-full flex md:flex-row sm:flex-col sm:items-center mx-auto">
-            <section className="sm:min-h-dvh md:rounded-r-none sm:rounded-xl bg-gray-200 dark:bg-gray-600 md:w-1/2 sm:w-full mt-8 border dark:border-black ">
-              <div className=" flex flex-col items-center md:h-dvh px-6 mx-auto lg:pt-6 ">
-                <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div className="max-w-screen-xl justify-center h-auto w-full flex md:flex-col sm:flex-col sm:items-center mx-auto">
+            <section className="sm:min-h-dvh md:rounded-r-none sm:rounded-xl bg-gray-200 dark:bg-gray-600  sm:w-full mt-8 border dark:border-black ">
+              <div className=" flex flex-col items-center p-6 mx-auto lg:pt-6 ">
+                <div className="w-full  bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                   <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-8">
                     Requests and Messages
                   </h1>
                 </div>
-                <div className="mt-8">
-                  <MessageCard />
+                <div className="mt-16">
+                  <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-28">
+                    <MessageCard />
+                  </div>
                 </div>
               </div>
             </section>
 
-            <section className="sm:min-h-dvh md:rounded-l-none sm:rounded-xl  bg-gray-200 dark:bg-gray-600 md:w-1/2 sm:w-full mt-8 border dark:border-black">
-              <div className=" flex flex-col items-center sm:h-auto md:h-dvh px-6 mx-auto lg:pt-6 ">
+            <section className="sm:min-h-dvh md:rounded-l-none sm:rounded-xl  bg-gray-200 dark:bg-gray-600 sm:w-full mt-8 border dark:border-black">
+              <div className=" flex flex-col items-center sm:h-auto px-6 mx-auto lg:pt-6 ">
                 <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                   <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-8">
                     My Items
