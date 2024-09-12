@@ -211,3 +211,15 @@ export const viewMessageInfo = async (loggedinUserRole) => {
   const data = await res.json();
   return data;
 };
+
+// delete message adminonly
+export const deleteMessageInfo = async (id, loggedinUserRole) => {
+  const res = await fetch(`$${VIEW_CONTACTUS_MESSAGES}/${id}/delete`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ loggedinUserRole }),
+  });
+  return res;
+};

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { viewMessageInfo } from "../apis/Api";
+import { deleteMessageInfo, viewMessageInfo } from "../apis/Api";
 import { useLogin } from "../context/LoginContext";
+import DeleteDecision from "./modals/DeleteDecision";
 
 const MessageCard = () => {
   const { loginInfo } = useLogin();
   const loggedinUserRole = loginInfo.userRole;
   const [messageInfo, setMessageInfo] = useState([]);
   const [selectedMessageInfo, setSelectedMessageInfo] = useState(null);
+  const [deletedId, setDeletedId] = useState(null);
+  const [pop, setPop] = useState(false);
   const [expand, setExpand] = useState("hidden");
 
   useEffect(() => {
@@ -21,12 +24,40 @@ const MessageCard = () => {
       setSelectedMessageInfo(id);
     } else {
       setExpand("hidden");
+      setSelectedMessageInfo(null);
     }
   };
 
-  const handleDelete = (id) => {
-    deleteMessage(id);
-    setExpand("hidden");
+  //first step to remove user, passed as removeuser props and it recieves user id from child and set Pop true to dispaly component created as modal
+  const handleDelete = async (id) => {
+    setDeletedId(id);
+    setPop(true);
+  };
+
+  //user delete decision can be made and receives true or false state from child compo
+  const handlePop = async (state) => {
+    setPop(false);
+    if (state && deletedId !== null) {
+      try {
+        const response = await deleteMessageInfo(deletedId, loggedinUserRole);
+        const data = await response.json();
+
+        if (response.ok) {
+          toast(data.message);
+          setMessageInfo(
+            messageInfo.filter((message) => message.messageid !== deletedId)
+          );
+        } else {
+          console.error("Failed to delete message");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setExpand("hidden");
+        setSelectedMessageInfo(null);
+        setDeletedId(null); // Reset deletedId after operation
+      }
+    }
   };
 
   return (
@@ -106,7 +137,7 @@ const MessageCard = () => {
                     </li>
                     <li>
                       <div
-                        onClick={handleDelete}
+                        onClick={() => handleDelete(message.messageid)}
                         className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                       >
                         Delete
@@ -119,6 +150,9 @@ const MessageCard = () => {
           </div>
         </div>
       ))}
+      {pop ? (
+        <DeleteDecision handlePopAction={handlePop} type="message" />
+      ) : null}
     </>
   );
 };
