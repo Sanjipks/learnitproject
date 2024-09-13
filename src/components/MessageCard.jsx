@@ -65,7 +65,6 @@ const MessageCard = () => {
     <>
       {messageInfo.map((message) => (
         <div key={message.messageid}>
-          {" "}
           <div className="flex items-start gap-1 ">
             {/* <img
               className="w-12 h-12 rounded-full"
