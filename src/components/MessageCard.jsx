@@ -13,11 +13,15 @@ const MessageCard = () => {
   const [pop, setPop] = useState(false);
   const [expand, setExpand] = useState("hidden");
 
-  useEffect(() => {
-    viewMessageInfo(loggedinUserRole).then((data) => {
-      setMessageInfo(data.result);
-    });
-  }, []);
+  try {
+    useEffect(() => {
+      viewMessageInfo(loggedinUserRole).then((data) => {
+        setMessageInfo(data.result);
+      });
+    }, []);
+  } catch (error) {
+    console.log(error);
+  }
 
   const handleExpand = (id) => {
     if (expand === "hidden") {
