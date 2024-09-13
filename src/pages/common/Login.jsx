@@ -56,8 +56,17 @@ export default function Login() {
       toast(error.message);
     }
   };
-  const handleNavigate = () => {
-    navigate("/register");
+  const handleNavigate = (nv) => {
+    switch (nv) {
+      case "su":
+        navigate("/register");
+        break;
+      case "fp":
+        navigate("/forgetpassword");
+        break;
+      default:
+        console.warn("Unknown navigation value:", nv);
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -145,12 +154,13 @@ export default function Login() {
                       </label>
                     </div>
                   </div>
-                  <a
-                    href="/forgetpassword"
+                  <button
+                    // href="/forgetpassword"
+                    onClick={() => handleNavigate("fp")}
                     className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500 dark:text-white"
                   >
                     Forgot password?
-                  </a>
+                  </button>
                 </div>
                 <button
                   type="submit"
@@ -161,7 +171,7 @@ export default function Login() {
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don’t have an account yet? {""}
                   <button
-                    onClick={handleNavigate}
+                    onClick={() => handleNavigate("su")}
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500 text-gray-950 dark:text-white"
                   >
                     Sign up
