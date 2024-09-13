@@ -3,12 +3,15 @@ import EyeHide from "../../assets/EyeHide";
 import React, { useState } from "react";
 import { useLogin } from "../../context/LoginContext";
 import { loginUser } from "../../apis/Api";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const { loginInfo, loginInfoUpdate } = useLogin();
 
@@ -38,7 +41,7 @@ export default function Login() {
           (loginInfo.userImage = userImage)
         );
 
-        window.location.href = "/auth";
+        navigate("/auth");
       }
       if (res.status === 401) {
         const errorData = await res.json();
@@ -52,6 +55,9 @@ export default function Login() {
     } catch (error) {
       toast(error.message);
     }
+  };
+  const handleNavigate = () => {
+    navigate("/register");
   };
 
   const togglePasswordVisibility = () => {
@@ -154,12 +160,12 @@ export default function Login() {
                 </button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don’t have an account yet? {""}
-                  <a
-                    href="/register"
+                  <button
+                    onClick={handleNavigate}
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500 text-gray-950 dark:text-white"
                   >
                     Sign up
-                  </a>
+                  </button>
                 </p>
               </form>
             </div>
