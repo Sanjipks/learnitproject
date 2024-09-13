@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useLogin } from "../../context/LoginContext";
 import Login from "../common/Login";
 import { useNavigate } from "react-router-dom";
-import MessageCard from "../../components/messageCard";
+import ContactUsMessageCard from "../../components/ContactUsMessageCard";
 
 const AdminPage = () => {
   const { loginInfo } = useLogin();
@@ -37,7 +37,7 @@ const AdminPage = () => {
                 </div>
                 <div className="mt-16">
                   <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-28">
-                    <MessageCard />
+                    <ContactUsMessageCard />
                   </div>
                 </div>
               </div>

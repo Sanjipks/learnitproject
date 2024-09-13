@@ -4,7 +4,7 @@ import { useLogin } from "../context/LoginContext";
 import DeleteDecision from "./modals/DeleteDecision";
 import { toast } from "react-toastify";
 
-const MessageCard = () => {
+const ContactUsMessageCard = () => {
   const { loginInfo } = useLogin();
   const loggedinUserRole = loginInfo.userRole;
   const [messageInfo, setMessageInfo] = useState([]);
@@ -13,15 +13,11 @@ const MessageCard = () => {
   const [pop, setPop] = useState(false);
   const [expand, setExpand] = useState("hidden");
 
-  try {
-    useEffect(() => {
-      viewMessageInfo(loggedinUserRole).then((data) => {
-        setMessageInfo(data.result);
-      });
-    }, []);
-  } catch (error) {
-    console.log(error);
-  }
+  useEffect(() => {
+    viewMessageInfo(loggedinUserRole).then((data) => {
+      setMessageInfo(data.result);
+    });
+  }, []);
 
   const handleExpand = (id) => {
     if (expand === "hidden") {
@@ -161,4 +157,4 @@ const MessageCard = () => {
   );
 };
 
-export default MessageCard;
+export default ContactUsMessageCard;
