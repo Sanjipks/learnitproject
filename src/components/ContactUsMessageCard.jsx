@@ -85,7 +85,7 @@ const ContactUsMessageCard = () => {
                 {message.message}
               </p>
               <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                Replied
+                {!message.message_status ? "Received" : "Replied"}
               </span>
             </div>
             <div>
