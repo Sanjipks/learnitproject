@@ -4,6 +4,7 @@ import { useLogin } from "../context/LoginContext";
 import DeleteDecision from "./modals/DeleteDecision";
 import { toast } from "react-toastify";
 import { dateFormater } from "../utility/DateFormatter";
+import ContactMessageReply from "./modals/ContactMessageReply";
 
 const ContactUsMessageCard = () => {
   const { loginInfo } = useLogin();
@@ -12,6 +13,7 @@ const ContactUsMessageCard = () => {
   const [selectedMessageInfo, setSelectedMessageInfo] = useState(null);
   const [deletedId, setDeletedId] = useState(null);
   const [pop, setPop] = useState(false);
+  const [popMessageReply, setPopMessageReply] = useState(false);
   const [expand, setExpand] = useState("hidden");
 
   useEffect(() => {
@@ -34,6 +36,10 @@ const ContactUsMessageCard = () => {
   const handleDelete = async (id) => {
     setDeletedId(id);
     setPop(true);
+  };
+
+  const popMessageReplyBox = () => {
+    setPopMessageReply(true);
   };
 
   //user delete decision can be made and receives true or false state from child compo
@@ -117,10 +123,14 @@ const ContactUsMessageCard = () => {
                     aria-labelledby="dropdownMenuIconButton"
                   >
                     <li>
-                      <div className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <div
+                        onClick={() => popMessageReplyBox(message.sender_name)}
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
                         Reply
                       </div>
                     </li>
+                    {popMessageReply ? <ContactMessageReply /> : null}
                     <li>
                       <div className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                         Forward
