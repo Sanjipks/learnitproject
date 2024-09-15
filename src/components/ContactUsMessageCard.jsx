@@ -3,6 +3,7 @@ import { deleteMessageInfo, viewMessageInfo } from "../apis/Api";
 import { useLogin } from "../context/LoginContext";
 import DeleteDecision from "./modals/DeleteDecision";
 import { toast } from "react-toastify";
+import { dateFormater } from "../utility/DateFormatter";
 
 const ContactUsMessageCard = () => {
   const { loginInfo } = useLogin();
@@ -77,7 +78,7 @@ const ContactUsMessageCard = () => {
                   {message.sender_name}
                 </span>
                 <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                  {message.date_created}
+                  {dateFormater(message.date_created)}
                 </span>
               </div>
               <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
