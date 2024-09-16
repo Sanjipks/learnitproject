@@ -32,14 +32,14 @@ const ContactUsMessageCard = () => {
     }
   };
 
-  //first step to remove user, passed as removeuser props and it recieves user id from child and set Pop true to dispaly component created as modal
+  //first step to remove message recieves id as parameter and sets deleetedId and pop modal to make decision
   const handleDelete = async (id) => {
     setDeletedId(id);
     setPop(true);
   };
 
   const popMessageReplyBox = () => {
-    setPopMessageReply(true);
+    setPopMessageReply((prev) => !prev);
   };
 
   //user delete decision can be made and receives true or false state from child compo
@@ -116,40 +116,55 @@ const ContactUsMessageCard = () => {
               {selectedMessageInfo === message.messageid ? (
                 <div
                   id="dropdownDots"
-                  className={`z-10 ${expand} absolute  px-2 bg-white divide-y divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600`}
+                  className={`z-10 ${expand} absolute mt-1 px-2 bg-gray-100 divide-y divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600  border`}
                 >
                   <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    className="flex flex-col py-2 text-sm text-gray-900   dark:text-gray-100 divide-y divide-gray-900 dark:divide-gray-100  dark:bg-gray-700 bg-gray-100  rounded-md  dark:hover:bg-gray-800 hover:bg-gray-200 "
                     aria-labelledby="dropdownMenuIconButton"
                   >
                     <li>
                       <div
                         onClick={() => popMessageReplyBox(message.sender_name)}
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
                       >
                         Reply
-                      </div>
+                      </div>{" "}
+                      {popMessageReply ? (
+                        <div className="absolute">
+                          {" "}
+                          <ContactMessageReply />{" "}
+                        </div>
+                      ) : null}
                     </li>
-                    {popMessageReply ? <ContactMessageReply /> : null}
+
                     <li>
-                      <div className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <div
+                        onClick={() => "todo"}
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
+                      >
                         Forward
                       </div>
                     </li>
                     <li>
-                      <div className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <div
+                        onClick={() => "todo"}
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
+                      >
                         Copy
                       </div>
                     </li>
                     <li>
-                      <div className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <div
+                        onClick={() => "todo"}
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
+                      >
                         Report
                       </div>
                     </li>
                     <li>
                       <div
                         onClick={() => handleDelete(message.messageid)}
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
                       >
                         Delete
                       </div>
