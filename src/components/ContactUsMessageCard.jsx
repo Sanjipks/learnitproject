@@ -116,7 +116,7 @@ const ContactUsMessageCard = () => {
               {selectedMessageInfo === message.messageid ? (
                 <div
                   id="dropdownDots"
-                  className={`z-10 ${expand} absolute mt-1 px-2 bg-gray-100 divide-y divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600  border`}
+                  className={`z-10 ${expand} absolute mt-1 -ml-20 px-2 bg-gray-100 divide-y divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600  border`}
                 >
                   <ul
                     className="flex flex-col py-2 text-sm text-gray-900   dark:text-gray-100 divide-y divide-gray-900 dark:divide-gray-100  dark:bg-gray-700 bg-gray-100  rounded-md  dark:hover:bg-gray-800 hover:bg-gray-200 "
@@ -124,27 +124,27 @@ const ContactUsMessageCard = () => {
                   >
                     <li>
                       <div
-                        onClick={() => popMessageReplyBox(message.sender_name)}
+                        onClick={() =>
+                          popMessageReplyBox(
+                            message.sender_name,
+                            message.email_from
+                          )
+                        }
                         className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
                       >
                         Reply
                       </div>{" "}
                       {popMessageReply ? (
-                        <div className="absolute">
+                        <div className="absolute -ml-72 mt-10">
                           {" "}
-                          <ContactMessageReply />{" "}
+                          <ContactMessageReply
+                            senderEmail={message.email_from}
+                            senderName={message.sender_name}
+                          />{" "}
                         </div>
                       ) : null}
                     </li>
 
-                    <li>
-                      <div
-                        onClick={() => "todo"}
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
-                      >
-                        Forward
-                      </div>
-                    </li>
                     <li>
                       <div
                         onClick={() => "todo"}
