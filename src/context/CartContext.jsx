@@ -1,4 +1,22 @@
-import React, { createContext, useContext, useState, useCallback } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
+import { openDB } from "idb";
+
+// initialize IndexedDB
+const dbPromise = openDB("ShoppingCartDB", 1, {
+  upgrade(db) {
+    const store = db.createObjectStore("cart", {
+      keyPath: "id",
+      autoIncrement: true,
+    });
+    store.createIndex("by-id", "id");
+  },
+});
 
 const CartContext = createContext();
 
@@ -7,42 +25,54 @@ export function useCart() {
 }
 
 export default function CartProvider({ children }) {
-  // Initialize cartItems from localStorage or with an empty array
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCartItems = localStorage.getItem("cartItems");
-    return savedCartItems ? JSON.parse(savedCartItems) : [];
-  });
+  const [cartItems, setCartItems] = useState([]);
 
-  // Function to add items to the cart
-  const addToCart = useCallback((item) => {
+  // function to load cart items from IndexedDB when the component mounts
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      const db = await dbPromise;
+      const allItems = await db.getAll("cart");
+      setCartItems(allItems);
+    };
+    fetchCartItems();
+  }, []);
+
+  // function to add an item to the cart and IndexedDB
+  const addToCart = useCallback(async (item) => {
     setCartItems((prevItems) => {
       const updatedItems = [...prevItems, item];
-      localStorage.setItem("cartItems", JSON.stringify(updatedItems));
       return updatedItems;
     });
+
+    const db = await dbPromise;
+    const tx = db.transaction("cart", "readwrite");
+    const store = tx.objectStore("cart");
+    await store.put(item); // Add or update the item in the IndexedDB
+    await tx.done;
   }, []);
 
-  // Function to remove a single item from the cart
-  const removeFromCart = useCallback((id) => {
+  // Function to remove an item from the cart and IndexedDB
+  const removeFromCart = useCallback(async (id) => {
     setCartItems((prevItems) => {
-      const index = prevItems.findIndex((item) => item.serviceId === id);
-      console.log("cartItems", cartItems);
-      if (index !== -1) {
-        const updatedItems = [
-          ...prevItems.slice(0, index),
-          ...prevItems.slice(index + 1),
-        ];
-        localStorage.setItem("cartItems", JSON.stringify(updatedItems));
-        return updatedItems;
-      }
-      return prevItems;
+      const updatedItems = prevItems.filter((item) => item.id !== id);
+      return updatedItems;
     });
+
+    const db = await dbPromise;
+    const tx = db.transaction("cart", "readwrite");
+    const store = tx.objectStore("cart");
+    await store.delete(id); // Remove the item from IndexedDB
+    await tx.done;
   }, []);
 
-  // Function to clear all items from the cart
-  const clearCart = useCallback(() => {
+  // Function to clear all items from the cart and IndexedDB
+  const clearCart = useCallback(async () => {
     setCartItems([]);
-    localStorage.removeItem("cartItems");
+    const db = await dbPromise;
+    const tx = db.transaction("cart", "readwrite");
+    const store = tx.objectStore("cart");
+    await store.clear(); // Clear all items from IndexedDB
+    await tx.done;
   }, []);
 
   return (
