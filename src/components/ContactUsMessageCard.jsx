@@ -23,12 +23,13 @@ const ContactUsMessageCard = () => {
   }, []);
 
   const handleExpand = (id) => {
-    if (expand === "hidden") {
+    if (expand === "hidden" && popMessageReply === false) {
       setExpand("block");
       setSelectedMessageInfo(id);
     } else {
       setExpand("hidden");
       setSelectedMessageInfo(null);
+      setPopMessageReply(false);
     }
   };
 
