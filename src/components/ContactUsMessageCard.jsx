@@ -156,14 +156,6 @@ const ContactUsMessageCard = () => {
                     </li>
                     <li>
                       <div
-                        onClick={() => "todo"}
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
-                      >
-                        Report
-                      </div>
-                    </li>
-                    <li>
-                      <div
                         onClick={() => handleDelete(message.messageid)}
                         className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
                       >
