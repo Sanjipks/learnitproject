@@ -79,14 +79,14 @@ export default function Login() {
 
   return (
     <div className="min-h-screen h-auto flex flex-col xm:gap-4 bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
-      <div className="items-center justify-start xl:mt-80 px-2">
+      <div className="h-1/2 items-center justify-start xl:mt-80 px-2">
         <div className="max-w-screen-xl w-full sm:h-auto sm:m-auto flex md:flex-row xm:flex-col-reverse">
           <section className="flex justify-center items-center w-full bg-blue-200 sm:rounded-br-xl md:rounded-br-none sm:rounded-bl-xl md:rounded-tl-xl">
             <div className="relative p-4 w-full max-w-md max-h-full"></div>
           </section>
           <section className="flex justify-center items-center min-h-max w-full bg-amber-100 md:rounded-br-xl sm:rounded-tr-xl sm:rounded-tl-xl md:rounded-tl-none">
             <div className=" flex w-full flex-col items-center justify-center mx-auto lg:pt-6 my-12">
-              <div className="w-full mx-4 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+              <div className="w-full mx-4 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-sm md:max-w-xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div className="py-6 space-y-4 md:space-y-6 sm:p-8">
                   <h1 className="text-center text-xl py-4 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Sign in to your account
@@ -97,7 +97,7 @@ export default function Login() {
                         htmlFor="email"
                         className="block mb-2 text-xl font-medium text-gray-900 dark:text-white"
                       >
-                        Your email
+                        Email
                       </label>
                       <input
                         type="email"
