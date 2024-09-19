@@ -3,14 +3,14 @@ import React from "react";
 export default function About() {
   return (
     <div className="min-h-dvh flex flex-col sm:items-center sm:mb-auto dark:bg-gray-700 dark:border-gray-800 bg-gray-200 border-gray-200 ">
-      <section className=" bg-gray-200 dark:bg-gray-700 md:w-1/2 sm:w-full sm:mt-2 sm:mb-4 border dark:border-gray-200 border-gray-800 rounded-xl">
-        <div className=" flex flex-col items-center md:h-dvh px-6 mx-auto lg:pt-6 ">
-          <div className="flex mx-auto w-full justify-center  bg-white rounded-lg shadow dark:border md:mt-0 xm:max-w-sm md:max-w-md xl:p-0 dark:bg-gray-800">
+      <section className=" bg-gray-200 dark:bg-gray-700 md:w-1/2 sm:w-full sm:mt-16 sm:mb-4 border dark:border-gray-200 border-gray-800 rounded-xl">
+        <div className=" flex flex-col items-center md:h-dvh px-6 mx-auto lg:pt-6 xm:pt-16">
+          <div className="flex mx-auto w-full justify-center sm:space-y-6 bg-white rounded-lg shadow dark:border md:mt-0 xm:max-w-sm md:max-w-md xl:p-0 dark:bg-gray-800">
             <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
               About Us
             </h1>
           </div>
-          <p className="mt-24 dark:text-slate-300 text-slate-900 xxl:text-3xl text-wrap sm:mx-2 text-left font-semibold font-serif  ">
+          <p className="xm:mt-8 md:mt-20 dark:text-slate-300 text-slate-900 xxl:text-3xl text-wrap sm:mx-2 text-left font-semibold font-serif  ">
             "At LearnIT, we are dedicated to empowering individuals through
             personalized IT education. Our consultancy stands out by offering
             one-on-one support, ensuring that each student receives tailored
@@ -28,18 +28,18 @@ export default function About() {
         </div>
       </section>
 
-      <section className="mb-24 bg-gray-200 dark:bg-gray-700 md:w-1/2 sm:w-full mt-8 sm:mt-2 rounded-xl border  dark:border-gray-200 border-gray-800">
-        <div className=" flex flex-col items-center px-6 mx-auto lg:pt-6 ">
+      <section className="mb-16 bg-gray-200 dark:bg-gray-700 md:w-1/2 sm:w-full mt-8 sm:mt-2 rounded-xl border  dark:border-gray-200 border-gray-800">
+        <div className=" flex flex-col items-center  px-6 mx-auto lg:pt-6 xm:pt-16">
           <div className="flex mx-auto w-full justify-center  bg-white rounded-lg shadow dark:border md:mt-0 xm:max-w-sm md:max-w-md xl:p-0 dark:bg-gray-800">
             <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
               Goals
             </h1>
           </div>
-          <ul className="mt-20 dark:text-slate-300 text-slate-900 xxl:text-3xl text-wrap mx-24 sm:mx-2 list-disc text-left ">
+          <ul className="xm:mt-8 md:mt-20 dark:text-slate-300 mx-24  list-disc    text-slate-900 xxl:text-3xl text-wrap sm:mx-2 text-left font-semibold font-serif   ">
             <li className="m-4">
               Client Acquisition:
               <ul>
-                <li className="m-4">
+                <li className="m-4 ">
                   Secure a certain number of new clients within the next 6
                   months.
                 </li>
