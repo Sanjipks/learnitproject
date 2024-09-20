@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { deleteMessageInfo, viewMessageInfo } from "../apis/Api";
 import { useLogin } from "../context/LoginContext";
-import DeleteDecision from "./modals/DeleteDecision";
+import DeleteDecision from "./modals/utilitycomponent/DeleteDecision";
 import { toast } from "react-toastify";
 import { dateFormater } from "../utility/DateFormatter";
 import ContactMessageReply from "./modals/ContactMessageReply";

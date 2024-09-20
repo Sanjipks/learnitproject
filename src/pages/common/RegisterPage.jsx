@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import EyeShow from "../../assets/EyeShow";
-import EyeHide from "../../assets/EyeHide";
+import EyeShow from "../../assets/icons/EyeShow";
+import EyeHide from "../../assets/icons/EyeHide";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Popup from "reactjs-popup";

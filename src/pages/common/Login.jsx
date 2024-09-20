@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import EyeHide from "../../assets/EyeHide";
+import EyeHide from "../../assets/icons/EyeHide";
 import React, { useState } from "react";
 import { useLogin } from "../../context/LoginContext";
 import { loginUser } from "../../apis/Api";
