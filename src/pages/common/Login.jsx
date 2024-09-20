@@ -1,9 +1,9 @@
 import { toast } from "react-toastify";
-import EyeHide from "../../assets/icons/EyeHide";
 import React, { useState } from "react";
 import { useLogin } from "../../context/LoginContext";
 import { loginUser } from "../../apis/Api";
 import { useNavigate } from "react-router-dom";
+import EyeHide from "../../assets/icons/EyeHide";
 
 export default function Login() {
   const [inputs, setInputs] = useState({

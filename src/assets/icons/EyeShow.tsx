@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function EyeShow() {
+const EyeShow = () => {
   return (
     <svg
       width="20px"
@@ -34,4 +34,6 @@ export default function EyeShow() {
       />
     </svg>
   );
-}
+};
+
+export default EyeShow;
