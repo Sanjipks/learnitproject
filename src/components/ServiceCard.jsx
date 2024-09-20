@@ -3,8 +3,8 @@ import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";
 import EditService from "./modals/EditService";
-import CartIcon from "../assets/CartIcon";
 import { useCart } from "../context/CartContext";
+import CartIcon from "../assets/icons/CartIcon";
 
 const ServiceCard = (props) => {
   const {

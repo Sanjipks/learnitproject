@@ -4,7 +4,7 @@ import { deleteUser, getUsers } from "../../../apis/Api";
 import { toast } from "react-toastify";
 import { useLogin } from "../../../context/LoginContext";
 import UserListView from "../../../components/UserListViewTable";
-import DeleteDecision from "../../../components/modals/DeleteDecision";
+import DeleteDecision from "../../../components/modals/utilitycomponent/DeleteDecision";
 
 export default function UserListViewPage(props) {
   const [pagenumberlist, setPagenumberlist] = useState(1);

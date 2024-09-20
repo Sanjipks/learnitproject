@@ -3,12 +3,12 @@ import ServiceCard from "../../components/ServiceCard";
 import { deleteService, getServices } from "../../apis/Api";
 import AddNewService from "../../components/modals/AddNewService";
 import { useLogin } from "../../context/LoginContext";
-import DeleteDecision from "../../components/modals/DeleteDecision";
 import { toast } from "react-toastify";
 import Cart from "../../components/Cart";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
-import CartIcon from "../../assets/CartIcon";
+import DeleteDecision from "../../components/modals/utilitycomponent/DeleteDecision";
+import CartIcon from "../../assets/icons/CartIcon";
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);
