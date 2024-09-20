@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import EyeHide from "../../assets/EyeHide";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { resetForgotPassword } from "../../apis/Api";
 import EyeShow from "../../assets/icons/EyeShow";
+import EyeHide from "../../assets/icons/EyeHide";
 
 const ResetForgetPassword = () => {
   const [inputs, setInputs] = useState({
