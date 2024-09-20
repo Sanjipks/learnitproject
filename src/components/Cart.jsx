@@ -1,5 +1,5 @@
 import React from "react";
-import CartIcon from "../assets/CartIcon";
+import CartIcon from "../assets/icons/CartIcon";
 
 const Cart = (props) => {
   const { cartItems } = props;

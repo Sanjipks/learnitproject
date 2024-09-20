@@ -1,11 +1,11 @@
 import React from "react";
 import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
-import CartIcon from "../../assets/CartIcon";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useLogin } from "../../context/LoginContext";
 import Login from "../common/Login";
+import CartIcon from "../../assets/icons/CartIcon";
 
 const CheckOutPage = () => {
   const { cartItems } = useCart();
