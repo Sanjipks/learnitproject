@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function EyeHide() {
+const EyeHide = () => {
   return (
     <svg
       width="20px"
@@ -32,4 +32,6 @@ export default function EyeHide() {
       />
     </svg>
   );
-}
+};
+
+export default EyeHide;
