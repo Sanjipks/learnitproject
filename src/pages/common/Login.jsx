@@ -98,11 +98,14 @@ export default function Login() {
                   <h1 className="text-center text-3xl py-4 font-bold leading-tight tracking-tight text-gray-900  dark:text-white">
                     Sign in to your account
                   </h1>
-                  <form className="space-y-12 " onSubmit={handleSubmit}>
+                  <form
+                    className="space-y-4 md:h-[475px]"
+                    onSubmit={handleSubmit}
+                  >
                     <div>
                       <label
                         htmlFor="email"
-                        className="block mb-2 text-xl font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
                         Email
                       </label>
@@ -111,7 +114,7 @@ export default function Login() {
                         name="email"
                         id="email"
                         onChange={handleInput}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xl rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xl rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="name@emaildomain.com"
                         required
                       />
@@ -119,7 +122,7 @@ export default function Login() {
                     <div>
                       <label
                         htmlFor="password"
-                        className="block mb-2 text-xl font-medium text-gray-900 dark:text-white"
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                       >
                         Password
                       </label>
@@ -129,7 +132,7 @@ export default function Login() {
                         id="password"
                         onChange={handleInput}
                         placeholder="••••••••"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xl rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-xl rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         required
                       />
                       <span
