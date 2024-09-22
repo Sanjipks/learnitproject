@@ -12,6 +12,7 @@ import leadership from "../../assets/images/leadership.jpeg";
 import reflection from "../../assets/images/reflection.jpeg";
 import shining from "../../assets/images/shining.jpeg";
 import Carasoul from "../../components/modals/utilitycomponent/Carasoul";
+import { validatePassword } from "../../utility/ValidatePassword";
 
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({
@@ -53,18 +54,23 @@ export default function RegisterPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (inputs.password === inputs.confirmpassword) {
-      try {
-        const response = await registerUser(inputs);
-        if (response.status == 201) {
-          loginInfoUpdate((loginInfo.userEmail = inputs.email));
-          navigate("/verifyaccount");
+    const passWordCheck = validatePassword(inputs.password);
+    if (!passWordCheck) {
+      if (inputs.password === inputs.confirmpassword) {
+        try {
+          const response = await registerUser(inputs);
+          if (response.status == 201) {
+            loginInfoUpdate((loginInfo.userEmail = inputs.email));
+            navigate("/verifyaccount");
+          }
+        } catch (error) {
+          console.error("Error:", error);
         }
-      } catch (error) {
-        console.error("Error:", error);
+      } else {
+        toast("password did not match");
       }
     } else {
-      toast("password did not match");
+      toast(passWordCheck.toastMessage);
     }
   };
 

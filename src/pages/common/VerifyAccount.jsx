@@ -7,8 +7,9 @@ import { verifyAccount } from "../../apis/Api";
 const VerifyAccount = () => {
   const [accountVerificationCode, setAccountVerificationCode] = useState("");
 
-  const emailInfo = useLogin();
-  const email = emailInfo.userEmail;
+  const { loginInfo } = useLogin();
+  const email = loginInfo.userEmail;
+  console.log(email);
 
   const navigate = useNavigate();
 
@@ -21,8 +22,10 @@ const VerifyAccount = () => {
     if (accountVerificationCode) {
       try {
         const response = await verifyAccount(email, accountVerificationCode);
+        console.log("response", response);
 
         const data = await response.json();
+        console.log("data", data);
 
         if (response.ok) {
           toast(data.message);
