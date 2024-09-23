@@ -42,7 +42,7 @@ const VerifyAccount = () => {
 
   return (
     <div className="min-h-screen justify-center items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 sm:pb-4 xm:pb-4">
-      <div className=" bg-gray-300 dark:bg-gray-600 max-w-screen-xl m-auto pt-16">
+      <div className=" bg-gray-100 dark:bg-gray-600 max-w-screen-xl m-auto pt-16">
         <div className=" flex flex-col items-center justify-center md:h-dvh px-6 mx-auto lg:pt-6 ">
           <a
             href="/"
@@ -50,7 +50,7 @@ const VerifyAccount = () => {
           >
             LearnIT
           </a>
-          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div className="w-full bg-gray-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Verify Your Account

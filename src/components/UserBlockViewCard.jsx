@@ -62,7 +62,7 @@ export default function User(props) {
   return (
     <>
       <div className="flex">
-        <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-full max-w-sm bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div
             className="flex justify-start px-4 pt-4"
             onMouseLeave={handleMouseLeave}
@@ -88,7 +88,7 @@ export default function User(props) {
             {expandeduser === userId ? (
               <div
                 id="dropdown"
-                className={`z-10 ${expand} absolute ml-10 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
+                className={`z-10 ${expand} absolute ml-10 text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
               >
                 <ul className="py-2" aria-labelledby="dropdownButton">
                   <li>
