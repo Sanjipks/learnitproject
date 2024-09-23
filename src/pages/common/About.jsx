@@ -2,8 +2,8 @@ import React from "react";
 
 export default function About() {
   return (
-    <div className="min-h-dvh flex flex-col sm:items-center sm:mb-auto dark:bg-gray-700 dark:border-gray-800 bg-gray-400 border-gray-200 ">
-      <section className=" bg-gray-200 dark:bg-gray-700 md:w-1/2 sm:w-full sm:mt-16 sm:mb-4 border dark:border-gray-200 border-gray-800 rounded-xl">
+    <div className="min-h-dvh flex flex-col sm:items-center sm:mb-auto dark:bg-gray-700 dark:border-gray-800 bg-gray-400 border-gray-200 px-2">
+      <section className="flex pd-4 bg-gray-200 dark:bg-gray-700 md:max-w-screen-xl w-full sm:w-full sm:mt-16 sm:mb-4 border dark:border-gray-200 border-gray-800 rounded-xl">
         <div className=" flex flex-col items-center md:h-dvh px-6 mx-auto lg:pt-6 xm:pt-16">
           <div className="flex mx-auto w-full justify-center sm:space-y-6 bg-gray-100 rounded-lg shadow dark:border md:mt-0 xm:max-w-sm md:max-w-md xl:p-0 dark:bg-gray-800">
             <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
@@ -28,8 +28,8 @@ export default function About() {
         </div>
       </section>
 
-      <section className="mb-16 bg-gray-200 dark:bg-gray-700 md:w-1/2 sm:w-full mt-8 sm:mt-2 rounded-xl border  dark:border-gray-200 border-gray-800">
-        <div className=" flex flex-col items-center  px-6 mx-auto lg:pt-6 xm:pt-16">
+      <section className="mb-16 bg-gray-200 dark:bg-gray-700 md:max-w-screen-xl w-full sm:w-full mt-8 sm:mt-2 rounded-xl border  dark:border-gray-200 border-gray-800">
+        <div className=" flex flex-col items-center px-4 mx-auto lg:pt-6 xm:pt-16">
           <div className="flex mx-auto w-full justify-center  bg-gray-100 rounded-lg shadow dark:border md:mt-0 xm:max-w-sm md:max-w-md xl:p-0 dark:bg-gray-800">
             <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
               Goals
