@@ -4,7 +4,7 @@ const ContactMessageReply = (props) => {
   const { senderEmail, senderName } = props;
   return (
     <div className="h-auto  w-96 flex flex-col rounded-lg xm:gap-4 bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
-      <div className=" bg-white rounded-lg shadow dark:bg-gray-700">
+      <div className=" bg-gray-100 rounded-lg shadow dark:bg-gray-700">
         <div className="flex items-center justify-between p-4 md:p-5 border-b  dark:border-gray-600">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
             Reply Message

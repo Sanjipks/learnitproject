@@ -39,7 +39,7 @@ const EditService = (props) => {
   return (
     <>
       <div className="z-50 absolute p-4 w-full max-w-md min-w-96 max-h-full">
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div className="relative bg-gray-100 rounded-lg shadow dark:bg-gray-700">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Edit Service

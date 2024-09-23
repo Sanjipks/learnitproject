@@ -65,7 +65,7 @@ export default function UserListView(props) {
 
   return (
     <div className="relative shadow-md border ">
-      <div className="p-4 flex flex-row justify-between bg-white dark:bg-gray-900 border ">
+      <div className="p-4 flex flex-row justify-between bg-gray-100 dark:bg-gray-900 border ">
         <div>
           <label htmlFor="table-search" className="sr-only">
             Search
@@ -98,14 +98,14 @@ export default function UserListView(props) {
           </div>
         </div>
         <div onMouseLeave={handleMouseLeave}>
-          <div className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+          <div className="inline-flex items-center text-gray-500 bg-gray-100 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
             Number of Users per Page
           </div>
           <button
             onClick={handleExpandForpagenumber}
             id="dropdownActionButton"
             data-dropdown-toggle="dropdownAction1"
-            className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+            className="inline-flex items-center text-gray-500 bg-gray-100 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
             type="button"
           >
             <span className="sr-only">Action button</span>
@@ -129,7 +129,7 @@ export default function UserListView(props) {
 
           <div
             id="dropdownAction1"
-            className={`z-10 ${expandforpagenumber} absolute  ml-48 px-3 mt-2 bg-white divide-y divide-gray-100 rounded-lg shadow w-auto dark:bg-gray-700 dark:divide-gray-600`}
+            className={`z-10 ${expandforpagenumber} absolute  ml-48 px-3 mt-2 bg-gray-100 divide-y divide-gray-100 rounded-lg shadow w-auto dark:bg-gray-700 dark:divide-gray-600`}
           >
             <ul
               className="py-1 text-sm text-gray-700 dark:text-gray-200"
@@ -212,7 +212,7 @@ export default function UserListView(props) {
         <tbody>
           {paginatedUsers.map((user, id) => (
             <tr
-              className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 border"
+              className="bg-gray-100 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 border"
               key={id}
             >
               <td className="px-6 py-4 border">{allusers.indexOf(user) + 1}</td>
@@ -254,7 +254,7 @@ export default function UserListView(props) {
                     onClick={() => handleExpand(user.user_id)}
                     id="dropdownActionButton"
                     data-dropdown-toggle="dropdownAction"
-                    className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                    className="inline-flex items-center text-gray-500 bg-gray-100 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                     type="button"
                   >
                     <span className="sr-only">Action button</span>
@@ -278,7 +278,7 @@ export default function UserListView(props) {
                   {expandeduser === user.user_id ? (
                     <div
                       id="dropdownAction"
-                      className={`z-10 ${expand} absolute bg-white divide-y divide-gray-100 rounded-lg shadow mt-2 w-28 dark:bg-gray-700 dark:divide-gray-600`}
+                      className={`z-10 ${expand} absolute bg-gray-100 divide-y divide-gray-100 rounded-lg shadow mt-2 w-28 dark:bg-gray-700 dark:divide-gray-600`}
                     >
                       <ul
                         className="py-1 text-sm text-gray-700 dark:text-gray-200 "

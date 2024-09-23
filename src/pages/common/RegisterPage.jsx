@@ -83,7 +83,7 @@ export default function RegisterPage() {
           </section>
           <section className="flex md:h-[756px] justify-center items-center min-h-max w-full bg-amber-100 md:rounded-br-xl sm:rounded-tr-xl sm:rounded-tl-xl md:rounded-tl-none sm:mt-8 md:mt-0 px-2">
             <div className=" flex w-full flex-col items-center justify-center mx-auto lg:pt-6 my-12">
-              <div className="w-full mx-4 bg-white rounded-xl shadow dark:border md:mt-0 sm:max-w-sm md:max-w-xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+              <div className="w-full mx-4 bg-gray-100 rounded-xl shadow dark:border md:mt-0 sm:max-w-sm md:max-w-xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div className="py-6 space-y-4 md:space-y-6 sm:p-8">
                   <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Register new account

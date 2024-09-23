@@ -122,7 +122,7 @@ const ServiceCard = (props) => {
               <div
                 id="dropdown"
                 onMouseLeave={handleMouseLeave}
-                className={`z-10 ${expand} absolute w-48 mt-9 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
+                className={`z-10 ${expand} absolute w-48 mt-9 text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
               >
                 {loggedinUserRole === "admin" && loginState === "true" ? (
                   <ul className="py-2" aria-labelledby="dropdownButton">

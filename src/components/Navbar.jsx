@@ -54,7 +54,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className="sticky top-0 z-50 bg-white dark:bg-gray-900 dark:border-gray-700 border-b border-gray-200"
+      className="sticky top-0 z-50 bg-gray-100 dark:bg-gray-900 dark:border-gray-700 border-b border-gray-200"
       onMouseLeave={handleMouseLeave}
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5">
@@ -98,7 +98,7 @@ export default function Navbar() {
           className={`${expand} w-full md:block md:w-auto lg:static sm:mt-0 md:mt-0 md:ml-0`}
           id="navbar-dropdown"
         >
-          <ul className="flex flex-col overflow-hidden font-medium p-4 md:p-0 mt-4 border border-gray-300 sm:rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-900">
+          <ul className="flex flex-col overflow-hidden font-medium p-4 md:p-0 mt-4 border border-gray-300 sm:rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-gray-100 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-900">
             <li>
               <Link
                 onClick={handleMainMenuClick}
@@ -170,7 +170,7 @@ export default function Navbar() {
               {/* <!-- Dropdown menu --> */}
               <div
                 id="dropdownNavbar"
-                className={`z-10 ${subExpand} w-80 md:-ml-56 fixed mt-5 sm:rounded-lg font-normal bg-white divide-y divide-gray-100 shadow dark:bg-gray-800 dark:divide-gray-800`}
+                className={`z-10 ${subExpand} w-80 md:-ml-56 fixed mt-5 sm:rounded-lg font-normal bg-gray-100 divide-y divide-gray-100 shadow dark:bg-gray-800 dark:divide-gray-800`}
               >
                 <ul
                   className="flex flex-col mx-0 pr-5 text-sm text-gray-900 dark:text-gray-200"
