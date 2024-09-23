@@ -2,7 +2,7 @@ import React from "react";
 
 export default function About() {
   return (
-    <div className="min-h-dvh flex flex-col sm:items-center sm:mb-auto dark:bg-gray-700 dark:border-gray-800 bg-gray-200 border-gray-200 ">
+    <div className="min-h-dvh flex flex-col sm:items-center sm:mb-auto dark:bg-gray-700 dark:border-gray-800 bg-gray-400 border-gray-200 ">
       <section className=" bg-gray-200 dark:bg-gray-700 md:w-1/2 sm:w-full sm:mt-16 sm:mb-4 border dark:border-gray-200 border-gray-800 rounded-xl">
         <div className=" flex flex-col items-center md:h-dvh px-6 mx-auto lg:pt-6 xm:pt-16">
           <div className="flex mx-auto w-full justify-center sm:space-y-6 bg-white rounded-lg shadow dark:border md:mt-0 xm:max-w-sm md:max-w-md xl:p-0 dark:bg-gray-800">

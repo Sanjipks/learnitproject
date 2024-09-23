@@ -87,7 +87,7 @@ const ServiceCard = (props) => {
   return (
     <>
       <div className="flex">
-        <div className="w-80 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-80 bg-gray-200 border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
           <div
             className="flex justify-between px-4 pt-4"
             // onMouseLeave={
