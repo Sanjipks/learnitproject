@@ -78,17 +78,21 @@ export default function RegisterPage() {
     <div className="min-h-screen h-auto flex flex-col xm:gap-4 bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
       <div className="items-center justify-start md:my-40 sm:my-20 px-2">
         <div className="max-w-screen-xl w-full sm:h-auto sm:m-auto flex md:flex-row xm:flex-col-reverse">
-          <section className="flex  justify-center items-center w-full bg-blue-200 sm:rounded-br-xl md:rounded-br-none sm:rounded-bl-xl md:rounded-tl-xl">
-            <Carasoul images={images} buttonShow={false} />
+          <section className="flex md:h-[756px] justify-center items-center w-full sm:rounded-br-xl md:rounded-br-none sm:rounded-bl-xl md:rounded-tl-xl">
+            <Carasoul
+              images={images}
+              buttonShow={false}
+              csss="w-auto md:h-[756px] sm:rounded-br-xl md:rounded-br-none sm:rounded-bl-xl md:rounded-tl-xl"
+            />
           </section>
-          <section className="flex md:h-[756px] justify-center items-center min-h-max w-full bg-amber-100 md:rounded-br-xl sm:rounded-tr-xl sm:rounded-tl-xl md:rounded-tl-none sm:mt-8 md:mt-0 px-2">
-            <div className=" flex w-full flex-col items-center justify-center mx-auto lg:pt-6 my-12">
-              <div className="w-full mx-4 bg-gray-100 rounded-xl shadow dark:border md:mt-0 sm:max-w-sm md:max-w-xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <section className="flex md:h-[756px] justify-center items-center min-h-max w-full dark:bg-gray-900 bg-gray-400 md:rounded-br-xl sm:rounded-tr-xl sm:rounded-tl-xl md:rounded-tl-none sm:mt-8 md:mt-0 p-2">
+            <div className=" flex w-full flex-col items-center justify-center mx-auto ">
+              <div className="w-full mx-4 bg-gray-200  rounded-xl shadow dark:border md:mt-0 sm:max-w-sm md:max-w-xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div className="py-6 space-y-4 md:space-y-6 sm:p-8">
                   <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Register new account
                   </h1>
-                  <form className="space-y-4" onSubmit={handleSubmit}>
+                  <form className="space-y-4">
                     <div>
                       <label
                         htmlFor="firstname"
@@ -239,7 +243,7 @@ export default function RegisterPage() {
                       </div>
                     </div>
                     <button
-                      type="submit"
+                      onSubmit={handleSubmit}
                       className="w-full text-gray-900 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 dark:text-white"
                     >
                       Register
