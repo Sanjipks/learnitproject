@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";
@@ -70,6 +70,7 @@ const ServiceCard = (props) => {
   };
 
   const handleRemoveFromCart = (id) => {
+    console.log("id", id);
     removeFromCart(id);
     setExpand("hidden");
     setExpandedservice(null);
