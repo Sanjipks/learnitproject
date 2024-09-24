@@ -95,10 +95,10 @@ export default function Login() {
               csss="w-auto md:h-[756px] sm:rounded-br-xl md:rounded-br-none sm:rounded-bl-xl md:rounded-tl-xl"
             />
           </section>
-          <section className="flex md:h-[756px] justify-center items-center min-h-max w-full bg-gray-400 dark:bg-gray-900 md:rounded-br-xl sm:rounded-tr-xl sm:rounded-tl-xl md:rounded-tl-none sm:mt-8 md:mt-0 px-2">
+          <section className="flex md:h-[756px] justify-center items-center min-h-max w-full bg-gray-400 dark:bg-gray-900 md:rounded-br-xl sm:rounded-tr-xl sm:rounded-tl-xl md:rounded-tl-none sm:mt-8 md:mt-0 sm:px-2 md:px-0">
             <div className=" flex w-full flex-col items-center justify-center sm:py-2 md:py-0 m-auto ">
               <div className="w-full mx-4 bg-gray-200 rounded-xl shadow dark:border md:mt-0 sm:max-w-sm md:max-w-xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                <div className="py-6 space-y-4 md:space-y-6 sm:p-8">
+                <div className="py-6 space-y-4 md:space-y-6 md:p-10 sm:m-4">
                   <h1 className="text-center text-3xl py-4 font-bold leading-tight tracking-tight text-gray-900  dark:text-white">
                     Sign in to your account
                   </h1>
