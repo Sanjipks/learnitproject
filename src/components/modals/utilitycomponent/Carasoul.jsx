@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const Carasoul = (props) => {
-  const { images, buttonShow } = props;
+  const { images, buttonShow, csss } = props;
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextSlide = () => {
@@ -29,7 +29,8 @@ const Carasoul = (props) => {
       </button>
 
       <img
-        className=" md:h-[756px] w-auto sm:rounded-xl md:rounded-r-none"
+        // className=" md:h-[756px] w-auto sm:rounded-xl md:rounded-r-none"
+        className={csss}
         src={images[currentIndex]}
         alt={`Slide ${currentIndex}`}
       />
