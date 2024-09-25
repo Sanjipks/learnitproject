@@ -10,6 +10,7 @@ const Auth = () => {
   const { loginInfo, loginInfoUpdate } = useLogin();
 
   const email = loginInfo.userEmail;
+
   const token = loginInfo.token;
   const Role = loginInfo.userRole;
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { useCart } from "../../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import DeleteIcon from "../../assets/icons/DeleteIcon";
 
 const MyCart = () => {
   const { cartItems } = useCart();
@@ -75,7 +76,7 @@ const MyCart = () => {
                         <div className=" text-xl">
                           <span>Price: </span>${item.servicePrice}
                         </div>
-                        <div
+                        {/* <div
                           id="dropdown"
                           className={`z-10 hidden  absolute w-60 ml-10 text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
                         >
@@ -89,7 +90,8 @@ const MyCart = () => {
                               </a>
                             </li>
                           </ul>
-                        </div>
+                        </div> */}
+                        <DeleteIcon />
                       </div>
 
                       <div className="flex flex-col items-center pb-10">
