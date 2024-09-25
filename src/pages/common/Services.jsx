@@ -30,7 +30,7 @@ const Services = () => {
 
   const handlePrevPage = () => {
     if (pagenumber > 1) {
-      setPagenumber(pagenumber - 1);
+      setPagenumber(pagenaumber - 1);
     }
   };
 

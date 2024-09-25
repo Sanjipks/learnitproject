@@ -55,7 +55,7 @@ export default function CartProvider({ children }) {
   // Function to remove an item from the cart and IndexedDB with generated indexedDb id
   const removeFromCartbyId = useCallback(async (id) => {
     setCartItems((prevItems) => {
-      const updatedItems = prevItems.filter((item) => item.serviceId !== id);
+      const updatedItems = prevItems.filter((item) => item.id !== id);
       return updatedItems;
     });
 
@@ -67,25 +67,26 @@ export default function CartProvider({ children }) {
   }, []);
 
   // Function to remove an item from the cart and IndexedDB with passed servicedId from parent
-  const removeFromCart = useCallback(async (serviceId) => {
-    // Update the cart in React state
+  const removeFromCart = useCallback(async (serviceid) => {
     setCartItems((prevItems) => {
-      const updatedItems = prevItems.filter(
-        (item) => item.serviceId !== serviceId
-      );
+      const updatedItems = prevItems.filter((item) => {
+        item.serviceId !== serviceid;
+      });
       return updatedItems;
     });
 
     // Get a reference to IndexedDB
     const db = await dbPromise;
+
     const tx = db.transaction("cart", "readwrite");
+
     const store = tx.objectStore("cart");
 
     // Create an index to search for the item by serviceId (assuming serviceId is indexed)
-    const index = store.index("serviceId");
+    const index = store.index("by-serviceId");
 
     // Get the record with the matching serviceId
-    const matchingRecord = await index.get(serviceId);
+    const matchingRecord = await index.get(serviceid);
 
     if (matchingRecord) {
       // Remove the item by its IndexedDB ID (primary key)
