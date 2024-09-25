@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useLogin } from "../../context/LoginContext";
 import Login from "../common/Login";
 import CartIcon from "../../assets/icons/CartIcon";
+import SelectPaymentMethod from "../../components/modals/Payment";
 
 const CheckOutPage = () => {
   const { cartItems } = useCart();
@@ -13,6 +14,7 @@ const CheckOutPage = () => {
   const navigate = useNavigate();
 
   const [itemTotal, setItemTotal] = useState(0);
+  const [popPaymentBox, setPopPaymentBox] = useState(false);
 
   const taxRate = 6 / 100;
   const userRole = loginInfo.userRole;
@@ -38,6 +40,14 @@ const CheckOutPage = () => {
 
   const navigateBacktoCart = () => {
     navigate("/mycart");
+  };
+
+  const handlePayment = () => {
+    setPopPaymentBox(true);
+  };
+
+  const handleClose = () => {
+    setPopPaymentBox(false);
   };
   return (
     <>
@@ -109,7 +119,7 @@ const CheckOutPage = () => {
 
                   <div className=" flex justify-end mt-20">
                     <button
-                      // onClick={handlePayment}
+                      onClick={handlePayment}
                       className="flex bg-gray-100 rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
                     >
                       Submit Payment
@@ -123,6 +133,7 @@ const CheckOutPage = () => {
       ) : (
         <Login />
       )}
+      {popPaymentBox ? <SelectPaymentMethod handleClose={handleClose} /> : null}
     </>
   );
 };
