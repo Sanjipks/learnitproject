@@ -4,9 +4,14 @@ import { useNavigate } from "react-router-dom";
 import DeleteIcon from "../../assets/icons/DeleteIcon";
 
 const MyCart = () => {
-  const { cartItems } = useCart();
+  const { cartItems, removeFromCartbyIndexedId } = useCart();
 
   const navigate = useNavigate();
+
+  const handledelete = (id) => {
+    console.log("indexedid", id);
+    removeFromCartbyIndexedId(id);
+  };
 
   const navigateBacktoServiceList = () => {
     navigate("/services");
@@ -91,7 +96,9 @@ const MyCart = () => {
                             </li>
                           </ul>
                         </div> */}
-                        <DeleteIcon />
+                        <div onClick={() => handledelete(item.id)}>
+                          <DeleteIcon />
+                        </div>
                       </div>
 
                       <div className="flex flex-col items-center pb-10">
