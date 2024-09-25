@@ -70,7 +70,6 @@ const ServiceCard = (props) => {
   };
 
   const handleRemoveFromCart = (id) => {
-    console.log("id", id);
     removeFromCart(id);
     setExpand("hidden");
     setExpandedservice(null);
