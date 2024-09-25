@@ -53,7 +53,7 @@ export default function CartProvider({ children }) {
   }, []);
 
   // Function to remove an item from the cart and IndexedDB with generated indexedDb id
-  const removeFromCartbyId = useCallback(async (id) => {
+  const removeFromCartbyIndexedId = useCallback(async (id) => {
     setCartItems((prevItems) => {
       const updatedItems = prevItems.filter((item) => item.id !== id);
       return updatedItems;
@@ -108,7 +108,13 @@ export default function CartProvider({ children }) {
 
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, clearCart }}
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        clearCart,
+        removeFromCartbyIndexedId,
+      }}
     >
       {children}
     </CartContext.Provider>
