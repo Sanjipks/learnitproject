@@ -9,7 +9,6 @@ const MyCart = () => {
   const navigate = useNavigate();
 
   const handledelete = (id) => {
-    console.log("indexedid", id);
     removeFromCartbyIndexedId(id);
   };
 
