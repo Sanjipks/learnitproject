@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import CartIcon from "../../assets/icons/CartIcon";
 import ConfirmDecision from "../../components/modals/utilitycomponent/ConfirmDecision";
+import Spinner from "../../components/common/Spinner";
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -19,6 +20,7 @@ const Services = () => {
   const [pop, setPop] = useState(false);
   const [deletedId, setDeletedId] = useState(null);
   const [expandedservice, setExpandedservice] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { cartItems, clearCart } = useCart();
 
@@ -52,12 +54,31 @@ const Services = () => {
     setOpenAddForm(false);
   };
 
+  // useEffect(() => {
+  //   getServices(pagenumber).then((data) => {
+  //     setServicesList(data.paginatedServices);
+  //     setServicesPerpage(data.servicesPerPage);
+  //     setTotalServicesCount(data.totalEntries);
+  //   });
+  // }, [pagenumber, deletedId]);
+
   useEffect(() => {
-    getServices(pagenumber).then((data) => {
-      setServicesList(data.paginatedServices);
-      setServicesPerpage(data.servicesPerPage);
-      setTotalServicesCount(data.totalEntries);
-    });
+    const fetchServices = async () => {
+      setLoading(true); // Set loading to true when starting the fetch
+
+      try {
+        const data = await getServices(pagenumber);
+        setServicesList(data.paginatedServices);
+        setServicesPerpage(data.servicesPerPage);
+        setTotalServicesCount(data.totalEntries);
+      } catch (error) {
+        console.error("Failed to fetch services:", error);
+      } finally {
+        setLoading(false); // Set loading to false after fetch is complete
+      }
+    };
+
+    fetchServices();
   }, [pagenumber, deletedId]);
 
   const handleCartView = () => {
@@ -177,23 +198,27 @@ const Services = () => {
           )}
 
           <div className="flex justify-center mt-2" onMouseDown={handleclose}>
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-              {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
-              {servicesList.map((service, id) => (
-                <div key={id} className="p-2">
-                  <ServiceCard
-                    key={service.service_id}
-                    service={service.service_name}
-                    serviceId={service.service_id}
-                    serviceLogo={service.service_image}
-                    servicePrice={service.service_price}
-                    deleteService={handleDelete}
-                    expandedservice={expandedservice}
-                    setExpandedservice={setExpandedservice}
-                  />
-                </div>
-              ))}
-            </div>
+            {loading ? (
+              <Spinner />
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+                {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
+                {servicesList.map((service, id) => (
+                  <div key={id} className="p-2">
+                    <ServiceCard
+                      key={service.service_id}
+                      service={service.service_name}
+                      serviceId={service.service_id}
+                      serviceLogo={service.service_image}
+                      servicePrice={service.service_price}
+                      deleteService={handleDelete}
+                      expandedservice={expandedservice}
+                      setExpandedservice={setExpandedservice}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
