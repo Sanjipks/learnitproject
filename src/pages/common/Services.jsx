@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 import Cart from "../../components/Cart";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
-import DeleteDecision from "../../components/modals/utilitycomponent/DeleteDecision";
 import CartIcon from "../../assets/icons/CartIcon";
+import ConfirmDecision from "../../components/modals/utilitycomponent/ConfirmDecision";
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -244,7 +244,10 @@ const Services = () => {
         </div>
       </div>
       {pop ? (
-        <DeleteDecision handlePopAction={handlePop} type="service" />
+        <ConfirmDecision
+          handlePopAction={handlePop}
+          typo=" Are you sure you want to delete this service?"
+        />
       ) : null}
     </>
   );

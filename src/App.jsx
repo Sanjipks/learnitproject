@@ -21,7 +21,7 @@ import Progress from "./pages/user/Progress";
 import MyCart from "./pages/user/MyCart";
 import CartProvider from "./context/CartContext";
 import CheckOutPage from "./pages/user/CheckOutPage";
-import PaymentForm from "./components/modals/Payment";
+import PaymentForm from "./pages/user/Payment";
 
 function App() {
   return (

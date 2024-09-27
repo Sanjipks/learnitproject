@@ -4,7 +4,7 @@ import { deleteUser, getUsers } from "../../../apis/Api";
 import { toast } from "react-toastify";
 import { useLogin } from "../../../context/LoginContext";
 import UserListView from "../../../components/UserListViewTable";
-import DeleteDecision from "../../../components/modals/utilitycomponent/DeleteDecision";
+import ConfirmDecision from "../../../components/modals/utilitycomponent/ConfirmDecision";
 
 export default function UserListViewPage(props) {
   const [pagenumberlist, setPagenumberlist] = useState(1);
@@ -195,7 +195,12 @@ export default function UserListViewPage(props) {
           </div>
         </div>
       </div>
-      {pop ? <DeleteDecision handlePopAction={handlePop} type="user" /> : null}
+      {pop ? (
+        <ConfirmDecision
+          handlePopAction={handlePop}
+          typo="Are you sure you want to delete this user?"
+        />
+      ) : null}
     </>
   );
 }
