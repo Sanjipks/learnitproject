@@ -168,7 +168,6 @@ export default function Login() {
                         </div>
                       </div>
                       <button
-                        // href="/forgetpassword"
                         onClick={() => handleNavigate("fp")}
                         className="text-md font-medium text-primary-600 hover:underline text-black dark:text-primary-500 dark:text-white"
                       >

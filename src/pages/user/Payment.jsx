@@ -17,15 +17,13 @@ const PaymentForm = () => {
     setInputs({ ...inputs, [name]: value });
   };
 
-  const handleSubmitPayment = (type) => {
+  const handleSubmitPayment = () => {
     setPop(true);
-    setType(type);
   };
 
   const handlePop = (state) => {
-    console.log(state, "state");
-
     setPop(false);
+
     if (state) {
       try {
         {
@@ -65,22 +63,30 @@ const PaymentForm = () => {
 
                       <div className="flex justify-center mb-6">
                         <button
+                          type="button"
                           className={`px-4 py-2 mr-2 text-sm font-medium border rounded-lg focus:outline-none ${
                             paymentMethod === "credit"
                               ? "bg-blue-500 text-white"
                               : "border-gray-300"
                           }`}
-                          onClick={() => setPaymentMethod("credit")}
+                          onClick={() => {
+                            setPaymentMethod("credit");
+                            setType("credit");
+                          }}
                         >
                           Credit Card
                         </button>
                         <button
+                          type="button"
                           className={`px-4 py-2 text-sm font-medium border rounded-lg focus:outline-none ${
                             paymentMethod === "bank"
                               ? "bg-blue-500 text-white"
                               : "border-gray-300"
                           }`}
-                          onClick={() => setPaymentMethod("bank")}
+                          onClick={() => {
+                            setPaymentMethod("bank");
+                            setType("bank");
+                          }}
                         >
                           Bank Account
                         </button>
@@ -139,6 +145,7 @@ const PaymentForm = () => {
                             </div>
                           </div>
                           <button
+                            type="button"
                             onClick={() => handleSubmitPayment("creditCard")}
                             className="w-full bg-blue-500 text-white py-2 px-4 rounded-md mt-4 hover:bg-blue-600"
                           >
@@ -180,6 +187,7 @@ const PaymentForm = () => {
                             />
                           </div>
                           <button
+                            type="button"
                             onClick={() => handleSubmitPayment("bankAccount")}
                             className="w-full bg-blue-500 text-white py-2 px-4 rounded-md mt-4 hover:bg-blue-600"
                           >
