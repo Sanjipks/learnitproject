@@ -4,6 +4,7 @@ import UserBlockView from "../../../components/UserBlockViewCard";
 import { deleteUser, getUsers } from "../../../apis/Api";
 import { toast } from "react-toastify";
 import { useLogin } from "../../../context/LoginContext";
+import Spinner from "../../../components/common/Spinner";
 
 export default function UsersBlockViewPage(props) {
   const [userlist, setUserlist] = useState([]);
@@ -12,6 +13,7 @@ export default function UsersBlockViewPage(props) {
   const [totalUserscount, setTotalUserscount] = useState(0);
   const [deletedUser, setDeletedUser] = useState(null);
   const [expandeduser, setExpandeduser] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { handleView } = props;
 
@@ -30,17 +32,35 @@ export default function UsersBlockViewPage(props) {
     }
   };
 
-  try {
-    useEffect(() => {
-      getUsers(loggedinUserRole, pagenumber).then((data) => {
-        setUserlist(data.paginatedUsers),
-          setUserperpage(data.usersPerPage),
-          setTotalUserscount(data.totalEntries);
-      });
-    }, [pagenumber, deletedUser]);
-  } catch (error) {
-    throw new Error("Error:", error);
-  }
+  // try {
+  //   useEffect(() => {
+  //     getUsers(loggedinUserRole, pagenumber).then((data) => {
+  //       setUserlist(data.paginatedUsers),
+  //         setUserperpage(data.usersPerPage),
+  //         setTotalUserscount(data.totalEntries);
+  //     });
+  //   }, [pagenumber, deletedUser]);
+  // } catch (error) {
+  //   throw new Error("Error:", error);
+  // }
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setLoading(true);
+      try {
+        const data = await getUsers(loggedinUserRole, pagenumber);
+        setUserlist(data.paginatedUsers);
+        setUserperpage(data.usersPerPage);
+        setTotalUserscount(data.totalEntries);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, [pagenumber, deletedUser]);
 
   const handleRemove = async (deletedId) => {
     setDeletedUser(deletedId);
@@ -74,22 +94,26 @@ export default function UsersBlockViewPage(props) {
           </div>
         </div>
         <div className="flex  justify-start mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-            {userlist.map((user, id) => (
-              <div key={id} className="p-2">
-                <UserBlockView
-                  key={user.user_id}
-                  user={user.user_name}
-                  userId={user.user_id}
-                  userEmail={user.user_email}
-                  userImage={user.user_image}
-                  removeUser={handleRemove}
-                  expandeduser={expandeduser}
-                  setExpandeduser={setExpandeduser}
-                />
-              </div>
-            ))}
-          </div>
+          {loading ? (
+            <Spinner />
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+              {userlist.map((user, id) => (
+                <div key={id} className="p-2">
+                  <UserBlockView
+                    key={user.user_id}
+                    user={user.user_name}
+                    userId={user.user_id}
+                    userEmail={user.user_email}
+                    userImage={user.user_image}
+                    removeUser={handleRemove}
+                    expandeduser={expandeduser}
+                    setExpandeduser={setExpandeduser}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="flex flex-col items-center">
           <div>
