@@ -32,7 +32,7 @@ const Services = () => {
 
   const handlePrevPage = () => {
     if (pagenumber > 1) {
-      setPagenumber(pagenaumber - 1);
+      setPagenumber(pagenumber - 1);
     }
   };
 
@@ -64,7 +64,7 @@ const Services = () => {
 
   useEffect(() => {
     const fetchServices = async () => {
-      setLoading(true); // Set loading to true when starting the fetch
+      setLoading(true);
 
       try {
         const data = await getServices(pagenumber);
@@ -74,7 +74,7 @@ const Services = () => {
       } catch (error) {
         console.error("Failed to fetch services:", error);
       } finally {
-        setLoading(false); // Set loading to false after fetch is complete
+        setLoading(false);
       }
     };
 
