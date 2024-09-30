@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useLogin } from "../../../context/LoginContext";
 import UserListView from "../../../components/UserListViewTable";
 import ConfirmDecision from "../../../components/modals/utilitycomponent/ConfirmDecision";
+import Spinner from "../../../components/common/Spinner";
 
 export default function UserListViewPage(props) {
   const [pagenumberlist, setPagenumberlist] = useState(1);
@@ -15,6 +16,7 @@ export default function UserListViewPage(props) {
   const [searchInput, setSearchInput] = useState("");
   const [pop, setPop] = useState(false);
   const [deletedId, setDeletedId] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { handleView } = props;
 
   const pagenumber = 1;
@@ -27,17 +29,34 @@ export default function UserListViewPage(props) {
 
   let paginatedUserslistview = filteredUsers.slice(startIndex, endIndex);
 
-  try {
-    useEffect(() => {
-      getUsers(loggedinUserRole, pagenumber).then((data) => {
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setLoading(true);
+      try {
+        const data = await getUsers(loggedinUserRole, pagenumber);
         setFilteredUsers(data.allUsers),
           setAllUsers(data.allUsers),
           setTotalUserscount(data.totalEntries);
-      });
-    }, []);
-  } catch (error) {
-    throw new Error("Error:", error);
-  }
+      } catch (error) {
+        throw new Error("Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUsers();
+  }, []);
+
+  // try {
+  //   useEffect(() => {
+  //     getUsers(loggedinUserRole, pagenumber).then((data) => {
+  //       setFilteredUsers(data.allUsers),
+  //         setAllUsers(data.allUsers),
+  //         setTotalUserscount(data.totalEntries);
+  //     });
+  //   }, []);
+  // } catch (error) {
+  //   throw new Error("Error:", error);
+  // }
 
   const handlePrevPageList = () => {
     if (pagenumberlist > 1) {
@@ -107,14 +126,18 @@ export default function UserListViewPage(props) {
           </div>
         </div>
         <div className="flex justify-self-center mx-auto">
-          <UserListView
-            allusers={allUsers}
-            removeUser={handleRemove}
-            handlesetuserperpagelistview={handleuserperpage}
-            paginatedUsers={paginatedUserslistview}
-            usernumber={userperpageListView}
-            handleSearchInput={handleSearch}
-          />
+          {loading ? (
+            <Spinner />
+          ) : (
+            <UserListView
+              allusers={allUsers}
+              removeUser={handleRemove}
+              handlesetuserperpagelistview={handleuserperpage}
+              paginatedUsers={paginatedUserslistview}
+              usernumber={userperpageListView}
+              handleSearchInput={handleSearch}
+            />
+          )}
         </div>
         <div className="flex flex-col items-center">
           {searchInput ? (
