@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useLogin } from "../../context/LoginContext";
 import { verifyAccount } from "../../apis/Api";
+import Spinner from "../../components/common/Spinner";
 
 const VerifyAccount = () => {
   const [accountVerificationCode, setAccountVerificationCode] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { loginInfo } = useLogin();
   const email = loginInfo.userEmail;
@@ -19,6 +21,7 @@ const VerifyAccount = () => {
 
   const handleVerifyAccount = async (event) => {
     event.preventDefault();
+    setLoading(true);
     if (accountVerificationCode) {
       try {
         const response = await verifyAccount(email, accountVerificationCode);
@@ -34,6 +37,8 @@ const VerifyAccount = () => {
         }
       } catch (error) {
         console.error("Error:", error);
+      } finally {
+        setLoading(false);
       }
     } else {
       toast("Please Enter the Code");
@@ -41,15 +46,11 @@ const VerifyAccount = () => {
   };
 
   return (
-    <div className="min-h-screen justify-center items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 sm:pb-4 xm:pb-4">
-      <div className=" bg-gray-100 dark:bg-gray-600 max-w-screen-xl m-auto pt-16">
-        <div className=" flex flex-col items-center justify-center md:h-dvh px-6 mx-auto lg:pt-6 ">
-          <a
-            href="/"
-            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-          >
-            LearnIT
-          </a>
+    <div className="flex md:h-screen sm:h-auto justify-center items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 sm:pb-4 xm:pb-4">
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="flex w-full flex-col items-center justify-center  lg:pt-6 sm:m-2 md:m-0">
           <div className="w-full bg-gray-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -86,7 +87,7 @@ const VerifyAccount = () => {
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
