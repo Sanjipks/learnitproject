@@ -35,15 +35,15 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div className="flex md:h-screen sm:h-auto justify-center items-center dark:bg-gray-600 dark:border-gray-800 bg-gray-200 border-gray-200 sm:pb-4 xm:pb-4">
+    <div className="flex md:h-screen sm:h-auto justify-center items-center dark:bg-gray-800 dark:border-gray-800 bg-gray-400 border-gray-200 sm:pb-4 xm:pb-4">
       {loading ? (
         <Spinner />
       ) : (
-        <div className="flex w-full flex-col items-center justify-center  lg:pt-6 sm:m-2 md:m-0">
+        <div className="flex p-4 flex-col max-w-xl w-full rounded-xl  dark:bg-gray-700 bg-gray-100 items-center justify-center sm:m-2 md:m-0">
           <p className="flex items-center  mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
             Reset your Password
           </p>
-          <div className="w-full bg-gray-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div className="w-full bg-gray-300 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h2 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Your Account Email
