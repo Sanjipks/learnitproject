@@ -11,7 +11,6 @@ const VerifyAccount = () => {
 
   const { loginInfo } = useLogin();
   const email = loginInfo.userEmail;
-  console.log(email);
 
   const navigate = useNavigate();
 

@@ -55,14 +55,6 @@ const Services = () => {
     setOpenAddForm(false);
   };
 
-  // useEffect(() => {
-  //   getServices(pagenumber).then((data) => {
-  //     setServicesList(data.paginatedServices);
-  //     setServicesPerpage(data.servicesPerPage);
-  //     setTotalServicesCount(data.totalEntries);
-  //   });
-  // }, [pagenumber, deletedId]);
-
   useEffect(() => {
     const fetchServices = async () => {
       setLoading(true);
@@ -119,36 +111,6 @@ const Services = () => {
       }
     }
   };
-
-  //it deletes the user if condition is met
-  // useEffect(() => {
-  //   if (confirmDelete && deletedId !== null) {
-  //     const deleteServiceAsync = async () => {
-  //       try {
-  //         const response = await deleteService(deletedId, loggedinUserRole);
-  //         const data = await response.json();
-
-  //         if (response.ok) {
-  //           toast(data.message);
-  //           setFilteredServices(
-  //             servicesList.filter((service) => service.service_id !== deletedId)
-  //           );
-  //         } else {
-  //           console.error("Failed to remove user");
-  //         }
-  //       } catch (error) {
-  //         console.error("Error:", error);
-  //       } finally {
-  //         setDeletedId(null); // Reset deletedId after operation
-  //         setConfirmDelete(false); // Reset confirmDelete after operation
-  //       }
-  //     };
-
-  //     deleteServiceAsync();
-  //   } else {
-  //     return;
-  //   }
-  // }, [confirmDelete]);
 
   return (
     <>

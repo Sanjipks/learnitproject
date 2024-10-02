@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { useLogin } from "../../context/LoginContext";
 import Login from "../common/Login";
 import CartIcon from "../../assets/icons/CartIcon";
-import PaymentForm from "./Payment";
 
 const CheckOutPage = () => {
   const { cartItems } = useCart();

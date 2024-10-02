@@ -32,18 +32,6 @@ export default function UsersBlockViewPage(props) {
     }
   };
 
-  // try {
-  //   useEffect(() => {
-  //     getUsers(loggedinUserRole, pagenumber).then((data) => {
-  //       setUserlist(data.paginatedUsers),
-  //         setUserperpage(data.usersPerPage),
-  //         setTotalUserscount(data.totalEntries);
-  //     });
-  //   }, [pagenumber, deletedUser]);
-  // } catch (error) {
-  //   throw new Error("Error:", error);
-  // }
-
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
