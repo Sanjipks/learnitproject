@@ -46,18 +46,6 @@ export default function UserListViewPage(props) {
     fetchUsers();
   }, []);
 
-  // try {
-  //   useEffect(() => {
-  //     getUsers(loggedinUserRole, pagenumber).then((data) => {
-  //       setFilteredUsers(data.allUsers),
-  //         setAllUsers(data.allUsers),
-  //         setTotalUserscount(data.totalEntries);
-  //     });
-  //   }, []);
-  // } catch (error) {
-  //   throw new Error("Error:", error);
-  // }
-
   const handlePrevPageList = () => {
     if (pagenumberlist > 1) {
       setPagenumberlist(pagenumberlist - 1);

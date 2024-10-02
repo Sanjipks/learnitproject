@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import ServiceCard from "../../components/ServiceCard";
 import { deleteService, getServices } from "../../apis/Api";
 import AddNewService from "../../components/modals/AddNewService";
@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import CartIcon from "../../assets/icons/CartIcon";
 import ConfirmDecision from "../../components/modals/utilitycomponent/ConfirmDecision";
-import Spinner from "../../components/common/Spinner";
+// import Spinner from "../../components/common/Spinner";
+const LazySpinner = React.lazy(() => import("../../components/common/Spinner"));
 
 const Services = () => {
   const [servicesList, setServicesList] = useState([]);
@@ -53,14 +54,6 @@ const Services = () => {
   const handleclose = () => {
     setOpenAddForm(false);
   };
-
-  // useEffect(() => {
-  //   getServices(pagenumber).then((data) => {
-  //     setServicesList(data.paginatedServices);
-  //     setServicesPerpage(data.servicesPerPage);
-  //     setTotalServicesCount(data.totalEntries);
-  //   });
-  // }, [pagenumber, deletedId]);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -119,154 +112,132 @@ const Services = () => {
     }
   };
 
-  //it deletes the user if condition is met
-  // useEffect(() => {
-  //   if (confirmDelete && deletedId !== null) {
-  //     const deleteServiceAsync = async () => {
-  //       try {
-  //         const response = await deleteService(deletedId, loggedinUserRole);
-  //         const data = await response.json();
-
-  //         if (response.ok) {
-  //           toast(data.message);
-  //           setFilteredServices(
-  //             servicesList.filter((service) => service.service_id !== deletedId)
-  //           );
-  //         } else {
-  //           console.error("Failed to remove user");
-  //         }
-  //       } catch (error) {
-  //         console.error("Error:", error);
-  //       } finally {
-  //         setDeletedId(null); // Reset deletedId after operation
-  //         setConfirmDelete(false); // Reset confirmDelete after operation
-  //       }
-  //     };
-
-  //     deleteServiceAsync();
-  //   } else {
-  //     return;
-  //   }
-  // }, [confirmDelete]);
-
   return (
     <>
       <div className="min-h-screen  mx-auto h-auto flex flex-col justify-items-center justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
-        <div className="mt-28">
-          <div className=" max-w-screen-xl flex w-full mx-auto">
-            <div className="w-full flex mx-auto justify-center bg-gray-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800">
-              <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
-                Services
-              </h1>
+        <Suspense
+          fallback={
+            <div className="justify-center justify-items-center text-center">
+              Loading...
             </div>
-          </div>
-          {loggedinUserRole === "admin" ? (
-            <div className="max-w-screen-xl flex justify-end px-2  mx-auto mt-12">
-              <button
-                onClick={handleOpenAddService}
-                className=" flex items-center bg-gray-100 rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
-              >
-                Add New Service +
-              </button>
-              {openAddForm ? (
-                <AddNewService
-                  handleformview={handleFormView}
-                  handleclose={handleclose}
-                />
-              ) : (
-                <></>
-              )}
+          }
+        >
+          <div className="mt-28">
+            <div className=" max-w-screen-xl flex w-full mx-auto">
+              <div className="w-full flex mx-auto justify-center bg-gray-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800">
+                <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
+                  Services
+                </h1>
+              </div>
             </div>
-          ) : (
-            <div className="max-w-screen-xl flex justify-between px-2  mx-auto mt-12">
-              <button
-                onClick={handleCartView}
-                className="flex bg-gray-100 rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
-              >
-                <Cart cartItems={cartItems} />
-              </button>
-              <button
-                onClick={handleClearCart}
-                className="flex bg-gray-100 rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
-              >
-                Clear
-                <span className="ml-4">
-                  <CartIcon />
-                </span>
-              </button>
-            </div>
-          )}
-
-          <div className="flex justify-center mt-2" onMouseDown={handleclose}>
-            {loading ? (
-              <Spinner />
+            {loggedinUserRole === "admin" ? (
+              <div className="max-w-screen-xl flex justify-end px-2  mx-auto mt-12">
+                <button
+                  onClick={handleOpenAddService}
+                  className=" flex items-center bg-gray-100 rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
+                >
+                  Add New Service +
+                </button>
+                {openAddForm ? (
+                  <AddNewService
+                    handleformview={handleFormView}
+                    handleclose={handleclose}
+                  />
+                ) : (
+                  <></>
+                )}
+              </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-                {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
-                {servicesList.map((service, id) => (
-                  <div key={id} className="p-2">
-                    <ServiceCard
-                      key={service.service_id}
-                      service={service.service_name}
-                      serviceId={service.service_id}
-                      serviceLogo={service.service_image}
-                      servicePrice={service.service_price}
-                      deleteService={handleDelete}
-                      expandedservice={expandedservice}
-                      setExpandedservice={setExpandedservice}
-                    />
-                  </div>
-                ))}
+              <div className="max-w-screen-xl flex justify-between px-2  mx-auto mt-12">
+                <button
+                  onClick={handleCartView}
+                  className="flex bg-gray-100 rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
+                >
+                  <Cart cartItems={cartItems} />
+                </button>
+                <button
+                  onClick={handleClearCart}
+                  className="flex bg-gray-100 rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
+                >
+                  Clear
+                  <span className="ml-4">
+                    <CartIcon />
+                  </span>
+                </button>
               </div>
             )}
-          </div>
-        </div>
 
-        <div className="flex flex-col items-center ">
-          <div>
-            {servicesList ? (
-              <span className="text-sm text-gray-950 dark:text-gray-400">
-                Showing{" "}
-                <span className="font-semibold text-gray-900 dark:text-white">
-                  {pagenumber * servicesPerpage - (servicesPerpage - 1)}
-                </span>{" "}
-                {servicesList.length !== 1 ? " to " : null}
-                {servicesList.length !== 1 ? (
+            <div className="flex justify-center mt-2" onMouseDown={handleclose}>
+              {loading ? (
+                <LazySpinner />
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+                  {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
+                  {servicesList.map((service, id) => (
+                    <div key={id} className="p-2">
+                      <ServiceCard
+                        key={service.service_id}
+                        service={service.service_name}
+                        serviceId={service.service_id}
+                        serviceLogo={service.service_image}
+                        servicePrice={service.service_price}
+                        deleteService={handleDelete}
+                        expandedservice={expandedservice}
+                        setExpandedservice={setExpandedservice}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center ">
+            <div>
+              {servicesList ? (
+                <span className="text-sm text-gray-950 dark:text-gray-400">
+                  Showing{" "}
                   <span className="font-semibold text-gray-900 dark:text-white">
-                    {(pagenumber - 1) * servicesPerpage + servicesList.length}
-                  </span>
-                ) : null}
-                <span className="font-semibold text-gray-900 dark:text-white">
-                  {" of "} {totalServicesCount}
-                </span>{" "}
-                Total Services
-              </span>
-            ) : (
-              "NO USERS TO DISPLAY"
-            )}
-          </div>
+                    {pagenumber * servicesPerpage - (servicesPerpage - 1)}
+                  </span>{" "}
+                  {servicesList.length !== 1 ? " to " : null}
+                  {servicesList.length !== 1 ? (
+                    <span className="font-semibold text-gray-900 dark:text-white">
+                      {(pagenumber - 1) * servicesPerpage + servicesList.length}
+                    </span>
+                  ) : null}
+                  <span className="font-semibold text-gray-900 dark:text-white">
+                    {" of "} {totalServicesCount}
+                  </span>{" "}
+                  Total Services
+                </span>
+              ) : (
+                "NO USERS TO DISPLAY"
+              )}
+            </div>
 
-          <div className="flex max-w-screen-xl w-full justify-between my-2  float-end">
-            <button
-              disabled={pagenumber === 1}
-              onClick={handlePrevPage}
-              className="items-center px-4 h-8 text-sm font-medium text-white disabled:cursor-not-allowed disabled:bg-gray-100 bg-gray-800 rounded-s border  disabled:hover:bg-gray-100 hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              &larr; Prev
-            </button>
-            <button
-              disabled={
-                pagenumber ===
-                  Math.ceil(totalServicesCount / servicesPerpage) ||
-                servicesList.length === 0
-              }
-              onClick={handleNextPage}
-              className="items-center px-4 h-8 text-sm font-medium text-white  disabled:cursor-not-allowed disabled:bg-gray-100 disabled:hover:bg-gray-100 bg-gray-800  rounded-e border border-gray-700  hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              Next &rarr;
-            </button>
+            <div className="flex max-w-screen-xl w-full justify-between my-2  float-end">
+              <button
+                disabled={pagenumber === 1}
+                onClick={handlePrevPage}
+                className="items-center px-4 h-8 text-sm font-medium text-white disabled:cursor-not-allowed disabled:bg-gray-100 bg-gray-800 rounded-s border  disabled:hover:bg-gray-100 hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                &larr; Prev
+              </button>
+              <button
+                disabled={
+                  pagenumber ===
+                    Math.ceil(totalServicesCount / servicesPerpage) ||
+                  servicesList.length === 0
+                }
+                onClick={handleNextPage}
+                className="items-center px-4 h-8 text-sm font-medium text-white  disabled:cursor-not-allowed disabled:bg-gray-100 disabled:hover:bg-gray-100 bg-gray-800  rounded-e border border-gray-700  hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              >
+                Next &rarr;
+              </button>
+            </div>
           </div>
-        </div>
+        </Suspense>
       </div>
       {pop ? (
         <ConfirmDecision
