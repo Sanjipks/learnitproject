@@ -18,6 +18,14 @@ function UserInfo() {
     }
   };
 
+  const handleEdit = () => {
+    "todo";
+  };
+
+  const handleExportData = () => {
+    "todo";
+  };
+
   return (
     <div className="flex justify-center items-center ">
       <div className="w-full h-full bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -47,45 +55,39 @@ function UserInfo() {
           >
             <ul className="py-2" aria-labelledby="dropdownButton">
               <li>
-                <a
-                  href="#"
+                <div
+                  type="button"
+                  onClick={handleEdit}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Edit
-                </a>
+                </div>
               </li>
               <li>
-                <a
-                  href="#"
+                <div
+                  onClick={handleExportData}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Export Data
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Delete
-                </a>
+                </div>
               </li>
             </ul>
           </div>
         </div>
         <div className="flex ml-16 min-h-96 flex-col pb-10">
-          <div className="flex flex-col">
-            <label
-              htmlFor="username"
-              className="block mb-2 mr-4 text-xl font-medium text-gray-900 dark:text-white"
-            >
+          <div className="flex flex-col space-y-2">
+            <label className="block text-xl font-medium text-gray-900 dark:text-white">
               Name: {username}
             </label>
-            <label
-              id="useremail"
-              className="block text-xl font-medium text-gray-900 dark:text-white"
-            >
+            <label className="block text-xl font-medium text-gray-900 dark:text-white">
               Email: {useremail}
+            </label>
+            <label className="block  text-xl font-medium text-gray-900 dark:text-white">
+              <span>Address: 123 Home Road City, VA 23456</span>
+            </label>
+            <label className="block space-x-2 text-xl font-medium text-gray-900 dark:text-white">
+              Phone: <span>703</span>
+              <span>45678790</span>
             </label>
           </div>
         </div>
