@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import CartIcon from "../../assets/icons/CartIcon";
 import ConfirmDecision from "../../components/modals/utilitycomponent/ConfirmDecision";
-// import Spinner from "../../components/common/Spinner";
 const LazySpinner = React.lazy(() => import("../../components/common/Spinner"));
 
 const Services = () => {
@@ -78,7 +77,6 @@ const Services = () => {
     navigate("/mycart");
   };
 
-  //clearcart
   const handleClearCart = () => {
     clearCart();
   };

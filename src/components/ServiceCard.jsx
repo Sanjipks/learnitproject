@@ -88,14 +88,7 @@ const ServiceCard = (props) => {
     <>
       <div className="flex">
         <div className="w-80 bg-gray-200 border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
-          <div
-            className="flex justify-between px-4 pt-4"
-            // onMouseLeave={
-            //   loggedinUserRole === "user" || loggedinUserRole === null
-            //     ? handleMouseLeave
-            //     : null
-            // }
-          >
+          <div className="flex justify-between px-4 pt-4">
             <button
               onClick={() => handleExpand(serviceId)}
               id="dropdownButton"
