@@ -46,11 +46,6 @@ const PaymentForm = () => {
           <div className="max-w-screen-xl w-full sm:h-auto sm:m-auto flex md:flex-row xm:flex-col-reverse">
             <section className="flex md:h-[756px]  bg-gray-400 dark:bg-gray-900 sm:rounded-br-xl md:rounded-br-none sm:rounded-bl-xl md:rounded-tl-xl  justify-center items-center w-full">
               Payment Type: {type}
-              {/* <Carasoul
-              images={images ? images : "no image"}
-              buttonShow={false}
-              csss="w-auto md:h-[756px] sm:rounded-br-xl md:rounded-br-none sm:rounded-bl-xl md:rounded-tl-xl"
-            /> */}
             </section>
             <section className="flex md:h-[756px] justify-center items-center min-h-max w-full bg-gray-400 dark:bg-gray-900 md:rounded-br-xl sm:rounded-tr-xl sm:rounded-tl-xl md:rounded-tl-none sm:mt-8 md:mt-0 sm:px-2 md:px-0">
               <div className=" flex w-full flex-col items-center justify-center sm:py-2 md:py-0 m-auto ">
