@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
-import { getUserInfo } from "../apis/Api";
+import { changeProfileImage, getUserInfo } from "../apis/Api";
+import { convertToBase64 } from "../utility/ConvertToBase64";
 
 function UserProfile() {
   const { loginInfo } = useLogin();
   //const rawimage = loginInfo.userImage;
   const username = loginInfo.userName;
   const email = loginInfo.userEmail;
+  const token = loginInfo.token;
   const [expand, setExpand] = useState("hidden");
   const [userImage, setUserImage] = useState(null);
+  const [newProfileImage, setNewProfileImage] = useState(null);
   // console.log("raw", rawimage);
 
   // useEffect(() => {
@@ -40,7 +43,7 @@ function UserProfile() {
     };
 
     fetchUserInfo();
-  }, [email]);
+  }, [email, newProfileImage]);
 
   const handleCardClick = () => {
     if (expand === "hidden") {
@@ -50,8 +53,27 @@ function UserProfile() {
     }
   };
 
-  const handleChangePhoto = () => {
-    "todo";
+  const handleChangePhoto = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setNewProfileImage(event.target.files[0]);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    let base64Image = null;
+
+    if (newProfileImage) {
+      base64Image = await convertToBase64(newProfileImage);
+    }
+    const bodyData = { profileImage: base64Image, email, token };
+
+    const res = await changeProfileImage(bodyData);
+    const data = await res.json();
+
+    if (res.status == 201) {
+      toast(data.message);
+    }
   };
 
   return (
@@ -77,20 +99,67 @@ function UserProfile() {
             </svg>
           </button>
 
+          {/* <div
+            id="dropdown"
+            className={`absolute mt-10 z-10 ${expand} text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
+          >
+            <ul className="p-2" aria-labelledby="dropdownButton">
+              <li>
+                <label
+                  htmlFor="serviceimage"
+                  className="block py-4 mx-auto text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Change Profile Image
+                </label>
+                <input
+                  type="file"
+                  name="serviceimage"
+                  id="serviceimage"
+                  onClick={handleChangePhoto}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="add image"
+                  required
+                />
+              </li>
+              <button className="border border-gray-900 dark:border-gray-100 m-2 px-2 py-1 rounded-md text-gray-900 dark:text-gray-100">
+                Submit
+              </button>
+            </ul>
+          </div> */}
           <div
             id="dropdown"
             className={`absolute mt-10 z-10 ${expand} text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
           >
-            <ul className="py-2" aria-labelledby="dropdownButton">
-              <li>
-                <div
-                  onClick={handleChangePhoto}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+            <form
+              onSubmit={handleSubmit}
+              className="p-2"
+              aria-labelledby="dropdownButton"
+            >
+              <div className="mb-4">
+                <label
+                  htmlFor="serviceimage"
+                  className="block text-md py-2 font-medium text-gray-900 dark:text-white"
                 >
-                  Change Profile Photo
-                </div>
-              </li>
-            </ul>
+                  Change Profile Image
+                </label>
+                <input
+                  type="file"
+                  name="serviceimage"
+                  id="serviceimage"
+                  onChange={handleChangePhoto}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="add image"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full border border-gray-900 dark:border-gray-100 px-2 py-1 rounded-md text-center text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600"
+              >
+                Submit
+              </button>
+            </form>
           </div>
         </div>
         <div className="md:min-h-96 flex flex-col items-center pb-10">
