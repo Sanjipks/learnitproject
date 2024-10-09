@@ -11,6 +11,7 @@ const GET_SERVICES = import.meta.env.VITE_GET_SERVICES;
 const ADD_SERVICE = import.meta.env.VITE_ADD_SERVICE;
 const SEND_CONTACTUS_MESSAGE = import.meta.env.VITE_CONTACT_US_MSG;
 const VIEW_CONTACTUS_MESSAGES = import.meta.env.VITE_CONTACT_US_VIEW_MSG;
+const CHANGE_PIMAGE = import.meta.env.VITE_CHANGE_PROFILEIMAGE;
 
 export const getUsers = async (loggedinUserRole, pagenumber) => {
   const res = await fetch(
@@ -220,6 +221,18 @@ export const deleteMessageInfo = async (id, loggedinUserRole) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ loggedinUserRole }),
+  });
+  return res;
+};
+
+//to change profile image
+export const changeProfileImage = async (bodyData) => {
+  const res = await fetch(`${CHANGE_PIMAGE}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bodyData),
   });
   return res;
 };
