@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";
 import EditService from "./modals/EditService";
 import { useCart } from "../context/CartContext";
 import CartIcon from "../assets/icons/CartIcon";
+const LazySpinner = React.lazy(() => import("./common/Spinner"));
 
 const ServiceCard = (props) => {
   const {
@@ -23,6 +24,7 @@ const ServiceCard = (props) => {
   const [image, setImage] = useState(null);
   const [expand, setExpand] = useState("hidden");
   const [serviceEditPop, setServiceEditPop] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   let serviceObject = { service, serviceId, image, servicePrice };
 
@@ -35,6 +37,7 @@ const ServiceCard = (props) => {
       const base64String = bufferToBase64(serviceLogo.data);
       setImage(`data:image/jpeg;base64,${base64String}`);
     }
+    setLoading(false);
   }, [serviceLogo]);
 
   const handleExpand = (id) => {
@@ -185,11 +188,16 @@ const ServiceCard = (props) => {
             />
           ) : null}
           <div className="flex flex-col items-center pb-10">
-            <img
-              className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"
-              src={image ? image : "no image"}
-              alt="Bonnie image"
-            />
+            {loading ? (
+              <LazySpinner />
+            ) : (
+              <img
+                className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"
+                src={image ? image : "no image"}
+                alt="Bonnie image"
+              />
+            )}
+
             <div className="mb-1 text-xl  min-w-full font-medium text-center text-gray-900 dark:text-white p-4">
               {service}
               <p className="mb-1 xl:text-xl lg:text-lg md:text-sm  text-center font-medium text-gray-900 dark:text-white">
