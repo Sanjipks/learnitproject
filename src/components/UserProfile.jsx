@@ -3,6 +3,7 @@ import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
 import { changeProfileImage, getUserInfo } from "../apis/Api";
 import { convertToBase64 } from "../utility/ConvertToBase64";
+import { toast } from "react-toastify";
 
 function UserProfile() {
   const { loginInfo } = useLogin();
@@ -43,7 +44,7 @@ function UserProfile() {
     };
 
     fetchUserInfo();
-  }, [email, newProfileImage]);
+  }, []);
 
   const handleCardClick = () => {
     if (expand === "hidden") {
@@ -53,26 +54,30 @@ function UserProfile() {
     }
   };
 
-  const handleChangePhoto = (event) => {
+  const handleChangePhoto = async (event) => {
     if (event.target.files && event.target.files[0]) {
-      setNewProfileImage(event.target.files[0]);
+      let newImage = event.target.files[0];
+      setNewProfileImage(newImage);
+      let base64Image = await convertToBase64(newImage);
+      setUserImage(base64Image);
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     let base64Image = null;
-
     if (newProfileImage) {
       base64Image = await convertToBase64(newProfileImage);
+      setUserImage(base64Image);
     }
     const bodyData = { profileImage: base64Image, email, token };
 
     const res = await changeProfileImage(bodyData);
     const data = await res.json();
 
-    if (res.status == 201) {
+    if (res.status == 200) {
       toast(data.message);
+      setExpand("hidden");
     }
   };
 
@@ -157,7 +162,7 @@ function UserProfile() {
                 type="submit"
                 className="w-full border border-gray-900 dark:border-gray-100 px-2 py-1 rounded-md text-center text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600"
               >
-                Submit
+                Save
               </button>
             </form>
           </div>
