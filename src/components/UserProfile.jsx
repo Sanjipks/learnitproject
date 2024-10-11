@@ -12,8 +12,9 @@ function UserProfile() {
   const email = loginInfo.userEmail;
   const token = loginInfo.token;
   const [expand, setExpand] = useState("hidden");
-  const [userImage, setUserImage] = useState(null);
-  const [newProfileImage, setNewProfileImage] = useState(null);
+  const [userImage, setUserImage] = useState("");
+  const [isNewImage, setIsNewImage] = useState(false);
+
   // console.log("raw", rawimage);
 
   // useEffect(() => {
@@ -56,28 +57,29 @@ function UserProfile() {
 
   const handleChangePhoto = async (event) => {
     if (event.target.files && event.target.files[0]) {
-      let newImage = event.target.files[0];
-      setNewProfileImage(newImage);
-      let base64Image = await convertToBase64(newImage);
+      const newImage = event.target.files[0];
+      const base64Image = await convertToBase64(newImage);
       setUserImage(base64Image);
+      setIsNewImage(true);
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let base64Image = null;
-    if (newProfileImage) {
-      base64Image = await convertToBase64(newProfileImage);
-      setUserImage(base64Image);
-    }
-    const bodyData = { profileImage: base64Image, email, token };
 
-    const res = await changeProfileImage(bodyData);
-    const data = await res.json();
+    if (userImage && isNewImage) {
+      const bodyData = { profileImage: userImage, email, token };
 
-    if (res.status == 200) {
-      toast(data.message);
-      setExpand("hidden");
+      const res = await changeProfileImage(bodyData);
+      const data = await res.json();
+
+      if (res.status === 200) {
+        toast(data.message);
+        setExpand("hidden");
+        setIsNewImage(false);
+      }
+    } else {
+      toast("No image selected.", 100);
     }
   };
 
