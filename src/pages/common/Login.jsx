@@ -63,7 +63,7 @@ export default function Login() {
         throw new Error(errorData.message);
       }
     } catch (error) {
-      toast(error.message);
+      toast(error.message, { autoClose: 1000 });
     } finally {
       setLoading(false); // Set loading to false after the API call is complete
     }

@@ -30,7 +30,7 @@ const VerifyAccount = () => {
         console.log("data", data);
 
         if (response.ok) {
-          toast(data.message);
+          toast(data.message, { autoClose: 1000 });
           navigate("/");
           localStorage.clear();
         }
@@ -40,7 +40,7 @@ const VerifyAccount = () => {
         setLoading(false);
       }
     } else {
-      toast("Please Enter the Code");
+      toast("Please Enter the Code", { autoClose: 1000 });
     }
   };
 

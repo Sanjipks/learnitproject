@@ -47,7 +47,7 @@ const Auth = () => {
         setLoading(false);
       }
     } else {
-      toast("Please provite the code");
+      toast("Please provite the code", { autoClose: 1000 });
     }
   };
   const handleResend = async () => {
@@ -60,7 +60,7 @@ const Auth = () => {
         toast("new code is sent to your email, please check you email");
       }
       if (res.status == 404) {
-        toast("email not found");
+        toast("email not found", { autoClose: 1000 });
       }
     } catch (error) {}
   };

@@ -25,7 +25,7 @@ const ForgetPassword = () => {
         navigate("/reset-forgot-password");
       }
       if (res.status === 404) {
-        toast("email not found");
+        toast("email not found", { autoClose: 1000 });
       }
     } catch (error) {
       console.error("Error:", error);
