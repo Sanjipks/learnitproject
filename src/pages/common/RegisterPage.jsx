@@ -67,10 +67,10 @@ export default function RegisterPage() {
           console.error("Error:", error);
         }
       } else {
-        toast("password did not match");
+        toast("password did not match", { autoClose: 1000 });
       }
     } else {
-      toast(passWordCheck.toastMessage);
+      toast(passWordCheck.toastMessage, { autoClose: 1000 });
     }
   };
 

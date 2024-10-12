@@ -31,7 +31,7 @@ const ContactUs = () => {
     try {
       const response = await sendContactUsMessages(email, sendername, message);
       if (response.status == 201) {
-        toast("message sent successfully");
+        toast("message sent successfully", { autoClose: 1000 });
       }
     } catch (error) {
       console.error("Error:", error);
