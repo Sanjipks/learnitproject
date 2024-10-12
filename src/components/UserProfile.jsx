@@ -74,12 +74,12 @@ function UserProfile() {
       const data = await res.json();
 
       if (res.status === 200) {
-        toast(data.message);
+        toast(data.message, { autoClose: 1000 });
         setExpand("hidden");
         setIsNewImage(false);
       }
     } else {
-      toast("No image selected.", 100);
+      toast("No image selected.", { autoClose: 1000 });
     }
   };
 
@@ -106,33 +106,6 @@ function UserProfile() {
             </svg>
           </button>
 
-          {/* <div
-            id="dropdown"
-            className={`absolute mt-10 z-10 ${expand} text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
-          >
-            <ul className="p-2" aria-labelledby="dropdownButton">
-              <li>
-                <label
-                  htmlFor="serviceimage"
-                  className="block py-4 mx-auto text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Change Profile Image
-                </label>
-                <input
-                  type="file"
-                  name="serviceimage"
-                  id="serviceimage"
-                  onClick={handleChangePhoto}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="add image"
-                  required
-                />
-              </li>
-              <button className="border border-gray-900 dark:border-gray-100 m-2 px-2 py-1 rounded-md text-gray-900 dark:text-gray-100">
-                Submit
-              </button>
-            </ul>
-          </div> */}
           <div
             id="dropdown"
             className={`absolute mt-10 z-10 ${expand} text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
