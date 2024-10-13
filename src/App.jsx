@@ -22,6 +22,7 @@ import MyCart from "./pages/user/MyCart";
 import CartProvider from "./context/CartContext";
 import CheckOutPage from "./pages/user/CheckOutPage";
 import PaymentForm from "./pages/user/Payment";
+import UserCircle from "./pages/user/UserCircle";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/user/progress" element={<Progress />} />
+            <Route path="/user/user-circle" element={<UserCircle />} />
             <Route path="/mycart" element={<MyCart />} />
             <Route path="/checkout" element={<CheckOutPage />} />
             <Route path="/paymentform" element={<PaymentForm />} />
