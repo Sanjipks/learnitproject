@@ -190,9 +190,9 @@ const Services = () => {
             </div>
           </div>
 
-          <div className="flex flex-col items-center ">
-            <div>
-              {servicesList ? (
+          <div className="flex flex-col items-center">
+            <div className="mt-4">
+              {servicesList.length !== 0 ? (
                 <span className="text-sm text-gray-950 dark:text-gray-400">
                   Showing{" "}
                   <span className="font-semibold text-gray-900 dark:text-white">
@@ -210,11 +210,11 @@ const Services = () => {
                   Total Services
                 </span>
               ) : (
-                "NO USERS TO DISPLAY"
+                "NO SERVICES TO DISPLAY"
               )}
             </div>
 
-            <div className="flex max-w-screen-xl w-full justify-between my-2  float-end">
+            <div className="flex max-w-screen-xl w-full justify-between mb-4 px-2 float-end">
               <button
                 disabled={pagenumber === 1}
                 onClick={handlePrevPage}
