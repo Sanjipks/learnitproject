@@ -10,6 +10,7 @@ const UserCircle = () => {
   const [pagenumber, setPagenumber] = useState(1);
   const [userperpage, setUserperpage] = useState(0);
   const [totalUserscount, setTotalUserscount] = useState(0);
+  const [expandeduser, setExpandeduser] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const { loginInfo } = useLogin();
@@ -66,6 +67,8 @@ const UserCircle = () => {
                   userId={user.user_id}
                   userEmail={user.user_email}
                   userImage={user.user_image}
+                  expandeduser={expandeduser}
+                  setExpandeduser={setExpandeduser}
                 />
               </div>
             ))}
