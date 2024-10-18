@@ -1,25 +1,18 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
-import EditUser from "./modals/EditUser";
 import { useLogin } from "../context/LoginContext";
+import ChatBox from "./Chatbox";
 
-export default function User(props) {
+export default function UsersForCircle(props) {
   const { loginInfo } = useLogin();
   const loggedInUserRole = loginInfo.userRole;
 
-  const {
-    removeUser,
-    userId,
-    userImage,
-    user,
-    userEmail,
-    expandeduser,
-    setExpandeduser,
-  } = props;
+  const { userId, userImage, user, userEmail, expandeduser, setExpandeduser } =
+    props;
   const [expand, setExpand] = useState("hidden");
-  const [popUserEditModel, setPopUserEditModel] = useState(false);
   const [image, setImage] = useState(null);
+  const [openchatbox, setOpenchatbox] = useState(false);
 
   useEffect(() => {
     if (userImage && userImage.data) {
@@ -48,28 +41,18 @@ export default function User(props) {
     }
   };
 
-  const handleDelete = (id) => {
-    removeUser(id);
-    setExpand("hidden");
-  };
-
-  const handleEditUser = () => {
-    setPopUserEditModel((prev) => !prev);
-  };
-
   const handleClose = () => {
-    setPopUserEditModel(false);
-    setExpand("hidden");
-    setExpandeduser(null);
+    setOpenchatbox(false);
   };
 
   const handleOpenChatbox = () => {
     setOpenchatbox(true);
+    setExpand("hidden");
   };
 
   return (
     <>
-      {loggedInUserRole === "admin" ? (
+      {loggedInUserRole === "user" ? (
         <div className="flex">
           <div className="w-full max-w-sm bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div
@@ -100,30 +83,24 @@ export default function User(props) {
                   className={`z-10 ${expand} absolute ml-10 text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
                 >
                   <ul className="py-2" aria-labelledby="dropdownButton">
-                    <li>
-                      <a
-                        onClick={handleEditUser}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Edit
-                      </a>
+                    <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                      connect
+                    </li>
+                    <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                      send Message
                     </li>
 
-                    <li>
-                      <a
-                        onClick={() => handleDelete(userId)}
-                        className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Delete
-                      </a>
+                    <li
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      onClick={handleOpenChatbox}
+                    >
+                      chat
                     </li>
                   </ul>
                 </div>
               ) : null}
             </div>
-            {popUserEditModel && expandeduser === userId ? (
-              <EditUser handleclose={handleClose} />
-            ) : null}
+
             <div className="flex flex-col items-center pb-10">
               <img
                 className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"
@@ -140,6 +117,7 @@ export default function User(props) {
           </div>
         </div>
       ) : null}
+      {openchatbox ? <ChatBox user={user} handleclose={handleClose} /> : null}
     </>
   );
 }

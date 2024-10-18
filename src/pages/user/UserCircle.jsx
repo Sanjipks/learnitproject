@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Spinner from "../../components/common/Spinner";
-import User from "../../components/UserBlockViewCard";
+import User from "../../components/UsersCardForCircle";
 import { getUsers } from "../../apis/Api";
 import { useLogin } from "../../context/LoginContext";
 
