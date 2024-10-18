@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
 const ChatBox = () => {
-  const [messages, setMessages] = useState([]);
+  const [sentmessages, setSentMessages] = useState([]);
+  const [recievedmessages, setreceivedMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
   const handleSend = () => {
     if (newMessage.trim() !== "") {
-      setMessages([...messages, newMessage]);
+      setSentMessages([...sentmessages, newMessage]);
       setNewMessage("");
     }
   };
@@ -14,14 +15,14 @@ const ChatBox = () => {
   return (
     <div className=" absolute flex flex-col w-full max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md">
       <div className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner">
-        {messages.length === 0 ? (
+        {sentmessages.length === 0 ? (
           <p className="text-gray-400 text-center">No messages yet...</p>
         ) : (
-          messages.map((msg, index) => (
+          sentmessages.map((msg, index) => (
             <div
               key={index}
               className={`my-1 p-2 rounded-lg ${
-                index % 2 === 0
+                sentmessages
                   ? "bg-blue-500 text-white self-start"
                   : "bg-green-500 text-white self-end"
               }`}
