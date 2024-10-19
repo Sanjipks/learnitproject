@@ -2,17 +2,23 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
-import ChatBox from "./Chatbox";
 
 export default function UsersForCircle(props) {
   const { loginInfo } = useLogin();
   const loggedInUserRole = loginInfo.userRole;
 
-  const { userId, userImage, user, userEmail, expandeduser, setExpandeduser } =
-    props;
+  const {
+    userId,
+    userImage,
+    user,
+    userEmail,
+    setExpandeduser,
+    expandeduserId,
+    setExpandeduserId,
+    setOpenchatbox,
+  } = props;
   const [expand, setExpand] = useState("hidden");
   const [image, setImage] = useState(null);
-  const [openchatbox, setOpenchatbox] = useState(false);
 
   useEffect(() => {
     if (userImage && userImage.data) {
@@ -21,29 +27,25 @@ export default function UsersForCircle(props) {
     }
   }, [userImage]);
 
-  const handleExpand = (id) => {
-    if (expand === "hidden" && expandeduser === null) {
+  const handleExpand = (id, username) => {
+    if (expand === "hidden" && expandeduserId === null) {
       setExpand("block");
-      setExpandeduser(id);
+      setExpandeduserId(id);
+      setExpandeduser(username);
     } else {
       setExpand("hidden");
+      setExpandeduserId(null);
       setExpandeduser(null);
-      setPopUserEditModel(false);
     }
   };
 
-  const handleMouseLeave = () => {
-    if (popUserEditModel === false) {
-      setExpand("hidden");
-      setPopUserEditModel(false);
-    } else {
-      setExpand("block");
-    }
-  };
-
-  const handleClose = () => {
-    setOpenchatbox(false);
-  };
+  // const handleMouseLeave = () => {
+  //   if (openchatbox === false) {
+  //     setExpand("hidden");
+  //   } else {
+  //     setExpand("block");
+  //   }
+  // };
 
   const handleOpenChatbox = () => {
     setOpenchatbox(true);
@@ -57,10 +59,10 @@ export default function UsersForCircle(props) {
           <div className="w-full max-w-sm bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div
               className="flex justify-start px-4 pt-4"
-              onMouseLeave={handleMouseLeave}
+              // onMouseLeave={handleMouseLeave}
             >
               <button
-                onClick={() => handleExpand(userId)}
+                onClick={() => handleExpand(userId, user)}
                 id="dropdownButton"
                 data-dropdown-toggle="dropdown"
                 className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
@@ -77,7 +79,7 @@ export default function UsersForCircle(props) {
                   <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
                 </svg>
               </button>
-              {expandeduser === userId ? (
+              {expandeduserId === userId ? (
                 <div
                   id="dropdown"
                   className={`z-10 ${expand} absolute ml-10 text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
@@ -92,7 +94,7 @@ export default function UsersForCircle(props) {
 
                     <li
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      onClick={handleOpenChatbox}
+                      onClick={() => handleOpenChatbox(true)}
                     >
                       chat
                     </li>
@@ -117,7 +119,6 @@ export default function UsersForCircle(props) {
           </div>
         </div>
       ) : null}
-      {openchatbox ? <ChatBox user={user} handleclose={handleClose} /> : null}
     </>
   );
 }

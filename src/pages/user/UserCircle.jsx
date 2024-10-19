@@ -4,6 +4,7 @@ import Spinner from "../../components/common/Spinner";
 import User from "../../components/UsersCardForCircle";
 import { getUsers } from "../../apis/Api";
 import { useLogin } from "../../context/LoginContext";
+import ChatBox from "../../components/Chatbox";
 
 const UserCircle = () => {
   const [userlist, setUserlist] = useState([]);
@@ -11,7 +12,10 @@ const UserCircle = () => {
   const [userperpage, setUserperpage] = useState(0);
   const [totalUserscount, setTotalUserscount] = useState(0);
   const [expandeduser, setExpandeduser] = useState(null);
+  const [expandeduserId, setExpandeduserId] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [openchatbox, setOpenchatbox] = useState(false);
+  const [opengroupchatbox, setOpengroupchatbox] = useState(false);
 
   const { loginInfo } = useLogin();
   const loggedinUserRole = loginInfo.userRole;
@@ -45,6 +49,11 @@ const UserCircle = () => {
       setPagenumber(pagenumber + 1);
     }
   };
+
+  const handleclose = () => {
+    setOpenchatbox(false);
+  };
+
   return (
     <div className="min-h-dvh h-auto flex flex-col justify-items-start justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
       <div className="md:my-20 xm:my-10">
@@ -69,6 +78,10 @@ const UserCircle = () => {
                   userImage={user.user_image}
                   expandeduser={expandeduser}
                   setExpandeduser={setExpandeduser}
+                  expandeduserId={expandeduserId}
+                  setExpandeduserId={setExpandeduserId}
+                  openchatbox={openchatbox}
+                  setOpenchatbox={setOpenchatbox}
                 />
               </div>
             ))}
@@ -119,6 +132,9 @@ const UserCircle = () => {
           </button>
         </div>
       </div>
+      {openchatbox ? (
+        <ChatBox handleclose={handleclose} user={expandeduser} />
+      ) : null}
     </div>
   );
 };
