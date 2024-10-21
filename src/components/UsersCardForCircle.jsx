@@ -6,6 +6,7 @@ import { useLogin } from "../context/LoginContext";
 export default function UsersForCircle(props) {
   const { loginInfo } = useLogin();
   const loggedInUserRole = loginInfo.userRole;
+  const loggedInUserId = login.Info.userId;
 
   const {
     userId,
@@ -51,6 +52,12 @@ export default function UsersForCircle(props) {
     setOpenchatbox(true);
     setExpand("hidden");
   };
+  const handleConnect = (loggedinUser) => {
+    "todo";
+  };
+  const handleSendOfflineMessage = (loggedinUser) => {
+    "todo";
+  };
 
   return (
     <>
@@ -85,16 +92,22 @@ export default function UsersForCircle(props) {
                   className={`z-10 ${expand} absolute ml-10 text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
                 >
                   <ul className="py-2" aria-labelledby="dropdownButton">
-                    <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                    <li
+                      onClick={() => handleConnect(loggedInUserId)}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
                       connect
                     </li>
-                    <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                    <li
+                      onclikc={() => handleSendOfflineMessage(loggedInUserId)}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
                       send Message
                     </li>
 
                     <li
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       onClick={() => handleOpenChatbox(true)}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
                       chat
                     </li>
