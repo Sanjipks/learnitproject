@@ -78,10 +78,10 @@ function Footer() {
           <div className="sm:flex sm:items-center sm:justify-between">
             <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
               © {year}{" "}
-              <a href="/" className="hover:underline">
+              <a href="/about" className="hover:underline">
                 LearnIT™
-              </a>
-              . All Rights Reserved.
+              </a>{" "}
+              All Rights Reserved.
             </span>
             <div className="flex mt-4 sm:justify-center sm:mt-0">
               <a
