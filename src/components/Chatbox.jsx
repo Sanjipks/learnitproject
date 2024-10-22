@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import io from "socket.io-client";
+const BEHOST = import.meta.env.VITE_BELC;
+
+const socket = io(BEHOST);
+console.log(socket);
 
 const ChatBox = (props) => {
   const { user, handleclose } = props;
   const [sentmessages, setSentMessages] = useState([]);
-  const [recievedmessages, setreceivedMessages] = useState([]);
+  const [recievedmessages, setReceivedMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
   const handleInput = (e) => {
@@ -16,6 +21,17 @@ const ChatBox = (props) => {
       setNewMessage("");
     }
   };
+
+  useEffect(() => {
+    socket.on("message", (newMessage) => {
+      setReceivedMessages((prevMessages) => [...prevMessages, newMessage]);
+    });
+
+    // clean up the effect when the component is unmounted
+    return () => {
+      socket.off("message");
+    };
+  }, [socket]);
 
   return (
     <div className="flex flex-col w-full fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden  max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md ">
@@ -46,18 +62,32 @@ const ChatBox = (props) => {
           <span className="sr-only">Close modal</span>
         </button>
       </div>
+      {sentmessages ? (
+        <div className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner">
+          {sentmessages &&
+            sentmessages.map((msg, index) => (
+              <div
+                key={index}
+                className="my-1 p-2 rounded-lg bg-blue-500 text-white self-start"
+              >
+                {msg}
+              </div>
+            ))}
+        </div>
+      ) : (
+        <div className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner">
+          {recievedmessages &&
+            recievedmessages.map((msg, index) => (
+              <div
+                key={index}
+                className="my-1 p-2 rounded-lg bg-blue-500 text-white self-start"
+              >
+                {msg}
+              </div>
+            ))}
+        </div>
+      )}
 
-      <div className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner">
-        {sentmessages &&
-          sentmessages.map((msg, index) => (
-            <div
-              key={index}
-              className="my-1 p-2 rounded-lg bg-blue-500 text-white self-start"
-            >
-              {msg}
-            </div>
-          ))}
-      </div>
       <div className="mt-4 flex">
         <input
           type="text"
