@@ -6,7 +6,7 @@ import { useLogin } from "../context/LoginContext";
 export default function UsersForCircle(props) {
   const { loginInfo } = useLogin();
   const loggedInUserRole = loginInfo.userRole;
-  const loggedInUserId = login.Info.userId;
+  const loggedInUserId = loginInfo.userId;
 
   const {
     userId,
