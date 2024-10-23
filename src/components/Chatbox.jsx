@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
+import { useLogin } from "../context/LoginContext";
 const BEHOST = import.meta.env.VITE_BELC;
 
 const socket = io(BEHOST);
 console.log(socket);
 
 const ChatBox = (props) => {
+  const { selectedUserId } = props;
+  const { loginInfo } = useLogin();
+  const loggedInUserId = loginInfo.userId;
   const { user, handleclose } = props;
   const [sentmessages, setSentMessages] = useState([]);
   const [recievedmessages, setReceivedMessages] = useState([]);
@@ -18,6 +22,11 @@ const ChatBox = (props) => {
   const handleSend = () => {
     if (newMessage.trim() !== "") {
       setSentMessages([...sentmessages, newMessage]);
+      socket.emit("message", {
+        senderId: loggedInUserId,
+        receiverId: selectedUserId,
+        message: newMessage,
+      });
       setNewMessage("");
     }
   };
