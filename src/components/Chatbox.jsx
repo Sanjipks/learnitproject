@@ -7,10 +7,9 @@ const socket = io(BEHOST);
 console.log(socket);
 
 const ChatBox = (props) => {
-  const { selectedUserId } = props;
+  const { selectedUserId, selectedUser, handleclose } = props;
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
-  const { user, handleclose } = props;
   const [sentmessages, setSentMessages] = useState([]);
   const [recievedmessages, setReceivedMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -46,7 +45,7 @@ const ChatBox = (props) => {
     <div className="flex flex-col w-full fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden  max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md ">
       <div>
         {" "}
-        <h1 className="py-2">{user}</h1>
+        <h1 className="py-2">{selectedUser}</h1>
         <button
           onClick={handleclose}
           type="button"
