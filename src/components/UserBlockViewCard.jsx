@@ -63,10 +63,6 @@ export default function User(props) {
     setExpandeduser(null);
   };
 
-  const handleOpenChatbox = () => {
-    setOpenchatbox(true);
-  };
-
   return (
     <>
       {loggedInUserRole === "admin" ? (
