@@ -3,8 +3,9 @@ import io from "socket.io-client";
 import { useLogin } from "../context/LoginContext";
 const BEHOST = import.meta.env.VITE_BELC;
 
-const socket = io(BEHOST);
-console.log(socket);
+const socket = io(BEHOST, {
+  withCredentials: true,
+});
 
 const ChatBox = (props) => {
   const { selectedUserId, selectedUser, handleclose } = props;

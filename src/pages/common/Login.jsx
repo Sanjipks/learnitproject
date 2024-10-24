@@ -41,6 +41,7 @@ export default function Login() {
         const token = data.token;
         const userRole = data.role;
         const userName = data.userName;
+        const userId = data.userId;
         const userImage = data.userImage;
 
         loginInfoUpdate(
@@ -48,6 +49,7 @@ export default function Login() {
           (loginInfo.userEmail = inputs.email),
           (loginInfo.userName = userName),
           (loginInfo.userRole = userRole),
+          (loginInfo.userId = userId),
           (loginInfo.userImage = userImage)
         );
 
