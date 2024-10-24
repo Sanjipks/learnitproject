@@ -27,6 +27,7 @@ const ChatBox = (props) => {
         senderId: loggedInUserId,
         receiverId: selectedUserId,
         message: newMessage,
+        timestamp: new Date().toISOString(),
       });
       setNewMessage("");
     }
@@ -49,9 +50,14 @@ const ChatBox = (props) => {
   }, [selectedUserId]);
 
   useEffect(() => {
-    setCombineMessages([...sentmessages, ...recievedmessages]);
-  }, [sentmessages, recievedmessages]);
+    const combined = [...sentmessages, ...recievedmessages];
 
+    const sortedMessages = combined.sort(
+      (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+    );
+
+    setCombineMessages(sortedMessages);
+  }, [sentmessages, recievedmessages]);
   return (
     <div className="flex flex-col w-full fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden  max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md ">
       <div>
