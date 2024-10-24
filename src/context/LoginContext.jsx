@@ -13,6 +13,7 @@ export default function LoginProvider({ children }) {
     userEmail: localStorage.getItem("userEmail"),
     userName: localStorage.getItem("userName"),
     userRole: localStorage.getItem("userRole"),
+    userId: localStorage.getItem("userId"),
     userImage: localStorage.getItem("userImage"),
   });
 
@@ -28,6 +29,7 @@ export default function LoginProvider({ children }) {
       localStorage.setItem("userEmail", updatedInfo.userEmail);
       localStorage.setItem("userName", updatedInfo.userName);
       localStorage.setItem("userRole", updatedInfo.userRole);
+      localStorage.setItem("userId", updatedInfo.userId);
       localStorage.setItem("userImage", JSON.stringify(updatedInfo.userImage));
 
       return updatedInfo;
