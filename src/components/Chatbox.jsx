@@ -8,12 +8,13 @@ const socket = io(BEHOST, {
 });
 
 const ChatBox = (props) => {
-  const { selectedUserId, selectedUser, handleclose } = props;
+  const { selectedUserId, selectedUser, handleclose, setOpenchatbox } = props;
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
   const [sentmessages, setSentMessages] = useState([]);
   const [recievedmessages, setReceivedMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [combineMessages, setCombineMessages] = useState([]);
 
   const handleInput = (e) => {
     setNewMessage(e.target.value);
@@ -21,7 +22,7 @@ const ChatBox = (props) => {
 
   const handleSend = () => {
     if (newMessage.trim() !== "") {
-      setSentMessages([...sentmessages, newMessage]);
+      setSentMessages([...sentmessages, { message: newMessage, sender: true }]);
       socket.emit("message", {
         senderId: loggedInUserId,
         receiverId: selectedUserId,
@@ -32,20 +33,28 @@ const ChatBox = (props) => {
   };
 
   useEffect(() => {
-    socket.on("message", (newMessage) => {
-      setReceivedMessages((prevMessages) => [...prevMessages, newMessage]);
+    socket.on("message", (receivedMessage) => {
+      if (receivedMessage.senderId === selectedUserId) {
+        setReceivedMessages((prevMessages) => [
+          ...prevMessages,
+          { message: receivedMessage.message, sender: false },
+        ]);
+      }
     });
 
-    // clean up the effect when the component is unmounted
+    // clean up the socket connection on component unmount
     return () => {
       socket.off("message");
     };
-  }, [socket]);
+  }, [selectedUserId]);
+
+  useEffect(() => {
+    setCombineMessages([...sentmessages, ...recievedmessages]);
+  }, [sentmessages, recievedmessages]);
 
   return (
     <div className="flex flex-col w-full fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden  max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md ">
       <div>
-        {" "}
         <h1 className="py-2">{selectedUser}</h1>
         <button
           onClick={handleclose}
@@ -71,31 +80,21 @@ const ChatBox = (props) => {
           <span className="sr-only">Close modal</span>
         </button>
       </div>
-      {sentmessages ? (
-        <div className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner">
-          {sentmessages &&
-            sentmessages.map((msg, index) => (
-              <div
-                key={index}
-                className="my-1 p-2 rounded-lg bg-blue-500 text-white self-start"
-              >
-                {msg}
-              </div>
-            ))}
-        </div>
-      ) : (
-        <div className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner">
-          {recievedmessages &&
-            recievedmessages.map((msg, index) => (
-              <div
-                key={index}
-                className="my-1 p-2 rounded-lg bg-blue-500 text-white self-start"
-              >
-                {msg}
-              </div>
-            ))}
-        </div>
-      )}
+
+      <div className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner">
+        {combineMessages.map((msg, index) => (
+          <div
+            key={index}
+            className={`my-1 p-2 rounded-lg ${
+              msg.sender
+                ? "bg-blue-500 text-white self-end"
+                : "bg-gray-300 text-black self-start"
+            }`}
+          >
+            {msg.message}
+          </div>
+        ))}
+      </div>
 
       <div className="mt-4 flex">
         <input

@@ -137,6 +137,7 @@ const UserCircle = () => {
           handleclose={handleclose}
           selectedUserId={expandeduserId}
           selectedUser={expandeduser}
+          openchatbox={setOpenchatbox}
         />
       ) : null}
     </div>
