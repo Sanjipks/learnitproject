@@ -43,7 +43,6 @@ const ChatBox = (props) => {
       }
     });
 
-    // clean up the socket connection on component unmount
     return () => {
       socket.off("message");
     };
