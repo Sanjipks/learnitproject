@@ -105,7 +105,7 @@ const Services = () => {
       } catch (error) {
         console.error("Error:", error);
       } finally {
-        setDeletedId(null); // Reset deletedId after operation
+        setDeletedId(null);
       }
     }
   };
@@ -170,7 +170,6 @@ const Services = () => {
                 <LazySpinner />
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-                  {/* <div className="md:w-4/5 flex flex-row flex-wrap justify-center mx-auto"> */}
                   {servicesList.map((service, id) => (
                     <div key={id} className="p-2">
                       <ServiceCard

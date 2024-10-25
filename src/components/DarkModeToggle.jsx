@@ -1,16 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 const DarkModeToggle = () => {
-  // const [darkMode, setDarkMode] = useState(true);
-
-  // useEffect(() => {
-  //   if (darkMode) {
-  //     document.body.classList.add("dark");
-  //   } else {
-  //     document.body.classList.remove("dark");
-  //   }
-  // }, [darkMode]);
-
   const [darkMode, setDarkMode] = useState(() => {
     const savedPreference = localStorage.getItem("darkMode");
     if (savedPreference !== null) {
