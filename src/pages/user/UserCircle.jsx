@@ -5,6 +5,7 @@ import User from "../../components/UsersCardForCircle";
 import { getUsers } from "../../apis/Api";
 import { useLogin } from "../../context/LoginContext";
 import ChatBox from "../../components/Chatbox";
+import GroupChatBox from "../../components/GroupChatbox";
 
 const UserCircle = () => {
   const [userlist, setUserlist] = useState([]);
@@ -138,6 +139,14 @@ const UserCircle = () => {
           selectedUserId={expandeduserId}
           selectedUser={expandeduser}
           openchatbox={setOpenchatbox}
+        />
+      ) : null}
+      {opengroupchatbox ? (
+        <GroupChatBox
+          handleclose={handleclose}
+          selectedUserId={expandeduserId}
+          selectedUser={expandeduser}
+          opengroupchatbox={setOpengroupchatbox}
         />
       ) : null}
     </div>
