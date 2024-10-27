@@ -8,7 +8,7 @@ const socket = io(BEHOST, {
 });
 
 const GroupChatBox = (props) => {
-  const { selectedUserId, selectedUser, handleclose, setOpenchatbox } = props;
+  const { handleclose, opengroupchatbox } = props;
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
   const [sentmessages, setSentMessages] = useState([]);
@@ -36,7 +36,7 @@ const GroupChatBox = (props) => {
 
   useEffect(() => {
     socket.on("message", (receivedMessage) => {
-      if (receivedMessage.senderId === selectedUserId) {
+      if (receivedMessage) {
         setReceivedMessages((prevMessages) => [
           ...prevMessages,
           { message: receivedMessage.message, sender: false },
@@ -58,6 +58,7 @@ const GroupChatBox = (props) => {
 
     setCombineMessages(sortedMessages);
   }, [sentmessages, recievedmessages]);
+
   return (
     <div className="flex flex-col w-full fixed bottom-0 left-0 md:right-1/4 overflow-scroll overflow-x-hidden  max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md ">
       <div>
