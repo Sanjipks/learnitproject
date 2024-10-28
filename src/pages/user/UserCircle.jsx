@@ -6,6 +6,7 @@ import { getUsers } from "../../apis/Api";
 import { useLogin } from "../../context/LoginContext";
 import ChatBox from "../../components/Chatbox";
 import GroupChatBox from "../../components/GroupChatbox";
+import CreateGroupChatForm from "../../components/CreateGroupChatForm";
 
 const UserCircle = () => {
   const [userlist, setUserlist] = useState([]);
@@ -16,11 +17,7 @@ const UserCircle = () => {
   const [expandeduserId, setExpandeduserId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [openchatbox, setOpenchatbox] = useState(false);
-  const [createGroupChat, setCreateGroupChat] = useState({
-    groupChatId: null,
-    groupChatName: "",
-    groupChatMembebers: [],
-  });
+  const [createGroupChat, setCreateGroupChat] = useState(false);
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
 
   const { loginInfo } = useLogin();
@@ -58,7 +55,6 @@ const UserCircle = () => {
 
   const handleCreateChatRoom = () => {
     setCreateGroupChat(true);
-    setOpengroupchatbox(true);
   };
 
   const handleclose = () => {
@@ -77,12 +73,17 @@ const UserCircle = () => {
           </h1>
         </div>
       </div>
-      <button
-        className="flex p-4 my-4 border border-white rounded-lg text-lg mx-auto"
-        onClick={handleCreateChatRoom}
-      >
-        Create Chat Room
-      </button>
+      <div>
+        {" "}
+        <button
+          className="flex p-4 my-4 border border-white rounded-lg text-lg mx-auto"
+          onClick={handleCreateChatRoom}
+        >
+          Create Chat Room
+        </button>
+        {createGroupChat ? <CreateGroupChatForm /> : null}
+      </div>
+
       <div className="flex  justify-start mx-auto">
         {loading ? (
           <Spinner />
