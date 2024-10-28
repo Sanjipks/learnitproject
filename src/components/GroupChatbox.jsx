@@ -8,7 +8,7 @@ const socket = io(BEHOST, {
 });
 
 const GroupChatBox = (props) => {
-  const { handleclose, opengroupchatbox } = props;
+  const { handleclose } = props;
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
   const [sentmessages, setSentMessages] = useState([]);
@@ -47,7 +47,7 @@ const GroupChatBox = (props) => {
     return () => {
       socket.off("message");
     };
-  }, [selectedUserId]);
+  }, []);
 
   useEffect(() => {
     const combined = [...sentmessages, ...recievedmessages];
@@ -62,7 +62,7 @@ const GroupChatBox = (props) => {
   return (
     <div className="flex flex-col w-full fixed bottom-0 left-0 md:right-1/4 overflow-scroll overflow-x-hidden  max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md ">
       <div>
-        <h1 className="py-2">{selectedUser}</h1>
+        <h1 className="py-2"></h1>
         <button
           onClick={handleclose}
           type="button"

@@ -16,7 +16,11 @@ const UserCircle = () => {
   const [expandeduserId, setExpandeduserId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [openchatbox, setOpenchatbox] = useState(false);
-  const [createGroupChat, setCreateGroupChat] = useState(false);
+  const [createGroupChat, setCreateGroupChat] = useState({
+    groupChatId: null,
+    groupChatName: "",
+    groupChatMembebers: [],
+  });
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
 
   const { loginInfo } = useLogin();
@@ -54,10 +58,14 @@ const UserCircle = () => {
 
   const handleCreateChatRoom = () => {
     setCreateGroupChat(true);
+    setOpengroupchatbox(true);
   };
 
   const handleclose = () => {
     setOpenchatbox(false);
+  };
+  const handlegroupchatclose = () => {
+    setOpengroupchatbox(false);
   };
 
   return (
@@ -154,7 +162,7 @@ const UserCircle = () => {
       ) : null}
       {opengroupchatbox ? (
         <GroupChatBox
-          handleclose={handleclose}
+          handleclose={handlegroupchatclose}
           opengroupchatbox={setOpengroupchatbox}
         />
       ) : null}
