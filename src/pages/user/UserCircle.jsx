@@ -56,6 +56,9 @@ const UserCircle = () => {
   const handleCreateChatRoom = () => {
     setCreateGroupChat(true);
   };
+  const handleCloseCreateChatRoom = () => {
+    setCreateGroupChat(false);
+  };
 
   const handleclose = () => {
     setOpenchatbox(false);
@@ -81,7 +84,11 @@ const UserCircle = () => {
         >
           Create Chat Room
         </button>
-        {createGroupChat ? <CreateGroupChatForm /> : null}
+        {createGroupChat ? (
+          <CreateGroupChatForm
+            handleclosecreateroom={handleCloseCreateChatRoom}
+          />
+        ) : null}
       </div>
 
       <div className="flex  justify-start mx-auto">
@@ -161,6 +168,7 @@ const UserCircle = () => {
           openchatbox={setOpenchatbox}
         />
       ) : null}
+
       {opengroupchatbox ? (
         <GroupChatBox
           handleclose={handlegroupchatclose}
