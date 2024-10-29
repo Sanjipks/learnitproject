@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-const CreateGroupChatForm = () => {
+const CreateGroupChatForm = (props) => {
+  const { handleclosecreateroom } = props;
+
   const [groupChat, setGroupChat] = useState({
     groupChatId: null,
     groupChatName: "",
@@ -31,6 +33,7 @@ const CreateGroupChatForm = () => {
             </h3>
             <button
               type="button"
+              onClick={handleclosecreateroom}
               className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-hide="popup-modal"
             >
@@ -77,7 +80,7 @@ const CreateGroupChatForm = () => {
               type="submit"
               className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              Submit
+              Create
             </button>
           </form>
         </div>
