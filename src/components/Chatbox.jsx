@@ -8,7 +8,7 @@ const socket = io(BEHOST, {
 });
 
 const ChatBox = (props) => {
-  const { selectedUserId, selectedUser, handleclose, setOpenchatbox } = props;
+  const { selectedUserId, selectedUser, handleclose } = props;
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
   const [sentmessages, setSentMessages] = useState([]);
