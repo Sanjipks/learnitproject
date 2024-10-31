@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { useLogin } from "../context/LoginContext";
+
 const BEHOST = import.meta.env.VITE_BELC;
 
 const socket = io(BEHOST, {
@@ -11,10 +12,9 @@ const ChatBox = (props) => {
   const { selectedUserId, selectedUser, handleclose } = props;
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
-  const [sentmessages, setSentMessages] = useState([]);
-  const [recievedmessages, setReceivedMessages] = useState([]);
+
+  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [combineMessages, setCombineMessages] = useState([]);
 
   const handleInput = (e) => {
     setNewMessage(e.target.value);
@@ -22,43 +22,42 @@ const ChatBox = (props) => {
 
   const handleSend = () => {
     if (newMessage.trim() !== "") {
-      setSentMessages([...sentmessages, { message: newMessage, sender: true }]);
-      socket.emit("message", {
+      const messageData = {
         senderId: loggedInUserId,
         receiverId: selectedUserId,
         message: newMessage,
         timestamp: new Date().toISOString(),
-      });
+      };
+
+      socket.emit("message", messageData);
       setNewMessage("");
     }
   };
 
   useEffect(() => {
     socket.on("message", (receivedMessage) => {
-      if (receivedMessage.senderId === selectedUserId) {
-        setReceivedMessages((prevMessages) => [
-          ...prevMessages,
-          { message: receivedMessage.message, sender: false },
-        ]);
+      const isRelevantMessage =
+        receivedMessage.senderId === loggedInUserId &&
+        receivedMessage.receiverId === selectedUserId;
+
+      if (isRelevantMessage) {
+        setMessages((prevMessages) => [...prevMessages, receivedMessage]);
       }
     });
 
+    // Clean up listener on component unmount
     return () => {
       socket.off("message");
     };
-  }, [selectedUserId]);
+  }, [selectedUserId, loggedInUserId]);
 
-  useEffect(() => {
-    const combined = [...sentmessages, ...recievedmessages];
+  // Sort messages by timestamp for accurate display
+  const sortedMessages = [...messages].sort(
+    (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+  );
 
-    const sortedMessages = combined.sort(
-      (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
-    );
-
-    setCombineMessages(sortedMessages);
-  }, [sentmessages, recievedmessages]);
   return (
-    <div className="flex flex-col w-full fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden  max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md ">
+    <div className="flex flex-col w-full fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md">
       <div>
         <h1 className="py-2">{selectedUser}</h1>
         <button
@@ -87,11 +86,11 @@ const ChatBox = (props) => {
       </div>
 
       <div className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner">
-        {combineMessages.map((msg, index) => (
+        {sortedMessages.map((msg, index) => (
           <div
             key={index}
             className={`my-1 p-2 rounded-lg ${
-              msg.sender
+              msg.senderId === loggedInUserId
                 ? "bg-blue-500 text-white self-end"
                 : "bg-gray-300 text-black self-start"
             }`}
