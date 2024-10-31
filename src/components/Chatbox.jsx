@@ -36,16 +36,10 @@ const ChatBox = (props) => {
 
   useEffect(() => {
     socket.on("message", (receivedMessage) => {
-      const isRelevantMessage =
-        receivedMessage.senderId === loggedInUserId &&
-        receivedMessage.receiverId === selectedUserId;
-
-      if (isRelevantMessage) {
-        setMessages((prevMessages) => [...prevMessages, receivedMessage]);
-      }
+      setMessages((prevMessages) => [...prevMessages, receivedMessage]);
     });
-
-    // Clean up listener on component unmount
+    console.log();
+    // clean up listener on component unmount
     return () => {
       socket.off("message");
     };
