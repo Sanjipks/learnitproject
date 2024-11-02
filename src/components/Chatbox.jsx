@@ -15,7 +15,6 @@ const ChatBox = (props) => {
 
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-
   const handleInput = (e) => {
     setNewMessage(e.target.value);
   };
@@ -28,28 +27,38 @@ const ChatBox = (props) => {
         message: newMessage,
         timestamp: new Date().toISOString(),
       };
-
       socket.emit("message", messageData);
       setNewMessage("");
     }
   };
 
   useEffect(() => {
+    // associate user and load past messages
+    socket.emit("user_connected", loggedInUserId);
+    socket.emit("fetch_past_messages", selectedUserId);
+
+    // listen for past messages on connection
+    socket.on("past_messages", (pastMessages) => {
+      setMessages(pastMessages);
+    });
+
     socket.on("message", (receivedMessage) => {
       setMessages((prevMessages) => [...prevMessages, receivedMessage]);
     });
-    console.log();
-    // clean up listener on component unmount
+    console.log("msg", messages);
+    // clean up the listeners on component unmount
     return () => {
       socket.off("message");
+      socket.off("past_messages");
     };
   }, [selectedUserId, loggedInUserId]);
 
-  // Sort messages by timestamp for accurate display
+  // sort messages by timestamp for accurate display
   const sortedMessages = [...messages].sort(
     (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
   );
 
+  console.log(sortedMessages);
   return (
     <div className="flex flex-col w-full fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md">
       <div>
@@ -84,7 +93,7 @@ const ChatBox = (props) => {
           <div
             key={index}
             className={`my-1 p-2 rounded-lg ${
-              msg.senderId === loggedInUserId
+              msg.sender_id || msg.senderId === loggedInUserId
                 ? "bg-blue-500 text-white self-end"
                 : "bg-gray-300 text-black self-start"
             }`}
