@@ -12,8 +12,8 @@ const ChatBox = (props) => {
   const { selectedUserId, selectedUser, handleclose } = props;
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
-
   const [messages, setMessages] = useState([]);
+  const [pastmessages, setPastMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const handleInput = (e) => {
     setNewMessage(e.target.value);
@@ -39,13 +39,13 @@ const ChatBox = (props) => {
 
     // listen for past messages on connection
     socket.on("past_messages", (pastMessages) => {
-      setMessages(pastMessages);
+      setPastMessages(pastMessages);
     });
 
     socket.on("message", (receivedMessage) => {
       setMessages((prevMessages) => [...prevMessages, receivedMessage]);
     });
-    console.log("msg", messages);
+
     // clean up the listeners on component unmount
     return () => {
       socket.off("message");
@@ -53,12 +53,12 @@ const ChatBox = (props) => {
     };
   }, [selectedUserId, loggedInUserId]);
 
+  const allMessages = [...messages, ...pastmessages];
   // sort messages by timestamp for accurate display
-  const sortedMessages = [...messages].sort(
+  const sortedMessages = allMessages.sort(
     (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
   );
 
-  console.log(sortedMessages);
   return (
     <div className="flex flex-col w-full fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md">
       <div>
@@ -89,18 +89,20 @@ const ChatBox = (props) => {
       </div>
 
       <div className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner">
-        {sortedMessages.map((msg, index) => (
-          <div
-            key={index}
-            className={`my-1 p-2 rounded-lg ${
-              msg.sender_id || msg.senderId === loggedInUserId
-                ? "bg-blue-500 text-white self-end"
-                : "bg-gray-300 text-black self-start"
-            }`}
-          >
-            {msg.message}
-          </div>
-        ))}
+        {sortedMessages.map((msg, index) => {
+          return (
+            <div
+              key={index}
+              className={`my-1 p-2 rounded-lg ${
+                msg.sender_id == loggedInUserId
+                  ? "bg-blue-500 text-white self-end"
+                  : "bg-gray-300 text-black self-start"
+              }`}
+            >
+              {msg.message}
+            </div>
+          );
+        })}
       </div>
 
       <div className="mt-4 flex">
