@@ -37,6 +37,7 @@ export default function UsersForCircle(props) {
       setExpand("hidden");
       setExpandeduserId(null);
       setExpandeduser(null);
+      setOpenchatbox(false);
     }
   };
 
