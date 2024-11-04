@@ -15,6 +15,7 @@ const ChatBox = (props) => {
   const [messages, setMessages] = useState([]);
   const [pastmessages, setPastMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+
   const handleInput = (e) => {
     setNewMessage(e.target.value);
   };
@@ -39,7 +40,11 @@ const ChatBox = (props) => {
 
     // listen for past messages on connection
     socket.on("past_messages", (pastMessages) => {
-      setPastMessages(pastMessages);
+      setPastMessages(
+        pastMessages.sort(
+          (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+        )
+      );
     });
 
     socket.on("message", (receivedMessage) => {
@@ -53,9 +58,8 @@ const ChatBox = (props) => {
     };
   }, [selectedUserId, loggedInUserId]);
 
-  const allMessages = [...messages, ...pastmessages];
   // sort messages by timestamp for accurate display
-  const sortedMessages = allMessages.sort(
+  const sortedMessages = messages.sort(
     (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
   );
 
@@ -89,12 +93,26 @@ const ChatBox = (props) => {
       </div>
 
       <div className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner">
-        {sortedMessages.map((msg, index) => {
+        {pastmessages.map((msg, index) => {
           return (
             <div
               key={index}
               className={`my-1 p-2 rounded-lg ${
                 msg.sender_id == loggedInUserId
+                  ? "bg-blue-500 text-white self-end"
+                  : "bg-gray-300 text-black self-start"
+              }`}
+            >
+              {msg.message}
+            </div>
+          );
+        })}
+        {sortedMessages.map((msg, index) => {
+          return (
+            <div
+              key={index}
+              className={`my-1 p-2 rounded-lg ${
+                msg.senderId == loggedInUserId
                   ? "bg-blue-500 text-white self-end"
                   : "bg-gray-300 text-black self-start"
               }`}
