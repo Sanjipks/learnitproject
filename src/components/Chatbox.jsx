@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import { useLogin } from "../context/LoginContext";
 
@@ -15,6 +15,7 @@ const ChatBox = (props) => {
   const [messages, setMessages] = useState([]);
   const [pastmessages, setPastMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const messageEndRef = useRef(null);
 
   const handleInput = (e) => {
     setNewMessage(e.target.value);
@@ -62,6 +63,9 @@ const ChatBox = (props) => {
   const sortedMessages = messages.sort(
     (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
   );
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <div className="flex flex-col w-full fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md">
@@ -121,6 +125,7 @@ const ChatBox = (props) => {
             </div>
           );
         })}
+        <div ref={messageEndRef} />
       </div>
 
       <div className="mt-4 flex">
