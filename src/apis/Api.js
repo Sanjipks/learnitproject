@@ -12,6 +12,7 @@ const ADD_SERVICE = import.meta.env.VITE_ADD_SERVICE;
 const SEND_CONTACTUS_MESSAGE = import.meta.env.VITE_CONTACT_US_MSG;
 const VIEW_CONTACTUS_MESSAGES = import.meta.env.VITE_CONTACT_US_VIEW_MSG;
 const CHANGE_PIMAGE = import.meta.env.VITE_CHANGE_PROFILEIMAGE;
+const SEND_CONNECTION_REQ = import.meta.env.VITE_REQ_USERCONNECTION;
 
 export const getUsers = async (loggedinUserRole, pagenumber) => {
   const res = await fetch(
@@ -234,5 +235,18 @@ export const changeProfileImage = async (bodyData) => {
     },
     body: JSON.stringify(bodyData),
   });
+  return res;
+};
+
+//send connection request
+export const sendConnectionReq = async (requester, targetuser) => {
+  const res = await fetch(`${SEND_CONNECTION_REQ}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ requester, targetuser }),
+  });
+
   return res;
 };
