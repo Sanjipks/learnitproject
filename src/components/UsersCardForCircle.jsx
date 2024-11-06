@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
+import { sendConnectionReq } from "../apis/Api";
+import { toast } from "react-toastify";
 
 export default function UsersForCircle(props) {
   const { loginInfo } = useLogin();
@@ -53,8 +55,19 @@ export default function UsersForCircle(props) {
     setOpenchatbox(true);
     setExpand("hidden");
   };
-  const handleConnect = (loggedinUser) => {
-    "todo";
+  const handleConnect = async (requester, targetuser) => {
+    try {
+      const response = await sendConnectionReq(requester, targetuser);
+
+      const data = await response.json();
+      console.log("data", data);
+
+      if (response.ok) {
+        toast(data.message, { autoClose: 1000 });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
   const handleSendOfflineMessage = (loggedinUser) => {
     "todo";
@@ -94,10 +107,12 @@ export default function UsersForCircle(props) {
                 >
                   <ul className="py-2" aria-labelledby="dropdownButton">
                     <li
-                      onClick={() => handleConnect(loggedInUserId)}
+                      onClick={() =>
+                        handleConnect(loggedInUserId, expandeduserId)
+                      }
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
-                      connect
+                      request connection
                     </li>
                     <li
                       onClick={() => handleSendOfflineMessage(loggedInUserId)}
