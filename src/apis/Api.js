@@ -13,6 +13,7 @@ const SEND_CONTACTUS_MESSAGE = import.meta.env.VITE_CONTACT_US_MSG;
 const VIEW_CONTACTUS_MESSAGES = import.meta.env.VITE_CONTACT_US_VIEW_MSG;
 const CHANGE_PIMAGE = import.meta.env.VITE_CHANGE_PROFILEIMAGE;
 const SEND_CONNECTION_REQ = import.meta.env.VITE_REQ_USERCONNECTION;
+const VIEW_CONNECTIONS_STATUS = import.meta.env.VITE_VIEW_ALLCONNECTIONS;
 
 export const getUsers = async (loggedinUserRole, pagenumber) => {
   const res = await fetch(
@@ -249,4 +250,18 @@ export const sendConnectionReq = async (requester, targetuser) => {
   });
 
   return res;
+};
+
+//to get list of services
+export const getAllconnections = async (loggedInUserId) => {
+  const res = await fetch(`${VIEW_CONNECTIONS_STATUS}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      loggedinuserid: loggedInUserId,
+    },
+  });
+  if (!res.ok) throw new Error("Network response was not ok.");
+  const data = await res.json();
+  return data;
 };

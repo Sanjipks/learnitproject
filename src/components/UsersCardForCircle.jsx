@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
-import { sendConnectionReq } from "../apis/Api";
+import { getAllconnections, sendConnectionReq } from "../apis/Api";
 import { toast } from "react-toastify";
 
 export default function UsersForCircle(props) {
   const { loginInfo } = useLogin();
+  const [sentRequest, setSendReques] = useState([]);
+  const [pendingRequest, setPendingReques] = useState([]);
   const loggedInUserRole = loginInfo.userRole;
   const loggedInUserId = loginInfo.userId;
 
@@ -55,6 +57,19 @@ export default function UsersForCircle(props) {
     setOpenchatbox(true);
     setExpand("hidden");
   };
+  useEffect(() => {
+    const fethUserdata = async () => {
+      try {
+        const connection_data = await getAllconnections(loggedInUserId);
+
+        console.log("condata", connection_data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    fethUserdata();
+  }, [sentRequest]);
+
   const handleConnect = async (requester, targetuser) => {
     try {
       const response = await sendConnectionReq(requester, targetuser);
