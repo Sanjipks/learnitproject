@@ -67,6 +67,9 @@ export default function UsersForCircle(props) {
       }
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setExpand("hidden");
+      setExpandeduser(null);
     }
   };
   const handleSendOfflineMessage = (loggedinUser) => {
