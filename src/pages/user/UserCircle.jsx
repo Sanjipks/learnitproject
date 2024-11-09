@@ -22,12 +22,17 @@ const UserCircle = () => {
 
   const { loginInfo } = useLogin();
   const loggedinUserRole = loginInfo.userRole;
+  const loggedInUserId = loginInfo.userId;
 
   useEffect(() => {
     const fetchUsers = async () => {
       setLoading(true);
       try {
-        const data = await getUsers(loggedinUserRole, pagenumber);
+        const data = await getUsers(
+          loggedinUserRole,
+          pagenumber,
+          loggedInUserId
+        );
         setUserlist(data.paginatedUsers);
         setUserperpage(data.usersPerPage);
         setTotalUserscount(data.totalEntries);
@@ -110,6 +115,7 @@ const UserCircle = () => {
                   setExpandeduserId={setExpandeduserId}
                   openchatbox={openchatbox}
                   setOpenchatbox={setOpenchatbox}
+                  connStatus={user.connectionStatus}
                 />
               </div>
             ))}
