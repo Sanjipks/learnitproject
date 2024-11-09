@@ -15,13 +15,18 @@ const CHANGE_PIMAGE = import.meta.env.VITE_CHANGE_PROFILEIMAGE;
 const SEND_CONNECTION_REQ = import.meta.env.VITE_REQ_USERCONNECTION;
 const VIEW_CONNECTIONS_STATUS = import.meta.env.VITE_VIEW_ALLCONNECTIONS;
 
-export const getUsers = async (loggedinUserRole, pagenumber) => {
+export const getUsers = async (
+  loggedinUserRole,
+  pagenumber,
+  loggedInUserId
+) => {
   const res = await fetch(
     `${GET_USERS}/${loggedinUserRole}/page=${pagenumber}`,
     {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        loggedinuserid: loggedInUserId,
       },
     }
   );
