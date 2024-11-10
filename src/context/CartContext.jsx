@@ -36,7 +36,7 @@ export default function CartProvider({ children }) {
       setCartItems(allItems);
     };
     fetchCartItems();
-  }, []);
+  }, [cartItems]);
 
   // function to add an item to the cart and IndexedDB
   const addToCart = useCallback(async (item) => {
