@@ -44,6 +44,7 @@ const MyCart = () => {
             ) : null}
 
             <button
+              disabled={cartItems.length <= 0}
               onClick={handleCheckOut}
               className="flex bg-gray-100 rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
             >
@@ -80,21 +81,7 @@ const MyCart = () => {
                         <div className=" text-xl">
                           <span>Price: </span>${item.servicePrice}
                         </div>
-                        {/* <div
-                          id="dropdown"
-                          className={`z-10 hidden  absolute w-60 ml-10 text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
-                        >
-                          <ul className="py-2" aria-labelledby="dropdownButton">
-                            <li>
-                              <a
-                                // onClick={() => handleDelete(serviceId)}
-                                className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                              >
-                                Delete
-                              </a>
-                            </li>
-                          </ul>
-                        </div> */}
+
                         <div onClick={() => handledelete(item.id)}>
                           <DeleteIcon />
                         </div>
