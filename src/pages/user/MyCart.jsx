@@ -44,9 +44,9 @@ const MyCart = () => {
             ) : null}
 
             <button
-              disabled={cartItems.length <= 0}
+              disabled={cartItems.length < 1}
               onClick={handleCheckOut}
-              className="flex bg-gray-100 rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
+              className="flex bg-gray-100 disabled:cursor-not-allowed disabled:invisible rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
             >
               Check Out
             </button>
