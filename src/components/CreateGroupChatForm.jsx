@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const CreateGroupChatForm = (props) => {
   const { handleclosecreateroom } = props;
 
+  const [groupCreated, setGroupCreated] = useState(false);
   const [groupChat, setGroupChat] = useState({
     groupChatId: null,
     groupChatName: "",
@@ -19,8 +20,7 @@ const CreateGroupChatForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(groupChat);
+    setGroupCreated(true);
   };
 
   return (
@@ -82,6 +82,11 @@ const CreateGroupChatForm = (props) => {
             >
               Create
             </button>
+            {groupCreated ? (
+              <div className="pt-4 px-1  text-lg font-semibold ">
+                Add Group Members
+              </div>
+            ) : null}
           </form>
         </div>
       </div>
