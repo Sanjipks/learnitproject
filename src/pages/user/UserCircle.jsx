@@ -10,6 +10,7 @@ import CreateGroupChatForm from "../../components/CreateGroupChatForm";
 
 const UserCircle = () => {
   const [userlist, setUserlist] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [pagenumber, setPagenumber] = useState(1);
   const [userperpage, setUserperpage] = useState(0);
   const [totalUserscount, setTotalUserscount] = useState(0);
@@ -36,6 +37,7 @@ const UserCircle = () => {
           pagenumber,
           loggedInUserId
         );
+        setAllUsers(data.allUsers);
         setUserlist(data.paginatedUsers);
         setUserperpage(data.usersPerPage);
         setTotalUserscount(data.totalEntries);
@@ -75,10 +77,6 @@ const UserCircle = () => {
     setOpengroupchatbox(false);
   };
 
-  const handleFindInput = (e) => {
-    setFindInput(e.target.value);
-  };
-
   const findUser = (id) => {
     setSearchUser(id);
   };
@@ -107,6 +105,12 @@ const UserCircle = () => {
         {createGroupChat ? (
           <CreateGroupChatForm
             handleclosecreateroom={handleCloseCreateChatRoom}
+            userlist={allUsers}
+            handlefindinput={setFindInput}
+            adduser={addUser}
+            searcheduser={searchuser}
+            finduser={findUser}
+            findInput={findInput}
           />
         ) : null}
       </div>
@@ -193,11 +197,6 @@ const UserCircle = () => {
       {opengroupchatbox ? (
         <GroupChatBox
           recievers={recievers}
-          handlefindinput={handleFindInput}
-          findInput={findInput}
-          searcheduser={searchuser}
-          finduser={findUser}
-          adduser={addUser}
           handleclose={handlegroupchatclose}
           opengroupchatbox={setOpengroupchatbox}
         />
