@@ -20,7 +20,7 @@ const UserCircle = () => {
   const [createGroupChat, setCreateGroupChat] = useState(false);
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
   const [findInput, setFindInput] = useState("");
-  const [finduser, setFindUser] = useState([]);
+  const [searchuser, setSearchUser] = useState([]);
   const [recievers, setReceivers] = useState([]);
 
   const { loginInfo } = useLogin();
@@ -80,7 +80,7 @@ const UserCircle = () => {
   };
 
   const findUser = (id) => {
-    setFindUser(id);
+    setSearchUser(id);
   };
 
   const addUser = (id) => {
@@ -192,7 +192,10 @@ const UserCircle = () => {
 
       {opengroupchatbox ? (
         <GroupChatBox
-          handleInput={handleFindInput}
+          recievers={recievers}
+          handlefindinput={handleFindInput}
+          findInput={findInput}
+          searcheduser={searchuser}
           finduser={findUser}
           adduser={addUser}
           handleclose={handlegroupchatclose}

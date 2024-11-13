@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const CreateGroupChatForm = (props) => {
-  const { handleclosecreateroom } = props;
+  const { handleclosecreateroom, handlefindinput } = props;
 
   const [groupCreated, setGroupCreated] = useState(false);
   const [groupChat, setGroupChat] = useState({
@@ -16,6 +16,15 @@ const CreateGroupChatForm = (props) => {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const hanldeUserSearchInput = (e) => {
+    handlefindinput(e.target.value);
+  };
+
+  const handleclosecreatchatroombox = () => {
+    handleclosecreateroom();
+    setGroupCreated(false);
   };
 
   const handleSubmit = (e) => {
@@ -33,7 +42,7 @@ const CreateGroupChatForm = (props) => {
             </h3>
             <button
               type="button"
-              onClick={handleclosecreateroom}
+              onClick={handleclosecreatchatroombox}
               className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-hide="popup-modal"
             >
@@ -78,15 +87,36 @@ const CreateGroupChatForm = (props) => {
             </div>
             <button
               type="submit"
-              className="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className={`${
+                groupCreated ? "hidden" : "block"
+              } bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}
             >
               Create
             </button>
             {groupCreated ? (
-              <div className="pt-4 px-1  text-lg font-semibold ">
-                Add Group Members
+              <div className="pt-4 px-1 text-lg font-semibold">
+                <label
+                  htmlFor="findUser"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Add Group Members
+                </label>
+                <input
+                  onChange={hanldeUserSearchInput}
+                  id="findUser"
+                  name="findUser"
+                  type="text"
+                  placeholder="Search users..."
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                />
               </div>
             ) : null}
+            <button
+              type="submit"
+              className={`mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}
+            >
+              Submit
+            </button>
           </form>
         </div>
       </div>
