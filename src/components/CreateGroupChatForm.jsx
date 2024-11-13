@@ -11,7 +11,6 @@ const CreateGroupChatForm = (props) => {
 
   const [groupCreated, setGroupCreated] = useState(false);
   const [groupChat, setGroupChat] = useState({
-    groupChatId: null,
     groupChatName: "",
     groupChatMembers: [],
   });
@@ -84,6 +83,7 @@ const CreateGroupChatForm = (props) => {
                   type="text"
                   name="groupChatName"
                   id="groupChatName"
+                  value={groupChat.groupChatName}
                   onChange={handleInput}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Type group name"
@@ -107,14 +107,21 @@ const CreateGroupChatForm = (props) => {
                 >
                   Add Group Members
                 </label>
-                <input
+                <select
                   onChange={hanldeUserSearchInput}
                   id="findUser"
                   name="findUser"
                   type="text"
                   placeholder="Search users..."
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                />
+                >
+                  {userlist.map((user) => (
+                    <div className="flex justify-around" key={user.user_id}>
+                      <div className="mx-8"> {user.user_name}</div>
+                      <button className="border">add</button>
+                    </div>
+                  ))}
+                </select>
               </div>
             ) : null}
 
