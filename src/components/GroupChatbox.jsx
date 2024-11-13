@@ -26,7 +26,7 @@ const GroupChatBox = (props) => {
       socket.emit("message", {
         senderId: loggedInUserId,
 
-        // receiverId: selectedUserId,
+        receiverId: recieverId,
         message: newMessage,
         timestamp: new Date().toISOString(),
       });
