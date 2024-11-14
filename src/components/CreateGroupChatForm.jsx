@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const CreateGroupChatForm = (props) => {
-  const { handleclosecreateroom, handlefindinput, userlist } = props;
+  const { handleclosecreateroom, userlist } = props;
 
   const [groupCreated, setGroupCreated] = useState(false);
   const [searchInput, setSearchInput] = useState("");
@@ -22,7 +22,6 @@ const CreateGroupChatForm = (props) => {
   const handleUserSearchInput = (e) => {
     const value = e.target.value;
     setSearchInput(value);
-    handlefindinput(value);
   };
 
   const handleAddUser = (userId) => {
@@ -31,11 +30,10 @@ const CreateGroupChatForm = (props) => {
         ...prevState,
         groupChatMembers: [...prevState.groupChatMembers, userId],
       }));
-      adduser(userId);
     }
     setSearchInput("");
   };
-
+  console.log(groupChat.groupChatMembers);
   const handleCloseCreateChatRoomBox = () => {
     handleclosecreateroom();
     setGroupCreated(false);
