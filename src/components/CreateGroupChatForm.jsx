@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 
 const CreateGroupChatForm = (props) => {
-  const {
-    handleclosecreateroom,
-    handlefindinput,
-    userlist,
-    adduser,
-    findInput,
-  } = props;
+  const { handleclosecreateroom, handlefindinput, userlist } = props;
 
   const [groupCreated, setGroupCreated] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+
   const [groupChat, setGroupChat] = useState({
     groupChatName: "",
     groupChatMembers: [],
@@ -23,11 +19,24 @@ const CreateGroupChatForm = (props) => {
     }));
   };
 
-  const hanldeUserSearchInput = (e) => {
-    handlefindinput(e.target.value);
+  const handleUserSearchInput = (e) => {
+    const value = e.target.value;
+    setSearchInput(value);
+    handlefindinput(value);
   };
 
-  const handleclosecreatchatroombox = () => {
+  const handleAddUser = (userId) => {
+    if (userId && !groupChat.groupChatMembers.includes(userId)) {
+      setGroupChat((prevState) => ({
+        ...prevState,
+        groupChatMembers: [...prevState.groupChatMembers, userId],
+      }));
+      adduser(userId);
+    }
+    setSearchInput("");
+  };
+
+  const handleCloseCreateChatRoomBox = () => {
     handleclosecreateroom();
     setGroupCreated(false);
   };
@@ -36,6 +45,10 @@ const CreateGroupChatForm = (props) => {
     e.preventDefault();
     setGroupCreated(true);
   };
+
+  const filteredUsers = userlist.filter((user) =>
+    user.user_name.toLowerCase().includes(searchInput.toLowerCase())
+  );
 
   return (
     <>
@@ -47,7 +60,7 @@ const CreateGroupChatForm = (props) => {
             </h3>
             <button
               type="button"
-              onClick={handleclosecreatchatroombox}
+              onClick={handleCloseCreateChatRoomBox}
               className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
               data-modal-hide="popup-modal"
             >
@@ -99,29 +112,59 @@ const CreateGroupChatForm = (props) => {
             >
               Create
             </button>
+
             {groupCreated ? (
               <div className="pt-4 px-1 text-lg font-semibold">
                 <label
                   htmlFor="findUser"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600"
                 >
                   Add Group Members
                 </label>
-                <select
-                  onChange={hanldeUserSearchInput}
+
+                <input
+                  type="text"
                   id="findUser"
                   name="findUser"
-                  type="text"
+                  value={searchInput}
+                  onChange={handleUserSearchInput}
                   placeholder="Search users..."
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                >
-                  {userlist.map((user) => (
-                    <div className="flex justify-around" key={user.user_id}>
-                      <div className="mx-8"> {user.user_name}</div>
-                      <button className="border">add</button>
-                    </div>
-                  ))}
-                </select>
+                />
+                {searchInput ? (
+                  <ul className="bg-white border border-gray-300 rounded-lg mt-2 max-h-40 overflow-y-auto">
+                    {filteredUsers.map((user) => (
+                      <li
+                        key={user.user_id}
+                        className="flex justify-between items-center p-2 text-gray-900 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 hover:bg-gray-100 cursor-pointer"
+                      >
+                        <span>{user.user_name}</span>
+                        <button
+                          onClick={() => handleAddUser(user.user_id)}
+                          className="ml-4 p-1 bg-blue-500 text-white rounded-lg text-xs"
+                        >
+                          Add
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+
+                <div className="mt-4">
+                  <h3 className="text-sm font-medium">Added Members:</h3>
+                  <ul>
+                    {groupChat.groupChatMembers.map((userId) => {
+                      const user = userlist.find(
+                        (user) => user.user_id === userId
+                      );
+                      return (
+                        <li key={userId} className="flex justify-between mt-2">
+                          <div>{user ? user.user_name : "Unknown User"}</div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
             ) : null}
 
