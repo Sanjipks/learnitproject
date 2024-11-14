@@ -6,7 +6,7 @@ import { getUsers } from "../../apis/Api";
 import { useLogin } from "../../context/LoginContext";
 import ChatBox from "../../components/Chatbox";
 import GroupChatBox from "../../components/GroupChatbox";
-import CreateGroupChatForm from "../../components/CreateGroupChatForm";
+import CreateChatGroup from "../../components/CreateChatGroupjsx";
 
 const UserCircle = () => {
   const [userlist, setUserlist] = useState([]);
@@ -92,7 +92,7 @@ const UserCircle = () => {
           Create Chat Room
         </button>
         {createGroupChat ? (
-          <CreateGroupChatForm
+          <CreateChatGroup
             handleclosecreateroom={handleCloseCreateChatRoom}
             userlist={allUsers}
           />

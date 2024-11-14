@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CreateGroupChatForm = (props) => {
+const CreateChatGroup = (props) => {
   const { handleclosecreateroom, userlist } = props;
 
   const [groupCreated, setGroupCreated] = useState(false);
@@ -33,7 +33,7 @@ const CreateGroupChatForm = (props) => {
     }
     setSearchInput("");
   };
-  console.log(groupChat.groupChatMembers);
+
   const handleCloseCreateChatRoomBox = () => {
     handleclosecreateroom();
     setGroupCreated(false);
@@ -183,4 +183,4 @@ const CreateGroupChatForm = (props) => {
   );
 };
 
-export default CreateGroupChatForm;
+export default CreateChatGroup;
