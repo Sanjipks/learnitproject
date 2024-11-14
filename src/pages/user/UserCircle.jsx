@@ -20,9 +20,6 @@ const UserCircle = () => {
   const [openchatbox, setOpenchatbox] = useState(false);
   const [createGroupChat, setCreateGroupChat] = useState(false);
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
-  const [findInput, setFindInput] = useState("");
-  const [searchuser, setSearchUser] = useState([]);
-  const [recievers, setReceivers] = useState([]);
 
   const { loginInfo } = useLogin();
   const loggedinUserRole = loginInfo.userRole;
@@ -77,14 +74,6 @@ const UserCircle = () => {
     setOpengroupchatbox(false);
   };
 
-  const findUser = (id) => {
-    setSearchUser(id);
-  };
-
-  const addUser = (id) => {
-    setReceivers([...recievers, id]);
-  };
-
   return (
     <div className="min-h-dvh h-auto flex flex-col justify-items-start justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
       <div className="flex md:my-20 xm:my-10 ">
@@ -106,11 +95,6 @@ const UserCircle = () => {
           <CreateGroupChatForm
             handleclosecreateroom={handleCloseCreateChatRoom}
             userlist={allUsers}
-            handlefindinput={setFindInput}
-            adduser={addUser}
-            searcheduser={searchuser}
-            finduser={findUser}
-            findInput={findInput}
           />
         ) : null}
       </div>
@@ -196,7 +180,6 @@ const UserCircle = () => {
 
       {opengroupchatbox ? (
         <GroupChatBox
-          recievers={recievers}
           handleclose={handlegroupchatclose}
           opengroupchatbox={setOpengroupchatbox}
         />
