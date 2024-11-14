@@ -6,7 +6,7 @@ import { getUsers } from "../../apis/Api";
 import { useLogin } from "../../context/LoginContext";
 import ChatBox from "../../components/Chatbox";
 import GroupChatBox from "../../components/GroupChatbox";
-import CreateChatGroup from "../../components/CreateChatGroupjsx";
+import CreateChatGroup from "../../components/CreateChatGroup";
 
 const UserCircle = () => {
   const [userlist, setUserlist] = useState([]);
