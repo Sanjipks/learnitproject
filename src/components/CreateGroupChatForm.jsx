@@ -39,11 +39,15 @@ const CreateGroupChatForm = (props) => {
     setGroupCreated(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleCreateGroup = () => {
     setGroupCreated(true);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setGroupCreated(false);
+    console.log("chatgroup creation submitted");
+  };
   const filteredUsers = userlist.filter((user) =>
     user.user_name.toLowerCase().includes(searchInput.toLowerCase())
   );
@@ -81,7 +85,7 @@ const CreateGroupChatForm = (props) => {
             </button>
           </div>
 
-          <form className="p-4 md:p-5" onSubmit={handleSubmit}>
+          <div className="p-4 md:p-5">
             <div className="grid gap-4 mb-4 grid-cols-2">
               <div className="col-span-2">
                 <label
@@ -103,7 +107,7 @@ const CreateGroupChatForm = (props) => {
               </div>
             </div>
             <button
-              type="submit"
+              onClick={handleCreateGroup}
               className={`${
                 groupCreated ? "hidden" : "block"
               } bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}
@@ -167,12 +171,12 @@ const CreateGroupChatForm = (props) => {
             ) : null}
 
             <button
-              type="submit"
+              onClick={handleSubmit}
               className={`mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}
             >
               Submit
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </>
