@@ -7,8 +7,7 @@ import { toast } from "react-toastify";
 
 export default function UsersForCircle(props) {
   const { loginInfo } = useLogin();
-  const [sentRequest, setSendReques] = useState([]);
-  const [pendingRequest, setPendingReques] = useState([]);
+
   const loggedInUserRole = loginInfo.userRole;
   const loggedInUserId = loginInfo.userId;
 
@@ -46,14 +45,6 @@ export default function UsersForCircle(props) {
     }
   };
 
-  // const handleMouseLeave = () => {
-  //   if (openchatbox === false) {
-  //     setExpand("hidden");
-  //   } else {
-  //     setExpand("block");
-  //   }
-  // };
-
   const handleOpenChatbox = () => {
     setOpenchatbox(true);
     setExpand("hidden");
@@ -69,7 +60,7 @@ export default function UsersForCircle(props) {
       }
     };
     fethUserdata();
-  }, [sentRequest]);
+  }, []);
 
   const handleConnect = async (requester, targetuser) => {
     try {
@@ -88,7 +79,8 @@ export default function UsersForCircle(props) {
       setExpandeduser(null);
     }
   };
-  const handleSendOfflineMessage = (loggedinUser) => {
+
+  const handleSendOfflineMessage = (userId) => {
     "todo";
   };
 
@@ -97,10 +89,7 @@ export default function UsersForCircle(props) {
       {loggedInUserRole === "user" ? (
         <div className="flex">
           <div className="w-full max-w-sm bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div
-              className="flex justify-start px-4 pt-4"
-              // onMouseLeave={handleMouseLeave}
-            >
+            <div className="flex justify-start px-4 pt-4">
               <button
                 onClick={() => handleExpand(userId, user)}
                 id="dropdownButton"
