@@ -194,10 +194,10 @@ export default function Navbar() {
                       <li>
                         <Link
                           onClick={handleSubMenuClick}
-                          to="/user/progress"
+                          to="/user/learner-portal"
                           className="block px-4 py-2 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
-                          Progress
+                          Learner Portal
                         </Link>
                       </li>
                       <li>
