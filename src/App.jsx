@@ -17,7 +17,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Services from "./pages/common/Services";
 import ContactUs from "./pages/common/ContactUs";
-import Progress from "./pages/user/Progress";
+import LearnerPortal from "./pages/user/LeanerPortal";
 import MyCart from "./pages/user/MyCart";
 import CartProvider from "./context/CartContext";
 import CheckOutPage from "./pages/user/CheckOutPage";
@@ -43,7 +43,7 @@ function App() {
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/services" element={<Services />} />
             <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/user/progress" element={<Progress />} />
+            <Route path="/user/learner-portal" element={<LearnerPortal />} />
             <Route path="/user/user-circle" element={<UserCircle />} />
             <Route path="/mycart" element={<MyCart />} />
             <Route path="/checkout" element={<CheckOutPage />} />
