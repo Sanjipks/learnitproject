@@ -2,13 +2,11 @@ import React, { useState } from "react";
 
 export default function Progress() {
   const [classes, setClasses] = useState(false);
-  const [mrProgress, setMyProgress] = useState(false);
 
   const handleClasses = () => {
     setClasses(true);
   };
   const handleMyProgress = () => {
-    setMyProgress(true);
     setClasses(false);
   };
   return (
