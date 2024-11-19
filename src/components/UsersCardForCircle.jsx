@@ -128,13 +128,14 @@ export default function UsersForCircle(props) {
                     >
                       send Message
                     </li>
-
-                    <li
-                      onClick={handleOpenChatbox}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      chat
-                    </li>
+                    {connStatus === "friend" ? (
+                      <li
+                        onClick={handleOpenChatbox}
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        chat
+                      </li>
+                    ) : null}
                   </ul>
                 </div>
               ) : null}
