@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
-import { getAllconnections, sendConnectionReq } from "../apis/Api";
+import {
+  getAllconnections,
+  rcvConnectionReq,
+  sendConnectionReq,
+} from "../apis/Api";
 import { toast } from "react-toastify";
 
 export default function UsersForCircle(props) {
@@ -80,6 +84,24 @@ export default function UsersForCircle(props) {
     }
   };
 
+  const handleReceiveConnect = async (requester, targetuser) => {
+    try {
+      const response = await rcvConnectionReq(requester, targetuser);
+
+      const data = await response.json();
+      console.log("data", data);
+
+      if (response.ok) {
+        toast(data.message, { autoClose: 1000 });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setExpand("hidden");
+      setExpandeduser(null);
+    }
+  };
+
   const handleSendOfflineMessage = (userId) => {
     "todo";
   };
@@ -114,14 +136,34 @@ export default function UsersForCircle(props) {
                   className={`z-10 ${expand} absolute ml-10 text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
                 >
                   <ul className="py-2" aria-labelledby="dropdownButton">
-                    <li
-                      onClick={() =>
-                        handleConnect(loggedInUserId, expandeduserId)
-                      }
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >
-                      {connStatus}
-                    </li>
+                    {connStatus === "send connection" ? (
+                      <li
+                        onClick={() =>
+                          handleConnect(loggedInUserId, expandeduserId)
+                        }
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        {connStatus}
+                      </li>
+                    ) : connStatus === "pending" ? (
+                      <li
+                        onClick={() =>
+                          handleReceiveConnect(loggedInUserId, expandeduserId)
+                        }
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        {connStatus}
+                      </li>
+                    ) : (
+                      <li
+                        onClick={() =>
+                          handleConnect(loggedInUserId, expandeduserId)
+                        }
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        {connStatus}
+                      </li>
+                    )}
                     <li
                       onClick={() => handleSendOfflineMessage(loggedInUserId)}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"

@@ -13,6 +13,7 @@ const SEND_CONTACTUS_MESSAGE = import.meta.env.VITE_CONTACT_US_MSG;
 const VIEW_CONTACTUS_MESSAGES = import.meta.env.VITE_CONTACT_US_VIEW_MSG;
 const CHANGE_PIMAGE = import.meta.env.VITE_CHANGE_PROFILEIMAGE;
 const SEND_CONNECTION_REQ = import.meta.env.VITE_REQ_USERCONNECTION;
+const RCV_CONNECTION_REQ = import.meta.env.VITE_ACCEPT_USERCONNECTION;
 const VIEW_CONNECTIONS_STATUS = import.meta.env.VITE_VIEW_ALLCONNECTIONS;
 
 export const getUsers = async (
@@ -247,6 +248,19 @@ export const changeProfileImage = async (bodyData) => {
 //send connection request
 export const sendConnectionReq = async (requester, targetuser) => {
   const res = await fetch(`${SEND_CONNECTION_REQ}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ requester, targetuser }),
+  });
+
+  return res;
+};
+
+//send connection request
+export const rcvConnectionReq = async (requester, targetuser) => {
+  const res = await fetch(`${RCV_CONNECTION_REQ}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
