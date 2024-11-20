@@ -284,3 +284,17 @@ export const getAllconnections = async (loggedInUserId) => {
   const data = await res.json();
   return data;
 };
+
+//to create a group chat
+
+export const createGroupChat = async (creater, groupChatName) => {
+  const res = await fetch(`${RCV_CONNECTION_REQ}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ creater, groupChatName }),
+  });
+
+  return res;
+};
