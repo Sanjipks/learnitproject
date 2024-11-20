@@ -143,9 +143,9 @@ export default function UsersForCircle(props) {
                         }
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
-                        {connStatus}
+                        Send Connection
                       </li>
-                    ) : connStatus === "pending" ? (
+                    ) : connStatus === "connection req received" ? (
                       <li
                         onClick={() =>
                           handleReceiveConnect(loggedInUserId, expandeduserId)
@@ -155,12 +155,7 @@ export default function UsersForCircle(props) {
                         {connStatus}
                       </li>
                     ) : (
-                      <li
-                        onClick={() =>
-                          handleConnect(loggedInUserId, expandeduserId)
-                        }
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
+                      <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                         {connStatus}
                       </li>
                     )}
