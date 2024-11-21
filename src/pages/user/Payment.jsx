@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ConfirmDecision from "../../components/modals/utilitycomponent/ConfirmDecision";
+import { useNavigate } from "react-router-dom";
 
 const PaymentForm = () => {
   const [inputs, setInputs] = useState({
@@ -11,6 +12,7 @@ const PaymentForm = () => {
   const [pop, setPop] = useState(false);
   const [type, setType] = useState(null);
 
+  const navigate = useNavigate();
   const handleInput = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -39,10 +41,31 @@ const PaymentForm = () => {
     }
   };
 
+  const handleNavtoSummary = () => {
+    navigate("/checkout");
+  };
+
   return (
     <>
-      <div className="min-h-screen h-auto flex flex-col xm:gap-4 bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
-        <div className="items-center justify-start md:my-40 sm:my-20 px-2">
+      <div className="min-h-screen h-auto flex flex-col justify-items-center justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
+        <div className="md:my-20">
+          <div className="w-full flex mx-auto justify-center bg-gray-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800">
+            <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white p-4 ">
+              Choose Payment
+            </h1>
+          </div>
+          <div className="flex max-w-screen-xl w-full mx-auto">
+            {" "}
+            <div className=" flex justify-start my-12 ">
+              <button
+                onClick={handleNavtoSummary}
+                className="flex bg-gray-100 rounded-lg shadow dark:border md:mt-0 max-w-sm w-auto p-4 dark:bg-gray-800 text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white  "
+              >
+                Go back<span className="px-2">summary</span>
+              </button>
+            </div>
+          </div>
+
           <div className="max-w-screen-xl w-full sm:h-auto sm:m-auto flex md:flex-row xm:flex-col-reverse">
             <section className="flex md:h-[756px]  bg-gray-400 dark:bg-gray-900 sm:rounded-br-xl md:rounded-br-none sm:rounded-bl-xl md:rounded-tl-xl  justify-center items-center w-full">
               Payment Type: {type}
