@@ -65,6 +65,9 @@ const ChatBox = (props) => {
   const sortedMessages = messages.sort(
     (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
   );
+
+  const recentMessages = pastmessages.slice(-30);
+
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, down]);
@@ -99,7 +102,7 @@ const ChatBox = (props) => {
       </div>
 
       <div className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner">
-        {pastmessages.map((msg, index) => {
+        {recentMessages.map((msg, index) => {
           return (
             <div
               key={index}
