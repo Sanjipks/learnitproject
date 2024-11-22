@@ -16,7 +16,9 @@ const ChatBox = (props) => {
   const [down, setDown] = useState(false);
   const [pastmessages, setPastMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [viewMessages, setViewMessages] = useState(-10);
   const messageEndRef = useRef(null);
+  const messageMoveUpRef = useRef(null);
 
   const handleInput = (e) => {
     setNewMessage(e.target.value);
@@ -66,7 +68,15 @@ const ChatBox = (props) => {
     (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
   );
 
-  const recentMessages = pastmessages.slice(-30);
+  const loadedMessages = pastmessages.slice(viewMessages);
+
+  const handleScroll = () => {
+    const container = messageMoveUpRef.current;
+
+    if (container.scrollTop === 0) {
+      setViewMessages((prev) => prev - 10);
+    }
+  };
 
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -101,8 +111,12 @@ const ChatBox = (props) => {
         </button>
       </div>
 
-      <div className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner">
-        {recentMessages.map((msg, index) => {
+      <div
+        ref={messageMoveUpRef}
+        onScroll={handleScroll}
+        className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner"
+      >
+        {loadedMessages.map((msg, index) => {
           return (
             <div
               key={index}
