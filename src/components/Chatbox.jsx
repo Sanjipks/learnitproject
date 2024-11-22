@@ -9,10 +9,11 @@ const socket = io(BEHOST, {
 });
 
 const ChatBox = (props) => {
-  const { selectedUserId, selectedUser, handleclose } = props;
+  const { selectedUserId, selectedUser, handleclose, openchatbox } = props;
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
   const [messages, setMessages] = useState([]);
+  const [down, setDown] = useState(false);
   const [pastmessages, setPastMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const messageEndRef = useRef(null);
@@ -41,6 +42,7 @@ const ChatBox = (props) => {
 
     // listen for past messages on connection
     socket.on("past_messages", (pastMessages) => {
+      setDown(true);
       setPastMessages(
         pastMessages.sort(
           (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
@@ -65,7 +67,7 @@ const ChatBox = (props) => {
   );
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, down]);
 
   return (
     <div className="flex flex-col w-full fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md">
