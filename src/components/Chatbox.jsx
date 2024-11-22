@@ -14,9 +14,9 @@ const ChatBox = (props) => {
   const loggedInUserId = loginInfo.userId;
   const [messages, setMessages] = useState([]);
   const [down, setDown] = useState(false);
-  const [pastmessages, setPastMessages] = useState([]);
+  const [pastMessages, setPastMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [viewMessages, setViewMessages] = useState(-10);
+  const [viewMessages, setViewMessages] = useState(1);
   const messageEndRef = useRef(null);
   const messageMoveUpRef = useRef(null);
 
@@ -36,11 +36,11 @@ const ChatBox = (props) => {
       setNewMessage("");
     }
   };
-
+  const loadMessagesNumber = viewMessages;
   useEffect(() => {
     // associate user and load past messages
     socket.emit("user_connected", loggedInUserId);
-    socket.emit("fetch_past_messages", selectedUserId);
+    socket.emit("fetch_past_messages", selectedUserId, loadMessagesNumber);
 
     // listen for past messages on connection
     socket.on("past_messages", (pastMessages) => {
@@ -67,14 +67,12 @@ const ChatBox = (props) => {
   const sortedMessages = messages.sort(
     (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
   );
-
-  const loadedMessages = pastmessages.slice(viewMessages);
-
+  //const loadedMessages = pastmessages.slice(viewMessages);
   const handleScroll = () => {
     const container = messageMoveUpRef.current;
 
     if (container.scrollTop === 0) {
-      setViewMessages((prev) => prev - 10);
+      setViewMessages((prev) => prev - 20);
     }
   };
 
@@ -116,7 +114,7 @@ const ChatBox = (props) => {
         onScroll={handleScroll}
         className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner"
       >
-        {loadedMessages.map((msg, index) => {
+        {pastMessages.map((msg, index) => {
           return (
             <div
               key={index}
