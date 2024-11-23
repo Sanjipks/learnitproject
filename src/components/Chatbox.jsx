@@ -16,7 +16,7 @@ const ChatBox = (props) => {
   const [down, setDown] = useState(false);
   const [pastMessages, setPastMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [viewMessages, setViewMessages] = useState(-20);
+  const [viewMessages, setViewMessages] = useState(-5);
   const messageEndRef = useRef(null);
   const messageMoveUpRef = useRef(null);
 
