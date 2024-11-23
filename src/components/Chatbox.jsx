@@ -16,7 +16,7 @@ const ChatBox = (props) => {
   const [down, setDown] = useState(false);
   const [pastMessages, setPastMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [viewMessages, setViewMessages] = useState(1);
+  const [viewMessages, setViewMessages] = useState(-20);
   const messageEndRef = useRef(null);
   const messageMoveUpRef = useRef(null);
 
@@ -61,7 +61,7 @@ const ChatBox = (props) => {
       socket.off("message");
       socket.off("past_messages");
     };
-  }, [selectedUserId, loggedInUserId]);
+  }, [selectedUserId, loggedInUserId, viewMessages]);
 
   // sort messages by timestamp for accurate display
   const sortedMessages = messages.sort(
