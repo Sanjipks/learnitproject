@@ -298,3 +298,15 @@ export const createGroupChat = async (creater, groupChatName) => {
 
   return res;
 };
+
+export const constSubmitPayment = async (userinfo, cardinfo) => {
+  const res = await fetch(`${SUBMIT_PAYMENT}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userinfo, cardinfo }),
+  });
+
+  return res;
+};
