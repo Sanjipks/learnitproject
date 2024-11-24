@@ -73,9 +73,9 @@ const CheckOutPage = () => {
                   <table>
                     <thead className="border">
                       <tr>
-                        <th className="border">Service ID</th>
-                        <th className="border">Service Name</th>
-                        <th className="border">Price</th>
+                        <th className="border py-1">Service ID</th>
+                        <th className="border py-1">Service Name</th>
+                        <th className="border py-1">Price</th>
                       </tr>
                     </thead>
                     <tbody>
