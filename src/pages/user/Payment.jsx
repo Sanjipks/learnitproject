@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import ConfirmDecision from "../../components/modals/utilitycomponent/ConfirmDecision";
 import { useNavigate } from "react-router-dom";
+import { servicesPayment } from "../../apis/Api";
+import { useLogin } from "../../context/LoginContext";
+import { toast } from "react-toastify";
+import { useCart } from "../../context/CartContext";
 
 const PaymentForm = () => {
   const [inputs, setInputs] = useState({
@@ -11,6 +15,10 @@ const PaymentForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("credit");
   const [pop, setPop] = useState(false);
   const [type, setType] = useState(null);
+
+  const { loginInfo } = useLogin();
+  const loggedInuser = loginInfo.userId;
+  const { cartItems } = useCart();
 
   const navigate = useNavigate();
   const handleInput = (event) => {
@@ -23,21 +31,16 @@ const PaymentForm = () => {
     setPop(true);
   };
 
-  const handlePop = (state) => {
-    setPop(false);
-
+  const handlePop = async (event, state) => {
+    event.preventDefault();
     if (state) {
-      try {
-        {
-          alert("payment sucessfully made");
-        }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setType(null);
+      const res = await servicesPayment(loggedInuser, cartItems);
+
+      if (res.status == 200) {
+        toast(data.message);
+      } else {
+        alert("payment can not be made");
       }
-    } else {
-      alert("payment can not be made");
     }
   };
 
