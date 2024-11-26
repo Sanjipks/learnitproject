@@ -15,6 +15,7 @@ const CHANGE_PIMAGE = import.meta.env.VITE_CHANGE_PROFILEIMAGE;
 const SEND_CONNECTION_REQ = import.meta.env.VITE_REQ_USERCONNECTION;
 const RCV_CONNECTION_REQ = import.meta.env.VITE_ACCEPT_USERCONNECTION;
 const VIEW_CONNECTIONS_STATUS = import.meta.env.VITE_VIEW_ALLCONNECTIONS;
+const PAYMENT_SERVICES = import.meta.env.VITE_SERVICE_PAYMENT;
 
 export const getUsers = async (
   loggedinUserRole,
@@ -300,7 +301,7 @@ export const createGroupChat = async (creater, groupChatName) => {
 };
 
 export const servicesPayment = async (userId, serviceId) => {
-  const res = await fetch(`${SUBMIT_PAYMENT}`, {
+  const res = await fetch(`${PAYMENT_SERVICES}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
