@@ -19,7 +19,8 @@ const PaymentForm = () => {
 
   const { loginInfo } = useLogin();
   const loggedInuser = loginInfo.userId;
-  const { cartItems } = useCart();
+
+  const { cartItems, clearCart } = useCart();
 
   const navigate = useNavigate();
   const handleInput = (event) => {
@@ -44,6 +45,7 @@ const PaymentForm = () => {
 
         if (res.status === 200) {
           toast(data.message);
+          clearCart();
         } else {
           alert("Payment cannot be made. Please try again.");
         }
