@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ConfirmDecision from "../../components/modals/utilitycomponent/ConfirmDecision";
 import { useNavigate } from "react-router-dom";
 import { servicesPayment } from "../../apis/Api";
@@ -15,6 +15,7 @@ const PaymentForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("credit");
   const [pop, setPop] = useState(false);
   const [type, setType] = useState(null);
+  const [serviceIds, setServiceIDs] = useState([]);
 
   const { loginInfo } = useLogin();
   const loggedInuser = loginInfo.userId;
@@ -30,16 +31,25 @@ const PaymentForm = () => {
   const handleSubmitPayment = () => {
     setPop(true);
   };
+  useEffect(() => {
+    setServiceIDs(cartItems.map((item) => item.serviceId));
+  }, []);
 
-  const handlePop = async (event, state) => {
-    event.preventDefault();
+  const handlePop = async (state) => {
     if (state) {
-      const res = await servicesPayment(loggedInuser, cartItems);
+      try {
+        const res = await servicesPayment(loggedInuser, serviceIds);
 
-      if (res.status == 200) {
-        toast(data.message);
-      } else {
-        alert("payment can not be made");
+        if (res?.status === 200) {
+          toast(res.message);
+        } else {
+          alert("Payment cannot be made. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error during payment:", error);
+        alert(
+          "An error occurred while processing the payment. Please try again later."
+        );
       }
     }
   };

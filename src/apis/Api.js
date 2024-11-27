@@ -300,13 +300,13 @@ export const createGroupChat = async (creater, groupChatName) => {
   return res;
 };
 
-export const servicesPayment = async (userId, serviceId) => {
+export const servicesPayment = async (userId, serviceIds) => {
   const res = await fetch(`${PAYMENT_SERVICES}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ userId, serviceId }),
+    body: JSON.stringify({ userId, serviceIds }),
   });
 
   return res;
