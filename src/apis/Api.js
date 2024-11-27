@@ -308,6 +308,5 @@ export const servicesPayment = async (userId, serviceIds) => {
     },
     body: JSON.stringify({ userId, serviceIds }),
   });
-
   return res;
 };
