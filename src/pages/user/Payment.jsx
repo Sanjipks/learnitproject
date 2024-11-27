@@ -36,12 +36,14 @@ const PaymentForm = () => {
   }, []);
 
   const handlePop = async (state) => {
+    setPop(false);
     if (state) {
       try {
         const res = await servicesPayment(loggedInuser, serviceIds);
+        const data = await res.json();
 
-        if (res?.status === 200) {
-          toast(res.message);
+        if (res.status === 200) {
+          toast(data.message);
         } else {
           alert("Payment cannot be made. Please try again.");
         }
