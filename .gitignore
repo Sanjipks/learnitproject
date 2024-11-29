@@ -11,7 +11,11 @@ node_modules
 dist
 dist-ssr
 *.local
-.env
+
+#loaded in all cases
+.env   
+#loaded in all cases, ignored by git           
+.env.local
 
 # Editor directories and files
 .vscode/*
