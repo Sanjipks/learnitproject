@@ -19,6 +19,10 @@ const CreateChatGroup = (props) => {
     }));
   };
 
+  const filteredUsers = userlist.filter((user) =>
+    user.user_name.toLowerCase().includes(searchInput.toLowerCase())
+  );
+
   const handleUserSearchInput = (e) => {
     const value = e.target.value;
     setSearchInput(value);
@@ -45,12 +49,10 @@ const CreateChatGroup = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setGroupCreated(false);
     console.log("chatgroup creation submitted");
   };
-  const filteredUsers = userlist.filter((user) =>
-    user.user_name.toLowerCase().includes(searchInput.toLowerCase())
-  );
 
   return (
     <>
