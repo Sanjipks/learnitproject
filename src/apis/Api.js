@@ -16,6 +16,7 @@ const SEND_CONNECTION_REQ = import.meta.env.VITE_REQ_USERCONNECTION;
 const RCV_CONNECTION_REQ = import.meta.env.VITE_ACCEPT_USERCONNECTION;
 const VIEW_CONNECTIONS_STATUS = import.meta.env.VITE_VIEW_ALLCONNECTIONS;
 const PAYMENT_SERVICES = import.meta.env.VITE_SERVICE_PAYMENT;
+const CREATE_GROUP_CHAT = import.meta.env.VITE_CREATE_GROUP_CHAT;
 
 export const getUsers = async (
   loggedinUserRole,
@@ -289,7 +290,7 @@ export const getAllconnections = async (loggedInUserId) => {
 //to create a group chat
 
 export const createGroupChat = async (creater, groupChatName) => {
-  const res = await fetch(`${RCV_CONNECTION_REQ}`, {
+  const res = await fetch(`${CREATE_GROUP_CHAT}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
