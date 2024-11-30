@@ -94,6 +94,7 @@ const UserCircle = () => {
         </button>
         {createGroupChat ? (
           <CreateChatGroup
+            loggedInuserId={loggedInUserId}
             handleclosecreateroom={handleCloseCreateChatRoom}
             userlist={allUsers}
           />

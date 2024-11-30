@@ -1,21 +1,19 @@
 import React, { useState } from "react";
+import { useGChat } from "../context/GChatContext";
 
 const CreateChatGroup = (props) => {
-  const { handleclosecreateroom, userlist } = props;
+  const { handleclosecreateroom, userlist, loggedInuserId } = props;
+  const { GChatInfo, setGChatInfo, addGroupMember, removeGroupMember } =
+    useGChat();
 
   const [groupCreated, setGroupCreated] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
-  const [groupChat, setGroupChat] = useState({
-    groupChatName: "",
-    groupChatMembers: [],
-  });
-
   const handleInput = (e) => {
-    const { name, value } = e.target;
-    setGroupChat((prevState) => ({
+    const { value } = e.target;
+    setGChatInfo((prevState) => ({
       ...prevState,
-      [name]: value,
+      groupName: value,
     }));
   };
 
@@ -24,18 +22,20 @@ const CreateChatGroup = (props) => {
   );
 
   const handleUserSearchInput = (e) => {
-    const value = e.target.value;
-    setSearchInput(value);
+    setSearchInput(e.target.value);
   };
 
   const handleAddUser = (userId) => {
-    if (userId && !groupChat.groupChatMembers.includes(userId)) {
-      setGroupChat((prevState) => ({
-        ...prevState,
-        groupChatMembers: [...prevState.groupChatMembers, userId],
-      }));
+    if (userId && !GChatInfo.groupMembers.includes(userId)) {
+      addGroupMember({ id: userId });
     }
     setSearchInput("");
+  };
+
+  const handleRemoveUser = (userId) => {
+    if (userId) {
+      removeGroupMember(userId);
+    }
   };
 
   const handleCloseCreateChatRoomBox = () => {
@@ -49,9 +49,8 @@ const CreateChatGroup = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log("Chat group creation submitted:", GChatInfo);
     setGroupCreated(false);
-    console.log("chatgroup creation submitted");
   };
 
   return (
@@ -64,8 +63,7 @@ const CreateChatGroup = (props) => {
             </h3>
             <button
               onClick={handleCloseCreateChatRoomBox}
-              className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-              data-modal-hide="popup-modal"
+              className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <svg
                 className="w-3 h-3"
@@ -87,44 +85,42 @@ const CreateChatGroup = (props) => {
           </div>
 
           <div className="p-4 md:p-5">
-            <div className="grid gap-4 mb-4 grid-cols-2">
-              <div className="col-span-2">
-                <label
-                  htmlFor="groupChatName"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Group Name
-                </label>
-                <input
-                  type="text"
-                  name="groupChatName"
-                  id="groupChatName"
-                  value={groupChat.groupChatName}
-                  onChange={handleInput}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type group name"
-                  required
-                />
-              </div>
+            <div className="mb-4">
+              <label
+                htmlFor="groupName"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Group Name
+              </label>
+              <input
+                type="text"
+                name="groupName"
+                id="groupName"
+                value={GChatInfo.groupName || ""}
+                onChange={handleInput}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                placeholder="Type group name"
+                required
+              />
             </div>
+
             <button
               onClick={handleCreateGroup}
               className={`${
                 groupCreated ? "hidden" : "block"
-              } bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}
+              } bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5 dark:bg-gray-600 dark:border-gray-500`}
             >
               Create
             </button>
 
-            {groupCreated ? (
-              <div className="pt-4 px-1 text-lg font-semibold">
+            {groupCreated && (
+              <div className="pt-4 px-1">
                 <label
                   htmlFor="findUser"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-600"
+                  className="block mb-2 text-sm font-medium text-gray-900"
                 >
                   Add Group Members
                 </label>
-
                 <input
                   type="text"
                   id="findUser"
@@ -132,14 +128,14 @@ const CreateChatGroup = (props) => {
                   value={searchInput}
                   onChange={handleUserSearchInput}
                   placeholder="Search users..."
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
                 />
-                {searchInput ? (
+                {searchInput && (
                   <ul className="bg-white border border-gray-300 rounded-lg mt-2 max-h-40 overflow-y-auto">
                     {filteredUsers.map((user) => (
                       <li
                         key={user.user_id}
-                        className="flex justify-between items-center p-2 text-gray-900 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 hover:bg-gray-100 cursor-pointer"
+                        className="flex justify-between items-center p-2 text-gray-900 bg-gray-200 hover:bg-gray-100 cursor-pointer"
                       >
                         <span>{user.user_name}</span>
                         <button
@@ -151,29 +147,32 @@ const CreateChatGroup = (props) => {
                       </li>
                     ))}
                   </ul>
-                ) : null}
-
+                )}
                 <div className="mt-4">
                   <h3 className="text-sm font-medium">Added Members:</h3>
                   <ul>
-                    {groupChat.groupChatMembers.map((userId) => {
-                      const user = userlist.find(
-                        (user) => user.user_id === userId
-                      );
+                    {GChatInfo.groupMembers.map((userId) => {
+                      const user = userlist.find((u) => u.user_id === userId);
                       return (
                         <li key={userId} className="flex justify-between mt-2">
-                          <div>{user ? user.user_name : "Unknown User"}</div>
+                          <span>{user ? user.user_name : "Unknown User"}</span>
+                          <button
+                            onClick={() => handleRemoveUser(userId)}
+                            className="text-red-600"
+                          >
+                            Remove
+                          </button>
                         </li>
                       );
                     })}
                   </ul>
                 </div>
               </div>
-            ) : null}
+            )}
 
             <button
               onClick={handleSubmit}
-              className={`mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500`}
+              className="mt-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
             >
               Submit
             </button>
