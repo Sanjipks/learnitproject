@@ -23,39 +23,42 @@ import CartProvider from "./context/CartContext";
 import CheckOutPage from "./pages/user/CheckOutPage";
 import PaymentForm from "./pages/user/Payment";
 import UserCircle from "./pages/user/UserCircle";
+import GChatProvider from "./context/GChatContext";
 
 function App() {
   return (
     <Router>
       <LoginProvider>
-        <CartProvider>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/userlist" element={<UserList />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/verifyaccount" element={<VerifyAccount />} />
-            {/* <Route path="/userprofile" element={<UserProfile />} /> */}
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/forgetpassword" element={<ForgetPassword />} />
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/user/learner-portal" element={<LearnerPortal />} />
-            <Route path="/user/user-circle" element={<UserCircle />} />
-            <Route path="/mycart" element={<MyCart />} />
-            <Route path="/checkout" element={<CheckOutPage />} />
-            <Route path="/paymentform" element={<PaymentForm />} />
-            <Route
-              path="/reset-forgot-password"
-              element={<ResetForgetPassword />}
-            />
-          </Routes>
-          <Footer />
-          <ToastContainer />
-        </CartProvider>
+        <GChatProvider>
+          <CartProvider>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/userlist" element={<UserList />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/verifyaccount" element={<VerifyAccount />} />
+              {/* <Route path="/userprofile" element={<UserProfile />} /> */}
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/forgetpassword" element={<ForgetPassword />} />
+              <Route path="/admin" element={<AdminPage />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/user/learner-portal" element={<LearnerPortal />} />
+              <Route path="/user/user-circle" element={<UserCircle />} />
+              <Route path="/mycart" element={<MyCart />} />
+              <Route path="/checkout" element={<CheckOutPage />} />
+              <Route path="/paymentform" element={<PaymentForm />} />
+              <Route
+                path="/reset-forgot-password"
+                element={<ResetForgetPassword />}
+              />
+            </Routes>
+            <Footer />
+            <ToastContainer />
+          </CartProvider>
+        </GChatProvider>
       </LoginProvider>
     </Router>
   );
