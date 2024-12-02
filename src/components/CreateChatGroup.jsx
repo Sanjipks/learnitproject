@@ -27,7 +27,7 @@ const CreateChatGroup = (props) => {
 
   const handleAddUser = (userId) => {
     if (userId && !GChatInfo.groupMembers.includes(userId)) {
-      addGroupMember({ id: userId });
+      addGroupMember(userId);
     }
     setSearchInput("");
   };

@@ -24,10 +24,10 @@ export default function GChatProvider({ children }) {
     );
   }, [GChatInfo]);
 
-  const addGroupMember = (member) => {
+  const addGroupMember = (userId) => {
     setGChatInfo((prev) => ({
       ...prev,
-      groupMembers: [...prev.groupMembers, member],
+      groupMembers: [...prev.groupMembers, userId],
     }));
   };
 
