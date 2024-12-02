@@ -171,22 +171,21 @@ const UserCircle = () => {
           </button>
         </div>
       </div>
-      {openchatbox ? (
+      {openchatbox && (
         <ChatBox
           handleclose={handleclose}
           selectedUserId={expandeduserId}
           selectedUser={expandeduser}
           openchatbox={setOpenchatbox}
         />
-      ) : null}
+      )}
 
-      {opengroupchatbox ? (
+      {opengroupchatbox && (
         <GroupChatBox
           handleclose={handlegroupchatclose}
           opengroupchatbox={setOpengroupchatbox}
         />
-      ) : null}
-      <Messaging />
+      )}
     </div>
   );
 };

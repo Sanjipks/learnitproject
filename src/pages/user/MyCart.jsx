@@ -37,11 +37,11 @@ const MyCart = () => {
             >
               Service List
             </button>
-            {cartItems.length !== 0 ? (
+            {cartItems.length !== 0 && (
               <div className="text-xl">
                 You have {cartItems.length} Items in Your Cart
               </div>
-            ) : null}
+            )}
 
             <button
               disabled={cartItems.length < 1}

@@ -24,6 +24,7 @@ import CheckOutPage from "./pages/user/CheckOutPage";
 import PaymentForm from "./pages/user/Payment";
 import UserCircle from "./pages/user/UserCircle";
 import GChatProvider from "./context/GChatContext";
+import Messaging from "./components/Messaging";
 
 function App() {
   return (
@@ -55,7 +56,9 @@ function App() {
                 element={<ResetForgetPassword />}
               />
             </Routes>
+
             <Footer />
+
             <ToastContainer />
           </CartProvider>
         </GChatProvider>
