@@ -33,6 +33,7 @@ const CreateChatGroup = (props) => {
   };
 
   const handleRemoveUser = (userId) => {
+    console.log("removeuserid", userId);
     if (userId) {
       removeGroupMember(userId);
     }
@@ -157,7 +158,7 @@ const CreateChatGroup = (props) => {
                         <li key={userId} className="flex justify-between mt-2">
                           <span>{user ? user.user_name : "Unknown User"}</span>
                           <button
-                            onClick={() => handleRemoveUser(userId)}
+                            onClick={() => handleRemoveUser(user.user_id)}
                             className="text-red-600"
                           >
                             Remove

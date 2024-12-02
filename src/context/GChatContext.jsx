@@ -24,19 +24,18 @@ export default function GChatProvider({ children }) {
     );
   }, [GChatInfo]);
 
-  const addGroupMember = (userId) => {
+  const addGroupMember = (memberId) => {
     setGChatInfo((prev) => ({
       ...prev,
-      groupMembers: [...prev.groupMembers, userId],
+      groupMembers: [...prev.groupMembers, memberId],
     }));
   };
 
   const removeGroupMember = (memberId) => {
+    console.log("removegmember", GChatInfo.groupMembers);
     setGChatInfo((prev) => ({
       ...prev,
-      groupMembers: prev.groupMembers.filter(
-        (member) => member.id !== memberId
-      ),
+      groupMembers: prev.groupMembers.filter((member) => member !== memberId),
     }));
   };
 
