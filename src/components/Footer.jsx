@@ -1,4 +1,5 @@
 import React from "react";
+import Messaging from "./Messaging";
 
 function Footer() {
   const date = new Date();
@@ -179,6 +180,7 @@ function Footer() {
           </div>
         </div>
       </footer>
+      <Messaging />
     </>
   );
 }

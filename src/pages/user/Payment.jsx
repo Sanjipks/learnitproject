@@ -238,12 +238,12 @@ const PaymentForm = () => {
           </div>
         </div>
       </div>
-      {pop ? (
+      {pop && (
         <ConfirmDecision
           handlePopAction={handlePop}
           typo="Are you sure you want to make a payment?"
         />
-      ) : null}
+      )}
     </>
   );
 };
