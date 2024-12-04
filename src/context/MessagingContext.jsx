@@ -15,6 +15,12 @@ export const MessagingProvider = ({ children }) => {
     setChatlists(["todo"]);
   }, []);
 
+  const chatListsUpdate = (updates) => {
+    setChatlists((prevList) => {
+      [...prevList, updates];
+    });
+  };
+
   const handleViewBox = () => {
     setViewBox((prev) => !prev);
   };
@@ -24,7 +30,14 @@ export const MessagingProvider = ({ children }) => {
   };
   return (
     <MessagingCotext.Provider
-      value={{ chatlists, closeBox, handleCloseBox, viewBox, handleViewBox }}
+      value={{
+        chatlists,
+        chatListsUpdate,
+        closeBox,
+        handleCloseBox,
+        viewBox,
+        handleViewBox,
+      }}
     >
       {children}
     </MessagingCotext.Provider>
