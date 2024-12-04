@@ -22,6 +22,9 @@ const Messaging = () => {
           ---
         </button>
       </h1>
+      {chatlists.map((chat) => (
+        <div id={chat.id}>{chat.name}</div>
+      ))}
     </div>
   );
 };
