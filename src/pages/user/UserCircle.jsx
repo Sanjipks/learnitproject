@@ -22,6 +22,7 @@ const UserCircle = () => {
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
 
   const { loginInfo } = useLogin();
+
   const loggedinUserRole = loginInfo.userRole;
   const loggedInUserId = loginInfo.userId;
 
@@ -91,13 +92,13 @@ const UserCircle = () => {
         >
           Create Chat Room
         </button>
-        {createGroupChat ? (
+        {createGroupChat && (
           <CreateChatGroup
             loggedInuserId={loggedInUserId}
             handleclosecreateroom={handleCloseCreateChatRoom}
             userlist={allUsers}
           />
-        ) : null}
+        )}
       </div>
 
       <div className="flex  justify-start mx-auto">

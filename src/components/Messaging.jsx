@@ -23,7 +23,12 @@ const Messaging = () => {
         </button>
       </h1>
       {chatlists.map((chat) => (
-        <div id={chat.id}>{chat.name}</div>
+        <div
+          id={chat.id}
+          className="flex w-96 h-auto pl-10 border border-t-0 border-gray-900 dark:border-gray-100 dark:text-slate-200 text-slate-900"
+        >
+          {chat.name}
+        </div>
       ))}
     </div>
   );
