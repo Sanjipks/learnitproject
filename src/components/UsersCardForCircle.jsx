@@ -108,7 +108,7 @@ export default function UsersForCircle(props) {
 
   return (
     <>
-      {loggedInUserRole === "user" ? (
+      {loggedInUserRole === "user" && (
         <div className="flex">
           <div className="w-full max-w-sm bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div className="flex justify-start px-4 pt-4">
@@ -130,7 +130,7 @@ export default function UsersForCircle(props) {
                   <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
                 </svg>
               </button>
-              {expandeduserId === userId ? (
+              {expandeduserId === userId && (
                 <div
                   id="dropdown"
                   className={`z-10 ${expand} absolute ml-10 text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
@@ -165,17 +165,17 @@ export default function UsersForCircle(props) {
                     >
                       send Message
                     </li>
-                    {connStatus === "friend" ? (
+                    {connStatus === "friend" && (
                       <li
                         onClick={handleOpenChatbox}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
                         chat
                       </li>
-                    ) : null}
+                    )}
                   </ul>
                 </div>
-              ) : null}
+              )}
             </div>
 
             <div className="flex flex-col items-center pb-10">
@@ -193,7 +193,7 @@ export default function UsersForCircle(props) {
             </div>
           </div>
         </div>
-      ) : null}
+      )}
     </>
   );
 }

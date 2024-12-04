@@ -30,8 +30,8 @@ function App() {
   return (
     <Router>
       <LoginProvider>
-        <MessagingProvider>
-          <GChatProvider>
+        <GChatProvider>
+          <MessagingProvider>
             <CartProvider>
               <Navbar />
               <Routes>
@@ -65,8 +65,8 @@ function App() {
 
               <ToastContainer />
             </CartProvider>
-          </GChatProvider>
-        </MessagingProvider>
+          </MessagingProvider>
+        </GChatProvider>
       </LoginProvider>
     </Router>
   );
