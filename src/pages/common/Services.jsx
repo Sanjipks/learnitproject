@@ -236,12 +236,12 @@ const Services = () => {
           </div>
         </Suspense>
       </div>
-      {pop ? (
+      {pop && (
         <ConfirmDecision
           handlePopAction={handlePop}
           typo=" Are you sure you want to delete this service?"
         />
-      ) : null}
+      )}
     </>
   );
 };
