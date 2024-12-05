@@ -3,7 +3,7 @@ import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
 import {
-  getAllconnections,
+  // getAllconnections,
   rcvConnectionReq,
   sendConnectionReq,
 } from "../apis/Api";
@@ -53,18 +53,19 @@ export default function UsersForCircle(props) {
     setOpenchatbox(true);
     setExpand("hidden");
   };
-  useEffect(() => {
-    const fethUserdata = async () => {
-      try {
-        const connection_data = await getAllconnections(loggedInUserId);
 
-        console.log("condata", connection_data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-    fethUserdata();
-  }, []);
+  // useEffect(() => {
+  //   const fethUserdata = async () => {
+  //     try {
+  //       const connection_data = await getAllconnections(loggedInUserId);
+
+  //       console.log("condata", connection_data);
+  //     } catch (error) {
+  //       console.error("Error:", error);
+  //     }
+  //   };
+  //   fethUserdata();
+  // }, []);
 
   const handleConnect = async (requester, targetuser) => {
     try {

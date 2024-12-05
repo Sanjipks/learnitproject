@@ -8,7 +8,6 @@ function UserInfo() {
 
   const username = loginInfo.userName;
   const useremail = loginInfo.userEmail;
-  console.log("username", username);
 
   const handleCardClick = () => {
     if (expand === "hidden") {
