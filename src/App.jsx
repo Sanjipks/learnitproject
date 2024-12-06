@@ -62,12 +62,11 @@ function App() {
               </Routes>
 
               <Footer />
-
-              <ToastContainer />
             </CartProvider>
           </MessagingProvider>
         </GChatProvider>
       </LoginProvider>
+      <ToastContainer />
     </Router>
   );
 }

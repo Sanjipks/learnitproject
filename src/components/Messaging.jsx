@@ -2,6 +2,8 @@ import React from "react";
 import CloseIcon from "../assets/icons/CloseIcon";
 import { useMessaging } from "../context/MessagingContext";
 
+import UserChatlistsForMessaging from "../pages/user/UserChatLists";
+
 const Messaging = () => {
   const { chatlists, closeBox, handleCloseBox, viewBox, handleViewBox } =
     useMessaging();
@@ -22,14 +24,10 @@ const Messaging = () => {
           ---
         </button>
       </h1>
-      {chatlists.map((chat) => (
-        <div
-          id={chat.id}
-          className="flex w-96 h-auto pl-10 border border-t-0 border-gray-900 dark:border-gray-100 dark:text-slate-200 text-slate-900"
-        >
-          {chat.name}
-        </div>
-      ))}
+
+      <div className="flex w-auto  overflow-hidden h-auto border border-t-0 border-gray-900 dark:border-gray-100 dark:text-slate-200 text-slate-900">
+        <UserChatlistsForMessaging />
+      </div>
     </div>
   );
 };
