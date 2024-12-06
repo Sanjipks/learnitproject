@@ -18,6 +18,7 @@ export default function UsersForMessaging(props) {
     connStatus,
   } = props;
 
+  console.log(connStatus);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -50,23 +51,25 @@ export default function UsersForMessaging(props) {
     <>
       {loggedInUserRole === "user" && (
         <div className="w-96 mr-2 bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <div
-            className="flex w-full flex-row  items-center p-1 mx-auto"
-            onClick={() => handleOpenChatbox(userId, user)}
-          >
-            <img
-              className="w-12 h-12 mb-3 mr-10 rounded-full shadow-lg"
-              src={image}
-              alt="Bonnie image"
-            />
-            <div className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-              {user}
-            </div>
+          {connStatus === "friend" && (
+            <div
+              className="flex w-full flex-row  items-center p-1 mx-auto"
+              onClick={() => handleOpenChatbox(userId, user)}
+            >
+              <img
+                className="w-12 h-12 my-2 mr-1 rounded-full shadow-lg"
+                src={image}
+                alt="Bonnie image"
+              />
+              <div className="mb-8 text-sm font-medium text-gray-900 dark:text-white">
+                {user}
+              </div>
 
-            {/* <div className="block px-16 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+              {/* <div className="block px-16 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                 chat
               </div> */}
-          </div>
+            </div>
+          )}
         </div>
       )}
     </>
