@@ -111,12 +111,12 @@ export default function UsersBlockViewPage(props) {
                 <span className="font-semibold text-gray-900 dark:text-white">
                   {pagenumber * userperpage - (userperpage - 1)}
                 </span>{" "}
-                {userlist.length !== 1 ? " to " : null}
-                {userlist.length !== 1 ? (
+                {userlist.length !== 1 && " to "}
+                {userlist.length !== 1 && (
                   <span className="font-semibold text-gray-900 dark:text-white">
                     {(pagenumber - 1) * userperpage + userlist.length}
                   </span>
-                ) : null}
+                )}
                 <span className="font-semibold text-gray-900 dark:text-white">
                   {" of "} {totalUserscount}
                 </span>{" "}
