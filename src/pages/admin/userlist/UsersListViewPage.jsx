@@ -52,7 +52,6 @@ export default function UserListViewPage(props) {
     }
   };
   const handleNextPageList = () => {
-    console.log(handleNextPageList);
     if (pagenumberlist >= 1) {
       setPagenumberlist(pagenumberlist + 1);
     }
