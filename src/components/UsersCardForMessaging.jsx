@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
+import ChatBox from "./Chatbox";
 
 export default function UsersForMessaging(props) {
   const { loginInfo } = useLogin();
@@ -61,13 +62,12 @@ export default function UsersForMessaging(props) {
                 src={image}
                 alt="Bonnie image"
               />
-              <div className="mb-8 text-sm font-medium text-gray-900 dark:text-white">
+              <div className="mb-10 text-sm font-medium text-gray-900 dark:text-white">
                 {user}
               </div>
-
-              {/* <div className="block px-16 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                chat
-              </div> */}
+              <div className="mt-6 ml-14 absolute w-80 h-10 border border-gray-900 text-sm font-medium rounded-sm  bg-gray-100 text-gray-900 ">
+                <span className="ml-2">lates Messages</span>
+              </div>
             </div>
           )}
         </div>
