@@ -60,7 +60,7 @@ const UserChatlistsForMessaging = () => {
 
   return (
     <div className="flex flex-col  bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
-      <div className="flex-none p-4 border-b border-gray-400">
+      <div className="flex-none py-6 border-b border-gray-400">
         <button
           className="flex px-6 py-2 my-2 border border-white rounded-lg text-lg mx-auto"
           onClick={handleCreateChatRoom}
@@ -76,13 +76,13 @@ const UserChatlistsForMessaging = () => {
         )}
       </div>
 
-      <div className="flex-grow-1 overflow-y-scroll p-4">
+      <div className="flex-grow-1 overflow-y-scroll">
         {loading ? (
           <Spinner />
         ) : (
           <div className="flex flex-col space-y-2">
             {allUsers.map((user, id) => (
-              <div key={id} className="p-2">
+              <div key={id} className="p-1">
                 <UsersForMessaging
                   key={user.user_id}
                   user={user.user_name}
