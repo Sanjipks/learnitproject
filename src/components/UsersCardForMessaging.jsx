@@ -2,11 +2,18 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
+import io from "socket.io-client";
+const BEHOST = import.meta.env.VITE_BELC;
+
+const socket = io(BEHOST, {
+  withCredentials: true,
+});
 
 export default function UsersForMessaging(props) {
   const { loginInfo } = useLogin();
 
   const loggedInUserRole = loginInfo.userRole;
+  const loggedInUserId = loginInfo.userId;
 
   const {
     userId,
@@ -18,8 +25,14 @@ export default function UsersForMessaging(props) {
     connStatus,
   } = props;
 
+  const selectedUserId = userId;
+
   console.log(connStatus);
   const [image, setImage] = useState(null);
+  const [messages, setMessages] = useState([]);
+
+  const [pastMessages, setPastMessages] = useState([]);
+  const [viewMessages, setViewMessages] = useState(-1);
 
   useEffect(() => {
     if (userImage && userImage.data) {
@@ -40,6 +53,34 @@ export default function UsersForMessaging(props) {
   //     setOpenchatbox(false);
   //   }
   // };
+
+  const loadMessagesNumber = viewMessages;
+  useEffect(() => {
+    socket.emit("user_connected", loggedInUserId);
+    socket.emit("fetch_past_messages", selectedUserId, loadMessagesNumber);
+
+    socket.on("past_messages", (pastMessages) => {
+      setPastMessages(
+        pastMessages.sort(
+          (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+        )
+      );
+    });
+
+    socket.on("message", (receivedMessage) => {
+      setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+    });
+
+    return () => {
+      socket.off("message");
+      socket.off("past_messages");
+    };
+  }, [selectedUserId, loggedInUserId, viewMessages]);
+
+  const sortedMessages = messages.sort(
+    (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+  );
+  //const loadedMessages = pastmessages.slice(viewMessages);
 
   const handleOpenChatbox = (id, user) => {
     setOpenchatbox((prev) => !prev);
@@ -65,7 +106,23 @@ export default function UsersForMessaging(props) {
               {user}
             </div>
             <div className="mt-6 ml-14 absolute w-80 h-10 border border-gray-900 text-sm font-medium rounded-sm  bg-gray-100 text-gray-900 ">
-              <span className=" w-80 ">lates Messages</span>
+              <span className=" w-80 ">
+                {" "}
+                {pastMessages.map((msg, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={`my-1 p-2 rounded-lg ${
+                        msg.sender_id == loggedInUserId
+                          ? "bg-blue-500 text-white self-end"
+                          : "bg-gray-300 text-black self-start"
+                      }`}
+                    >
+                      {msg.message}
+                    </div>
+                  );
+                })}
+              </span>
             </div>
           </div>
           {/* )} */}
