@@ -37,6 +37,7 @@ const ChatBox = (props) => {
     }
   };
   const loadMessagesNumber = viewMessages;
+
   useEffect(() => {
     // associate user and load past messages
     socket.emit("user_connected", loggedInUserId);
