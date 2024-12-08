@@ -9,6 +9,9 @@ import { useMessaging } from "../../context/MessagingContext";
 import UsersForMessaging from "../../components/UsersCardForMessaging";
 
 const UserChatlistsForMessaging = () => {
+  const { loginInfo } = useLogin();
+  const { closeBox, handleCloseBox, viewBox, handleViewBox } = useMessaging();
+
   const [allUsers, setAllUsers] = useState([]);
   const [expandeduser, setExpandeduser] = useState(null);
   const [expandeduserId, setExpandeduserId] = useState(null);
@@ -17,8 +20,6 @@ const UserChatlistsForMessaging = () => {
   const [createGroupChat, setCreateGroupChat] = useState(false);
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
 
-  const { loginInfo } = useLogin();
-  const { closeBox, handleCloseBox, viewBox, handleViewBox } = useMessaging();
   const pagenumber = 1;
   const loggedinUserRole = loginInfo.userRole;
   const loggedInUserId = loginInfo.userId;
