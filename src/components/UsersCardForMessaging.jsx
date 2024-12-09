@@ -2,12 +2,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
-import io from "socket.io-client";
-const BEHOST = import.meta.env.VITE_BELC;
-
-const socket = io(BEHOST, {
-  withCredentials: true,
-});
 
 export default function UsersForMessaging(props) {
   const { loginInfo } = useLogin();
@@ -23,15 +17,13 @@ export default function UsersForMessaging(props) {
     setExpandeduserId,
     setOpenchatbox,
     connStatus,
+    pastMessages,
   } = props;
 
   const selectedUserId = userId;
 
   console.log(connStatus);
   const [image, setImage] = useState(null);
-  const [messages, setMessages] = useState([]);
-
-  const [pastMessages, setPastMessages] = useState([]);
 
   useEffect(() => {
     if (userImage && userImage.data) {
@@ -39,29 +31,6 @@ export default function UsersForMessaging(props) {
       setImage(`data:image/jpeg;base64,${base64String}`);
     }
   }, [userImage]);
-
-  const loadMessagesNumber = -1;
-  useEffect(() => {
-    socket.emit("user_connected", loggedInUserId);
-    socket.emit("fetch_past_messages", selectedUserId, loadMessagesNumber);
-
-    socket.on("past_messages", (pastMessages) => {
-      setPastMessages(
-        pastMessages.sort(
-          (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
-        )
-      );
-    });
-
-    socket.on("message", (receivedMessage) => {
-      setMessages((prevMessages) => [...prevMessages, receivedMessage]);
-    });
-
-    return () => {
-      socket.off("message");
-      socket.off("past_messages");
-    };
-  }, [selectedUserId, loggedInUserId]);
 
   const handleOpenChatbox = (id, user) => {
     setOpenchatbox((prev) => !prev);

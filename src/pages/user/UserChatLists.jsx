@@ -7,6 +7,12 @@ import GroupChatBox from "../../components/GroupChatbox";
 import CreateChatGroup from "../../components/CreateChatGroup";
 import { useMessaging } from "../../context/MessagingContext";
 import UsersForMessaging from "../../components/UsersCardForMessaging";
+import io from "socket.io-client";
+const BEHOST = import.meta.env.VITE_BELC;
+
+const socket = io(BEHOST, {
+  withCredentials: true,
+});
 
 const UserChatlistsForMessaging = () => {
   const { loginInfo } = useLogin();
@@ -19,6 +25,9 @@ const UserChatlistsForMessaging = () => {
   const [openchatbox, setOpenchatbox] = useState(false);
   const [createGroupChat, setCreateGroupChat] = useState(false);
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
+  const [messages, setMessages] = useState([]);
+
+  const [pastMessages, setPastMessages] = useState([]);
 
   const pagenumber = 1;
   const loggedinUserRole = loginInfo.userRole;
@@ -43,6 +52,29 @@ const UserChatlistsForMessaging = () => {
 
     fetchUsers();
   }, []);
+
+  const loadMessagesNumber = -1;
+  useEffect(() => {
+    socket.emit("user_connected", loggedInUserId);
+    socket.emit("fetch_past_messages", 77, loadMessagesNumber);
+
+    socket.on("past_messages", (pastMessages) => {
+      setPastMessages(
+        pastMessages.sort(
+          (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+        )
+      );
+    });
+
+    socket.on("message", (receivedMessage) => {
+      setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+    });
+
+    return () => {
+      socket.off("message");
+      socket.off("past_messages");
+    };
+  }, [loggedInUserId]);
 
   const handleCreateChatRoom = () => {
     setCreateGroupChat((prev) => !prev);
@@ -95,6 +127,7 @@ const UserChatlistsForMessaging = () => {
                   openchatbox={openchatbox}
                   setOpenchatbox={setOpenchatbox}
                   connStatus={user.connectionStatus}
+                  pastMessages={pastMessages}
                 />
               </div>
             ))}
