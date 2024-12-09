@@ -32,7 +32,6 @@ export default function UsersForMessaging(props) {
   const [messages, setMessages] = useState([]);
 
   const [pastMessages, setPastMessages] = useState([]);
-  const [viewMessages, setViewMessages] = useState(-1);
 
   useEffect(() => {
     if (userImage && userImage.data) {
@@ -41,20 +40,7 @@ export default function UsersForMessaging(props) {
     }
   }, [userImage]);
 
-  // const handleExpand = (id, username) => {
-  //   if (expand === "hidden" && expandeduserId === null) {
-  //     setExpand("block");
-  //     setExpandeduserId(id);
-  //     setExpandeduser(username);
-  //   } else {
-  //     setExpand("hidden");
-  //     setExpandeduserId(null);
-  //     setExpandeduser(null);
-  //     setOpenchatbox(false);
-  //   }
-  // };
-
-  const loadMessagesNumber = viewMessages;
+  const loadMessagesNumber = -1;
   useEffect(() => {
     socket.emit("user_connected", loggedInUserId);
     socket.emit("fetch_past_messages", selectedUserId, loadMessagesNumber);
@@ -75,12 +61,7 @@ export default function UsersForMessaging(props) {
       socket.off("message");
       socket.off("past_messages");
     };
-  }, [selectedUserId, loggedInUserId, viewMessages]);
-
-  const sortedMessages = messages.sort(
-    (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
-  );
-  //const loadedMessages = pastmessages.slice(viewMessages);
+  }, [selectedUserId, loggedInUserId]);
 
   const handleOpenChatbox = (id, user) => {
     setOpenchatbox((prev) => !prev);
@@ -106,17 +87,13 @@ export default function UsersForMessaging(props) {
               {user}
             </div>
             <div className="mt-6 ml-14 absolute w-80 h-10 border border-gray-900 text-sm font-medium rounded-sm  bg-gray-100 text-gray-900 ">
-              <span className=" w-80 ">
+              <span className="w-96 ">
                 {" "}
                 {pastMessages.map((msg, index) => {
                   return (
                     <div
                       key={index}
-                      className={`my-1 p-2 rounded-lg ${
-                        msg.sender_id == loggedInUserId
-                          ? "bg-blue-500 text-white self-end"
-                          : "bg-gray-300 text-black self-start"
-                      }`}
+                      className="my-1 p-2 rounded-lg bg-gray-300 text-black self-start"
                     >
                       {msg.message}
                     </div>
