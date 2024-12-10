@@ -7,7 +7,6 @@ export default function UsersForMessaging(props) {
   const { loginInfo } = useLogin();
 
   const loggedInUserRole = loginInfo.userRole;
-  const loggedInUserId = loginInfo.userId;
 
   const {
     userId,
@@ -19,8 +18,6 @@ export default function UsersForMessaging(props) {
     connStatus,
     pastMessages,
   } = props;
-
-  const selectedUserId = userId;
 
   console.log(connStatus);
   const [image, setImage] = useState(null);
@@ -56,19 +53,14 @@ export default function UsersForMessaging(props) {
               {user}
             </div>
             <div className="mt-6 ml-14 absolute w-80 h-10 border border-gray-900 text-sm font-medium rounded-sm  bg-gray-100 text-gray-900 ">
-              <span className="w-96 ">
-                {" "}
-                {pastMessages.map((msg, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="my-1 p-2 rounded-lg bg-gray-300 text-black self-start"
-                    >
-                      {msg.message}
-                    </div>
-                  );
-                })}
-              </span>
+              {" "}
+              {pastMessages.map((msg, index) => {
+                return (
+                  <div key={index} className=" p-2 text-black self-start">
+                    {msg.message}
+                  </div>
+                );
+              })}
             </div>
           </div>
           {/* )} */}
