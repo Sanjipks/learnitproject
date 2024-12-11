@@ -7,12 +7,6 @@ import GroupChatBox from "../../components/GroupChatbox";
 import CreateChatGroup from "../../components/CreateChatGroup";
 import { useMessaging } from "../../context/MessagingContext";
 import UsersForMessaging from "../../components/UsersCardForMessaging";
-import io from "socket.io-client";
-const BEHOST = import.meta.env.VITE_BELC;
-
-const socket = io(BEHOST, {
-  withCredentials: true,
-});
 
 const UserChatlistsForMessaging = () => {
   const { loginInfo } = useLogin();
@@ -25,9 +19,6 @@ const UserChatlistsForMessaging = () => {
   const [openchatbox, setOpenchatbox] = useState(false);
   const [createGroupChat, setCreateGroupChat] = useState(false);
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
-  const [messages, setMessages] = useState([]);
-
-  const [pastMessages, setPastMessages] = useState([]);
 
   const pagenumber = 1;
   const loggedinUserRole = loginInfo.userRole;
