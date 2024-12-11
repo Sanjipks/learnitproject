@@ -16,7 +16,7 @@ export default function UsersForMessaging(props) {
     setExpandeduserId,
     setOpenchatbox,
     connStatus,
-    pastMessages,
+    latestMessage,
   } = props;
 
   console.log(connStatus);
@@ -54,7 +54,7 @@ export default function UsersForMessaging(props) {
             </div>
             <div className="mt-6 ml-14 absolute w-80 h-10 border border-gray-900 text-sm font-medium rounded-sm  bg-gray-100 text-gray-900 ">
               {" "}
-              {pastMessages.map((msg, index) => {
+              {latestMessage.map((msg, index) => {
                 return (
                   <div key={index} className=" p-2 text-black self-start">
                     {msg.message}

@@ -53,29 +53,6 @@ const UserChatlistsForMessaging = () => {
     fetchUsers();
   }, []);
 
-  const loadMessagesNumber = -1;
-  useEffect(() => {
-    socket.emit("user_connected", loggedInUserId);
-    socket.emit("fetch_past_messages", 77, loadMessagesNumber);
-
-    socket.on("past_messages", (pastMessages) => {
-      setPastMessages(
-        pastMessages.sort(
-          (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
-        )
-      );
-    });
-
-    socket.on("message", (receivedMessage) => {
-      setMessages((prevMessages) => [...prevMessages, receivedMessage]);
-    });
-
-    return () => {
-      socket.off("message");
-      socket.off("past_messages");
-    };
-  }, [loggedInUserId]);
-
   const handleCreateChatRoom = () => {
     setCreateGroupChat((prev) => !prev);
   };
@@ -127,7 +104,7 @@ const UserChatlistsForMessaging = () => {
                   openchatbox={openchatbox}
                   setOpenchatbox={setOpenchatbox}
                   connStatus={user.connectionStatus}
-                  pastMessages={pastMessages}
+                  latestMessage={user.latestMessages}
                 />
               </div>
             ))}
