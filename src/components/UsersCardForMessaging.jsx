@@ -20,6 +20,7 @@ export default function UsersForMessaging(props) {
   } = props;
 
   console.log(connStatus);
+  console.log(latestMessage.length);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
@@ -37,9 +38,8 @@ export default function UsersForMessaging(props) {
 
   return (
     <>
-      {loggedInUserRole === "user" && (
+      {loggedInUserRole === "user" && latestMessage.length > 0 && (
         <div className="w-96 sticky mr-2 bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          {/* {connStatus === "friend" && ( */}
           <div
             className="flex w-full flex-row  items-center p-1 mx-auto"
             onClick={() => handleOpenChatbox(userId, user)}
@@ -63,7 +63,6 @@ export default function UsersForMessaging(props) {
               })}
             </div>
           </div>
-          {/* )} */}
         </div>
       )}
     </>
