@@ -7,10 +7,17 @@ import { toast } from "react-toastify";
 import { useCart } from "../../context/CartContext";
 
 const PaymentForm = () => {
-  const [inputs, setInputs] = useState({
+  const [cardInputs, setCardInputs] = useState({
     carholderName: "",
     cardNumber: "",
     expiryDate: "",
+    cvv: "",
+  });
+  const [bankInputs, setBankInputs] = useState({
+    carholderName: "",
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
   });
   const [paymentMethod, setPaymentMethod] = useState("credit");
   const [pop, setPop] = useState(false);
@@ -23,10 +30,16 @@ const PaymentForm = () => {
   const { cartItems, clearCart } = useCart();
 
   const navigate = useNavigate();
-  const handleInput = (event) => {
+  const handleCardInput = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setInputs({ ...inputs, [name]: value });
+    setCardInputs({ ...cardInputs, [name]: value });
+  };
+
+  const handleBankInput = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setCardInputs({ ...bankInputs, [name]: value });
   };
 
   const handleSubmitPayment = () => {
@@ -136,7 +149,7 @@ const PaymentForm = () => {
                             <input
                               type="text"
                               name="carholderName"
-                              onChange={handleInput}
+                              onChange={handleCardInput}
                               className="mt-1 block w-full p-2 border border-gray-300 dark:text-gray-900 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                               placeholder="type your name"
                             />
@@ -148,7 +161,7 @@ const PaymentForm = () => {
                             <input
                               type="text"
                               name="cardNumber"
-                              onChange={handleInput}
+                              onChange={handleCardInput}
                               className="mt-1 block w-full p-2 border border-gray-300 dark:text-gray-900 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                               placeholder="1234 5678 9012 3456"
                             />
@@ -161,7 +174,7 @@ const PaymentForm = () => {
                               <input
                                 type="text"
                                 name="date"
-                                onChange={handleInput}
+                                onChange={handleCardInput}
                                 className="mt-1 block w-full p-2 border border-gray-300 dark:text-gray-900 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="MM/YY"
                               />
@@ -173,7 +186,7 @@ const PaymentForm = () => {
                               <input
                                 type="text"
                                 name="expiryDate"
-                                onChange={handleInput}
+                                onChange={handleCardInput}
                                 className="mt-1 block w-full p-2 border border-gray-300 dark:text-gray-900 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="123"
                               />
@@ -207,6 +220,18 @@ const PaymentForm = () => {
                             </label>
                             <input
                               type="text"
+                              onChange={handleBankInput}
+                              className="mt-1 block w-full p-2 border border-gray-300 dark:text-gray-900 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                              placeholder="0123456789"
+                            />
+                          </div>
+                          <div className="mb-4">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                              Routing Number
+                            </label>
+                            <input
+                              type="text"
+                              onChange={handleBankInput}
                               className="mt-1 block w-full p-2 border border-gray-300 dark:text-gray-900 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                               placeholder="0123456789"
                             />
@@ -217,8 +242,9 @@ const PaymentForm = () => {
                             </label>
                             <input
                               type="text"
+                              onChange={handleBankInput}
                               className="mt-1 block w-full p-2 border border-gray-300 dark:text-gray-900 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                              placeholder="bank type"
+                              placeholder="Name of your Bank"
                             />
                           </div>
                           <button
