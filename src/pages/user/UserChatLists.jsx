@@ -59,7 +59,7 @@ const UserChatlistsForMessaging = () => {
   };
 
   return (
-    <div className="flex flex-col  bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
+    <div className="flex flex-col bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
       <div className="flex-none py-6 border-b border-gray-400">
         <button
           className="flex px-6 py-2 my-2 border border-white rounded-lg text-lg mx-auto"
@@ -76,7 +76,7 @@ const UserChatlistsForMessaging = () => {
         )}
       </div>
 
-      <div className="flex-grow-1 overflow-y-scroll">
+      <div className="flex-grow overflow-y-scroll">
         {loading ? (
           <Spinner />
         ) : (
