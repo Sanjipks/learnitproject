@@ -10,39 +10,23 @@ import UsersForMessaging from "../../components/UsersCardForMessaging";
 
 const UserChatlistsForMessaging = () => {
   const { loginInfo } = useLogin();
-  const { closeBox, handleCloseBox, viewBox, handleViewBox } = useMessaging();
+  const {
+    closeBox,
+    handleCloseBox,
+    viewBox,
+    handleViewBox,
+    allUsers,
+    loading,
+  } = useMessaging();
 
-  const [allUsers, setAllUsers] = useState([]);
   const [expandeduser, setExpandeduser] = useState(null);
   const [expandeduserId, setExpandeduserId] = useState(null);
-  const [loading, setLoading] = useState(false);
+
   const [openchatbox, setOpenchatbox] = useState(false);
   const [createGroupChat, setCreateGroupChat] = useState(false);
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
 
-  const pagenumber = 1;
-  const loggedinUserRole = loginInfo.userRole;
   const loggedInUserId = loginInfo.userId;
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      setLoading(true);
-      try {
-        const data = await getUsers(
-          loggedinUserRole,
-          pagenumber,
-          loggedInUserId
-        );
-        setAllUsers(data.allUsers);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUsers();
-  }, []);
 
   const handleCreateChatRoom = () => {
     setCreateGroupChat((prev) => !prev);
