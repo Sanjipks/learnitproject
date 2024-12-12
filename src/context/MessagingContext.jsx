@@ -18,10 +18,10 @@ export const MessagingProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [closeBox, setCloseBox] = useState(false);
   const [chatlists, setChatlists] = useState([]);
+  const [messageUpdate, setMessageUpdate] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      setLoading(true);
       try {
         const data = await getUsers(
           loggedinUserRole,
@@ -31,13 +31,11 @@ export const MessagingProvider = ({ children }) => {
         setAllUsers(data.allUsers);
       } catch (error) {
         console.error("Error fetching users:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchUsers();
-  }, []);
+  }, [messageUpdate]);
 
   const chatListsUpdate = (updates) => {
     setChatlists((prevList) => {
@@ -63,6 +61,8 @@ export const MessagingProvider = ({ children }) => {
         handleCloseBox,
         viewBox,
         handleViewBox,
+        messageUpdate,
+        setMessageUpdate,
       }}
     >
       {children}
