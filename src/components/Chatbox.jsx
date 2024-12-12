@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import { useLogin } from "../context/LoginContext";
+import { useMessaging } from "../context/MessagingContext";
 
 const BEHOST = import.meta.env.VITE_BELC;
 
@@ -10,6 +11,7 @@ const socket = io(BEHOST, {
 
 const ChatBox = (props) => {
   const { selectedUserId, selectedUser, handleclose, openchatbox } = props;
+  const { messageUpdate, setMessageUpdate } = useMessaging();
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
   const [messages, setMessages] = useState([]);
@@ -34,6 +36,7 @@ const ChatBox = (props) => {
       };
       socket.emit("message", messageData);
       setNewMessage("");
+      setMessageUpdate(true);
     }
   };
   const loadMessagesNumber = viewMessages;
@@ -55,6 +58,7 @@ const ChatBox = (props) => {
 
     socket.on("message", (receivedMessage) => {
       setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+      setMessageUpdate(false);
     });
 
     // clean up the listeners on component unmount
