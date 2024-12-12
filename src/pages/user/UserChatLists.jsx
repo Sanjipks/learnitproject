@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Spinner from "../../components/common/Spinner";
-import { getUsers } from "../../apis/Api";
+import React, { useState } from "react";
 import { useLogin } from "../../context/LoginContext";
 import ChatBox from "../../components/Chatbox";
 import GroupChatBox from "../../components/GroupChatbox";
@@ -21,7 +19,6 @@ const UserChatlistsForMessaging = () => {
 
   const [expandeduser, setExpandeduser] = useState(null);
   const [expandeduserId, setExpandeduserId] = useState(null);
-
   const [openchatbox, setOpenchatbox] = useState(false);
   const [createGroupChat, setCreateGroupChat] = useState(false);
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
@@ -61,30 +58,26 @@ const UserChatlistsForMessaging = () => {
       </div>
 
       <div className="flex-grow overflow-y-scroll">
-        {loading ? (
-          <Spinner />
-        ) : (
-          <div className="flex flex-col space-y-2">
-            {allUsers.map((user, id) => (
-              <div key={id} className="p-1">
-                <UsersForMessaging
-                  key={user.user_id}
-                  user={user.user_name}
-                  userId={user.user_id}
-                  userImage={user.user_image}
-                  expandeduser={expandeduser}
-                  setExpandeduser={setExpandeduser}
-                  expandeduserId={expandeduserId}
-                  setExpandeduserId={setExpandeduserId}
-                  openchatbox={openchatbox}
-                  setOpenchatbox={setOpenchatbox}
-                  connStatus={user.connectionStatus}
-                  latestMessage={user.latestMessages}
-                />
-              </div>
-            ))}
-          </div>
-        )}
+        <div className="flex flex-col space-y-2">
+          {allUsers.map((user, id) => (
+            <div key={id} className="p-1">
+              <UsersForMessaging
+                key={user.user_id}
+                user={user.user_name}
+                userId={user.user_id}
+                userImage={user.user_image}
+                expandeduser={expandeduser}
+                setExpandeduser={setExpandeduser}
+                expandeduserId={expandeduserId}
+                setExpandeduserId={setExpandeduserId}
+                openchatbox={openchatbox}
+                setOpenchatbox={setOpenchatbox}
+                connStatus={user.connectionStatus}
+                latestMessage={user.latestMessages}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Chat Boxes */}
