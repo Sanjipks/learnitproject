@@ -58,9 +58,9 @@ const UserChatlistsForMessaging = () => {
       </div>
 
       <div className="flex-grow overflow-y-scroll">
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-col">
           {allUsers.map((user, id) => (
-            <div key={id} className="p-1">
+            <div key={id} className="relative">
               <UsersForMessaging
                 key={user.user_id}
                 user={user.user_name}

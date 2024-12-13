@@ -39,7 +39,7 @@ export default function UsersForMessaging(props) {
   return (
     <>
       {loggedInUserRole === "user" && latestMessage.length > 0 && (
-        <div className="w-96 sticky mr-2 bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-96 mt-2 sticky mx-1 bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div
             className="flex w-full flex-row  items-center p-1 mx-auto"
             onClick={() => handleOpenChatbox(userId, user)}
