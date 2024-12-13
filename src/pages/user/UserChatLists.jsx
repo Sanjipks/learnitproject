@@ -5,17 +5,12 @@ import GroupChatBox from "../../components/GroupChatbox";
 import CreateChatGroup from "../../components/CreateChatGroup";
 import { useMessaging } from "../../context/MessagingContext";
 import UsersForMessaging from "../../components/UsersCardForMessaging";
+import { useChatBox } from "../../context/ChatBoxContext";
 
 const UserChatlistsForMessaging = () => {
   const { loginInfo } = useLogin();
-  const {
-    closeBox,
-    handleCloseBox,
-    viewBox,
-    handleViewBox,
-    allUsers,
-    loading,
-  } = useMessaging();
+  const { allUsers } = useMessaging();
+  const { viewChatBox } = useChatBox();
 
   const [expandeduser, setExpandeduser] = useState(null);
   const [expandeduserId, setExpandeduserId] = useState(null);
@@ -57,7 +52,7 @@ const UserChatlistsForMessaging = () => {
         )}
       </div>
 
-      <div className="flex-grow overflow-y-scroll">
+      <div className="flex-grow overflow-y-scroll mb-20">
         <div className="flex flex-col">
           {allUsers.map((user, id) => (
             <div key={id} className="relative">
@@ -70,8 +65,6 @@ const UserChatlistsForMessaging = () => {
                 setExpandeduser={setExpandeduser}
                 expandeduserId={expandeduserId}
                 setExpandeduserId={setExpandeduserId}
-                openchatbox={openchatbox}
-                setOpenchatbox={setOpenchatbox}
                 connStatus={user.connectionStatus}
                 latestMessage={user.latestMessages}
               />
@@ -81,9 +74,8 @@ const UserChatlistsForMessaging = () => {
       </div>
 
       {/* Chat Boxes */}
-      {openchatbox && (
+      {viewChatBox && (
         <ChatBox
-          handleclose={handleclose}
           selectedUserId={expandeduserId}
           selectedUser={expandeduser}
           openchatbox={setOpenchatbox}
