@@ -2,19 +2,20 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
+import { useChatBox } from "../context/ChatBoxContext";
 
 export default function UsersForMessaging(props) {
   const { loginInfo } = useLogin();
 
   const loggedInUserRole = loginInfo.userRole;
-
+  const { handleViewChatBox } = useChatBox();
   const {
     userId,
     userImage,
     user,
     setExpandeduser,
     setExpandeduserId,
-    setOpenchatbox,
+
     connStatus,
     latestMessage,
   } = props;
@@ -31,7 +32,7 @@ export default function UsersForMessaging(props) {
   }, [userImage]);
 
   const handleOpenChatbox = (id, user) => {
-    setOpenchatbox((prev) => !prev);
+    handleViewChatBox(true);
     setExpandeduserId(id);
     setExpandeduser(user);
   };

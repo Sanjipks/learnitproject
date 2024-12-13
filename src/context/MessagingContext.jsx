@@ -15,7 +15,6 @@ export const MessagingProvider = ({ children }) => {
   const loggedInUserId = loginInfo.userId;
   const [viewBox, setViewBox] = useState(true);
   const [allUsers, setAllUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [closeBox, setCloseBox] = useState(false);
   const [chatlists, setChatlists] = useState([]);
   const [messageUpdate, setMessageUpdate] = useState(false);
@@ -53,7 +52,6 @@ export const MessagingProvider = ({ children }) => {
   return (
     <MessagingCotext.Provider
       value={{
-        loading,
         allUsers,
         chatlists,
         chatListsUpdate,
