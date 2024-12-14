@@ -7,6 +7,7 @@ import { useLogin } from "../../context/LoginContext";
 import ChatBox from "../../components/Chatbox";
 import GroupChatBox from "../../components/GroupChatbox";
 import CreateChatGroup from "../../components/CreateChatGroup";
+import { useChatBox } from "../../context/ChatBoxContext";
 
 const UserCircle = () => {
   const [userlist, setUserlist] = useState([]);
@@ -14,14 +15,14 @@ const UserCircle = () => {
   const [pagenumber, setPagenumber] = useState(1);
   const [userperpage, setUserperpage] = useState(0);
   const [totalUserscount, setTotalUserscount] = useState(0);
-  const [expandeduser, setExpandeduser] = useState(null);
+  const [expandeduser, setExpandedUser] = useState(null);
   const [expandeduserId, setExpandeduserId] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [openchatbox, setOpenchatbox] = useState(false);
   const [createGroupChat, setCreateGroupChat] = useState(false);
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
 
   const { loginInfo } = useLogin();
+  const { viewChatBox } = useChatBox();
 
   const loggedinUserRole = loginInfo.userRole;
   const loggedInUserId = loginInfo.userId;
@@ -107,16 +108,14 @@ const UserCircle = () => {
               <div key={id} className="p-2">
                 <User
                   key={user.user_id}
-                  user={user.user_name}
+                  userName={user.user_name}
                   userId={user.user_id}
                   userEmail={user.user_email}
                   userImage={user.user_image}
+                  setExpandeduser={setExpandedUser}
                   expandeduser={expandeduser}
-                  setExpandeduser={setExpandeduser}
                   expandeduserId={expandeduserId}
                   setExpandeduserId={setExpandeduserId}
-                  openchatbox={openchatbox}
-                  setOpenchatbox={setOpenchatbox}
                   connStatus={user.connectionStatus}
                 />
               </div>
@@ -168,14 +167,7 @@ const UserCircle = () => {
           </button>
         </div>
       </div>
-      {openchatbox && (
-        <ChatBox
-          handleclose={handleclose}
-          selectedUserId={expandeduserId}
-          selectedUser={expandeduser}
-          openchatbox={setOpenchatbox}
-        />
-      )}
+      {viewChatBox && <ChatBox />}
 
       {opengroupchatbox && (
         <GroupChatBox

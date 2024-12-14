@@ -13,6 +13,8 @@ export const ChatProvider = ({ children }) => {
   const loggedinUserRole = loginInfo.userRole;
   const loggedInUserId = loginInfo.userId;
 
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUserId, setSelectedUserId] = useState(null);
   const [viewChatBox, setViewChatBox] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
 
@@ -37,12 +39,16 @@ export const ChatProvider = ({ children }) => {
       value={{
         allUsers,
         chatlists,
+        selectedUser,
+        setSelectedUser,
         chatListsUpdate,
         handleCloseChatBox,
         viewChatBox,
         handleViewChatBox,
         messageUpdate,
         setMessageUpdate,
+        selectedUserId,
+        setSelectedUserId,
       }}
     >
       {children}
