@@ -11,10 +11,10 @@ const socket = io(BEHOST, {
   withCredentials: true,
 });
 
-const ChatBox = (props) => {
-  const { selectedUserId, selectedUser, openchatbox } = props;
+const ChatBox = () => {
   const { messageUpdate, setMessageUpdate } = useMessaging();
-  const { handleCloseChatBox, viewChatBox } = useChatBox();
+  const { handleCloseChatBox, viewChatBox, selectedUser, selectedUserId } =
+    useChatBox();
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
   const [messages, setMessages] = useState([]);

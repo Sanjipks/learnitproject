@@ -2,28 +2,27 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
-import {
-  // getAllconnections,
-  rcvConnectionReq,
-  sendConnectionReq,
-} from "../apis/Api";
+import { rcvConnectionReq, sendConnectionReq } from "../apis/Api";
 import { toast } from "react-toastify";
+import { useChatBox } from "../context/ChatBoxContext";
 
 export default function UsersForCircle(props) {
   const { loginInfo } = useLogin();
+  const { handleViewChatBox, setSelectedUser, setSelectedUserId } =
+    useChatBox();
 
   const loggedInUserRole = loginInfo.userRole;
   const loggedInUserId = loginInfo.userId;
 
   const {
+    userName,
     userId,
     userImage,
-    user,
     userEmail,
     setExpandeduser,
+    expandeduser,
     expandeduserId,
     setExpandeduserId,
-    setOpenchatbox,
     connStatus,
   } = props;
   const [expand, setExpand] = useState("hidden");
@@ -45,28 +44,17 @@ export default function UsersForCircle(props) {
       setExpand("hidden");
       setExpandeduserId(null);
       setExpandeduser(null);
-      setOpenchatbox(false);
     }
   };
 
-  const handleOpenChatbox = () => {
-    setOpenchatbox(true);
+  const handleOpenChatbox = (id, username) => {
+    handleViewChatBox(true);
+    setSelectedUserId(id);
+    setSelectedUser(username);
     setExpand("hidden");
   };
 
-  // useEffect(() => {
-  //   const fethUserdata = async () => {
-  //     try {
-  //       const connection_data = await getAllconnections(loggedInUserId);
-
-  //       console.log("condata", connection_data);
-  //     } catch (error) {
-  //       console.error("Error:", error);
-  //     }
-  //   };
-  //   fethUserdata();
-  // }, []);
-
+  console.log("hahahah", expandeduser, expandeduserId);
   const handleConnect = async (requester, targetuser) => {
     try {
       const response = await sendConnectionReq(requester, targetuser);
@@ -114,7 +102,7 @@ export default function UsersForCircle(props) {
           <div className="w-full max-w-sm bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div className="flex justify-start px-4 pt-4">
               <button
-                onClick={() => handleExpand(userId, user)}
+                onClick={() => handleExpand(userId, userName)}
                 id="dropdownButton"
                 data-dropdown-toggle="dropdown"
                 className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
@@ -168,7 +156,7 @@ export default function UsersForCircle(props) {
                     </li>
                     {connStatus === "friend" && (
                       <li
-                        onClick={handleOpenChatbox}
+                        onClick={() => handleOpenChatbox(userId, userName)}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
                         chat
@@ -186,7 +174,7 @@ export default function UsersForCircle(props) {
                 alt="Bonnie image"
               />
               <div className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-                {user}
+                {userName}
                 <p className="mb-1 xl:text-xl lg:text-lg md:text-sm font-medium text-gray-900 dark:text-white">
                   {userEmail}
                 </p>

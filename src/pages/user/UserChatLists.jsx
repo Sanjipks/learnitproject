@@ -14,7 +14,6 @@ const UserChatlistsForMessaging = () => {
 
   const [expandeduser, setExpandeduser] = useState(null);
   const [expandeduserId, setExpandeduserId] = useState(null);
-  const [openchatbox, setOpenchatbox] = useState(false);
   const [createGroupChat, setCreateGroupChat] = useState(false);
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
 
@@ -74,13 +73,7 @@ const UserChatlistsForMessaging = () => {
       </div>
 
       {/* Chat Boxes */}
-      {viewChatBox && (
-        <ChatBox
-          selectedUserId={expandeduserId}
-          selectedUser={expandeduser}
-          openchatbox={setOpenchatbox}
-        />
-      )}
+      {viewChatBox && <ChatBox />}
 
       {opengroupchatbox && (
         <GroupChatBox

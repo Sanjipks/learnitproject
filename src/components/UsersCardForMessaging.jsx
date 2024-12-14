@@ -8,17 +8,10 @@ export default function UsersForMessaging(props) {
   const { loginInfo } = useLogin();
 
   const loggedInUserRole = loginInfo.userRole;
-  const { handleViewChatBox } = useChatBox();
-  const {
-    userId,
-    userImage,
-    user,
-    setExpandeduser,
-    setExpandeduserId,
+  const { handleViewChatBox, setSelectedUser, setSelectedUserId } =
+    useChatBox();
 
-    connStatus,
-    latestMessage,
-  } = props;
+  const { userId, userImage, user, connStatus, latestMessage } = props;
 
   console.log(connStatus);
   console.log(latestMessage.length);
@@ -33,8 +26,8 @@ export default function UsersForMessaging(props) {
 
   const handleOpenChatbox = (id, user) => {
     handleViewChatBox(true);
-    setExpandeduserId(id);
-    setExpandeduser(user);
+    setSelectedUserId(id);
+    setSelectedUser(user);
   };
 
   return (
