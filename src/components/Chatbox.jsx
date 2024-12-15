@@ -116,14 +116,16 @@ const ChatBox = () => {
           return (
             <div
               key={index}
-              className={`my-1 p-2 rounded-lg ${
+              className={`my-1 p-2 rounded-lg w-36 ${
                 msg.sender_id == loggedInUserId
                   ? "bg-blue-500 text-white self-end"
                   : "bg-gray-300 text-black self-start"
               }`}
             >
-              <span>{TimeStampToTime(msg.timestamp)}</span>
-              <div>{msg.message}</div>
+              <div className="text-sm float-end mb-3 ">
+                {TimeStampToTime(msg.timestamp)}
+              </div>
+              <div className="text-lg">{msg.message}</div>
             </div>
           );
         })}
@@ -137,8 +139,8 @@ const ChatBox = () => {
                   : "bg-gray-300 text-black self-start"
               }`}
             >
-              <span>{TimeStampToTime(msg.timestamp)}</span>
-              {msg.message}
+              <div>{TimeStampToTime(msg.timestamp)}</div>
+              <div>{msg.message}</div>
             </div>
           );
         })}
