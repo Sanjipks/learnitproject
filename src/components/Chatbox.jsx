@@ -4,6 +4,7 @@ import { useLogin } from "../context/LoginContext";
 import { useMessaging } from "../context/MessagingContext";
 import CloseIcon from "../assets/icons/CloseIcon";
 import { useChatBox } from "../context/ChatBoxContext";
+import { TimeStampToTime } from "../utility/TimestampToRE";
 
 const BEHOST = import.meta.env.VITE_BELC;
 
@@ -121,7 +122,8 @@ const ChatBox = () => {
                   : "bg-gray-300 text-black self-start"
               }`}
             >
-              {msg.message}
+              <span>{TimeStampToTime(msg.timestamp)}</span>
+              <div>{msg.message}</div>
             </div>
           );
         })}
@@ -135,6 +137,7 @@ const ChatBox = () => {
                   : "bg-gray-300 text-black self-start"
               }`}
             >
+              <span>{TimeStampToTime(msg.timestamp)}</span>
               {msg.message}
             </div>
           );
