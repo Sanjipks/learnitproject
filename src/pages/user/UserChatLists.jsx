@@ -26,9 +26,6 @@ const UserChatlistsForMessaging = () => {
     setCreateGroupChat(false);
   };
 
-  const handleclose = () => {
-    setOpenchatbox(false);
-  };
   const handlegroupchatclose = () => {
     setOpengroupchatbox(false);
   };
@@ -72,7 +69,6 @@ const UserChatlistsForMessaging = () => {
         </div>
       </div>
 
-      {/* Chat Boxes */}
       {viewChatBox && <ChatBox />}
 
       {opengroupchatbox && (

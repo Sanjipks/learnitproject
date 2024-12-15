@@ -29,6 +29,7 @@ const UserCircle = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
+      setLoading(true);
       try {
         const data = await getUsers(
           loggedinUserRole,
@@ -41,6 +42,8 @@ const UserCircle = () => {
         setTotalUserscount(data.totalEntries);
       } catch (error) {
         console.error("Error fetching users:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -66,9 +69,6 @@ const UserCircle = () => {
     setCreateGroupChat(false);
   };
 
-  const handleclose = () => {
-    setOpenchatbox(false);
-  };
   const handlegroupchatclose = () => {
     setOpengroupchatbox(false);
   };
