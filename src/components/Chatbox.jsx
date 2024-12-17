@@ -4,7 +4,13 @@ import { useLogin } from "../context/LoginContext";
 import { useMessaging } from "../context/MessagingContext";
 import CloseIcon from "../assets/icons/CloseIcon";
 import { useChatBox } from "../context/ChatBoxContext";
-import { TimeStampToTime, TimeStampToDay } from "../utility/TimestampToRE";
+import {
+  TimeStampToTime,
+  TimeStampToDay,
+  TimeStampToMonth,
+  TimeStampToDate,
+  TimeStampToYear,
+} from "../utility/TimestampToRE";
 
 const BEHOST = import.meta.env.VITE_BELC;
 
@@ -123,8 +129,12 @@ const ChatBox = () => {
               }`}
             >
               <div className="text-sm float-end mb-3 ">
-                {TimeStampToDay(msg.timestamp) +
-                  ": " +
+                {TimeStampToMonth(msg.timestamp) +
+                  ", " +
+                  TimeStampToYear(msg.timestamp) +
+                  " " +
+                  TimeStampToDay(msg.timestamp) +
+                  ", " +
                   TimeStampToTime(msg.timestamp)}
               </div>
               <div className="text-lg">{msg.message}</div>
@@ -142,8 +152,12 @@ const ChatBox = () => {
               }`}
             >
               <div className="text-sm float-end mb-3 ">
-                {TimeStampToDay(msg.timestamp) +
-                  ": " +
+                {TimeStampToMonth(msg.timestamp) +
+                  ", " +
+                  TimeStampToYear(msg.timestamp) +
+                  " " +
+                  TimeStampToDay(msg.timestamp) +
+                  ", " +
                   TimeStampToTime(msg.timestamp)}
               </div>
               <div>{msg.message}</div>
