@@ -8,7 +8,6 @@ import {
   TimeStampToTime,
   TimeStampToDay,
   TimeStampToMonth,
-  TimeStampToDate,
   TimeStampToYear,
 } from "../utility/TimestampToRE";
 
@@ -20,6 +19,13 @@ const socket = io(BEHOST, {
 
 const ChatBox = () => {
   const { messageUpdate, setMessageUpdate } = useMessaging();
+
+  const date = new Date();
+  const currentYear = date.getFullYear();
+  const currentDay = date.toLocaleDateString("en-US", { weekday: "long" });
+  const currentMonth = date.toLocaleString("en-US", { month: "long" });
+  const CurrentDayOfMonth = date.getDate();
+
   const { handleCloseChatBox, viewChatBox, selectedUser, selectedUserId } =
     useChatBox();
   const { loginInfo } = useLogin();
@@ -129,11 +135,16 @@ const ChatBox = () => {
               }`}
             >
               <div className="text-sm float-end mb-3 ">
-                {TimeStampToMonth(msg.timestamp) +
-                  ", " +
-                  TimeStampToYear(msg.timestamp) +
+                {(currentMonth == TimeStampToMonth(msg.timestamp)
+                  ? ""
+                  : TimeStampToMonth(msg.timestamp) + ", ") +
+                  (currentYear == TimeStampToYear(msg.timestamp)
+                    ? ""
+                    : TimeStampToYear(msg.timestamp)) +
                   " " +
-                  TimeStampToDay(msg.timestamp) +
+                  (currentDay == TimeStampToDay(msg.timestamp)
+                    ? "Today"
+                    : TimeStampToDay(msg.timestamp)) +
                   ", " +
                   TimeStampToTime(msg.timestamp)}
               </div>
@@ -152,11 +163,16 @@ const ChatBox = () => {
               }`}
             >
               <div className="text-sm float-end mb-3 ">
-                {TimeStampToMonth(msg.timestamp) +
-                  ", " +
-                  TimeStampToYear(msg.timestamp) +
+                {(currentMonth == TimeStampToMonth(msg.timestamp)
+                  ? ""
+                  : TimeStampToMonth(msg.timestamp) + ", ") +
+                  (currentYear == TimeStampToYear(msg.timestamp)
+                    ? ""
+                    : TimeStampToYear(msg.timestamp)) +
                   " " +
-                  TimeStampToDay(msg.timestamp) +
+                  (currentDay == TimeStampToDay(msg.timestamp)
+                    ? "Today"
+                    : TimeStampToDay(msg.timestamp)) +
                   ", " +
                   TimeStampToTime(msg.timestamp)}
               </div>
