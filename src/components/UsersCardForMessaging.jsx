@@ -13,8 +13,6 @@ export default function UsersForMessaging(props) {
 
   const { userId, userImage, user, connStatus, latestMessage } = props;
 
-  console.log(connStatus);
-  console.log(latestMessage.length);
   const [image, setImage] = useState(null);
 
   useEffect(() => {
