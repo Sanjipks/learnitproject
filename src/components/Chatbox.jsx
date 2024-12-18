@@ -129,12 +129,14 @@ const ChatBox = () => {
             <div
               key={index}
               className={`my-1 p-2 rounded-lg w-36 ${
-                msg.sender_id == loggedInUserId
-                  ? "bg-blue-500 text-white self-end"
-                  : "bg-gray-300 text-black self-start"
+                msg.sender_id == loggedInUserId ? "self-end" : "self-start"
               }`}
             >
-              <div className="text-sm float-end mb-3 ">
+              <div
+                className={`my-1 py-2 text-sm rounded-lg w-48 text-gray-900 ${
+                  msg.sender_id == loggedInUserId ? " self-end" : " self-start"
+                }`}
+              >
                 {(currentMonth == TimeStampToMonth(msg.timestamp)
                   ? ""
                   : TimeStampToMonth(msg.timestamp) + ", ") +
@@ -148,7 +150,15 @@ const ChatBox = () => {
                   ", " +
                   TimeStampToTime(msg.timestamp)}
               </div>
-              <div className="text-lg">{msg.message}</div>
+              <div
+                className={`my-1 p-2 rounded-lg w-auto ${
+                  msg.sender_id == loggedInUserId
+                    ? "bg-blue-500 text-white self-end"
+                    : "bg-gray-300 text-black self-start"
+                }`}
+              >
+                {msg.message}
+              </div>
             </div>
           );
         })}
@@ -157,12 +167,14 @@ const ChatBox = () => {
             <div
               key={index}
               className={`my-1 p-2 rounded-lg w-36 ${
-                msg.senderId == loggedInUserId
-                  ? "bg-blue-500 text-white self-end"
-                  : "bg-gray-300 text-black self-start"
+                msg.senderId == loggedInUserId ? "self-end" : "self-start"
               }`}
             >
-              <div className="text-sm float-end mb-3 ">
+              <div
+                className={`my-1 py-2 text-sm rounded-lg w-48 text-gray-900 ${
+                  msg.senderId == loggedInUserId ? " self-end" : " self-start"
+                }`}
+              >
                 {(currentMonth == TimeStampToMonth(msg.timestamp)
                   ? ""
                   : TimeStampToMonth(msg.timestamp) + ", ") +
@@ -176,7 +188,15 @@ const ChatBox = () => {
                   ", " +
                   TimeStampToTime(msg.timestamp)}
               </div>
-              <div>{msg.message}</div>
+              <div
+                className={`my-1 p-2 rounded-lg w-auto ${
+                  msg.senderId == loggedInUserId
+                    ? "bg-blue-500 text-white self-end"
+                    : "bg-gray-300 text-black self-start"
+                }`}
+              >
+                {msg.message}
+              </div>
             </div>
           );
         })}
