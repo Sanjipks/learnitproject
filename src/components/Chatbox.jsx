@@ -106,12 +106,21 @@ const ChatBox = () => {
         viewChatBox ? "flex" : "hidden"
       } fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
     >
-      <div>
-        <h1 className="py-2">{selectedUser}</h1>
+      <div className="flex justify-center">
         <button
           onClick={handleCloseChatBox}
           type="button"
-          className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          className=" text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm  ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          data-modal-hide="popup-modal"
+        >
+          ---
+        </button>
+        <h1 className="py-2">{selectedUser}</h1>
+
+        <button
+          onClick={handleCloseChatBox}
+          type="button"
+          className=" text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
           data-modal-hide="popup-modal"
         >
           <CloseIcon />
