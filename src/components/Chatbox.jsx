@@ -24,7 +24,6 @@ const ChatBox = () => {
   const currentYear = date.getFullYear();
   const currentDay = date.toLocaleDateString("en-US", { weekday: "long" });
   const currentMonth = date.toLocaleString("en-US", { month: "long" });
-  const CurrentDayOfMonth = date.getDate();
 
   const { handleCloseChatBox, viewChatBox, selectedUser, selectedUserId } =
     useChatBox();
@@ -52,7 +51,7 @@ const ChatBox = () => {
       };
       socket.emit("message", messageData);
       setNewMessage("");
-      setMessageUpdate(true);
+      setMessageUpdate((prev) => !prev);
     }
   };
   const loadMessagesNumber = viewMessages;
@@ -74,7 +73,7 @@ const ChatBox = () => {
 
     socket.on("message", (receivedMessage) => {
       setMessages((prevMessages) => [...prevMessages, receivedMessage]);
-      setMessageUpdate(false);
+      setMessageUpdate((prev) => !prev);
     });
 
     // clean up the listeners on component unmount
