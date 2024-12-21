@@ -27,7 +27,18 @@ export const MessagingProvider = ({ children }) => {
           pagenumber,
           loggedInUserId
         );
-        setAllUsers(data.allUsers);
+        // setAllUsers(data.allUsers);
+        setAllUsers(
+          data.allUsers.sort((a, b) => {
+            // ensure both users have a latestMessages array with at least one message
+            const aTimestamp = a.latestMessages?.[0]?.timestamp;
+
+            const bTimestamp = b.latestMessages?.[0]?.timestamp;
+
+            // compare timestamps (descending order for most recent first)
+            return aTimestamp - bTimestamp;
+          })
+        );
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -36,7 +47,7 @@ export const MessagingProvider = ({ children }) => {
     fetchUsers();
   }, [messageUpdate]);
 
-  console.log("messagingcontex", allUsers);
+  console.log("all", allUsers);
 
   const chatListsUpdate = (updates) => {
     setChatlists((prevList) => {
