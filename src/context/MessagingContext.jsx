@@ -36,6 +36,8 @@ export const MessagingProvider = ({ children }) => {
     fetchUsers();
   }, [messageUpdate]);
 
+  console.log("messagingcontex", allUsers);
+
   const chatListsUpdate = (updates) => {
     setChatlists((prevList) => {
       [...prevList, updates];

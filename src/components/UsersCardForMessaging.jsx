@@ -3,8 +3,19 @@ import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
 import { useChatBox } from "../context/ChatBoxContext";
+import {
+  TimeStampToDay,
+  TimeStampToMonth,
+  TimeStampToTime,
+  TimeStampToYear,
+} from "../utility/TimestampToRE";
 
 export default function UsersForMessaging(props) {
+  const date = new Date();
+  const currentYear = date.getFullYear();
+  const currentDay = date.toLocaleDateString("en-US", { weekday: "long" });
+  const currentMonth = date.toLocaleString("en-US", { month: "long" });
+
   const { loginInfo } = useLogin();
 
   const loggedInUserRole = loginInfo.userRole;
@@ -48,8 +59,26 @@ export default function UsersForMessaging(props) {
               {" "}
               {latestMessage.map((msg, index) => {
                 return (
-                  <div key={index} className=" p-2 text-black self-start">
-                    {msg.message}
+                  <div
+                    key={index}
+                    className="flex p-2 text-black justify-between"
+                  >
+                    <div>{msg.message} </div>
+                    <span>
+                      {" "}
+                      {(currentMonth == TimeStampToMonth(msg.timestamp)
+                        ? ""
+                        : TimeStampToMonth(msg.timestamp) + ", ") +
+                        (currentYear == TimeStampToYear(msg.timestamp)
+                          ? ""
+                          : TimeStampToYear(msg.timestamp)) +
+                        " " +
+                        (currentDay == TimeStampToDay(msg.timestamp)
+                          ? "Today"
+                          : TimeStampToDay(msg.timestamp)) +
+                        ", " +
+                        TimeStampToTime(msg.timestamp)}
+                    </span>
                   </div>
                 );
               })}
