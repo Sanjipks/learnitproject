@@ -25,13 +25,20 @@ const ChatBox = () => {
   const currentDay = date.toLocaleDateString("en-US", { weekday: "long" });
   const currentMonth = date.toLocaleString("en-US", { month: "long" });
 
-  const { handleCloseChatBox, viewChatBox, selectedUser, selectedUserId } =
-    useChatBox();
+  const {
+    handleCloseChatBox,
+    handleMinimizeChatBox,
+    display,
+    viewChatBox,
+    selectedUser,
+    selectedUserId,
+  } = useChatBox();
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
   const [messages, setMessages] = useState([]);
   const [down, setDown] = useState(false);
   const [pastMessages, setPastMessages] = useState([]);
+
   const [newMessage, setNewMessage] = useState("");
   const [viewMessages, setViewMessages] = useState(-5);
   const messageEndRef = useRef(null);
@@ -106,9 +113,9 @@ const ChatBox = () => {
         viewChatBox ? "flex" : "hidden"
       } fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
     >
-      <div className="flex justify-between pb-4 items-center">
+      <section className="flex justify-between pb-4 items-center">
         <div
-          onClick={handleCloseChatBox}
+          onClick={handleMinimizeChatBox}
           type="button"
           className=" text-gray-400 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
         >
@@ -123,107 +130,110 @@ const ChatBox = () => {
         >
           <CloseIcon />
         </div>
-      </div>
-
-      <div
-        ref={messageMoveUpRef}
-        onScroll={handleScroll}
-        className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner"
-      >
-        {pastMessages.map((msg, index) => {
-          return (
-            <div
-              key={index}
-              className={`my-1 p-2 rounded-lg w-36 ${
-                msg.sender_id == loggedInUserId ? "self-end" : "self-start"
-              }`}
-            >
-              <div
-                className={`my-1 py-2 text-sm rounded-lg w-48 text-gray-900 ${
-                  msg.sender_id == loggedInUserId ? " self-end" : " self-start"
-                }`}
-              >
-                {(currentMonth == TimeStampToMonth(msg.timestamp)
-                  ? ""
-                  : TimeStampToMonth(msg.timestamp) + ", ") +
-                  (currentYear == TimeStampToYear(msg.timestamp)
-                    ? ""
-                    : TimeStampToYear(msg.timestamp)) +
-                  " " +
-                  (currentDay == TimeStampToDay(msg.timestamp)
-                    ? "Today"
-                    : TimeStampToDay(msg.timestamp)) +
-                  ", " +
-                  TimeStampToTime(msg.timestamp)}
-              </div>
-              <div
-                className={`my-1 p-2 rounded-lg w-auto ${
-                  msg.sender_id == loggedInUserId
-                    ? "bg-blue-500 text-white self-end"
-                    : "bg-gray-300 text-black self-start"
-                }`}
-              >
-                {msg.message}
-              </div>
-            </div>
-          );
-        })}
-        {sortedMessages.map((msg, index) => {
-          return (
-            <div
-              key={index}
-              className={`my-1 p-2 rounded-lg w-36 ${
-                msg.senderId == loggedInUserId ? "self-end" : "self-start"
-              }`}
-            >
-              <div
-                className={`my-1 py-2 text-sm rounded-lg w-48 text-gray-900 ${
-                  msg.senderId == loggedInUserId ? " self-end" : " self-start"
-                }`}
-              >
-                {(currentMonth == TimeStampToMonth(msg.timestamp)
-                  ? ""
-                  : TimeStampToMonth(msg.timestamp) + ", ") +
-                  (currentYear == TimeStampToYear(msg.timestamp)
-                    ? ""
-                    : TimeStampToYear(msg.timestamp)) +
-                  " " +
-                  (currentDay == TimeStampToDay(msg.timestamp)
-                    ? "Today"
-                    : TimeStampToDay(msg.timestamp)) +
-                  ", " +
-                  TimeStampToTime(msg.timestamp)}
-              </div>
-              <div
-                className={`my-1 p-2 rounded-lg w-auto ${
-                  msg.senderId == loggedInUserId
-                    ? "bg-blue-500 text-white self-end"
-                    : "bg-gray-300 text-black self-start"
-                }`}
-              >
-                {msg.message}
-              </div>
-            </div>
-          );
-        })}
-        <div ref={messageEndRef} />
-      </div>
-
-      <div className="mt-4 flex">
-        <input
-          type="text"
-          value={newMessage}
-          onChange={handleInput}
-          className="flex-1 p-2 border border-gray-300 rounded-md dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          placeholder="Type your message..."
-        />
-        <button
-          onClick={handleSend}
-          className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+      </section>
+      <section className={`${display}`}>
+        <div
+          ref={messageMoveUpRef}
+          onScroll={handleScroll}
+          className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner"
         >
-          Send
-        </button>
-      </div>
+          {pastMessages.map((msg, index) => {
+            return (
+              <div
+                key={index}
+                className={`my-1 p-2 rounded-lg w-36 ${
+                  msg.sender_id == loggedInUserId ? "self-end" : "self-start"
+                }`}
+              >
+                <div
+                  className={`my-1 py-2 text-sm rounded-lg w-48 text-gray-900 ${
+                    msg.sender_id == loggedInUserId
+                      ? " self-end"
+                      : " self-start"
+                  }`}
+                >
+                  {(currentMonth == TimeStampToMonth(msg.timestamp)
+                    ? ""
+                    : TimeStampToMonth(msg.timestamp) + ", ") +
+                    (currentYear == TimeStampToYear(msg.timestamp)
+                      ? ""
+                      : TimeStampToYear(msg.timestamp)) +
+                    " " +
+                    (currentDay == TimeStampToDay(msg.timestamp)
+                      ? "Today"
+                      : TimeStampToDay(msg.timestamp)) +
+                    ", " +
+                    TimeStampToTime(msg.timestamp)}
+                </div>
+                <div
+                  className={`my-1 p-2 rounded-lg w-auto ${
+                    msg.sender_id == loggedInUserId
+                      ? "bg-blue-500 text-white self-end"
+                      : "bg-gray-300 text-black self-start"
+                  }`}
+                >
+                  {msg.message}
+                </div>
+              </div>
+            );
+          })}
+          {sortedMessages.map((msg, index) => {
+            return (
+              <div
+                key={index}
+                className={`my-1 p-2 rounded-lg w-36 ${
+                  msg.senderId == loggedInUserId ? "self-end" : "self-start"
+                }`}
+              >
+                <div
+                  className={`my-1 py-2 text-sm rounded-lg w-48 text-gray-900 ${
+                    msg.senderId == loggedInUserId ? " self-end" : " self-start"
+                  }`}
+                >
+                  {(currentMonth == TimeStampToMonth(msg.timestamp)
+                    ? ""
+                    : TimeStampToMonth(msg.timestamp) + ", ") +
+                    (currentYear == TimeStampToYear(msg.timestamp)
+                      ? ""
+                      : TimeStampToYear(msg.timestamp)) +
+                    " " +
+                    (currentDay == TimeStampToDay(msg.timestamp)
+                      ? "Today"
+                      : TimeStampToDay(msg.timestamp)) +
+                    ", " +
+                    TimeStampToTime(msg.timestamp)}
+                </div>
+                <div
+                  className={`my-1 p-2 rounded-lg w-auto ${
+                    msg.senderId == loggedInUserId
+                      ? "bg-blue-500 text-white self-end"
+                      : "bg-gray-300 text-black self-start"
+                  }`}
+                >
+                  {msg.message}
+                </div>
+              </div>
+            );
+          })}
+          <div ref={messageEndRef} />
+        </div>
+
+        <div className="mt-4 flex">
+          <input
+            type="text"
+            value={newMessage}
+            onChange={handleInput}
+            className="flex-1 p-2 border border-gray-300 rounded-md dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            placeholder="Type your message..."
+          />
+          <button
+            onClick={handleSend}
+            className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          >
+            Send
+          </button>
+        </div>
+      </section>
     </div>
   );
 };
