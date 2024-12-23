@@ -54,13 +54,11 @@ export default function UsersForCircle(props) {
     setExpand("hidden");
   };
 
-  console.log("hahahah", expandeduser, expandeduserId);
   const handleConnect = async (requester, targetuser) => {
     try {
       const response = await sendConnectionReq(requester, targetuser);
 
       const data = await response.json();
-      console.log("data", data);
 
       if (response.ok) {
         toast(data.message, { autoClose: 1000 });

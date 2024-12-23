@@ -30,13 +30,12 @@ export const MessagingProvider = ({ children }) => {
         // setAllUsers(data.allUsers);
         setAllUsers(
           data.allUsers.sort((a, b) => {
-            // ensure both users have a latestMessages array with at least one message
-            const aTimestamp = a.latestMessages?.[0]?.timestamp;
+            const aTimestamp =
+              new Date(a.latestMessages?.[0]?.timestamp).getTime() || 0;
+            const bTimestamp =
+              new Date(b.latestMessages?.[0]?.timestamp).getTime() || 0;
 
-            const bTimestamp = b.latestMessages?.[0]?.timestamp;
-
-            // compare timestamps (descending order for most recent first)
-            return aTimestamp - bTimestamp;
+            return bTimestamp - aTimestamp;
           })
         );
       } catch (error) {
@@ -46,8 +45,6 @@ export const MessagingProvider = ({ children }) => {
 
     fetchUsers();
   }, [messageUpdate]);
-
-  console.log("all", allUsers);
 
   const chatListsUpdate = (updates) => {
     setChatlists((prevList) => {
