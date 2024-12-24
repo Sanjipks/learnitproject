@@ -24,10 +24,8 @@ const VerifyAccount = () => {
     if (accountVerificationCode) {
       try {
         const response = await verifyAccount(email, accountVerificationCode);
-        console.log("response", response);
 
         const data = await response.json();
-        console.log("data", data);
 
         if (response.ok) {
           toast(data.message, { autoClose: 1000 });

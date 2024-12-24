@@ -33,7 +33,6 @@ const CreateChatGroup = (props) => {
   };
 
   const handleRemoveUser = (userId) => {
-    console.log("removeuserid", userId);
     if (userId) {
       removeGroupMember(userId);
     }
@@ -50,7 +49,6 @@ const CreateChatGroup = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Chat group creation submitted:", GChatInfo);
     setGroupCreated(false);
   };
 

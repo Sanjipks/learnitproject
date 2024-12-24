@@ -76,7 +76,6 @@ export default function UsersForCircle(props) {
       const response = await rcvConnectionReq(requester, targetuser);
 
       const data = await response.json();
-      console.log("data", data);
 
       if (response.ok) {
         toast(data.message, { autoClose: 1000 });
