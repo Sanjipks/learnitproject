@@ -24,6 +24,7 @@ export default function UsersForCircle(props) {
     expandeduserId,
     setExpandeduserId,
     connStatus,
+    setrefresh,
   } = props;
   const [expand, setExpand] = useState("hidden");
   const [image, setImage] = useState(null);
@@ -68,6 +69,7 @@ export default function UsersForCircle(props) {
     } finally {
       setExpand("hidden");
       setExpandeduser(null);
+      setrefresh((prev) => !prev);
     }
   };
 
@@ -85,6 +87,7 @@ export default function UsersForCircle(props) {
     } finally {
       setExpand("hidden");
       setExpandeduser(null);
+      setrefresh((prev) => !prev);
     }
   };
 
