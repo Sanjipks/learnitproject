@@ -32,7 +32,6 @@ export default function GChatProvider({ children }) {
   };
 
   const removeGroupMember = (memberId) => {
-    console.log("removegmember", GChatInfo.groupMembers);
     setGChatInfo((prev) => ({
       ...prev,
       groupMembers: prev.groupMembers.filter((member) => member !== memberId),
