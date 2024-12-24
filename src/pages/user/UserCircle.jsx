@@ -20,6 +20,7 @@ const UserCircle = () => {
   const [loading, setLoading] = useState(false);
   const [createGroupChat, setCreateGroupChat] = useState(false);
   const [opengroupchatbox, setOpengroupchatbox] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const { loginInfo } = useLogin();
   const { viewChatBox } = useChatBox();
@@ -29,7 +30,6 @@ const UserCircle = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      setLoading(true);
       try {
         const data = await getUsers(
           loggedinUserRole,
@@ -42,13 +42,11 @@ const UserCircle = () => {
         setTotalUserscount(data.totalEntries);
       } catch (error) {
         console.error("Error fetching users:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchUsers();
-  }, [pagenumber]);
+  }, [pagenumber, refresh]);
 
   const handlePrevPage = () => {
     if (pagenumber > 1) {
@@ -117,6 +115,7 @@ const UserCircle = () => {
                   expandeduserId={expandeduserId}
                   setExpandeduserId={setExpandeduserId}
                   connStatus={user.connectionStatus}
+                  setrefresh={setRefresh}
                 />
               </div>
             ))}
