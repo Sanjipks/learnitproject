@@ -166,26 +166,22 @@ const Services = () => {
             )}
 
             <div className="flex justify-center mt-2" onMouseDown={handleclose}>
-              {loading ? (
-                <LazySpinner />
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-                  {servicesList.map((service, id) => (
-                    <div key={id} className="p-2">
-                      <ServiceCard
-                        key={service.service_id}
-                        service={service.service_name}
-                        serviceId={service.service_id}
-                        serviceLogo={service.service_image}
-                        servicePrice={service.service_price}
-                        deleteService={handleDelete}
-                        expandedservice={expandedservice}
-                        setExpandedservice={setExpandedservice}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
+              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+                {servicesList.map((service, id) => (
+                  <div key={id} className="p-2">
+                    <ServiceCard
+                      key={service.service_id}
+                      service={service.service_name}
+                      serviceId={service.service_id}
+                      serviceLogo={service.service_image}
+                      servicePrice={service.service_price}
+                      deleteService={handleDelete}
+                      expandedservice={expandedservice}
+                      setExpandedservice={setExpandedservice}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
