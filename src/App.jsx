@@ -26,7 +26,7 @@ import UserCircle from "./pages/user/UserCircle";
 import GChatProvider from "./context/GChatContext";
 import { MessagingProvider } from "./context/MessagingContext";
 import { ChatProvider } from "./context/ChatBoxContext";
-import Mailbox from "./pages/user/Mailbox";
+import Mailbox from "./components/Mailbox";
 
 function App() {
   return (
@@ -54,7 +54,6 @@ function App() {
                     path="/user/learner-portal"
                     element={<LearnerPortal />}
                   />
-                  <Route path="/user/mail-box" element={<Mailbox />} />
                   <Route path="/user/user-circle" element={<UserCircle />} />
                   <Route path="/mycart" element={<MyCart />} />
                   <Route path="/checkout" element={<CheckOutPage />} />

@@ -1,14 +1,25 @@
 import React, { useState } from "react";
+import Mailbox from "../../components/Mailbox";
 
 export default function Progress() {
-  const [classes, setClasses] = useState(false);
+  const [pages, setPages] = useState({
+    classes: true,
+    myProgress: false,
+    myMailbox: false,
+  });
+
+  const { classes, myProgress, myMailbox } = pages;
 
   const handleClasses = () => {
-    setClasses(true);
+    setPages({ ...pages, classes: true, myProgress: false, myMailbox: false });
   };
   const handleMyProgress = () => {
-    setClasses(false);
+    setPages({ ...pages, classes: false, myProgress: true, myMailbox: false });
   };
+  const handleMyMailBox = () => {
+    setPages({ ...pages, classes: false, myProgress: false, myMailbox: true });
+  };
+
   return (
     <div className="min-h-screen h-auto flex flex-col justify-items-center justify-between bg-gray-500 dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white">
       <div className="md:my-20">
@@ -30,9 +41,21 @@ export default function Progress() {
           >
             My Progress
           </button>
+          <button
+            onClick={handleMyMailBox}
+            className="flex py-3  w-48 justify-center my-4 border border-white rounded-lg text-lg "
+          >
+            My MailBox
+          </button>
         </div>
         <div className="flex justify-center mx-auto">
-          {classes ? <div>My Classes</div> : <div>My Progress</div>}
+          {classes ? (
+            <div>My Classes</div>
+          ) : myProgress ? (
+            <div>My Progress</div>
+          ) : (
+            <Mailbox />
+          )}
         </div>
       </div>
     </div>

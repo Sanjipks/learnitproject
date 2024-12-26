@@ -109,7 +109,7 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {loginInfo.loginState === null && loginInfo.userRole === null ? (
+            {loginInfo.loginState === null && loginInfo.userRole === null && (
               <li>
                 <Link
                   onClick={handleMainMenuClick}
@@ -119,7 +119,7 @@ export default function Navbar() {
                   About
                 </Link>
               </li>
-            ) : null}
+            )}
             <li>
               <Link
                 onClick={handleMainMenuClick}
