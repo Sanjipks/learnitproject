@@ -139,7 +139,7 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="static">
-              {loginInfo.loginState === "true" ? (
+              {loginInfo.loginState === "true" && (
                 <div>
                   <button
                     id="dropdownNavbarLink"
@@ -165,7 +165,7 @@ export default function Navbar() {
                     </svg>
                   </button>
                 </div>
-              ) : null}
+              )}
 
               {/* <!-- Dropdown menu --> */}
               <div
@@ -176,7 +176,7 @@ export default function Navbar() {
                   className="flex flex-col mx-0 pr-5 text-sm text-gray-900 dark:text-gray-200"
                   aria-labelledby="dropdownLargeButton"
                 >
-                  {loginInfo.userRole === "admin" ? (
+                  {loginInfo.userRole === "admin" && (
                     <div className="py-1">
                       <li>
                         <Link
@@ -188,8 +188,8 @@ export default function Navbar() {
                         </Link>
                       </li>
                     </div>
-                  ) : null}
-                  {loginInfo.userRole === "user" ? (
+                  )}
+                  {loginInfo.userRole === "user" && (
                     <div className="py-1">
                       <li>
                         <Link
@@ -210,10 +210,10 @@ export default function Navbar() {
                         </Link>
                       </li>
                     </div>
-                  ) : null}
+                  )}
                 </ul>
 
-                {loginInfo.loginState === "true" ? (
+                {loginInfo.loginState === "true" && (
                   <div className="py-1">
                     <Link
                       onClick={loginUpdate}
@@ -223,7 +223,7 @@ export default function Navbar() {
                       Log out
                     </Link>
                   </div>
-                ) : null}
+                )}
               </div>
             </li>
           </ul>
