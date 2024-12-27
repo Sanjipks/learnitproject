@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Mailbox = () => {
+  const [selected, setSelected] = useState("");
+
+  const selectInbox = () => {
+    setSelected("inbox");
+  };
+  const selectSent = () => {
+    setSelected("sent");
+  };
+  const selectJunk = () => {
+    setSelected("junk");
+  };
+  const selectDeleted = () => {
+    setSelected("Deleted");
+  };
   return (
     <div className="flex h-dvh w-full flex-col max-w-screen-xl border border-gray-50 rounded-lg mt-20">
       <div className="flex w-full h-20 border rounded-lg border-gray-50 justify-center">
@@ -11,24 +25,28 @@ const Mailbox = () => {
           <h1 className="text-lg text-center border rounded-lg p-4">MailBox</h1>
           <div className="flex flex-col text-lg  mx-4">
             <button
+              onClick={selectInbox}
               className="border p-2 my-2 min-w-96 rounded-md"
               type="button "
             >
               Inbox
             </button>
             <button
+              onClick={selectSent}
               className="border p-2 my-2 min-w-96 rounded-md"
               type="button "
             >
               Sent
             </button>
             <button
+              onClick={selectJunk}
               className="border p-2 my-2 min-w-96 rounded-md"
               type="button "
             >
               Junk
             </button>
             <button
+              onClick={selectDeleted}
               className="border p-2 my-2 min-w-96 rounded-md"
               type="button "
             >
@@ -38,7 +56,13 @@ const Mailbox = () => {
         </section>
         <section className="w-3/5 h-full border rounded-lg border-gray-50">
           <h1 className="text-lg text-center border rounded-lg p-4">
-            Selected
+            {selected === "inbox"
+              ? "Inbox"
+              : selected === "sent"
+              ? "Sent"
+              : selected === "junk"
+              ? "Junk"
+              : "Deleted"}
           </h1>
         </section>
       </div>
