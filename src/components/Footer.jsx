@@ -14,7 +14,7 @@ function Footer() {
               <a href="/" className="flex items-center">
                 <img src="" className="h-8 me-3" alt="Logo" />
                 <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white text-slate-950">
-                  LearnIT
+                  L£arnIT
                 </span>
               </a>
             </div>
@@ -80,7 +80,7 @@ function Footer() {
             <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
               © {year}{" "}
               <a href="/about" className="hover:underline">
-                LearnIT™
+                L£arnIT™
               </a>{" "}
               All Rights Reserved.
             </span>
