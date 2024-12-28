@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const Mailbox = () => {
   const [selected, setSelected] = useState("");
+  const [messages, setMessages] = useState([]);
 
   const selectInbox = () => {
     setSelected("inbox");
@@ -54,8 +55,8 @@ const Mailbox = () => {
             </button>
           </div>
         </section>
-        <section className="w-3/5 sm:w-full h-full border rounded-lg border-gray-50">
-          <h1 className="text-lg text-center border rounded-lg p-4">
+        <section className="w-3/5 p-2  sm:w-full h-full border rounded-lg border-gray-50">
+          <h1 className="text-lg text-center border-b-2 p-4">
             {selected === "inbox"
               ? "Inbox"
               : selected === "sent"
