@@ -216,6 +216,7 @@ export const viewMessageInfo = async (loggedinUserRole) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      loggedinuserrole: loggedinUserRole,
     },
   });
   if (!res.ok) throw new Error("Network response was not ok.");
