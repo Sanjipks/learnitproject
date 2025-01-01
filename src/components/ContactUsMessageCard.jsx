@@ -114,67 +114,66 @@ const ContactUsMessageCard = () => {
                   <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
                 </svg>
               </button>
-              {selectedMessageInfo === message.messageid ? (
+              {selectedMessageInfo === message.messageid && (
                 <div
                   id="dropdownDots"
-                  className={`z-10 ${expand} absolute mt-1 -ml-20 px-2 bg-gray-100 divide-y divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600  border`}
+                  className={`z-10 ${expand} absolute mt-1 -ml-20  bg-gray-100 divide-y divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600  border`}
                 >
                   <ul
-                    className="flex flex-col py-2 text-sm text-gray-900   dark:text-gray-100 divide-y divide-gray-900 dark:divide-gray-100  dark:bg-gray-700 bg-gray-100  rounded-md  dark:hover:bg-gray-800 hover:bg-gray-200 "
+                    className="flex flex-col  text-sm m-1 text-gray-900 dark:text-gray-100 divide-y divide-gray-900 dark:divide-gray-100  dark:bg-gray-700 bg-gray-100    dark:hover:bg-gray-800 hover:bg-gray-200 "
                     aria-labelledby="dropdownMenuIconButton"
                   >
                     <li>
-                      <div
+                      <button
                         onClick={() =>
                           popMessageReplyBox(
                             message.sender_name,
                             message.email_from
                           )
                         }
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
+                        className=" px-4 py-2 hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
                       >
                         Reply
-                      </div>{" "}
-                      {popMessageReply ? (
+                      </button>
+                      {popMessageReply && (
                         <div className="absolute -ml-72 mt-10">
-                          {" "}
                           <ContactMessageReply
                             senderEmail={message.email_from}
                             senderName={message.sender_name}
-                          />{" "}
+                          />
                         </div>
-                      ) : null}
+                      )}
                     </li>
 
                     <li>
-                      <div
+                      <button
                         onClick={() => "todo"}
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
+                        className="flex px-4 py-2 hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
                       >
                         Copy
-                      </div>
+                      </button>
                     </li>
                     <li>
-                      <div
+                      <button
                         onClick={() => handleDelete(message.messageid)}
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
+                        className="flex px-4 py-2 hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
                       >
                         Delete
-                      </div>
+                      </button>
                     </li>
                   </ul>
                 </div>
-              ) : null}
+              )}
             </div>
           </div>
         </div>
       ))}
-      {pop ? (
+      {pop && (
         <ConfirmDecision
           handlePopAction={handlePop}
           typo="Are you sure you want to delete this message?"
         />
-      ) : null}
+      )}
     </>
   );
 };
