@@ -147,7 +147,9 @@ const ContactUsMessageCard = () => {
 
                     <li>
                       <button
-                        onClick={() => "todo"}
+                        onClick={() =>
+                          navigator.clipboard.writeText(message.message)
+                        }
                         className="flex px-4 py-2 hover:bg-gray-300 dark:hover:bg-gray-600 dark:hover:text-white hover:text-gray-900"
                       >
                         Copy
