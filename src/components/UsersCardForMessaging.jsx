@@ -55,16 +55,16 @@ export default function UsersForMessaging(props) {
             <div className="mb-10  text-sm font-medium text-gray-900 dark:text-white">
               {user}
             </div>
-            <div className="mt-6 ml-14 absolute w-80 h-10 border border-gray-900 text-sm font-medium rounded-sm  bg-gray-100 text-gray-900 ">
+            <div className="mt-6 ml-14 absolute w-80 h-11 border border-gray-900 text-sm font-medium rounded-sm  bg-gray-100 text-gray-900 ">
               {" "}
               {latestMessage.map((msg, index) => {
                 return (
                   <div
                     key={index}
-                    className="flex p-2 text-black justify-between"
+                    className="flex flex-row text-black justify-between"
                   >
-                    <div>{msg.message} </div>
-                    <span>
+                    <div className="flex w-40 p-2"> {msg.message} </div>
+                    <div className="w-40 font-light text-xs">
                       {" "}
                       {(currentMonth == TimeStampToMonth(msg.timestamp)
                         ? ""
@@ -78,7 +78,7 @@ export default function UsersForMessaging(props) {
                           : TimeStampToDay(msg.timestamp)) +
                         ", " +
                         TimeStampToTime(msg.timestamp)}
-                    </span>
+                    </div>
                   </div>
                 );
               })}
