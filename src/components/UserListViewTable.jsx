@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import EditUser from "./modals/EditUser";
+import { bufferToImage } from "../utility/BufferToImage";
 
 export default function UserListView(props) {
   const {
@@ -242,8 +243,12 @@ export default function UserListView(props) {
               >
                 <img
                   className="w-10 h-10 rounded-full"
-                  src="todo"
-                  alt="Jese image"
+                  src={
+                    user.user_image?.data
+                      ? bufferToImage(user.user_image.data)
+                      : "default_image_url_here"
+                  }
+                  alt={user.user_name || "User image"}
                 />
               </th>
               <td className="px-6 py-4 border">{user.user_email}</td>
