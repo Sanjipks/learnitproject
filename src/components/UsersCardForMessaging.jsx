@@ -9,6 +9,7 @@ import {
   TimeStampToTime,
   TimeStampToYear,
 } from "../utility/TimestampToRE";
+import { bufferToImage } from "../utility/BufferToImage";
 
 export default function UsersForMessaging(props) {
   const date = new Date();
@@ -24,14 +25,14 @@ export default function UsersForMessaging(props) {
 
   const { userId, userImage, user, connStatus, latestMessage } = props;
 
-  const [image, setImage] = useState(null);
+  // const [image, setImage] = useState(null);
 
-  useEffect(() => {
-    if (userImage && userImage.data) {
-      const base64String = bufferToBase64(userImage.data);
-      setImage(`data:image/jpeg;base64,${base64String}`);
-    }
-  }, [userImage]);
+  // useEffect(() => {
+  //   if (userImage && userImage.data) {
+  //     const base64String = bufferToBase64(userImage.data);
+  //     setImage(`data:image/jpeg;base64,${base64String}`);
+  //   }
+  // }, [userImage]);
 
   const handleOpenChatbox = (id, user) => {
     handleViewChatBox(true);
@@ -49,7 +50,7 @@ export default function UsersForMessaging(props) {
           >
             <img
               className="w-12 h-12 my-2 mr-1 rounded-full shadow-lg"
-              src={image}
+              src={bufferToImage(userImage && userImage.data)}
               alt="Bonnie image"
             />
             <div className="mb-10  text-sm font-medium text-gray-900 dark:text-white">
