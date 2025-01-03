@@ -3,6 +3,7 @@ import { useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import EditUser from "./modals/EditUser";
 import { useLogin } from "../context/LoginContext";
+import { bufferToImage } from "../utility/BufferToImage";
 
 export default function User(props) {
   const { loginInfo } = useLogin();
@@ -19,14 +20,15 @@ export default function User(props) {
   } = props;
   const [expand, setExpand] = useState("hidden");
   const [popUserEditModel, setPopUserEditModel] = useState(false);
-  const [image, setImage] = useState(null);
 
-  useEffect(() => {
-    if (userImage && userImage.data) {
-      const base64String = bufferToBase64(userImage.data);
-      setImage(`data:image/jpeg;base64,${base64String}`);
-    }
-  }, [userImage]);
+  // const [image, setImage] = useState(null);
+
+  // useEffect(() => {
+  //   if (userImage && userImage.data) {
+  //     const base64String = bufferToBase64(userImage.data);
+  //     setImage(`data:image/jpeg;base64,${base64String}`);
+  //   }
+  // }, [userImage]);
 
   const handleExpand = (id) => {
     if (expand === "hidden" && expandeduser === null) {
@@ -117,13 +119,13 @@ export default function User(props) {
                 </div>
               ) : null}
             </div>
-            {popUserEditModel && expandeduser === userId ? (
+            {popUserEditModel && expandeduser === userId && (
               <EditUser handleclose={handleClose} />
-            ) : null}
+            )}
             <div className="flex flex-col items-center pb-10">
               <img
                 className="w-48 h-48 mb-3 mt-10 rounded-full shadow-lg"
-                src={image}
+                src={bufferToImage(userImage && userImage.data)}
                 alt="Bonnie image"
               />
               <div className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
