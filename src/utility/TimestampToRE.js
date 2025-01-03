@@ -35,3 +35,12 @@ export const TimeStampToDate = (timestamp) => {
   const date = dateObject.toISOString().split("T")[0];
   return date;
 };
+
+export const TimeStampToMonthAndDay = (timestamp) => {
+  const dateObject = new Date(timestamp);
+  const month = dateObject.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+  });
+  return month;
+};

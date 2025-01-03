@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { bufferToBase64 } from "../utility/BufferToBase64";
+import React from "react";
 import { useLogin } from "../context/LoginContext";
 import { useChatBox } from "../context/ChatBoxContext";
 import {
   TimeStampToDay,
   TimeStampToMonth,
+  TimeStampToMonthAndDay,
   TimeStampToTime,
   TimeStampToYear,
 } from "../utility/TimestampToRE";
@@ -15,6 +14,10 @@ export default function UsersForMessaging(props) {
   const date = new Date();
   const currentYear = date.getFullYear();
   const currentDay = date.toLocaleDateString("en-US", { weekday: "long" });
+  const currentMonthAndDay = date.toLocaleString("en-US", {
+    month: "long",
+    day: "numeric",
+  });
   const currentMonth = date.toLocaleString("en-US", { month: "long" });
 
   const { loginInfo } = useLogin();
@@ -23,7 +26,7 @@ export default function UsersForMessaging(props) {
   const { handleViewChatBox, setSelectedUser, setSelectedUserId } =
     useChatBox();
 
-  const { userId, userImage, user, connStatus, latestMessage } = props;
+  const { userId, userImage, user, latestMessage } = props;
 
   // const [image, setImage] = useState(null);
 
@@ -67,9 +70,10 @@ export default function UsersForMessaging(props) {
                     <div className="flex w-40 p-2"> {msg.message} </div>
                     <div className="w-40 font-light text-xs">
                       {" "}
-                      {(currentMonth == TimeStampToMonth(msg.timestamp)
+                      {(currentMonthAndDay ==
+                      TimeStampToMonthAndDay(msg.timestamp)
                         ? ""
-                        : TimeStampToMonth(msg.timestamp) + ", ") +
+                        : TimeStampToMonthAndDay(msg.timestamp) + ", ") +
                         (currentYear == TimeStampToYear(msg.timestamp)
                           ? ""
                           : TimeStampToYear(msg.timestamp)) +
