@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { deleteUser, getUsers } from "../../../apis/Api";
 import { toast } from "react-toastify";
 import { useLogin } from "../../../context/LoginContext";
