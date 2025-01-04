@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../../components/common/Spinner";
 import User from "../../components/UsersCardForCircle";
 import { getUsers } from "../../apis/Api";

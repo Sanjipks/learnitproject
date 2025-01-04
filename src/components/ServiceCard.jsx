@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { bufferToBase64 } from "../utility/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";

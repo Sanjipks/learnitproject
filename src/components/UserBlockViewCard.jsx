@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
-import { bufferToBase64 } from "../utility/BufferToBase64";
+
 import EditUser from "./modals/EditUser";
 import { useLogin } from "../context/LoginContext";
 import { bufferToImage } from "../utility/BufferToImage";

@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import EditUser from "./modals/EditUser";
 import { bufferToImage } from "../utility/BufferToImage";
 
