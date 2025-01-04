@@ -10,6 +10,7 @@ import {
   TimeStampToMonth,
   TimeStampToYear,
 } from "../utility/TimestampToRE";
+import { bufferToImage } from "../utility/BufferToImage";
 
 const BEHOST = import.meta.env.VITE_BELC;
 
@@ -18,7 +19,7 @@ const socket = io(BEHOST, {
 });
 
 const ChatBox = () => {
-  const { messageUpdate, setMessageUpdate } = useMessaging();
+  const { setMessageUpdate } = useMessaging();
 
   const date = new Date();
   const currentYear = date.getFullYear();
@@ -30,6 +31,7 @@ const ChatBox = () => {
     handleMinimizeChatBox,
     display,
     viewChatBox,
+    selectedUserImage,
     selectedUser,
     selectedUserId,
   } = useChatBox();
@@ -114,14 +116,21 @@ const ChatBox = () => {
       } fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
     >
       <section className="flex justify-between pb-4 items-center">
-        <div
-          onClick={handleMinimizeChatBox}
-          type="button"
-          className=" text-gray-400 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
-        >
-          ---
-        </div>
+        <img
+          className="w-12 h-12 my-2 mr-1 rounded-full shadow-lg"
+          src={bufferToImage(selectedUserImage && selectedUserImage.data)}
+          alt="Bonnie image"
+        />
         <h1 className="px-2">{selectedUser}</h1>
+        <div className="flex flex-row">
+          <div
+            onClick={handleMinimizeChatBox}
+            type="button"
+            className=" text-gray-400 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
+          >
+            ---
+          </div>
+        </div>
 
         <div
           onClick={handleCloseChatBox}
