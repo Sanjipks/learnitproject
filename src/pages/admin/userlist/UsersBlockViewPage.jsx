@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import UserBlockView from "../../../components/UserBlockViewCard";
 import { deleteUser, getUsers } from "../../../apis/Api";
 import { toast } from "react-toastify";
