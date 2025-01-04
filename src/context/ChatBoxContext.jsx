@@ -15,6 +15,7 @@ export const ChatProvider = ({ children }) => {
 
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedUserImage, setSelectedUserImage] = useState(null);
   const [display, setDisplay] = useState("block");
   const [viewChatBox, setViewChatBox] = useState(false);
   const [allUsers, setAllUsers] = useState([]);
@@ -56,6 +57,8 @@ export const ChatProvider = ({ children }) => {
         setSelectedUserId,
         display,
         handleMinimizeChatBox,
+        selectedUserImage,
+        setSelectedUserImage,
       }}
     >
       {children}

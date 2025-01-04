@@ -23,8 +23,12 @@ export default function UsersForMessaging(props) {
   const { loginInfo } = useLogin();
 
   const loggedInUserRole = loginInfo.userRole;
-  const { handleViewChatBox, setSelectedUser, setSelectedUserId } =
-    useChatBox();
+  const {
+    handleViewChatBox,
+    setSelectedUser,
+    setSelectedUserId,
+    setSelectedUserImage,
+  } = useChatBox();
 
   const { userId, userImage, user, latestMessage } = props;
 
@@ -41,6 +45,7 @@ export default function UsersForMessaging(props) {
     handleViewChatBox(true);
     setSelectedUserId(id);
     setSelectedUser(user);
+    setSelectedUserImage(userImage);
   };
 
   return (
@@ -49,7 +54,7 @@ export default function UsersForMessaging(props) {
         <div className="w-96 mt-2 sticky mx-1 bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div
             className="flex w-full flex-row  items-center p-1 mx-auto"
-            onClick={() => handleOpenChatbox(userId, user)}
+            onClick={() => handleOpenChatbox(userId, user, userImage)}
           >
             <img
               className="w-12 h-12 my-2 mr-1 rounded-full shadow-lg"
