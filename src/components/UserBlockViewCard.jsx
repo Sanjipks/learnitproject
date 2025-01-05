@@ -21,15 +21,6 @@ export default function User(props) {
   const [expand, setExpand] = useState("hidden");
   const [popUserEditModel, setPopUserEditModel] = useState(false);
 
-  // const [image, setImage] = useState(null);
-
-  // useEffect(() => {
-  //   if (userImage && userImage.data) {
-  //     const base64String = bufferToBase64(userImage.data);
-  //     setImage(`data:image/jpeg;base64,${base64String}`);
-  //   }
-  // }, [userImage]);
-
   const handleExpand = (id) => {
     if (expand === "hidden" && expandeduser === null) {
       setExpand("block");
