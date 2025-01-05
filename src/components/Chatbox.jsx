@@ -113,34 +113,36 @@ const ChatBox = () => {
     <div
       className={` flex-col w-full ${
         viewChatBox ? "flex" : "hidden"
-      } fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden max-w-md p-6 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
+      } fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden max-w-md p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
     >
-      <section className="flex justify-between pb-4 items-center">
-        <img
-          className="w-12 h-12 my-2 mr-1 rounded-full shadow-lg"
-          src={bufferToImage(selectedUserImage && selectedUserImage.data)}
-          alt="Bonnie image"
-        />
-        <h1 className="px-2">{selectedUser}</h1>
+      <section className="flex justify-between border-b-2 border-gray-500 dark:border-gray-100  mb-1 items-start">
         <div className="flex flex-row">
+          <img
+            className="w-12 h-12 m-1 rounded-full shadow-lg"
+            src={bufferToImage(selectedUserImage && selectedUserImage.data)}
+            alt="Bonnie image"
+          />
+          <h1 className="px-2">{selectedUser}</h1>
+        </div>
+
+        <div className="flex flex-row justify-end items-center gap-2">
           <div
             onClick={handleMinimizeChatBox}
             type="button"
-            className=" text-gray-400 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
+            className=" text-gray-700 dark:text-gray-400 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
           >
             ---
           </div>
-        </div>
-
-        <div
-          onClick={handleCloseChatBox}
-          type="button"
-          className=" text-gray-400 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
-        >
-          <CloseIcon />
+          <div
+            onClick={handleCloseChatBox}
+            type="button"
+            className=" dark:text-gray-400 text-gray-700 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
+          >
+            <CloseIcon />
+          </div>
         </div>
       </section>
-      <section className={`${display}`}>
+      <section className={`${display} px-1.5`}>
         <div
           ref={messageMoveUpRef}
           onScroll={handleScroll}

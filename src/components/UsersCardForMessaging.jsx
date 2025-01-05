@@ -3,7 +3,6 @@ import { useLogin } from "../context/LoginContext";
 import { useChatBox } from "../context/ChatBoxContext";
 import {
   TimeStampToDay,
-  TimeStampToMonth,
   TimeStampToMonthAndDay,
   TimeStampToTime,
   TimeStampToYear,
@@ -18,7 +17,6 @@ export default function UsersForMessaging(props) {
     month: "long",
     day: "numeric",
   });
-  const currentMonth = date.toLocaleString("en-US", { month: "long" });
 
   const { loginInfo } = useLogin();
 
@@ -31,15 +29,6 @@ export default function UsersForMessaging(props) {
   } = useChatBox();
 
   const { userId, userImage, user, latestMessage } = props;
-
-  // const [image, setImage] = useState(null);
-
-  // useEffect(() => {
-  //   if (userImage && userImage.data) {
-  //     const base64String = bufferToBase64(userImage.data);
-  //     setImage(`data:image/jpeg;base64,${base64String}`);
-  //   }
-  // }, [userImage]);
 
   const handleOpenChatbox = (id, user) => {
     handleViewChatBox(true);
