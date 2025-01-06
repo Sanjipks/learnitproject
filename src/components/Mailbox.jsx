@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import InboxIcon from "../assets/icons/mailIcons/InboxIcon";
 
 const Mailbox = () => {
   const [selected, setSelected] = useState("");
@@ -27,11 +28,15 @@ const Mailbox = () => {
           <div className="flex flex-col text-lg  mx-4">
             <button
               onClick={selectInbox}
-              className="border p-2 my-2 w-auto rounded-md"
+              className="flex flex-row justify-center gap-2 items-center border p-2 my-2 w-auto rounded-md"
               type="button "
             >
               Inbox
+              <span>
+                <InboxIcon />
+              </span>
             </button>
+
             <button
               onClick={selectSent}
               className="border p-2 my-2  w-auto rounded-md"
