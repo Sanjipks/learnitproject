@@ -6,8 +6,8 @@ const InboxIcon = () => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 58 58"
-        width="20"
-        height="20"
+        width="40"
+        height="28"
       >
         <g>
           <polygon
@@ -31,7 +31,7 @@ const InboxIcon = () => {
             d="M56.672,15.307L53.051,1.794l-0.027-0.101L3.18,15.048c-0.149,0.04-0.12,0.259,0.034,0.259H56.672z"
           />
           <polygon
-            fill="#7383BF"
+            fill="rgb(75, 101, 195)"
             points="49.425,15.307 48.074,10.266 40.347,12.337 41.143,15.307"
           />
           <path
