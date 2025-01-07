@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import InboxIcon from "../assets/icons/mailIcons/InboxIcon";
 import SentIcon from "../assets/icons/mailIcons/SentIcon";
+import JunkIcon from "../assets/icons/mailIcons/JunkIcon";
+import MailTrashIcon from "../assets/icons/mailIcons/MailTrashIcon";
 
 const Mailbox = () => {
   const [selected, setSelected] = useState("");
@@ -29,10 +31,11 @@ const Mailbox = () => {
           <div className="flex flex-col text-lg  mx-4">
             <button
               onClick={selectInbox}
-              className="flex flex-row justify-center gap-2 items-center border p-2 my-2 w-auto rounded-md"
+              className="flex flex-row  justify-center gap-2 items-center border p-2 my-2 w-auto rounded-md"
               type="button "
             >
-              Inbox
+              <span className="w-16 text-start">Inbox</span>
+
               <span>
                 <InboxIcon />
               </span>
@@ -43,24 +46,31 @@ const Mailbox = () => {
               className="flex flex-row justify-center gap-2 items-center border p-2 my-2 w-auto rounded-md"
               type="button "
             >
-              Sent
+              <span className="w-16 text-start">Sent</span>
               <span>
                 <SentIcon />
               </span>
             </button>
             <button
               onClick={selectJunk}
-              className="border p-2 my-2  w-auto rounded-md"
+              className="flex flex-row justify-center gap-2 items-center border p-2 my-2 w-auto rounded-md"
               type="button "
             >
-              Junk
+              <span className="w-16 text-start"> Junk</span>
+
+              <span>
+                <JunkIcon />
+              </span>
             </button>
             <button
               onClick={selectDeleted}
-              className="border p-2 my-2  w-auto rounded-md"
+              className="flex flex-row justify-center gap-2 items-center border p-2 my-2 w-auto rounded-md"
               type="button "
             >
-              Deleted
+              <span className="w-16 text-start"> Deleted</span>
+              <span>
+                <MailTrashIcon />
+              </span>
             </button>
           </div>
         </section>
