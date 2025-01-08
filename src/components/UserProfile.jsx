@@ -49,10 +49,14 @@ function UserProfile() {
 
   const handleCardClick = () => {
     if (expand === "hidden") {
-      setExpand(null);
+      setExpand("block");
     } else {
       setExpand("hidden");
     }
+  };
+
+  const handleMouseLeave = () => {
+    setExpand("hidden");
   };
 
   const handleChangePhoto = async (event) => {
@@ -84,7 +88,10 @@ function UserProfile() {
   };
 
   return (
-    <div className="flex justify-center items-center ">
+    <div
+      className="flex justify-center items-center "
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="w-full h-full bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div className="flex justify-end px-4 pt-4 pb-10 ">
           <button
