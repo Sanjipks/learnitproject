@@ -36,6 +36,7 @@ export default function User(props) {
     if (popUserEditModel === false) {
       setExpand("hidden");
       setPopUserEditModel(false);
+      setExpandeduser(null);
     } else {
       setExpand("block");
     }

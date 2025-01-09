@@ -35,6 +35,7 @@ const ChatBox = () => {
     selectedUser,
     selectedUserId,
   } = useChatBox();
+
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
   const [messages, setMessages] = useState([]);
@@ -96,6 +97,9 @@ const ChatBox = () => {
   const sortedMessages = messages.sort(
     (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
   );
+
+  const handleMouseLeave = () => {};
+
   //const loadedMessages = pastmessages.slice(viewMessages);
   const handleScroll = () => {
     const container = messageMoveUpRef.current;
@@ -111,6 +115,7 @@ const ChatBox = () => {
 
   return (
     <div
+      onMouseLeave={handleMouseLeave}
       className={` flex-col w-full ${
         viewChatBox ? "flex" : "hidden"
       } fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden max-w-md p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
