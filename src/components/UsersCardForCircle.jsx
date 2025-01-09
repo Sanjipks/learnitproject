@@ -57,6 +57,9 @@ export default function UsersForCircle(props) {
 
   const onmouseleave = () => {
     setExpand("hidden");
+    setSelectedUserId(null);
+    setExpandeduserId(null);
+    setSelectedUser(null);
   };
 
   const handleConnect = async (requester, targetuser) => {
