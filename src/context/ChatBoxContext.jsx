@@ -8,26 +8,13 @@ export const useChatBox = () => {
 };
 
 export const ChatProvider = ({ children }) => {
-  const { loginInfo } = useLogin();
-  const pagenumber = 1;
-  const loggedinUserRole = loginInfo.userRole;
-  const loggedInUserId = loginInfo.userId;
-
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [selectedUserImage, setSelectedUserImage] = useState(null);
   const [display, setDisplay] = useState("block");
   const [viewChatBox, setViewChatBox] = useState(false);
-  const [allUsers, setAllUsers] = useState([]);
 
-  const [chatlists, setChatlists] = useState([]);
   const [messageUpdate, setMessageUpdate] = useState(false);
-
-  const chatListsUpdate = (updates) => {
-    setChatlists((prevList) => {
-      [...prevList, updates];
-    });
-  };
 
   const handleViewChatBox = (state) => {
     setViewChatBox(state);
@@ -43,11 +30,8 @@ export const ChatProvider = ({ children }) => {
   return (
     <ChatCotext.Provider
       value={{
-        allUsers,
-        chatlists,
         selectedUser,
         setSelectedUser,
-        chatListsUpdate,
         handleCloseChatBox,
         viewChatBox,
         handleViewChatBox,

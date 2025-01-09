@@ -16,11 +16,11 @@ export const MessagingProvider = ({ children }) => {
   const [viewBox, setViewBox] = useState(true);
   const [allUsers, setAllUsers] = useState([]);
   const [closeBox, setCloseBox] = useState(false);
-  const [chatlists, setChatlists] = useState([]);
+  const [chatlist, setChatlist] = useState([]);
   const [messageUpdate, setMessageUpdate] = useState(false);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchUsersForChatList = async () => {
       try {
         const data = await getUsers(
           loggedinUserRole,
@@ -28,26 +28,28 @@ export const MessagingProvider = ({ children }) => {
           loggedInUserId
         );
         // setAllUsers(data.allUsers);
-        setAllUsers(
-          data.allUsers.sort((a, b) => {
-            const aTimestamp =
-              new Date(a.latestMessages?.[0]?.timestamp).getTime() || 0;
-            const bTimestamp =
-              new Date(b.latestMessages?.[0]?.timestamp).getTime() || 0;
+        setChatlist(() => {
+          setAllUsers(
+            data.allUsers.sort((a, b) => {
+              const aTimestamp =
+                new Date(a.latestMessages?.[0]?.timestamp).getTime() || 0;
+              const bTimestamp =
+                new Date(b.latestMessages?.[0]?.timestamp).getTime() || 0;
 
-            return bTimestamp - aTimestamp;
-          })
-        );
+              return bTimestamp - aTimestamp;
+            })
+          );
+        });
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
 
-    fetchUsers();
+    fetchUsersForChatList();
   }, [messageUpdate]);
 
   const chatListsUpdate = (updates) => {
-    setChatlists((prevList) => {
+    setChatlist((prevList) => {
       [...prevList, updates];
     });
   };
@@ -63,7 +65,7 @@ export const MessagingProvider = ({ children }) => {
     <MessagingCotext.Provider
       value={{
         allUsers,
-        chatlists,
+        chatlist,
         chatListsUpdate,
         closeBox,
         handleCloseBox,
