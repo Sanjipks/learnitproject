@@ -55,6 +55,10 @@ export default function UsersForCircle(props) {
     setExpand("hidden");
   };
 
+  const onmouseleave = () => {
+    setExpand("hidden");
+  };
+
   const handleConnect = async (requester, targetuser) => {
     try {
       const response = await sendConnectionReq(requester, targetuser);
@@ -98,7 +102,7 @@ export default function UsersForCircle(props) {
   return (
     <>
       {loggedInUserRole === "user" && (
-        <div className="flex">
+        <div className="flex" onMouseLeave={onmouseleave}>
           <div className="w-full max-w-sm bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div className="flex justify-start px-4 pt-4">
               <button
