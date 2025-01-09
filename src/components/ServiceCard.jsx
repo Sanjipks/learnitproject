@@ -89,7 +89,7 @@ const ServiceCard = (props) => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex" onMouseLeave={handleMouseLeave}>
         <div className="w-80 bg-gray-200 border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700">
           <div className="flex justify-between px-4 pt-4">
             <button
@@ -117,7 +117,6 @@ const ServiceCard = (props) => {
             {expandedservice === serviceId ? (
               <div
                 id="dropdown"
-                onMouseLeave={handleMouseLeave}
                 className={`z-10 ${expand} absolute w-48 mt-9 text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
               >
                 {loggedinUserRole === "admin" && loginState === "true" ? (

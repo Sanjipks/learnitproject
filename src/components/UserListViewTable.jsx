@@ -37,6 +37,7 @@ export default function UserListView(props) {
 
   const handleMouseLeave = () => {
     setExpandforpagenumber("hidden");
+    setExpandeduser(null);
   };
 
   const handleDelete = (id) => {
