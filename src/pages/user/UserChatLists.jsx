@@ -9,7 +9,7 @@ import { useChatBox } from "../../context/ChatBoxContext";
 
 const UserChatlistsForMessaging = () => {
   const { loginInfo } = useLogin();
-  const { allUsers } = useMessaging();
+  const { chatlist } = useMessaging();
   const { viewChatBox } = useChatBox();
 
   const [expandeduser, setExpandeduser] = useState(null);
@@ -50,7 +50,7 @@ const UserChatlistsForMessaging = () => {
 
       <div className="flex-grow overflow-y-scroll mb-20">
         <div className="flex flex-col">
-          {allUsers.map((user, id) => (
+          {chatlist.userChatlist.map((user, id) => (
             <div key={id} className="relative">
               <UsersForMessaging
                 key={user.user_id}
