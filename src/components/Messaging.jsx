@@ -9,8 +9,7 @@ const Messaging = () => {
   const { loginInfo } = useLogin();
   const userState = loginInfo.loginState;
   const userRole = loginInfo.userRole;
-  const { chatlists, closeBox, handleCloseBox, viewBox, handleViewBox } =
-    useMessaging();
+  const { closeBox, handleCloseBox, viewBox, handleViewBox } = useMessaging();
 
   return (
     <>
