@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import { useLogin } from "./LoginContext";
 
 const ChatCotext = createContext();
 
@@ -13,7 +12,6 @@ export const ChatProvider = ({ children }) => {
   const [selectedUserImage, setSelectedUserImage] = useState(null);
   const [display, setDisplay] = useState("block");
   const [viewChatBox, setViewChatBox] = useState(false);
-
   const [messageUpdate, setMessageUpdate] = useState(false);
 
   const handleViewChatBox = (state) => {
