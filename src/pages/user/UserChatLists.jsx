@@ -69,8 +69,6 @@ const UserChatlistsForMessaging = () => {
         </div>
       </div>
 
-      {viewChatBox && <ChatBox />}
-
       {opengroupchatbox && (
         <GroupChatBox
           handleclose={handlegroupchatclose}

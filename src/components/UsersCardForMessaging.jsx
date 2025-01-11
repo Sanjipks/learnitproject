@@ -21,6 +21,7 @@ export default function UsersForMessaging(props) {
   const { loginInfo } = useLogin();
 
   const loggedInUserRole = loginInfo.userRole;
+
   const {
     handleViewChatBox,
     setSelectedUser,
@@ -30,11 +31,11 @@ export default function UsersForMessaging(props) {
 
   const { userId, userImage, user, latestMessage } = props;
 
-  const handleOpenChatbox = (id, user) => {
+  const handleOpenChatbox = (id, user, image) => {
     handleViewChatBox(true);
     setSelectedUserId(id);
     setSelectedUser(user);
-    setSelectedUserImage(userImage);
+    setSelectedUserImage(image);
   };
 
   return (
