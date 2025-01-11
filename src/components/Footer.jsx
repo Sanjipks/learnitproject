@@ -1,5 +1,6 @@
 import React from "react";
 import Messaging from "./Messaging";
+import ChatBoxContainer from "./ChatBoxContainer";
 
 function Footer() {
   const date = new Date();
@@ -181,6 +182,7 @@ function Footer() {
         </div>
       </footer>
       <Messaging />
+      <ChatBoxContainer />
     </>
   );
 }
