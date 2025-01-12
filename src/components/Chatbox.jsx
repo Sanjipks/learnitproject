@@ -18,14 +18,7 @@ const socket = io(BEHOST, {
   withCredentials: true,
 });
 
-const ChatBox = () => {
-  const { setMessageUpdate } = useMessaging();
-
-  const date = new Date();
-  const currentYear = date.getFullYear();
-  const currentDay = date.toLocaleDateString("en-US", { weekday: "long" });
-  const currentMonth = date.toLocaleString("en-US", { month: "long" });
-
+const ChatBox = (props) => {
   const {
     handleCloseChatBox,
     handleMinimizeChatBox,
@@ -34,7 +27,14 @@ const ChatBox = () => {
     selectedUserImage,
     selectedUser,
     selectedUserId,
-  } = useChatBox();
+  } = props;
+
+  const { setMessageUpdate } = useMessaging();
+
+  const date = new Date();
+  const currentYear = date.getFullYear();
+  const currentDay = date.toLocaleDateString("en-US", { weekday: "long" });
+  const currentMonth = date.toLocaleString("en-US", { month: "long" });
 
   const { loginInfo } = useLogin();
   const loggedInUserId = loginInfo.userId;
