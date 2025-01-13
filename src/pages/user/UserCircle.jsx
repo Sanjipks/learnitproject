@@ -7,6 +7,7 @@ import ChatBox from "../../components/Chatbox";
 import GroupChatBox from "../../components/GroupChatbox";
 import CreateChatGroup from "../../components/CreateChatGroup";
 import { useChatBox } from "../../context/ChatBoxContext";
+import { bufferToImage } from "../../utility/BufferToImage";
 
 const UserCircle = () => {
   const [userlist, setUserlist] = useState([]);
@@ -22,7 +23,6 @@ const UserCircle = () => {
   const [refresh, setRefresh] = useState(false);
 
   const { loginInfo } = useLogin();
-  const { viewChatBox } = useChatBox();
 
   const loggedinUserRole = loginInfo.userRole;
   const loggedInUserId = loginInfo.userId;
@@ -165,7 +165,6 @@ const UserCircle = () => {
           </button>
         </div>
       </div>
-      {viewChatBox && <ChatBox />}
 
       {opengroupchatbox && (
         <GroupChatBox
