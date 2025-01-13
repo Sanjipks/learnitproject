@@ -181,6 +181,7 @@ function Footer() {
           </div>
         </div>
       </footer>
+
       <Messaging />
       <ChatBoxContainer />
     </>

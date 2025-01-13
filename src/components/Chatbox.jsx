@@ -19,7 +19,7 @@ const socket = io(BEHOST, {
 });
 
 const ChatBox = (props) => {
-  const { selectedUserImage, selectedUser, selectedUserId } = props;
+  const { userImage, user, userId } = props;
 
   const {
     setMessageUpdate,
@@ -41,12 +41,17 @@ const ChatBox = (props) => {
   const [newMessage, setNewMessage] = useState("");
   const [viewMessages, setViewMessages] = useState(-5);
   const [viewChatBox, setViewChatBox] = useState(true);
+  const [selectedUserId, setSelectedUserId] = useState(null);
 
   const messageEndRef = useRef(null);
   const messageMoveUpRef = useRef(null);
 
   const handleInput = (e) => {
     setNewMessage(e.target.value);
+  };
+
+  const handleSelectUserId = (id) => {
+    setSelectedUserId(id);
   };
 
   const handleSend = () => {
@@ -89,7 +94,7 @@ const ChatBox = (props) => {
       socket.off("message");
       socket.off("past_messages");
     };
-  }, [selectedUserId, loggedInUserId, viewMessages]);
+  }, [viewMessages]);
 
   // sort messages by timestamp for accurate display
   const sortedMessages = messages.sort(
@@ -114,6 +119,7 @@ const ChatBox = (props) => {
   return (
     <div
       onMouseLeave={handleMouseLeave}
+      onClick={() => handleSelectUserId(userId)}
       className={` flex-col w-full ${
         viewChatBox ? "flex" : "hidden"
       } fixed bottom-0 md:right-1/4 overflow-y-auto overflow-x-hidden max-w-md p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
@@ -122,10 +128,10 @@ const ChatBox = (props) => {
         <div className="flex flex-row">
           <img
             className="w-12 h-12 m-1 rounded-full shadow-lg"
-            src={bufferToImage(selectedUserImage && selectedUserImage.data)}
+            src={userImage ?? userImage}
             alt="Bonnie image"
           />
-          <h1 className="px-2">{selectedUser}</h1>
+          <h1 className="px-2">{user}</h1>
         </div>
 
         <div className="flex flex-row justify-end items-center gap-2">
