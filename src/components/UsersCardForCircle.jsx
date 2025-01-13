@@ -5,11 +5,14 @@ import { useLogin } from "../context/LoginContext";
 import { rcvConnectionReq, sendConnectionReq } from "../apis/Api";
 import { toast } from "react-toastify";
 import { useChatBox } from "../context/ChatBoxContext";
+import { useChats } from "../context/ChatsContext";
 
 export default function UsersForCircle(props) {
   const { loginInfo } = useLogin();
   const { handleViewChatBox, setSelectedUser, setSelectedUserId } =
     useChatBox();
+
+  const { addChatUser } = useChats();
 
   const loggedInUserRole = loginInfo.userRole;
   const loggedInUserId = loginInfo.userId;
@@ -20,12 +23,12 @@ export default function UsersForCircle(props) {
     userImage,
     userEmail,
     setExpandeduser,
-    expandeduser,
     expandeduserId,
     setExpandeduserId,
     connStatus,
     setrefresh,
   } = props;
+
   const [expand, setExpand] = useState("hidden");
   const [image, setImage] = useState(null);
 
@@ -35,6 +38,8 @@ export default function UsersForCircle(props) {
       setImage(`data:image/jpeg;base64,${base64String}`);
     }
   }, [userImage]);
+
+  let userToAdd = { userName, userId, image };
 
   const handleExpand = (id, username) => {
     if (expand === "hidden" && expandeduserId === null) {
@@ -49,6 +54,7 @@ export default function UsersForCircle(props) {
   };
 
   const handleOpenChatbox = (id, username) => {
+    addChatUser(id, username);
     handleViewChatBox(true);
     setSelectedUserId(id);
     setSelectedUser(username);
@@ -163,7 +169,7 @@ export default function UsersForCircle(props) {
                     </li>
                     {connStatus === "friend" && (
                       <li
-                        onClick={() => handleOpenChatbox(userId, userName)}
+                        onClick={() => handleOpenChatbox(userToAdd)}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
                         chat

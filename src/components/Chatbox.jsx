@@ -19,17 +19,14 @@ const socket = io(BEHOST, {
 });
 
 const ChatBox = (props) => {
-  const {
-    handleCloseChatBox,
-    handleMinimizeChatBox,
-    display,
-    viewChatBox,
-    selectedUserImage,
-    selectedUser,
-    selectedUserId,
-  } = props;
+  const { selectedUserImage, selectedUser, selectedUserId } = props;
 
-  const { setMessageUpdate } = useMessaging();
+  const {
+    setMessageUpdate,
+    handleMinimizeChatBox,
+    handleCloseChatBox,
+    display,
+  } = useMessaging();
 
   const date = new Date();
   const currentYear = date.getFullYear();
@@ -41,9 +38,10 @@ const ChatBox = (props) => {
   const [messages, setMessages] = useState([]);
   const [down, setDown] = useState(false);
   const [pastMessages, setPastMessages] = useState([]);
-
   const [newMessage, setNewMessage] = useState("");
   const [viewMessages, setViewMessages] = useState(-5);
+  const [viewChatBox, setViewChatBox] = useState(true);
+
   const messageEndRef = useRef(null);
   const messageMoveUpRef = useRef(null);
 
