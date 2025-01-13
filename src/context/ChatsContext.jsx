@@ -24,7 +24,7 @@ export function useChats() {
   return useContext(ChatsContext);
 }
 
-export default function ChatContainerProvider({ children }) {
+export default function ChatsProvider({ children }) {
   const [chatContainerItems, setChatContainerItems] = useState([]);
 
   useEffect(() => {
@@ -36,20 +36,20 @@ export default function ChatContainerProvider({ children }) {
     fetchChatContainerItems();
   }, []);
 
-  const addChatbox = useCallback(async (chatbox) => {
+  const addChatUser = useCallback(async (chatUser) => {
     setChatContainerItems((prevItems) => {
-      const updatedItems = [...prevItems, chatbox];
+      const updatedItems = [...prevItems, chatUser];
       return updatedItems;
     });
 
     const db = await dbPromise;
     const tx = db.transaction("chat", "readwrite");
     const store = tx.objectStore("chat");
-    await store.put(chatbox);
+    await store.put(chatUser);
     await tx.done;
   }, []);
 
-  const removeChatboxById = useCallback(async (id) => {
+  const removeChatboxUserById = useCallback(async (id) => {
     setChatContainerItems((prevItems) => {
       const updatedItems = prevItems.filter((item) => item.id !== id);
       return updatedItems;
@@ -97,8 +97,8 @@ export default function ChatContainerProvider({ children }) {
     <ChatsContext.Provider
       value={{
         chatContainerItems,
-        addChatbox,
-        removeChatboxById,
+        addChatUser,
+        removeChatboxUserById,
         removeChatboxByServiceId,
         clearChatContainer,
       }}
