@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useLogin } from "../../context/LoginContext";
-import ChatBox from "../../components/Chatbox";
 import GroupChatBox from "../../components/GroupChatbox";
 import CreateChatGroup from "../../components/CreateChatGroup";
 import { useMessaging } from "../../context/MessagingContext";
@@ -10,7 +9,6 @@ import { useChatBox } from "../../context/ChatBoxContext";
 const UserChatlistsForMessaging = () => {
   const { loginInfo } = useLogin();
   const { chatlist } = useMessaging();
-  const { viewChatBox } = useChatBox();
 
   const [expandeduser, setExpandeduser] = useState(null);
   const [expandeduserId, setExpandeduserId] = useState(null);
