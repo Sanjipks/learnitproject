@@ -4,16 +4,6 @@ import { useChatBox } from "../context/ChatBoxContext";
 import { useChats } from "../context/ChatsContext";
 
 const ChatBoxContainer = () => {
-  const {
-    handleCloseChatBox,
-    handleMinimizeChatBox,
-    display,
-    viewChatBox,
-    selectedUserImage,
-    selectedUser,
-    selectedUserId,
-  } = useChatBox();
-
   const { chatContainerItems } = useChats();
 
   return (
@@ -24,7 +14,7 @@ const ChatBoxContainer = () => {
             <div key={id} className="relative">
               <ChatBox
                 key={user.user_id}
-                selectedUse={user.user_name}
+                selectedUser={user.user_name}
                 selectedUserId={user.user_id}
                 selectedUserImage={user.user_image}
               />

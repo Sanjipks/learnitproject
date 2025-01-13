@@ -6,6 +6,7 @@ import { rcvConnectionReq, sendConnectionReq } from "../apis/Api";
 import { toast } from "react-toastify";
 import { useChatBox } from "../context/ChatBoxContext";
 import { useChats } from "../context/ChatsContext";
+import { bufferToImage } from "../utility/BufferToImage";
 
 export default function UsersForCircle(props) {
   const { loginInfo } = useLogin();
@@ -30,14 +31,8 @@ export default function UsersForCircle(props) {
   } = props;
 
   const [expand, setExpand] = useState("hidden");
-  const [image, setImage] = useState(null);
 
-  useEffect(() => {
-    if (userImage && userImage.data) {
-      const base64String = bufferToBase64(userImage.data);
-      setImage(`data:image/jpeg;base64,${base64String}`);
-    }
-  }, [userImage]);
+  let image = bufferToImage(userImage && userImage.data);
 
   let userToAdd = { userName, userId, image };
 
