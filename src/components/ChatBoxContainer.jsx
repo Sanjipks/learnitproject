@@ -9,16 +9,15 @@ const ChatBoxContainer = () => {
   console.log(chatContainerItems);
 
   return (
-    <div className="flex w-4/5 h-2/6 float-right border border-gray-200 bottom-1 right-1 z-20 fixed">
-      <h1>Chat Box</h1>
-      <div className="flex">
+    <div className="flex w-4/5 h-2/6 float-right border-gray-200 bottom-0 right-1 z-10 fixed">
+      <div className="flex flex-row ">
         {chatContainerItems.map((user) => (
-          <div key={user.user_id} className="flex justify-between px-4 pt-4">
+          <div key={user.user_id} className="flex w- justify-between px-2 py-2">
             <ChatBox
-              key={user.user_id}
-              user={user.user_name}
-              userId={user.user_id}
-              userImage={user.user_image}
+              key={user.userId}
+              user={user.userName}
+              userId={user.userId}
+              userImage={user.image}
             />
           </div>
         ))}

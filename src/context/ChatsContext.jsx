@@ -49,18 +49,21 @@ export default function ChatsProvider({ children }) {
     await tx.done;
   }, []);
 
-  const removeChatboxUserById = useCallback(async (id) => {
-    setChatContainerItems((prevItems) => {
-      const updatedItems = prevItems.filter((item) => item.id !== id);
-      return updatedItems;
-    });
+  const removeChatboxUserById = useCallback(
+    async (id) => {
+      setChatContainerItems((prevItems) => {
+        const updatedItems = prevItems.filter((item) => item.id !== id);
+        return updatedItems;
+      });
 
-    const db = await dbPromise;
-    const tx = db.transaction("chat", "readwrite");
-    const store = tx.objectStore("chat");
-    await store.delete(id);
-    await tx.done;
-  }, []);
+      const db = await dbPromise;
+      const tx = db.transaction("chat", "readwrite");
+      const store = tx.objectStore("chat");
+      await store.delete(id);
+      await tx.done;
+    },
+    [chatContainerItems]
+  );
 
   const removeChatboxByServiceId = useCallback(async (serviceId) => {
     setChatContainerItems((prevItems) => {
