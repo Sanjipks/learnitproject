@@ -14,7 +14,7 @@ const socket = io(BEHOST, {
   withCredentials: true,
 });
 
-const ChatBoxMessages = (props) => {
+const ChatBoxMessages = () => {
   const date = new Date();
   const currentYear = date.getFullYear();
   const currentDay = date.toLocaleDateString("en-US", { weekday: "long" });
