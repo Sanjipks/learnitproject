@@ -23,13 +23,15 @@ const ChatBox = (props) => {
     setNewMessage(e.target.value);
   };
 
+  const handleSend = () => {};
+
   return (
     <div
       onMouseLeave={handleMouseLeave}
       onClick={() => handleSelectUserId(userId)}
       className={` flex-col w-screen ${
         closeChatBox ? "flex" : "hidden"
-      }    max-w-md p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
+      }    max-w-md h-auto p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
     >
       <section className="flex justify-between border-b-2 border-gray-500 dark:border-gray-100  mb-1 items-start">
         <div className="flex flex-row">
@@ -43,7 +45,7 @@ const ChatBox = (props) => {
 
         <div className="flex flex-row justify-end items-center gap-2">
           <div
-            onClick={handleMinimizeChatBox}
+            onClick={() => handleMinimizeChatBox(userId)}
             type="button"
             className=" text-gray-700 dark:text-gray-400 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
           >
@@ -64,13 +66,13 @@ const ChatBox = (props) => {
         <div className="flex  mt-2 pb-8">
           <input
             type="text"
-            // value={newMessage}
+            value={newMessage}
             onChange={handleInput}
             className="flex-1 p-2 border border-gray-300 rounded-md dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="Type your message..."
           />
           <button
-            // onClick={handleSend}
+            onClick={handleSend}
             className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
           >
             Send
