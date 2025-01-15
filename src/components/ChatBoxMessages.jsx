@@ -33,10 +33,6 @@ const ChatBoxMessages = (props) => {
   const messageEndRef = useRef(null);
   const messageMoveUpRef = useRef(null);
 
-  const handleInput = (e) => {
-    setNewMessage(e.target.value);
-  };
-
   const handleSelectUserId = (id) => {
     setSelectedUserId(id);
   };

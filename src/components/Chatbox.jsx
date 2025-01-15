@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-
-import { useMessaging } from "../context/MessagingContext";
+import React, { useState } from "react";
 import CloseIcon from "../assets/icons/CloseIcon";
 
 import ChatBoxMessages from "./ChatBoxMessages";
@@ -8,22 +6,29 @@ import ChatBoxMessages from "./ChatBoxMessages";
 const ChatBox = (props) => {
   const { userImage, user, userId } = props;
 
-  const {
-    setMessageUpdate,
-    handleMinimizeChatBox,
-    handleCloseChatBox,
-    display,
-  } = useMessaging();
-  const [viewChatBox, setViewChatBox] = useState(true);
+  const [minimizeChatBox, setMinimizeChatBox] = useState(false);
+  const [closeChatBox, setCloseChatBox] = useState(true);
+  const [newMessage, setNewMessage] = useState("");
 
   const handleMouseLeave = () => {};
+
+  const handleMinimizeChatBox = () => {
+    setMinimizeChatBox((prev) => !prev);
+  };
+
+  const handleClose = () => {
+    setCloseChatBox(false);
+  };
+  const handleInput = (e) => {
+    setNewMessage(e.target.value);
+  };
 
   return (
     <div
       onMouseLeave={handleMouseLeave}
       onClick={() => handleSelectUserId(userId)}
       className={` flex-col w-screen ${
-        viewChatBox ? "flex" : "hidden"
+        closeChatBox ? "flex" : "hidden"
       }    max-w-md p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
     >
       <section className="flex justify-between border-b-2 border-gray-500 dark:border-gray-100  mb-1 items-start">
@@ -45,7 +50,7 @@ const ChatBox = (props) => {
             ---
           </div>
           <div
-            onClick={handleCloseChatBox}
+            onClick={handleClose}
             type="button"
             className=" dark:text-gray-400 text-gray-700 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
           >
@@ -53,14 +58,14 @@ const ChatBox = (props) => {
           </div>
         </div>
       </section>
-      <section className={`${display} px-1.5`}>
-        <ChatBoxMessages />
+      <section className={`${minimizeChatBox ? "hidden" : "block"}  px-1.5`}>
+        <ChatBoxMessages newMessage={newMessage} />
 
         <div className="flex  mt-2 pb-8">
           <input
             type="text"
             // value={newMessage}
-            // onChange={handleInput}
+            onChange={handleInput}
             className="flex-1 p-2 border border-gray-300 rounded-md dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
             placeholder="Type your message..."
           />
