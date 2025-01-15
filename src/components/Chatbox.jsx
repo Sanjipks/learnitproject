@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import CloseIcon from "../assets/icons/CloseIcon";
 
 import ChatBoxMessages from "./ChatBoxMessages";
+import { useChats } from "../context/ChatsContext";
 
 const ChatBox = (props) => {
   const { userImage, user, userId } = props;
+  const { removeChatboxUserById } = useChats();
 
   const [minimizeChatBox, setMinimizeChatBox] = useState(false);
-  const [closeChatBox, setCloseChatBox] = useState(true);
+
   const [newMessage, setNewMessage] = useState("");
 
   const handleMouseLeave = () => {};
@@ -16,8 +18,8 @@ const ChatBox = (props) => {
     setMinimizeChatBox((prev) => !prev);
   };
 
-  const handleClose = () => {
-    setCloseChatBox(false);
+  const handleClose = (id) => {
+    removeChatboxUserById(id);
   };
   const handleInput = (e) => {
     setNewMessage(e.target.value);
@@ -28,10 +30,8 @@ const ChatBox = (props) => {
   return (
     <div
       onMouseLeave={handleMouseLeave}
-      onClick={() => handleSelectUserId(userId)}
-      className={` flex-col w-screen ${
-        closeChatBox ? "flex" : "hidden"
-      }    max-w-md h-auto p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
+      // onClick={() => handleSelectUserId(userId)}
+      className={` flex-col w-screen max-w-md h-auto p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
     >
       <section className="flex justify-between border-b-2 border-gray-500 dark:border-gray-100  mb-1 items-start">
         <div className="flex flex-row">
@@ -52,7 +52,7 @@ const ChatBox = (props) => {
             ---
           </div>
           <div
-            onClick={handleClose}
+            onClick={() => handleClose(userId)}
             type="button"
             className=" dark:text-gray-400 text-gray-700 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
           >
