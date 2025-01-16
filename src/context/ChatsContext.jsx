@@ -37,15 +37,16 @@ export default function ChatsProvider({ children }) {
   }, []);
 
   const addChatUser = useCallback(async (chatUser) => {
+    const chatUserWithStatus = { ...chatUser, minimizeStatus: false };
     setChatContainerItems((prevItems) => {
-      const updatedItems = [...prevItems, chatUser];
+      const updatedItems = [...prevItems, chatUserWithStatus];
       return updatedItems;
     });
 
     const db = await dbPromise;
     const tx = db.transaction("chat", "readwrite");
     const store = tx.objectStore("chat");
-    await store.put(chatUser);
+    await store.put(chatUserWithStatus);
     await tx.done;
   }, []);
 

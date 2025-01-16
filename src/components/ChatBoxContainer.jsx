@@ -16,6 +16,7 @@ const ChatBoxContainer = () => {
               user={user.userName}
               userId={user.userId}
               userImage={user.image}
+              minimizeStatus={user.minimizeStatus}
             />
           </div>
         ))}

@@ -5,18 +5,16 @@ import ChatBoxMessages from "./ChatBoxMessages";
 import { useChats } from "../context/ChatsContext";
 
 const ChatBox = (props) => {
-  const { userImage, user, userId } = props;
+  const { userImage, user, userId, minimizeStatus } = props;
   const { removeChatboxUserById } = useChats();
-
-  const [minimizeChatBox, setMinimizeChatBox] = useState(false);
 
   const [newMessage, setNewMessage] = useState("");
 
   const handleMouseLeave = () => {};
 
-  const handleMinimizeChatBox = () => {
-    setMinimizeChatBox((prev) => !prev);
-  };
+  // const handleMinimizeChatBox = () => {
+  //   setMinimizeChatBox((prev) => !prev);
+  // };
 
   const handleClose = (id) => {
     removeChatboxUserById(id);
@@ -60,7 +58,7 @@ const ChatBox = (props) => {
           </div>
         </div>
       </section>
-      <section className={`${minimizeChatBox ? "hidden" : "block"}  px-1.5`}>
+      <section className={`${minimizeStatus ? "hidden" : "block"}  px-1.5`}>
         <ChatBoxMessages newMessage={newMessage} />
 
         <div className="flex  mt-2 pb-8">
