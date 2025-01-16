@@ -59,7 +59,7 @@ export default function User(props) {
 
   return (
     <>
-      {loggedInUserRole === "admin" ? (
+      {loggedInUserRole === "admin" && (
         <div className="flex">
           <div className="w-full max-w-sm bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div
@@ -84,7 +84,7 @@ export default function User(props) {
                   <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
                 </svg>
               </button>
-              {expandeduser === userId ? (
+              {expandeduser === userId && (
                 <div
                   id="dropdown"
                   className={`z-10 ${expand} absolute ml-10 text-base list-none bg-gray-100 divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700`}
@@ -109,7 +109,7 @@ export default function User(props) {
                     </li>
                   </ul>
                 </div>
-              ) : null}
+              )}
             </div>
             {popUserEditModel && expandeduser === userId && (
               <EditUser handleclose={handleClose} />
@@ -129,7 +129,7 @@ export default function User(props) {
             </div>
           </div>
         </div>
-      ) : null}
+      )}
     </>
   );
 }

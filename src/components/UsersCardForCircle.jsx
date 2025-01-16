@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { bufferToBase64 } from "../utility/BufferToBase64";
+import React, { useState } from "react";
 import { useLogin } from "../context/LoginContext";
 import { rcvConnectionReq, sendConnectionReq } from "../apis/Api";
 import { toast } from "react-toastify";
@@ -13,7 +11,7 @@ export default function UsersForCircle(props) {
   const { handleViewChatBox, setSelectedUser, setSelectedUserId } =
     useChatBox();
 
-  const { addChatUser } = useChats();
+  const { addChatUser, chatContainerItems } = useChats();
 
   const loggedInUserRole = loginInfo.userRole;
   const loggedInUserId = loginInfo.userId;
@@ -99,7 +97,7 @@ export default function UsersForCircle(props) {
     }
   };
 
-  const handleSendOfflineMessage = (userId) => {
+  const handleSendOfflineMessage = (senderId, receiverId) => {
     "todo";
   };
 
@@ -164,8 +162,22 @@ export default function UsersForCircle(props) {
                     </li>
                     {connStatus === "friend" && (
                       <li
-                        onClick={() => handleOpenChatbox(userToAdd)}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        onClick={() => {
+                          if (
+                            !chatContainerItems.some(
+                              (item) => item.userId === userId
+                            )
+                          ) {
+                            handleOpenChatbox(userToAdd);
+                          }
+                        }}
+                        className={`block px-4 py-2 text-sm text-gray-700 ${
+                          chatContainerItems.some(
+                            (item) => item.userId === userId
+                          )
+                            ? "cursor-not-allowed opacity-50"
+                            : "hover:bg-gray-300 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        }`}
                       >
                         chat
                       </li>
