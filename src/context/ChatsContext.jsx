@@ -14,7 +14,7 @@ const dbPromise = openDB("ChatContainerDB", 1, {
       autoIncrement: true,
     });
     store.createIndex("by-id", "id");
-    store.createIndex("by-chatId", "chatId", { unique: true });
+    store.createIndex("by-userId", "userId", { unique: true });
   },
 });
 
@@ -53,7 +53,7 @@ export default function ChatsProvider({ children }) {
   const removeChatboxUserById = useCallback(
     async (id) => {
       setChatContainerItems((prevItems) => {
-        const updatedItems = prevItems.filter((item) => item.userId !== id);
+        const updatedItems = prevItems.filter((item) => item.id !== id);
         return updatedItems;
       });
 
@@ -65,6 +65,27 @@ export default function ChatsProvider({ children }) {
     },
     [chatContainerItems]
   );
+
+  const updateMinimizeStatus = useCallback(async (userId, status) => {
+    setChatContainerItems((prevItems) => {
+      const updatedItems = prevItems.map((item) =>
+        item.userId === userId ? { ...item, minimizeStatus: status } : item
+      );
+      return updatedItems;
+    });
+
+    const db = await dbPromise;
+    const tx = db.transaction("chat", "readwrite");
+    const store = tx.objectStore("chat");
+    const item = await store.get(userId);
+
+    if (item) {
+      item.minimizeStatus = status;
+      await store.put(item);
+    }
+
+    await tx.done;
+  }, []);
 
   const clearChatContainer = useCallback(async () => {
     setChatContainerItems([]);
@@ -82,6 +103,7 @@ export default function ChatsProvider({ children }) {
         addChatUser,
         removeChatboxUserById,
         clearChatContainer,
+        updateMinimizeStatus,
       }}
     >
       {children}
