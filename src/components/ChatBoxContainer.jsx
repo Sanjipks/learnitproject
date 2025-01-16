@@ -6,8 +6,6 @@ import { useChats } from "../context/ChatsContext";
 const ChatBoxContainer = () => {
   const { chatContainerItems } = useChats();
 
-  console.log(chatContainerItems);
-
   return (
     <div className="flex w-4/5 h-auto overflow-x-scroll float-right border-gray-200 bottom-0 right-1 z-10 fixed">
       <div className="flex flex-row ">

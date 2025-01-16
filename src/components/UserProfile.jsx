@@ -15,19 +15,6 @@ function UserProfile() {
   const [userImage, setUserImage] = useState("");
   const [isNewImage, setIsNewImage] = useState(false);
 
-  // console.log("raw", rawimage);
-
-  // useEffect(() => {
-  //   const savedImage = JSON.parse(rawimage);
-
-  //   if (savedImage && savedImage.data) {
-  //     console.log("savediiiiiii", savedImage.data);
-  //     const base64String = bufferToBase64(savedImage.data);
-  //     console.log("saved", base64String);
-  //     setUserImage(`data:image/jpeg;base64,${base64String}`);
-  //   }
-  // }, [rawimage]);
-
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {

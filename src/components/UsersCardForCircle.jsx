@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import { bufferToBase64 } from "../utility/BufferToBase64";
+import React, { useState } from "react";
 import { useLogin } from "../context/LoginContext";
 import { rcvConnectionReq, sendConnectionReq } from "../apis/Api";
 import { toast } from "react-toastify";
@@ -99,7 +97,7 @@ export default function UsersForCircle(props) {
     }
   };
 
-  const handleSendOfflineMessage = (userId) => {
+  const handleSendOfflineMessage = (senderId, receiverId) => {
     "todo";
   };
 
