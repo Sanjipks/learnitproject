@@ -5,16 +5,16 @@ import ChatBoxMessages from "./ChatBoxMessages";
 import { useChats } from "../context/ChatsContext";
 
 const ChatBox = (props) => {
-  const { userImage, user, userId, minimizeStatus } = props;
-  const { removeChatboxUserById } = useChats();
+  const { userImage, user, userId, minimizeStatus, chatId } = props;
+  const { removeChatboxUserById, updateMinimizeStatus } = useChats();
 
   const [newMessage, setNewMessage] = useState("");
 
   const handleMouseLeave = () => {};
 
-  // const handleMinimizeChatBox = () => {
-  //   setMinimizeChatBox((prev) => !prev);
-  // };
+  const handleMinimizeChatBox = (userId, status) => {
+    updateMinimizeStatus(userId, status);
+  };
 
   const handleClose = (id) => {
     removeChatboxUserById(id);
@@ -43,14 +43,14 @@ const ChatBox = (props) => {
 
         <div className="flex flex-row justify-end items-center gap-2">
           <div
-            onClick={() => handleMinimizeChatBox(userId)}
+            onClick={() => handleMinimizeChatBox(userId, true)}
             type="button"
             className=" text-gray-700 dark:text-gray-400 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
           >
             ---
           </div>
           <div
-            onClick={() => handleClose(userId)}
+            onClick={() => handleClose(chatId)}
             type="button"
             className=" dark:text-gray-400 text-gray-700 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
           >
