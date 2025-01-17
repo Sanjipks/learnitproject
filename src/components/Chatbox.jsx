@@ -9,11 +9,18 @@ const ChatBox = (props) => {
   const { removeChatboxUserById, updateMinimizeStatus } = useChats();
 
   const [newMessage, setNewMessage] = useState("");
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [send, setSend] = useState(false);
 
   const handleMouseLeave = () => {};
 
   const handleMinimizeChatBox = (userId, status) => {
     updateMinimizeStatus(userId, status);
+    selectedUserId(userId);
+  };
+
+  const handleSelectUserId = () => {
+    setSelectedUserId(userId);
   };
 
   const handleClose = (id) => {
@@ -23,12 +30,14 @@ const ChatBox = (props) => {
     setNewMessage(e.target.value);
   };
 
-  const handleSend = () => {};
+  const handleSend = () => {
+    setSend(true);
+  };
 
   return (
     <div
       onMouseLeave={handleMouseLeave}
-      // onClick={() => handleSelectUserId(userId)}
+      onClick={() => handleSelectUserId(userId)}
       className={` flex-col w-screen max-w-md h-auto p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
     >
       <section className="flex justify-between border-b-2 border-gray-500 dark:border-gray-100  mb-1 items-start">
@@ -61,7 +70,12 @@ const ChatBox = (props) => {
       <section
         className={`${minimizeStatus === "true" ? "hidden" : "block"}  px-1.5`}
       >
-        <ChatBoxMessages newMessage={newMessage} />
+        <ChatBoxMessages
+          newMessage={newMessage}
+          setNewMessage={setNewMessage}
+          selectedUserId={selectedUserId}
+          send={send}
+        />
 
         <div className="flex  mt-2 pb-8">
           <input
