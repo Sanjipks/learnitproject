@@ -43,7 +43,7 @@ const ChatBox = (props) => {
 
         <div className="flex flex-row justify-end items-center gap-2">
           <div
-            onClick={() => handleMinimizeChatBox(userId, true)}
+            onClick={() => handleMinimizeChatBox(userId, "false")}
             type="button"
             className=" text-gray-700 dark:text-gray-400 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
           >
@@ -58,7 +58,9 @@ const ChatBox = (props) => {
           </div>
         </div>
       </section>
-      <section className={`${minimizeStatus ? "hidden" : "block"}  px-1.5`}>
+      <section
+        className={`${minimizeStatus === "true" ? "hidden" : "block"}  px-1.5`}
+      >
         <ChatBoxMessages newMessage={newMessage} />
 
         <div className="flex  mt-2 pb-8">
