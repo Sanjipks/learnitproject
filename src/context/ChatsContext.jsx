@@ -26,6 +26,7 @@ export function useChats() {
 
 export default function ChatsProvider({ children }) {
   const [chatContainerItems, setChatContainerItems] = useState([]);
+  const [stateUpdate, setStateUpdate] = useState(true);
 
   useEffect(() => {
     const fetchChatContainerItems = async () => {
@@ -34,12 +35,16 @@ export default function ChatsProvider({ children }) {
       setChatContainerItems(allItems);
     };
     fetchChatContainerItems();
-  }, []);
+  }, [stateUpdate]);
 
   const addChatUser = useCallback(async (chatUser) => {
-    const chatUserWithStatus = { ...chatUser, minimizeStatus: false };
+    const chatUserWithStatus = { ...chatUser, minimizeStatus: "false" };
     setChatContainerItems((prevItems) => {
-      const updatedItems = [...prevItems, chatUserWithStatus];
+      const updatedItems = prevItems.some(
+        (item) => item.userId !== chatUser.userId
+      )
+        ? [...prevItems, chatUserWithStatus]
+        : [...prevItems];
       return updatedItems;
     });
 
@@ -48,23 +53,22 @@ export default function ChatsProvider({ children }) {
     const store = tx.objectStore("chat");
     await store.put(chatUserWithStatus);
     await tx.done;
+    setStateUpdate((prev) => !prev);
   }, []);
 
-  const removeChatboxUserById = useCallback(
-    async (id) => {
-      setChatContainerItems((prevItems) => {
-        const updatedItems = prevItems.filter((item) => item.id !== id);
-        return updatedItems;
-      });
+  const removeChatboxUserById = useCallback(async (id) => {
+    setChatContainerItems((prevItems) => {
+      const updatedItems = prevItems.filter((item) => item.id !== id);
+      return updatedItems;
+    });
 
-      const db = await dbPromise;
-      const tx = db.transaction("chat", "readwrite");
-      const store = tx.objectStore("chat");
-      await store.delete(id);
-      await tx.done;
-    },
-    [chatContainerItems]
-  );
+    const db = await dbPromise;
+    const tx = db.transaction("chat", "readwrite");
+    const store = tx.objectStore("chat");
+    await store.delete(id);
+    await tx.done;
+    setStateUpdate((prev) => !prev);
+  }, []);
 
   const updateMinimizeStatus = useCallback(async (userId, status) => {
     setChatContainerItems((prevItems) => {
@@ -83,8 +87,8 @@ export default function ChatsProvider({ children }) {
       item.minimizeStatus = status;
       await store.put(item);
     }
-
     await tx.done;
+    setStateUpdate((prev) => !prev);
   }, []);
 
   const clearChatContainer = useCallback(async () => {
