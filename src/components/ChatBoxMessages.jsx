@@ -76,7 +76,7 @@ const ChatBoxMessages = (props) => {
       socket.off("message");
       socket.off("past_messages");
     };
-  }, [viewMessages, messageUpdate]);
+  }, [viewMessages]);
 
   // sort messages by timestamp for accurate display
   const sortedMessages = messages.sort(

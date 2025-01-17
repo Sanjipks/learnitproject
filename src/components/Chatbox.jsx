@@ -31,7 +31,7 @@ const ChatBox = (props) => {
   };
 
   const handleSend = () => {
-    setSend(true);
+    setSend((prev) => !prev);
   };
 
   return (
