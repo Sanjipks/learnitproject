@@ -14,7 +14,8 @@ const socket = io(BEHOST, {
   withCredentials: true,
 });
 
-const ChatBoxMessages = () => {
+const ChatBoxMessages = (props) => {
+  const { selectedUserId, send, newMessage, setNewMessage } = props;
   const date = new Date();
   const currentYear = date.getFullYear();
   const currentDay = date.toLocaleDateString("en-US", { weekday: "long" });
@@ -25,17 +26,11 @@ const ChatBoxMessages = () => {
   const [messages, setMessages] = useState([]);
   const [down, setDown] = useState(false);
   const [pastMessages, setPastMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
+  const [messageUpdate, setMessageUpdate] = useState(false);
   const [viewMessages, setViewMessages] = useState(-5);
-
-  const [selectedUserId, setSelectedUserId] = useState(null);
 
   const messageEndRef = useRef(null);
   const messageMoveUpRef = useRef(null);
-
-  const handleSelectUserId = (id) => {
-    setSelectedUserId(id);
-  };
 
   const handleSend = () => {
     if (newMessage.trim() !== "") {
@@ -50,6 +45,10 @@ const ChatBoxMessages = () => {
       setMessageUpdate((prev) => !prev);
     }
   };
+  useEffect(() => {
+    handleSend();
+  }, [send]);
+
   const loadMessagesNumber = viewMessages;
 
   useEffect(() => {
@@ -77,7 +76,7 @@ const ChatBoxMessages = () => {
       socket.off("message");
       socket.off("past_messages");
     };
-  }, [viewMessages]);
+  }, [viewMessages, messageUpdate]);
 
   // sort messages by timestamp for accurate display
   const sortedMessages = messages.sort(
