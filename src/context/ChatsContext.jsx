@@ -70,10 +70,16 @@ export default function ChatsProvider({ children }) {
     setStateUpdate((prev) => !prev);
   }, []);
 
-  const updateMinimizeStatus = useCallback(async (userId, status) => {
+  const updateMinimizeStatus = useCallback(async (chatId) => {
     setChatContainerItems((prevItems) => {
       const updatedItems = prevItems.map((item) =>
-        item.userId === userId ? { ...item, minimizeStatus: status } : item
+        item.Id === chatId
+          ? {
+              ...item,
+              minimizeStatus:
+                item.minimizeStatus === "false" ? "true" : "false",
+            }
+          : item
       );
       return updatedItems;
     });
@@ -81,13 +87,15 @@ export default function ChatsProvider({ children }) {
     const db = await dbPromise;
     const tx = db.transaction("chat", "readwrite");
     const store = tx.objectStore("chat");
-    const item = await store.get(userId);
+    const item = await store.get(chatId);
 
     if (item) {
-      item.minimizeStatus = status;
+      item.minimizeStatus = item.minimizeStatus === "false" ? "true" : "false";
       await store.put(item);
     }
+
     await tx.done;
+
     setStateUpdate((prev) => !prev);
   }, []);
 
