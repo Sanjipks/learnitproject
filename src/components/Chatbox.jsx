@@ -87,6 +87,7 @@ const ChatBox = (props) => {
               className="flex-1 p-2 border border-gray-300 rounded-md dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Type your message..."
             />
+
             <button
               onClick={handleSend}
               className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
