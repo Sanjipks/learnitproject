@@ -4,7 +4,7 @@ import { rcvConnectionReq, sendConnectionReq } from "../apis/Api";
 import { toast } from "react-toastify";
 import { useChatBox } from "../context/ChatBoxContext";
 import { useChats } from "../context/ChatsContext";
-import { bufferToImage } from "../utility/BufferToImage";
+import { bufferToImage } from "../utility functions/BufferToImage";
 
 export default function UsersForCircle(props) {
   const { loginInfo } = useLogin();

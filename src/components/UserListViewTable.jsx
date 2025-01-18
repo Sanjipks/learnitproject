@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EditUser from "./modals/EditUser";
-import { bufferToImage } from "../utility/BufferToImage";
+import { bufferToImage } from "../utility functions/BufferToImage";
 
 export default function UserListView(props) {
   const {

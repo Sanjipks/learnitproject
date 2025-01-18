@@ -7,7 +7,7 @@ import ChatBox from "../../components/Chatbox";
 import GroupChatBox from "../../components/GroupChatbox";
 import CreateChatGroup from "../../components/CreateChatGroup";
 import { useChatBox } from "../../context/ChatBoxContext";
-import { bufferToImage } from "../../utility/BufferToImage";
+import { bufferToImage } from "../../utility functions/BufferToImage";
 
 const UserCircle = () => {
   const [userlist, setUserlist] = useState([]);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { deleteMessageInfo, viewMessageInfo } from "../apis/Api";
 import { useLogin } from "../context/LoginContext";
 import { toast } from "react-toastify";
-import { dateFormater } from "../utility/DateFormatter";
+import { dateFormater } from "../utility functions/DateFormatter";
 import ContactMessageReply from "./modals/ContactMessageReply";
 import ConfirmDecision from "./modals/utilitycomponent/ConfirmDecision";
 

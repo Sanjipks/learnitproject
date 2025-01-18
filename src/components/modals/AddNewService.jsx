@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useLogin } from "../../context/LoginContext";
 import { addServices } from "../../apis/Api";
 import { toast } from "react-toastify";
-import { convertToBase64 } from "../../utility/ConvertToBase64";
+import { convertToBase64 } from "../../utility functions/ConvertToBase64";
 
 const AddNewService = (props) => {
   const { handleformview, handleclose } = props;

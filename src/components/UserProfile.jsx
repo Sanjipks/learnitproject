@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { bufferToBase64 } from "../utility/BufferToBase64";
+import { bufferToBase64 } from "../utility functions/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
 import { changeProfileImage, getUserInfo } from "../apis/Api";
-import { convertToBase64 } from "../utility/ConvertToBase64";
+import { convertToBase64 } from "../utility functions/ConvertToBase64";
 import { toast } from "react-toastify";
 
 function UserProfile() {

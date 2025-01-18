@@ -12,7 +12,9 @@ const ChatBox = (props) => {
   const [selectedUserId, setSelectedUserId] = useState(null);
   const [send, setSend] = useState(false);
 
-  const handleMouseLeave = () => {};
+  const handleMouseLeave = () => {
+    selectedUserId(null);
+  };
 
   const handleMinimizeChatBox = (chatId, userId) => {
     updateMinimizeStatus(chatId);
@@ -37,6 +39,7 @@ const ChatBox = (props) => {
   return (
     <div
       onMouseLeave={handleMouseLeave}
+      onMouseOver={() => handleSelectUserId(userId)}
       onClick={() => handleSelectUserId(userId)}
       className={` flex-col w-screen max-w-md h-auto p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
     >

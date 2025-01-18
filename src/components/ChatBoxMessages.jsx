@@ -6,7 +6,7 @@ import {
   TimeStampToDay,
   TimeStampToMonth,
   TimeStampToYear,
-} from "../utility/TimestampToRE";
+} from "../utility functions/TimestampToRE";
 
 const BEHOST = import.meta.env.VITE_BELC;
 

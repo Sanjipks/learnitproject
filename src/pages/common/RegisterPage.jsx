@@ -12,7 +12,7 @@ import leadership from "../../assets/images/leadership.jpeg";
 import reflection from "../../assets/images/reflection.jpeg";
 import shining from "../../assets/images/shining.jpeg";
 import Carasoul from "../../components/modals/utilitycomponent/Carasoul";
-import { validatePassword } from "../../utility/ValidatePassword";
+import { validatePassword } from "../../utility functions/ValidatePassword";
 
 export default function RegisterPage() {
   const [inputs, setInputs] = useState({

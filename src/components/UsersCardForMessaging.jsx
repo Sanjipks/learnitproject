@@ -6,8 +6,8 @@ import {
   TimeStampToMonthAndDay,
   TimeStampToTime,
   TimeStampToYear,
-} from "../utility/TimestampToRE";
-import { bufferToImage } from "../utility/BufferToImage";
+} from "../utility functions/TimestampToRE";
+import { bufferToImage } from "../utility functions/BufferToImage";
 
 export default function UsersForMessaging(props) {
   const date = new Date();
