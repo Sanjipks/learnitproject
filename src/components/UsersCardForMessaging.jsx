@@ -1,6 +1,5 @@
 import React from "react";
 import { useLogin } from "../context/LoginContext";
-import { useChatBox } from "../context/ChatBoxContext";
 import {
   TimeStampToDay,
   TimeStampToMonthAndDay,
@@ -8,8 +7,11 @@ import {
   TimeStampToYear,
 } from "../utility functions/TimestampToRE";
 import { bufferToImage } from "../utility functions/BufferToImage";
+import { useChats } from "../context/ChatsContext";
 
 export default function UsersForMessaging(props) {
+  const { addChatUser } = useChats();
+
   const date = new Date();
   const currentYear = date.getFullYear();
   const currentDay = date.toLocaleDateString("en-US", { weekday: "long" });
@@ -22,20 +24,15 @@ export default function UsersForMessaging(props) {
 
   const loggedInUserRole = loginInfo.userRole;
 
-  const {
-    handleViewChatBox,
-    setSelectedUser,
-    setSelectedUserId,
-    setSelectedUserImage,
-  } = useChatBox();
+  const { user, userId, userImage, latestMessage } = props;
 
-  const { userId, userImage, user, latestMessage } = props;
+  const image = bufferToImage(userImage && userImage.data);
+  const userName = user;
 
-  const handleOpenChatbox = (id, user, image) => {
-    handleViewChatBox(true);
-    setSelectedUserId(id);
-    setSelectedUser(user);
-    setSelectedUserImage(image);
+  const userToAdd = { userName, userId, image };
+
+  const handleOpenChatbox = (useradd) => {
+    addChatUser(useradd);
   };
 
   return (
@@ -44,7 +41,7 @@ export default function UsersForMessaging(props) {
         <div className="w-96 mt-2 sticky mx-1 bg-gray-100 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div
             className="flex w-full flex-row  items-center p-1 mx-auto"
-            onClick={() => handleOpenChatbox(userId, user, userImage)}
+            onClick={() => handleOpenChatbox(userToAdd)}
           >
             <img
               className="w-12 h-12 my-2 mr-1 rounded-full shadow-lg"

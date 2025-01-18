@@ -46,8 +46,8 @@ export default function UsersForCircle(props) {
     }
   };
 
-  const handleOpenChatbox = (id, username) => {
-    addChatUser(id, username);
+  const handleOpenChatbox = (userAdd, id, username) => {
+    addChatUser(userAdd);
     handleViewChatBox(true);
     setSelectedUserId(id);
     setSelectedUser(username);
