@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { bufferToBase64 } from "../utility/BufferToBase64";
+import { bufferToBase64 } from "../utility functions/BufferToBase64";
 import { useLogin } from "../context/LoginContext";
 import { useNavigate } from "react-router-dom";
 import EditService from "./modals/EditService";

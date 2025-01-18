@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import EditUser from "./modals/EditUser";
 import { useLogin } from "../context/LoginContext";
-import { bufferToImage } from "../utility/BufferToImage";
+import { bufferToImage } from "../utility functions/BufferToImage";
 
 export default function User(props) {
   const { loginInfo } = useLogin();
