@@ -102,82 +102,89 @@ const ChatBoxMessages = (props) => {
       onScroll={handleScroll}
       className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner"
     >
-      {pastMessages.map((msg, index) => {
-        return (
-          <div
-            key={index}
-            className={`my-1 p-2 rounded-lg w-36 ${
-              msg.sender_id == loggedInUserId ? "self-end" : "self-start"
-            }`}
-          >
-            <div
-              className={`my-1 py-2 text-sm rounded-lg w-48 text-gray-900 ${
-                msg.sender_id == loggedInUserId ? " self-end" : " self-start"
-              }`}
-            >
-              {(currentMonth == TimeStampToMonth(msg.timestamp)
-                ? ""
-                : TimeStampToMonth(msg.timestamp) + ", ") +
-                (currentYear == TimeStampToYear(msg.timestamp)
-                  ? ""
-                  : TimeStampToYear(msg.timestamp)) +
-                " " +
-                (currentDay == TimeStampToDay(msg.timestamp)
-                  ? "Today"
-                  : TimeStampToDay(msg.timestamp)) +
-                ", " +
-                TimeStampToTime(msg.timestamp)}
-            </div>
-            <div
-              className={`my-1 p-2 rounded-lg w-auto ${
-                msg.sender_id == loggedInUserId
-                  ? "bg-blue-500 text-white self-end"
-                  : "bg-gray-300 text-black self-start"
-              }`}
-            >
-              {msg.message}
-            </div>
-          </div>
-        );
-      })}
-      {sortedMessages.map((msg, index) => {
-        return (
-          <div
-            key={index}
-            className={`my-1 p-2 rounded-lg w-36 ${
-              msg.senderId == loggedInUserId ? "self-end" : "self-start"
-            }`}
-          >
-            <div
-              className={`my-1 py-2 text-sm rounded-lg w-48 text-gray-900 ${
-                msg.senderId == loggedInUserId ? " self-end" : " self-start"
-              }`}
-            >
-              {(currentMonth == TimeStampToMonth(msg.timestamp)
-                ? ""
-                : TimeStampToMonth(msg.timestamp) + ", ") +
-                (currentYear == TimeStampToYear(msg.timestamp)
-                  ? ""
-                  : TimeStampToYear(msg.timestamp)) +
-                " " +
-                (currentDay == TimeStampToDay(msg.timestamp)
-                  ? "Today"
-                  : TimeStampToDay(msg.timestamp)) +
-                ", " +
-                TimeStampToTime(msg.timestamp)}
-            </div>
-            <div
-              className={`my-1 p-2 rounded-lg w-auto ${
-                msg.senderId == loggedInUserId
-                  ? "bg-blue-500 text-white self-end"
-                  : "bg-gray-300 text-black self-start"
-              }`}
-            >
-              {msg.message}
-            </div>
-          </div>
-        );
-      })}
+      {selectedUserId && (
+        <>
+          {pastMessages.map((msg, index) => {
+            return (
+              <div
+                key={index}
+                className={`my-1 p-2 rounded-lg w-36 ${
+                  msg.sender_id == loggedInUserId ? "self-end" : "self-start"
+                }`}
+              >
+                <div
+                  className={`my-1 py-2 text-sm rounded-lg w-48 text-gray-900 ${
+                    msg.sender_id == loggedInUserId
+                      ? " self-end"
+                      : " self-start"
+                  }`}
+                >
+                  {(currentMonth == TimeStampToMonth(msg.timestamp)
+                    ? ""
+                    : TimeStampToMonth(msg.timestamp) + ", ") +
+                    (currentYear == TimeStampToYear(msg.timestamp)
+                      ? ""
+                      : TimeStampToYear(msg.timestamp)) +
+                    " " +
+                    (currentDay == TimeStampToDay(msg.timestamp)
+                      ? "Today"
+                      : TimeStampToDay(msg.timestamp)) +
+                    ", " +
+                    TimeStampToTime(msg.timestamp)}
+                </div>
+                <div
+                  className={`my-1 p-2 rounded-lg w-auto ${
+                    msg.sender_id == loggedInUserId
+                      ? "bg-blue-500 text-white self-end"
+                      : "bg-gray-300 text-black self-start"
+                  }`}
+                >
+                  {msg.message}
+                </div>
+              </div>
+            );
+          })}
+          {sortedMessages.map((msg, index) => {
+            return (
+              <div
+                key={index}
+                className={`my-1 p-2 rounded-lg w-36 ${
+                  msg.senderId == loggedInUserId ? "self-end" : "self-start"
+                }`}
+              >
+                <div
+                  className={`my-1 py-2 text-sm rounded-lg w-48 text-gray-900 ${
+                    msg.senderId == loggedInUserId ? " self-end" : " self-start"
+                  }`}
+                >
+                  {(currentMonth == TimeStampToMonth(msg.timestamp)
+                    ? ""
+                    : TimeStampToMonth(msg.timestamp) + ", ") +
+                    (currentYear == TimeStampToYear(msg.timestamp)
+                      ? ""
+                      : TimeStampToYear(msg.timestamp)) +
+                    " " +
+                    (currentDay == TimeStampToDay(msg.timestamp)
+                      ? "Today"
+                      : TimeStampToDay(msg.timestamp)) +
+                    ", " +
+                    TimeStampToTime(msg.timestamp)}
+                </div>
+                <div
+                  className={`my-1 p-2 rounded-lg w-auto ${
+                    msg.senderId == loggedInUserId
+                      ? "bg-blue-500 text-white self-end"
+                      : "bg-gray-300 text-black self-start"
+                  }`}
+                >
+                  {msg.message}
+                </div>
+              </div>
+            );
+          })}
+        </>
+      )}
+
       <div ref={messageEndRef} />
     </div>
   );
