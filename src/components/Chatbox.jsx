@@ -80,12 +80,9 @@ const ChatBox = (props) => {
             send={send}
           />
 
-          <div
-            className="flex mt-2 pb-8"
-            onMouseOver={handleMouseOver}
-            onMouseLeave={handleMouseLeave}
-          >
+          <div className="flex mt-2 pb-8">
             <input
+              onMouseOver={handleMouseOver}
               type="text"
               value={newMessage}
               onChange={handleInput}
