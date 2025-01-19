@@ -13,21 +13,21 @@ const ChatBox = (props) => {
   const [send, setSend] = useState(false);
 
   const handleMouseLeave = () => {
-    selectedUserId(null);
+    setSelectedUserId(null);
   };
 
-  const handleMinimizeChatBox = (chatId, userId) => {
+  const handleMouseOver = () => {
+    setSelectedUserId(userId);
+  };
+
+  const handleMinimizeChatBox = (chatId) => {
     updateMinimizeStatus(chatId);
-    setSelectedUserId(userId);
-  };
-
-  const handleSelectUserId = () => {
-    setSelectedUserId(userId);
   };
 
   const handleClose = (id) => {
     removeChatboxUserById(id);
   };
+
   const handleInput = (e) => {
     setNewMessage(e.target.value);
   };
@@ -39,32 +39,29 @@ const ChatBox = (props) => {
   return (
     <div
       onMouseLeave={handleMouseLeave}
-      onMouseOver={() => handleSelectUserId(userId)}
-      onClick={() => handleSelectUserId(userId)}
-      className={` flex-col w-screen max-w-md h-auto p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
+      onMouseOver={handleMouseOver}
+      className={`flex-col w-screen max-w-md h-auto p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
     >
-      <section className="flex justify-between border-b-2 border-gray-500 dark:border-gray-100  mb-1 items-start">
+      <section className="flex justify-between border-b-2 border-gray-500 dark:border-gray-100 mb-1 items-start">
         <div className="flex flex-row">
           <img
             className="w-12 h-12 m-1 rounded-full shadow-lg"
-            src={userImage ?? userImage}
-            alt="Bonnie image"
+            src={userImage}
+            alt={`${user}'s avatar`}
           />
           <h1 className="px-2">{user}</h1>
         </div>
 
         <div className="flex flex-row justify-end items-center gap-2">
           <div
-            onClick={() => handleMinimizeChatBox(chatId, userId)}
-            type="button"
-            className=" text-gray-700 dark:text-gray-400 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
+            onClick={() => handleMinimizeChatBox(chatId)}
+            className="text-gray-700 dark:text-gray-400 bg-transparent hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
           >
             ---
           </div>
           <div
             onClick={() => handleClose(chatId)}
-            type="button"
-            className=" dark:text-gray-400 text-gray-700 bg-transparent  hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
+            className="dark:text-gray-400 text-gray-700 bg-transparent hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
           >
             <CloseIcon />
           </div>
@@ -72,17 +69,22 @@ const ChatBox = (props) => {
       </section>
 
       <section
-        className={`${minimizeStatus === "true" ? "hidden" : "block"}  px-1.5`}
+        className={`${minimizeStatus === "true" ? "hidden" : "block"} px-1.5`}
       >
         <div>
           <ChatBoxMessages
             newMessage={newMessage}
             setNewMessage={setNewMessage}
             selectedUserId={selectedUserId}
+            userId={userId}
             send={send}
           />
 
-          <div className="flex  mt-2 pb-8">
+          <div
+            className="flex mt-2 pb-8"
+            onMouseOver={handleMouseOver}
+            onMouseLeave={handleMouseLeave}
+          >
             <input
               type="text"
               value={newMessage}

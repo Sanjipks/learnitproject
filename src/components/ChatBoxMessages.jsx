@@ -15,7 +15,7 @@ const socket = io(BEHOST, {
 });
 
 const ChatBoxMessages = (props) => {
-  const { selectedUserId, send, newMessage, setNewMessage } = props;
+  const { selectedUserId, send, newMessage, setNewMessage, userId } = props;
   const date = new Date();
   const currentYear = date.getFullYear();
   const currentDay = date.toLocaleDateString("en-US", { weekday: "long" });
@@ -102,7 +102,7 @@ const ChatBoxMessages = (props) => {
       onScroll={handleScroll}
       className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner"
     >
-      {selectedUserId && (
+      {selectedUserId === userId && (
         <>
           {pastMessages.map((msg, index) => {
             return (
