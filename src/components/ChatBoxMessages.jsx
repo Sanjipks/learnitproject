@@ -54,7 +54,7 @@ const ChatBoxMessages = (props) => {
   useEffect(() => {
     // associate user and load past messages
     socket.emit("user_connected", loggedInUserId);
-    socket.emit("fetch_past_messages", selectedUserId, loadMessagesNumber);
+    socket.emit("fetch_past_messages", userId, loadMessagesNumber);
 
     // listen for past messages on connection
     socket.on("past_messages", (pastMessages) => {
@@ -76,7 +76,7 @@ const ChatBoxMessages = (props) => {
       socket.off("message");
       socket.off("past_messages");
     };
-  }, [viewMessages]);
+  }, [viewMessages, messageUpdate]);
 
   // sort messages by timestamp for accurate display
   const sortedMessages = messages.sort(
@@ -102,7 +102,7 @@ const ChatBoxMessages = (props) => {
       onScroll={handleScroll}
       className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner"
     >
-      {selectedUserId === userId && (
+      {userId && (
         <>
           {pastMessages.map((msg, index) => {
             return (
@@ -144,48 +144,58 @@ const ChatBoxMessages = (props) => {
               </div>
             );
           })}
-          {sortedMessages.map((msg, index) => {
-            return (
-              <div
-                key={index}
-                className={`my-1 p-2 rounded-lg w-36 ${
-                  msg.senderId == loggedInUserId ? "self-end" : "self-start"
-                }`}
-              >
-                <div
-                  className={`my-1 py-2 text-sm rounded-lg w-48 text-gray-900 ${
-                    msg.senderId == loggedInUserId ? " self-end" : " self-start"
-                  }`}
-                >
-                  {(currentMonth == TimeStampToMonth(msg.timestamp)
-                    ? ""
-                    : TimeStampToMonth(msg.timestamp) + ", ") +
-                    (currentYear == TimeStampToYear(msg.timestamp)
-                      ? ""
-                      : TimeStampToYear(msg.timestamp)) +
-                    " " +
-                    (currentDay == TimeStampToDay(msg.timestamp)
-                      ? "Today"
-                      : TimeStampToDay(msg.timestamp)) +
-                    ", " +
-                    TimeStampToTime(msg.timestamp)}
-                </div>
-                <div
-                  className={`my-1 p-2 rounded-lg w-auto ${
-                    msg.senderId == loggedInUserId
-                      ? "bg-blue-500 text-white self-end"
-                      : "bg-gray-300 text-black self-start"
-                  }`}
-                >
-                  {msg.message}
-                </div>
-              </div>
-            );
-          })}
+
+          <>
+            {selectedUserId === userId && (
+              <>
+                {sortedMessages.map((msg, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={`my-1 p-2 rounded-lg w-36 ${
+                        msg.senderId == loggedInUserId
+                          ? "self-end"
+                          : "self-start"
+                      }`}
+                    >
+                      <div
+                        className={`my-1 py-2 text-sm rounded-lg w-48 text-gray-900 ${
+                          msg.senderId == loggedInUserId
+                            ? " self-end"
+                            : " self-start"
+                        }`}
+                      >
+                        {(currentMonth == TimeStampToMonth(msg.timestamp)
+                          ? ""
+                          : TimeStampToMonth(msg.timestamp) + ", ") +
+                          (currentYear == TimeStampToYear(msg.timestamp)
+                            ? ""
+                            : TimeStampToYear(msg.timestamp)) +
+                          " " +
+                          (currentDay == TimeStampToDay(msg.timestamp)
+                            ? "Today"
+                            : TimeStampToDay(msg.timestamp)) +
+                          ", " +
+                          TimeStampToTime(msg.timestamp)}
+                      </div>
+                      <div
+                        className={`my-1 p-2 rounded-lg w-auto ${
+                          msg.senderId == loggedInUserId
+                            ? "bg-blue-500 text-white self-end"
+                            : "bg-gray-300 text-black self-start"
+                        }`}
+                      >
+                        {msg.message}
+                      </div>
+                      <div ref={messageEndRef} />
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </>
         </>
       )}
-
-      <div ref={messageEndRef} />
     </div>
   );
 };
