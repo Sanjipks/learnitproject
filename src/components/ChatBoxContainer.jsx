@@ -7,10 +7,13 @@ const ChatBoxContainer = () => {
   const { chatContainerItems } = useChats();
 
   return (
-    <div className="flex w-4/5 h-auto overflow-x-scroll overflow-y-auto float-right border-gray-200 bottom-0 right-1 z-10 fixed">
-      <div className="flex flex-row ">
+    <div className="flex w-4/5 h-auto overflow-x-scroll border-gray-200 bottom-0 right-1 z-10 fixed">
+      <div className="flex flex-row bottom-0 ">
         {chatContainerItems.map((user) => (
-          <div key={user.id} className="flex justify-between px-2 py-2">
+          <div
+            key={user.id}
+            className="flex flex-row justify-between justify-items-end px-2 py-2 z-10 relative "
+          >
             <ChatBox
               chatId={user.id}
               user={user.userName}

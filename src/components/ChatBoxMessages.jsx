@@ -101,7 +101,7 @@ const ChatBoxMessages = (props) => {
     <div
       ref={messageMoveUpRef}
       onScroll={handleScroll}
-      className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner"
+      className="flex flex-col max-h-64 h-auto overflow-y-auto p-3 bg-white rounded-lg shadow-inner"
     >
       {userId && (
         <>
