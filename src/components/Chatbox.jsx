@@ -9,15 +9,11 @@ const ChatBox = (props) => {
   const { removeChatboxUserById, updateMinimizeStatus } = useChats();
 
   const [newMessage, setNewMessage] = useState("");
-  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [selectedUserId, setSelectedUserId] = useState(userId);
   const [send, setSend] = useState(false);
 
-  const handleMouseLeave = () => {
-    setSelectedUserId(null);
-  };
-
-  const handleMouseOver = () => {
-    setSelectedUserId(userId);
+  const handleOnFocus = (id) => {
+    setSelectedUserId(id);
   };
 
   const handleMinimizeChatBox = (chatId) => {
@@ -32,14 +28,13 @@ const ChatBox = (props) => {
     setNewMessage(e.target.value);
   };
 
-  const handleSend = () => {
+  const handleSend = (id) => {
+    setSelectedUserId(id);
     setSend((prev) => !prev);
   };
 
   return (
     <div
-      onMouseLeave={handleMouseLeave}
-      onMouseOver={handleMouseOver}
       className={`flex-col w-screen max-w-md h-auto p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md`}
     >
       <section className="flex justify-between border-b-2 border-gray-500 dark:border-gray-100 mb-1 items-start">
@@ -80,18 +75,21 @@ const ChatBox = (props) => {
             send={send}
           />
 
-          <div className="flex mt-2 pb-8">
+          <div
+            className="flex mt-2 pb-8"
+            onMouseOver={() => handleOnFocus(userId)}
+          >
             <input
-              onMouseOver={handleMouseOver}
               type="text"
               value={newMessage}
-              onChange={handleInput}
+              onFocus={() => handleOnFocus(userId)}
+              onChange={(e) => handleInput(e)}
               className="flex-1 p-2 border border-gray-300 rounded-md dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Type your message..."
             />
 
             <button
-              onClick={handleSend}
+              onClick={() => handleSend(userId)}
               className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
             >
               Send

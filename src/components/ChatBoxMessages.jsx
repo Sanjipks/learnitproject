@@ -16,6 +16,7 @@ const socket = io(BEHOST, {
 
 const ChatBoxMessages = (props) => {
   const { selectedUserId, send, newMessage, setNewMessage, userId } = props;
+
   const date = new Date();
   const currentYear = date.getFullYear();
   const currentDay = date.toLocaleDateString("en-US", { weekday: "long" });
@@ -146,7 +147,7 @@ const ChatBoxMessages = (props) => {
           })}
 
           <>
-            {selectedUserId === userId && (
+            {
               <>
                 {sortedMessages.map((msg, index) => {
                   return (
@@ -192,7 +193,7 @@ const ChatBoxMessages = (props) => {
                   );
                 })}
               </>
-            )}
+            }
           </>
         </>
       )}
