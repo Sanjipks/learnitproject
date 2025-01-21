@@ -12,7 +12,7 @@ const ChatBoxContainer = () => {
         {chatContainerItems.map((user) => (
           <div
             key={user.id}
-            className="flex flew-grow overflow-x-scroll px-12 py-2  z-10  "
+            className="flex flex-grow overflow-x-scroll px-12 py-2  z-10  "
           >
             <ChatBox
               chatId={user.id}
