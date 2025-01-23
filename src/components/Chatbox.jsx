@@ -3,6 +3,7 @@ import CloseIcon from "../assets/icons/CloseIcon";
 
 import ChatBoxMessages from "./ChatBoxMessages";
 import { useChats } from "../context/ChatsContext";
+import Emoji from "./common/Emoji";
 
 const ChatBox = (props) => {
   const { userImage, user, userId, minimizeStatus, chatId } = props;
@@ -98,6 +99,9 @@ const ChatBox = (props) => {
             </button>
           </div>
         </div>
+      </section>
+      <section>
+        <Emoji />
       </section>
     </div>
   );
