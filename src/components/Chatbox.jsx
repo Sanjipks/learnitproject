@@ -35,11 +35,9 @@ const ChatBox = (props) => {
 
   return (
     <div
-      className={` w-screen max-w-md  ${
-        minimizeStatus === "true"
-          ? "h-20 fixed bottom-0"
-          : " h-auto fixed bottom-0"
-      } p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md flex-col`}
+      className={`flex-col bottom-0 fixed  w-screen max-w-md  ${
+        minimizeStatus === "true" ? "h-20 " : " h-auto "
+      } p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md `}
     >
       <section className="flex justify-between h-auto border-b-2 border-gray-500 dark:border-gray-100 mb-1 items-start">
         <div className="flex flex-row">
