@@ -12,6 +12,7 @@ const ChatBox = (props) => {
   const [newMessage, setNewMessage] = useState("");
   const [selectedUserId, setSelectedUserId] = useState(userId);
   const [send, setSend] = useState(false);
+  const [emojiSelection, setOpenEmojiSelection] = useState(false);
 
   const handleOnFocus = (id) => {
     setSelectedUserId(id);
@@ -23,6 +24,10 @@ const ChatBox = (props) => {
 
   const handleClose = (id) => {
     removeChatboxUserById(id);
+  };
+
+  const handleEmojiSelection = () => {
+    setOpenEmojiSelection((prev) => !prev);
   };
 
   const handleInput = (e) => {
@@ -100,8 +105,11 @@ const ChatBox = (props) => {
           </div>
         </div>
       </section>
-      <section>
-        <Emoji />
+      <section className=" ">
+        {emojiSelection && <Emoji />}
+        <button className="h-auto" onClick={handleEmojiSelection}>
+          &#128522;
+        </button>
       </section>
     </div>
   );
