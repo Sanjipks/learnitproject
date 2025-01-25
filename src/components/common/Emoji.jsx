@@ -1,9 +1,10 @@
 import React from "react";
 
-const Emoji = () => {
+const Emoji = (props) => {
+  const { setSelectedEmo } = props;
   return (
     <div className="absolute h-28 w-48 border bottom-0">
-      <div>&#128512;</div>
+      <div onClick={() => setSelectedEmo("&#128512;")}>&#128512;</div>
     </div>
   );
 };
