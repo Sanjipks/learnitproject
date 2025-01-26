@@ -10,10 +10,10 @@ const ChatBox = (props) => {
   const { removeChatboxUserById, updateMinimizeStatus } = useChats();
 
   const [newMessage, setNewMessage] = useState("");
-  const [selectedUserId, setSelectedUserId] = useState(userId);
+  const [selectedUserId, setSelectedUserId] = useState(null);
   const [send, setSend] = useState(false);
   const [emojiSelection, setOpenEmojiSelection] = useState(false);
-  const [selectEmo, setSelectedEmo] = useState(null);
+  const [selectedEmo, setSelectedEmo] = useState("");
 
   const handleOnFocus = (id) => {
     setSelectedUserId(id);
@@ -38,6 +38,7 @@ const ChatBox = (props) => {
   const handleSend = (id) => {
     setSelectedUserId(id);
     setSend((prev) => !prev);
+    setOpenEmojiSelection(false);
   };
 
   return (
@@ -91,9 +92,9 @@ const ChatBox = (props) => {
             >
               <input
                 type="text"
-                value={newMessage}
+                value={newMessage || selectedEmo}
                 onFocus={() => handleOnFocus(userId)}
-                onChange={(e) => handleInput(e)}
+                onChange={handleInput}
                 className="flex-1 p-2 border border-gray-300 rounded-md dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 placeholder="Type your message..."
               />
@@ -109,7 +110,11 @@ const ChatBox = (props) => {
         </section>
         {emojiSelection && (
           <div className="absolute bottom-12 h-48 w-72 z-50 rounded-md bg-gray-200 border border-gray-500">
-            <Emoji value={selectEmo} setSelectedEmo={setSelectedEmo} />
+            <Emoji
+              value={selectedEmo}
+              setSelectedEmo={setSelectedEmo}
+              setOpenEmojiSelection={setOpenEmojiSelection}
+            />
           </div>
         )}
         <button className="h-auto" onClick={handleEmojiSelection}>
