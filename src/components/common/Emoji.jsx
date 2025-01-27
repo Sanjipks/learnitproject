@@ -46,7 +46,7 @@ const EmojiPicker = (props) => {
   };
 
   return (
-    <div className="grid grid-cols-10 gap-3 w-auto bottom-0 h-auto p-2 bg-gray-100 border border-gray-300 rounded-md">
+    <div className="grid grid-cols-10 gap-3 w-auto  h-auto p-2 bg-gray-100 border border-gray-300 rounded-md">
       {emojis.map((emoji, index) => (
         <div
           key={index}
