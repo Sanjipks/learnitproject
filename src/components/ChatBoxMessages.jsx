@@ -15,7 +15,10 @@ const socket = io(BEHOST, {
 });
 
 const ChatBoxMessages = (props) => {
-  const { selectedUserId, send, newMessage, setNewMessage, userId } = props;
+  const { selectedUserId, send, setSend, newMessage, setNewMessage, userId } =
+    props;
+
+  console.log(newMessage, "newMessage", send);
 
   const date = new Date();
   const currentYear = date.getFullYear();
@@ -44,8 +47,10 @@ const ChatBoxMessages = (props) => {
       socket.emit("message", messageData);
       setNewMessage("");
       setMessageUpdate((prev) => !prev);
+      setSend(false);
     }
   };
+
   useEffect(() => {
     handleSend();
   }, [send]);
@@ -69,7 +74,6 @@ const ChatBoxMessages = (props) => {
 
     socket.on("message", (receivedMessage) => {
       setMessages((prevMessages) => [...prevMessages, receivedMessage]);
-      setMessageUpdate((prev) => !prev);
     });
 
     // clean up the listeners on component unmount
@@ -77,14 +81,13 @@ const ChatBoxMessages = (props) => {
       socket.off("message");
       socket.off("past_messages");
     };
-  }, [viewMessages, messageUpdate]);
+  }, [viewMessages, messageUpdate, send]);
 
   // sort messages by timestamp for accurate display
   const sortedMessages = messages.sort(
     (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
   );
 
-  //const loadedMessages = pastmessages.slice(viewMessages);
   const handleScroll = () => {
     const container = messageMoveUpRef.current;
 
