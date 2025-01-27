@@ -36,9 +36,11 @@ const ChatBox = (props) => {
   };
 
   const handleSend = (id) => {
-    setSelectedUserId(id);
-    setSend((prev) => !prev);
-    setOpenEmojiSelection(false);
+    if (newMessage.trim()) {
+      setSelectedUserId(id);
+      setSend(true);
+      setOpenEmojiSelection(false);
+    }
   };
 
   return (
@@ -84,6 +86,7 @@ const ChatBox = (props) => {
               selectedUserId={selectedUserId}
               userId={userId}
               send={send}
+              setSend={setSend}
             />
 
             <div
