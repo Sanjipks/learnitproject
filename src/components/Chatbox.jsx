@@ -90,7 +90,7 @@ const ChatBox = (props) => {
             />
 
             <div
-              className="flex mt-2 pb-8"
+              className="flex mt-2 pb-4 border-b-2 "
               onMouseOver={() => handleOnFocus(userId)}
             >
               <input
@@ -121,9 +121,14 @@ const ChatBox = (props) => {
             />
           </div>
         )}
-        <button className=" text-3xl h-auto" onClick={handleEmojiSelection}>
-          &#128522;
-        </button>
+        {minimizeStatus === "false" && (
+          <div className="flex flex-row gap-2 mx-2 ">
+            <button className=" text-3xl h-auto" onClick={handleEmojiSelection}>
+              &#128522;
+            </button>
+            <button className=" text-3xl h-auto">&#128391;</button>
+          </div>
+        )}
       </div>
     </>
   );
