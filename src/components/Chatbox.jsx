@@ -108,8 +108,9 @@ const ChatBox = (props) => {
             </div>
           </div>
         </section>
+
         {emojiSelection && (
-          <div className="absolute bottom-12 h-48 w-72 z-50 rounded-md bg-gray-200 border border-gray-500">
+          <div className="absolute bottom-12 h-auto w-auto z-50 rounded-md bg-gray-200 border border-gray-500">
             <Emoji
               value={selectedEmo}
               setSelectedEmo={setSelectedEmo}
@@ -117,7 +118,7 @@ const ChatBox = (props) => {
             />
           </div>
         )}
-        <button className="h-auto" onClick={handleEmojiSelection}>
+        <button className=" text-3xl h-auto" onClick={handleEmojiSelection}>
           &#128522;
         </button>
       </div>
