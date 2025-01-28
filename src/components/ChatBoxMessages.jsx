@@ -7,6 +7,7 @@ import {
   TimeStampToMonth,
   TimeStampToYear,
 } from "../utility functions/TimestampToRE";
+import { useMessaging } from "../context/MessagingContext";
 
 const BEHOST = import.meta.env.VITE_BELC;
 
@@ -25,7 +26,7 @@ const ChatBoxMessages = (props) => {
     attachedFile,
   } = props;
 
-  console.log(newMessage, "newMessage", send);
+  const { setMessageUpdate } = useMessaging();
 
   const date = new Date();
   const currentYear = date.getFullYear();
@@ -37,7 +38,7 @@ const ChatBoxMessages = (props) => {
   const [messages, setMessages] = useState([]);
   const [down, setDown] = useState(false);
   const [pastMessages, setPastMessages] = useState([]);
-  const [messageUpdate, setMessageUpdate] = useState(false);
+
   const [viewMessages, setViewMessages] = useState(-5);
 
   const messageEndRef = useRef(null);
@@ -88,7 +89,7 @@ const ChatBoxMessages = (props) => {
       socket.off("message");
       socket.off("past_messages");
     };
-  }, [viewMessages, messageUpdate, send]);
+  }, [viewMessages, send]);
 
   // sort messages by timestamp for accurate display
   const sortedMessages = messages.sort(
