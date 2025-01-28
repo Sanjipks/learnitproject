@@ -8,9 +8,9 @@ const ChatBoxContainer = () => {
 
   return (
     <div className="flex fixed right-1 w-4/5 overflow-x-scroll bottom-0 ">
-      <div className="flex h-auto relative justify-between gap-96  ">
+      <div className="flex h-auto relative justify-between ">
         {chatContainerItems.map((user) => (
-          <div key={user.id} className="flex flex-grow px-12">
+          <div key={user.id} className="flex flex-grow px-1">
             <ChatBox
               chatId={user.id}
               user={user.userName}
