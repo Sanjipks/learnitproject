@@ -14,6 +14,7 @@ const ChatBox = (props) => {
   const [send, setSend] = useState(false);
   const [emojiSelection, setOpenEmojiSelection] = useState(false);
   const [selectedEmo, setSelectedEmo] = useState("");
+  const [fileAttachment, setFileAttachment] = useState(null);
 
   const handleOnFocus = (id) => {
     setSelectedUserId(id);
@@ -40,6 +41,18 @@ const ChatBox = (props) => {
       setSelectedUserId(id);
       setSend(true);
       setOpenEmojiSelection(false);
+    }
+  };
+
+  const handleAttachFile = async (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const fileToAttach = event.target.files[0];
+      setFileAttachment(fileToAttach);
+      setNewMessage((prevMessage) =>
+        prevMessage
+          ? `${prevMessage} [File: ${fileAttachment.name}]`
+          : `[File: ${fileAttachment?.name}]`
+      );
     }
   };
 
@@ -87,6 +100,7 @@ const ChatBox = (props) => {
               userId={userId}
               send={send}
               setSend={setSend}
+              attachedFile={fileAttachment}
             />
 
             <div
@@ -94,7 +108,8 @@ const ChatBox = (props) => {
               onMouseOver={() => handleOnFocus(userId)}
             >
               <input
-                type="text"
+                type="text, file"
+                name="inputBox"
                 value={newMessage || selectedEmo}
                 onFocus={() => handleOnFocus(userId)}
                 onChange={handleInput}
@@ -126,7 +141,17 @@ const ChatBox = (props) => {
             <button className=" text-3xl h-auto" onClick={handleEmojiSelection}>
               &#128522;
             </button>
-            <button className=" text-3xl h-auto">&#128391;</button>
+
+            <div className="mt-2">
+              <label className="cursor-pointer flex text-3xl items-center gap-2 text-gray-700 hover:text-gray-800">
+                <input
+                  type="file"
+                  className="hidden"
+                  onChange={handleAttachFile}
+                />
+                &#128391;
+              </label>
+            </div>
           </div>
         )}
       </div>
