@@ -15,8 +15,15 @@ const socket = io(BEHOST, {
 });
 
 const ChatBoxMessages = (props) => {
-  const { selectedUserId, send, setSend, newMessage, setNewMessage, userId } =
-    props;
+  const {
+    selectedUserId,
+    send,
+    setSend,
+    newMessage,
+    setNewMessage,
+    userId,
+    attachedFile,
+  } = props;
 
   console.log(newMessage, "newMessage", send);
 
