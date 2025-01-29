@@ -106,13 +106,13 @@ const ChatBoxMessages = (props) => {
 
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, down]);
+  }, [messages, down, send]);
 
   return (
     <div
       ref={messageMoveUpRef}
       onScroll={handleScroll}
-      className="flex flex-col h-64 overflow-y-auto p-3 bg-white rounded-lg shadow-inner"
+      className="flex flex-col h-64 overflow-y-scroll p-3 bg-white rounded-lg shadow-inner"
     >
       {userId && (
         <>
@@ -190,7 +190,9 @@ const ChatBoxMessages = (props) => {
                           ", " +
                           TimeStampToTime(msg.timestamp)}
                       </div>
+
                       <div
+                        ref={messageEndRef}
                         className={`my-1 p-2 rounded-lg w-auto ${
                           msg.senderId == loggedInUserId
                             ? "bg-blue-500 text-white self-end"
@@ -199,7 +201,7 @@ const ChatBoxMessages = (props) => {
                       >
                         {msg.message}
                       </div>
-                      <div ref={messageEndRef} />
+                      <div />
                     </div>
                   );
                 })}
