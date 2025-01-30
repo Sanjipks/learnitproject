@@ -7,13 +7,12 @@ import { useLogin } from "../context/LoginContext";
 
 const Messaging = () => {
   const { loginInfo } = useLogin();
-  const userState = loginInfo.loginState;
   const userRole = loginInfo.userRole;
   const { closeBox, handleCloseBox, viewBox, handleViewBox } = useMessaging();
 
   return (
     <>
-      {userState === "true" && userRole === "user" && (
+      {userRole === "user" && (
         <div
           className={`${viewBox ? "h-auto" : "h-10"} ${
             closeBox && "hidden"

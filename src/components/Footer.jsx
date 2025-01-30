@@ -1,10 +1,15 @@
 import React from "react";
 import Messaging from "./Messaging";
 import ChatBoxContainer from "./ChatBoxContainer";
+import { useLogin } from "../context/LoginContext";
+import ChatBotBox from "./ChatBotBox";
 
 function Footer() {
   const date = new Date();
   const year = date.getFullYear();
+
+  const { loginInfo } = useLogin();
+  const loginState = loginInfo.loginState;
 
   return (
     <>
@@ -181,9 +186,14 @@ function Footer() {
           </div>
         </div>
       </footer>
-
-      <Messaging />
-      <ChatBoxContainer />
+      {loginState == "true" ? (
+        <>
+          <Messaging />
+          <ChatBoxContainer />
+        </>
+      ) : (
+        <ChatBotBox />
+      )}
     </>
   );
 }
