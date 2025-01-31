@@ -4,6 +4,7 @@ import CloseIcon from "../assets/icons/CloseIcon";
 import ChatBoxMessages from "./ChatBoxMessages";
 
 import Emoji from "./common/Emoji";
+import ChatBotIcon from "../assets/icons/ChatBotIcon";
 
 const ChatBotBox = (props) => {
   const { userImage, user, userId, chatId } = props;
@@ -64,11 +65,9 @@ const ChatBotBox = (props) => {
     >
       <section className="flex justify-between h-auto border-b-2 border-gray-500 dark:border-gray-100 mb-1 items-start">
         <div className="flex flex-row">
-          <img
-            className="w-12 h-12 m-1 rounded-full shadow-lg"
-            src={userImage}
-            alt={`${user}'s avatar`}
-          />
+          <span className="w-12 h-12 m-1 rounded-full shadow-lg">
+            <ChatBotIcon />
+          </span>
           <h1 className="px-2">{user}</h1>
         </div>
 
