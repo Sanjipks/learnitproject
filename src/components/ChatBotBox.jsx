@@ -7,7 +7,7 @@ import Emoji from "./common/Emoji";
 import ChatBotIcon from "../assets/icons/ChatBotIcon";
 
 const ChatBotBox = (props) => {
-  const { userImage, user, userId, chatId } = props;
+  const { user, userId } = props;
 
   const [newMessage, setNewMessage] = useState("");
   const [tempUser, setTempUser] = useState(null);
