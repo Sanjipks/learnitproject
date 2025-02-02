@@ -29,7 +29,6 @@ const Carasoul = (props) => {
       </button>
 
       <img
-        // className=" md:h-[756px] w-auto sm:rounded-xl md:rounded-r-none"
         className={csss}
         src={images[currentIndex]}
         alt={`Slide ${currentIndex}`}
