@@ -13,7 +13,8 @@ export default function About() {
             </h1>
           </div>
           <img
-            src={classImg ? classImg : null}
+            src={classImg}
+            alt="class image"
             className="my-8 rounded-md"
           ></img>
           <p className="xm:mb-8 dark:text-slate-300 text-slate-900 xxl:text-3xl text-wrap sm:mx-2 text-left font-serif  ">
