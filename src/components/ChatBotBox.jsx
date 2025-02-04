@@ -16,6 +16,7 @@ const ChatBotBox = (props) => {
   const [selectedEmo, setSelectedEmo] = useState("");
   const [fileAttachment, setFileAttachment] = useState(null);
   const [minimize, setMinimize] = useState(true);
+  const [closeChatBox, setCloseChatBox] = useState(false);
 
   const handleOnFocus = (id) => {
     setSelectedUserId(id);
@@ -25,8 +26,8 @@ const ChatBotBox = (props) => {
     setMinimize((prev) => !prev);
   };
 
-  const handleClose = (id) => {
-    removeChatboxUserById(id);
+  const handleClose = () => {
+    setCloseChatBox(true);
   };
 
   const handleEmojiSelection = () => {
@@ -59,7 +60,7 @@ const ChatBotBox = (props) => {
 
   return (
     <div
-      className={`flex-col  w-screen  ${
+      className={`  w-screen ${closeChatBox ? "hidden" : "flex-col"} ${
         minimize ? "h-20 max-w-xs " : " h-auto max-w-md "
       } p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md fixed bottom-0 right-4 `}
     >
