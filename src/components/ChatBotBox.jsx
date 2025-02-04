@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CloseIcon from "../assets/icons/CloseIcon";
 
 import ChatBoxMessages from "./ChatBoxMessages";
@@ -7,7 +7,7 @@ import Emoji from "./common/Emoji";
 import ChatBotIcon from "../assets/icons/ChatBotIcon";
 
 const ChatBotBox = (props) => {
-  const { user, userId } = props;
+  const { user } = props;
 
   const [newMessage, setNewMessage] = useState("");
   const [tempUser, setTempUser] = useState(null);
@@ -17,10 +17,16 @@ const ChatBotBox = (props) => {
   const [fileAttachment, setFileAttachment] = useState(null);
   const [minimize, setMinimize] = useState(true);
   const [closeChatBox, setCloseChatBox] = useState(false);
+  const [tempUserId, setTempUserId] = useState(null);
 
-  const handleOnFocus = (id) => {
-    setSelectedUserId(id);
-  };
+  useEffect(() => {
+    const randomId = Math.floor(987000 + Math.random() * 1000);
+    setTempUserId(randomId);
+  }, []);
+
+  // const handleOnFocus = () => {
+  //   setSelectedUserId();
+  // };
 
   const handleMinimizeChatBox = () => {
     setMinimize((prev) => !prev);
@@ -38,9 +44,8 @@ const ChatBotBox = (props) => {
     setNewMessage(e.target.value);
   };
 
-  const handleSend = (id) => {
+  const handleSend = () => {
     if (newMessage.trim()) {
-      setTempUser();
       setSend(true);
       setOpenEmojiSelection(false);
     }
@@ -93,7 +98,7 @@ const ChatBotBox = (props) => {
           <ChatBoxMessages
             newMessage={newMessage}
             setNewMessage={setNewMessage}
-            userId={tempUser}
+            userId={tempUserId}
             send={send}
             setSend={setSend}
             attachedFile={fileAttachment}
@@ -101,20 +106,20 @@ const ChatBotBox = (props) => {
 
           <div
             className="flex mt-2 pb-4 border-b-2 "
-            onMouseOver={() => handleOnFocus(userId)}
+            // onMouseOver={() => handleOnFocus(userId)}
           >
             <input
               type="text, file"
               name="inputBox"
               value={newMessage || selectedEmo}
-              onFocus={() => handleOnFocus(userId)}
+              // onFocus={() => handleOnFocus(userId)}
               onChange={handleInput}
               className="flex-1 p-2 border border-gray-300 rounded-md dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Type your message..."
             />
 
             <button
-              onClick={() => handleSend(userId)}
+              onClick={() => handleSend()}
               className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
             >
               Send
