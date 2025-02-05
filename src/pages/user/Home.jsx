@@ -14,7 +14,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userRole !== "user") {
+    if (userRole !== "user" && localStorage.getItem("tempUserId") === null) {
       localStorage.clear();
       navigate("/");
     }

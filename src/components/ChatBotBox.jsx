@@ -10,19 +10,23 @@ const ChatBotBox = (props) => {
   const { user } = props;
 
   const [newMessage, setNewMessage] = useState("");
-  const [tempUser, setTempUser] = useState(null);
   const [send, setSend] = useState(false);
   const [emojiSelection, setOpenEmojiSelection] = useState(false);
   const [selectedEmo, setSelectedEmo] = useState("");
   const [fileAttachment, setFileAttachment] = useState(null);
   const [minimize, setMinimize] = useState(true);
   const [closeChatBox, setCloseChatBox] = useState(false);
-  const [tempUserId, setTempUserId] = useState(null);
+  const [tempUserId, setTempUserId] = useState(() => {
+    return localStorage.getItem("tempUserId" || null);
+  });
 
   useEffect(() => {
-    const randomId = Math.floor(987000 + Math.random() * 1000);
-    setTempUserId(randomId);
-  }, []);
+    if (!tempUserId) {
+      const randomId = Math.floor(987 + Math.random() * 1000000);
+      setTempUserId(randomId);
+      localStorage.setItem("tempUserId", randomId);
+    }
+  }, [!tempUserId]);
 
   // const handleOnFocus = () => {
   //   setSelectedUserId();
