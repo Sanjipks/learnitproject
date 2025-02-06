@@ -145,6 +145,7 @@ const ChatBoxMessages = (props) => {
                     TimeStampToTime(msg.timestamp)}
                 </div>
                 <div
+                  ref={messageEndRef}
                   className={`my-1 p-2 rounded-lg w-auto ${
                     msg.sender_id == loggedInUserId
                       ? "bg-blue-500 text-white self-end"
