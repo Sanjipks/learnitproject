@@ -52,7 +52,7 @@ export default function Login() {
           (loginInfo.userId = userId),
           (loginInfo.userImage = userImage)
         );
-
+        localStorage.setItem("tempUserId", null);
         navigate("/auth");
       }
       if (res.status === 401) {
