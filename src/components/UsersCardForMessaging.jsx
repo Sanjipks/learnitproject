@@ -10,7 +10,7 @@ import { bufferToImage } from "../utility functions/BufferToImage";
 import { useChats } from "../context/ChatsContext";
 
 export default function UsersForMessaging(props) {
-  const { addChatUser } = useChats();
+  const { addChatUser, chatContainerItems } = useChats();
 
   const date = new Date();
   const currentYear = date.getFullYear();
@@ -32,7 +32,10 @@ export default function UsersForMessaging(props) {
   const userToAdd = { userName, userId, image };
 
   const handleOpenChatbox = (useradd) => {
-    addChatUser(useradd);
+    const userExists = chatContainerItems.some(
+      (item) => item.userId === useradd.userId
+    );
+    return userExists ? null : addChatUser(useradd);
   };
 
   return (
