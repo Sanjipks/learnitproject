@@ -28,10 +28,6 @@ const ChatBotBox = (props) => {
     }
   }, [!tempUserId]);
 
-  // const handleOnFocus = () => {
-  //   setSelectedUserId();
-  // };
-
   const handleMinimizeChatBox = () => {
     setMinimize((prev) => !prev);
   };
@@ -108,15 +104,11 @@ const ChatBotBox = (props) => {
             attachedFile={fileAttachment}
           />
 
-          <div
-            className="flex mt-2 pb-4 border-b-2 "
-            // onMouseOver={() => handleOnFocus(userId)}
-          >
+          <div className="flex mt-2 pb-4 border-b-2 ">
             <input
               type="text, file"
               name="inputBox"
               value={newMessage || selectedEmo}
-              // onFocus={() => handleOnFocus(userId)}
               onChange={handleInput}
               className="flex-1 p-2 border border-gray-300 rounded-md dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
               placeholder="Type your message..."
