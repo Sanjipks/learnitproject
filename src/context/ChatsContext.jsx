@@ -38,7 +38,6 @@ export default function ChatsProvider({ children }) {
   }, [stateUpdate]);
 
   const addChatUser = useCallback(async (chatUser) => {
-    console.log("chatuser", chatUser);
     const chatUserWithStatus = { ...chatUser, minimizeStatus: "false" };
     setChatContainerItems((prevItems) => {
       const updatedItems = prevItems.some(
