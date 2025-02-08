@@ -26,7 +26,7 @@ const ChatBotBox = (props) => {
       setTempUserId(randomId);
       localStorage.setItem("tempUserId", randomId);
     }
-  }, [!tempUserId]);
+  }, [tempUserId]);
 
   const handleMinimizeChatBox = () => {
     setMinimize((prev) => !prev);
