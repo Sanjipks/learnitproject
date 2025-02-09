@@ -6,7 +6,7 @@ import { useChats } from "../context/ChatsContext";
 const ChatBoxContainer = () => {
   const [visibleCount, setVisibleCount] = useState(0);
   const { chatContainerItems } = useChats();
-  let delay = 100;
+  let delay = 200;
 
   useEffect(() => {
     if (visibleCount < chatContainerItems.length) {
