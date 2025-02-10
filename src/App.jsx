@@ -26,7 +26,6 @@ import UserCircle from "./pages/user/UserCircle";
 import GChatProvider from "./context/GChatContext";
 import { MessagingProvider } from "./context/MessagingContext";
 import { ChatProvider } from "./context/ChatBoxContext";
-import Mailbox from "./components/Mailbox";
 import ChatsProvider from "./context/ChatsContext";
 
 function App() {
