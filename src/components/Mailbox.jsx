@@ -6,7 +6,6 @@ import MailTrashIcon from "../assets/icons/mailIcons/MailTrashIcon";
 
 const Mailbox = () => {
   const [selected, setSelected] = useState("");
-  const [messages, setMessages] = useState([]);
 
   const selectInbox = () => {
     setSelected("inbox");
