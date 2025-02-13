@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CloseIcon from "../assets/icons/CloseIcon";
 import ChatBoxMessages from "./ChatBoxMessages";
 import Emoji from "./common/Emoji";
@@ -15,15 +15,41 @@ const ChatBotBox = (props) => {
   const [minimize, setMinimize] = useState(true);
   const [closeChatBox, setCloseChatBox] = useState(false);
   const [tempUserId, setTempUserId] = useState(() => {
-    const storedUserId = localStorage.getItem("tempUserId");
-    if (storedUserId) {
+    const storedUserId = sessionStorage.getItem("tempUserId");
+    const storedTimestamp = sessionStorage.getItem("tempUserIdTimestamp");
+    const currentTime = new Date().getTime();
+
+    if (
+      storedUserId &&
+      storedTimestamp &&
+      currentTime - storedTimestamp < 3600000
+    ) {
       return storedUserId;
     } else {
       const randomId = Math.floor(987 + Math.random() * 1000000).toString();
-      localStorage.setItem("tempUserId", randomId);
+      sessionStorage.setItem("tempUserId", randomId);
+      sessionStorage.setItem("tempUserIdTimestamp", currentTime);
       return randomId;
     }
   });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const storedTimestamp = sessionStorage.getItem("tempUserIdTimestamp");
+      const currentTime = new Date().getTime();
+
+      if (storedTimestamp && currentTime - storedTimestamp >= 3600000) {
+        sessionStorage.removeItem("tempUserId");
+        sessionStorage.removeItem("tempUserIdTimestamp");
+        const randomId = Math.floor(987 + Math.random() * 1000000).toString();
+        sessionStorage.setItem("tempUserId", randomId);
+        sessionStorage.setItem("tempUserIdTimestamp", currentTime);
+        setTempUserId(randomId);
+      }
+    }, 60000); // check every minute to see if the user id has expired
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleMinimizeChatBox = () => {
     setMinimize((prev) => !prev);
