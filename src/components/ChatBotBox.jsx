@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CloseIcon from "../assets/icons/CloseIcon";
-
 import ChatBoxMessages from "./ChatBoxMessages";
-
 import Emoji from "./common/Emoji";
 import ChatBotIcon from "../assets/icons/ChatBotIcon";
 
@@ -17,16 +15,15 @@ const ChatBotBox = (props) => {
   const [minimize, setMinimize] = useState(true);
   const [closeChatBox, setCloseChatBox] = useState(false);
   const [tempUserId, setTempUserId] = useState(() => {
-    return localStorage.getItem("tempUserId" || null);
-  });
-
-  useEffect(() => {
-    if (!tempUserId) {
-      const randomId = Math.floor(987 + Math.random() * 1000000);
-      setTempUserId(randomId);
+    const storedUserId = localStorage.getItem("tempUserId");
+    if (storedUserId) {
+      return storedUserId;
+    } else {
+      const randomId = Math.floor(987 + Math.random() * 1000000).toString();
       localStorage.setItem("tempUserId", randomId);
+      return randomId;
     }
-  }, [tempUserId]);
+  });
 
   const handleMinimizeChatBox = () => {
     setMinimize((prev) => !prev);
@@ -65,9 +62,9 @@ const ChatBotBox = (props) => {
 
   return (
     <div
-      className={`  w-screen ${closeChatBox ? "hidden" : "flex-col"} ${
-        minimize ? "h-20 max-w-xs " : " h-auto max-w-md "
-      } p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md fixed bottom-0 right-4 `}
+      className={`w-screen ${closeChatBox ? "hidden" : "flex-col"} ${
+        minimize ? "h-20 max-w-xs" : "h-auto max-w-md"
+      } p-2 border border-gray-500 dark:border-gray-400 bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md fixed bottom-0 right-4`}
     >
       <section className="flex justify-between h-auto border-b-2 border-gray-500 dark:border-gray-100 mb-1 items-start">
         <div className="flex flex-row">
@@ -79,13 +76,13 @@ const ChatBotBox = (props) => {
 
         <div className="flex flex-row justify-end items-center gap-2">
           <div
-            onClick={() => handleMinimizeChatBox()}
+            onClick={handleMinimizeChatBox}
             className="text-gray-700 dark:text-gray-400 bg-transparent hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
           >
             ---
           </div>
           <div
-            onClick={() => handleClose()}
+            onClick={handleClose}
             className="dark:text-gray-400 text-gray-700 bg-transparent hover:cursor-pointer text-lg hover:text-gray-800 dark:hover:text-gray-200"
           >
             <CloseIcon />
@@ -104,9 +101,9 @@ const ChatBotBox = (props) => {
             attachedFile={fileAttachment}
           />
 
-          <div className="flex mt-2 pb-4 border-b-2 ">
+          <div className="flex mt-2 pb-4 border-b-2">
             <input
-              type="text, file"
+              type="text"
               name="inputBox"
               value={newMessage || selectedEmo}
               onChange={handleInput}
@@ -115,7 +112,7 @@ const ChatBotBox = (props) => {
             />
 
             <button
-              onClick={() => handleSend()}
+              onClick={handleSend}
               className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
             >
               Send
@@ -134,8 +131,8 @@ const ChatBotBox = (props) => {
         </div>
       )}
       {!minimize && (
-        <div className="flex flex-row gap-2 mx-2 ">
-          <button className=" text-3xl h-auto" onClick={handleEmojiSelection}>
+        <div className="flex flex-row gap-2 mx-2">
+          <button className="text-3xl h-auto" onClick={handleEmojiSelection}>
             &#128522;
           </button>
 
